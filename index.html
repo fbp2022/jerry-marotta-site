@@ -23,13 +23,11 @@ nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-i
 .nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:8px 20px;font-weight:500!important;}
 .nav-cta::after{display:none!important;}
 .nav-cta:hover{background:var(--gold-light)!important;}
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:120px 60px 80px;-webkit-transform:translateZ(0);transform:translateZ(0);}
-.hero-bg{position:absolute;top:0;left:0;right:0;bottom:0;}
-.hero-bg img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-.hero-bg::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(74,127,193,0.12) 0%,transparent 70%),linear-gradient(160deg,rgba(10,22,40,0.93) 0%,rgba(13,31,60,0.88) 40%,rgba(17,30,53,0.95) 100%);}
-.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(74,127,193,0.12) 0%,transparent 70%),linear-gradient(160deg,rgba(10,22,40,0.93) 0%,rgba(13,31,60,0.88) 40%,rgba(17,30,53,0.95) 100%);}
-.horizon{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;z-index:3;}
-.hero-content{position:relative;z-index:3;max-width:700px;}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:120px 60px 80px;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(74,127,193,0.12) 0%,transparent 70%),linear-gradient(160deg,rgba(10,22,40,0.93) 0%,rgba(13,31,60,0.88) 40%,rgba(17,30,53,0.95) 100%);}
+.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-1;opacity:0.18;}
+.horizon{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;}
+.hero-content{position:relative;z-index:2;max-width:700px;}
 .hero-eyebrow{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px;}
 .hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold);flex-shrink:0;}
 h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,8rem);line-height:0.92;letter-spacing:3px;color:var(--white);margin-bottom:8px;}
@@ -75,7 +73,7 @@ h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-s
 .gallery-cell img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;display:block;}
 .gallery-cell:hover img{transform:scale(1.04);}
 .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.5) 0%,transparent 50%);}
-#schedule{background:linear-gradient(160deg,rgba(10,22,40,0.97) 0%,rgba(13,31,60,0.95) 100%);}
+#schedule{background:linear-gradient(160deg,rgba(10,22,40,0.97) 0%,rgba(13,31,60,0.95) 100%),url('images/flight-simulator.jpg') center/cover no-repeat;}
 .schedule-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;margin-top:60px;align-items:start;}
 .schedule-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--cloud);margin-bottom:28px;line-height:1.5;}
 .contact-details{list-style:none;display:flex;flex-direction:column;gap:16px;}
@@ -153,10 +151,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
 </nav>
 
 <section id="hero">
-  <div class="hero-bg">
-    <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta with his Travel Air biplane">
-  </div>
-  <div class="hero-overlay"></div>
+  <div class="hero-bg"><img class="hero-bg-img" src="images/jerry-with-plane.jpg" alt=""></div>
   <div class="horizon"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Gold Seal Certified &bull; Knoxville, TN</div>
@@ -266,7 +261,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       <h3>"I believe every student deserves an instructor who meets them where they are — and takes them higher."</h3>
       <ul class="contact-details">
         <li><div class="contact-icon">&#128205;</div><span>Knoxville, TN, USA</span></li>
-        <li><div class="contact-icon">&#9993;&#65039;</div><a href="/cdn-cgi/l/email-protection#046e6176767d2a6965766b707065446c6b7069656d682a676b69"><span class="__cf_email__" data-cfemail="38525d4a4a411655594a574c4c597850574c55595154165b5755">[email&#160;protected]</span></a></li>
+        <li><div class="contact-icon">&#9993;&#65039;</div><a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a></li>
         <li><div class="contact-icon">&#128241;</div><a href="sms:8657247251">(865) 724-7251</a></li>
       </ul>
     </div>
@@ -340,7 +335,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
         <div class="sms-preview-text" id="sms-preview-text">Fill in the form above to preview your message.</div>
       </div>
       <button class="form-submit" onclick="handleSubmit()">Send Request via Text</button>
-      <p class="form-note">Tapping the button does two things: (1) downloads a <strong style="color:var(--gold-light)">calendar invite (.ics)</strong> you can add to Google Calendar or Apple Calendar, and (2) opens your Messages app with everything pre-filled so Jerry gets notified instantly.</p>
+      <p class="form-note">Tapping the button does two things automatically: (1) downloads a <strong style="color:var(--gold-light)">calendar invite (.ics)</strong> you can add to Google Calendar or Apple Calendar, and (2) opens your Messages app with the request pre-filled so Jerry gets notified instantly.</p>
     </div>
   </div>
 </section>
@@ -381,178 +376,177 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
   </a>
 </nav>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
-var JERRY_NUMBER = ‘8657247251’;
+<script>
+var JERRY_NUMBER = '8657247251';
 
 function handleSessionType(val) {
-var field = document.getElementById(‘other-field’);
-field.classList.toggle(‘visible’, val === ‘other’);
-updatePreview();
+  var field = document.getElementById('other-field');
+  field.classList.toggle('visible', val === 'other');
+  updatePreview();
 }
 
 function buildSMS() {
-var first = document.getElementById(‘fname’).value.trim();
-var last = document.getElementById(‘lname’).value.trim();
-var phone = document.getElementById(‘phone’).value.trim();
-var email = document.getElementById(‘email’).value.trim();
-var typeVal = document.getElementById(‘session-type’).value;
-var typeLabel = typeVal === ‘other’
-? (document.getElementById(‘other-type’).value.trim() || ‘[not specified]’)
-: typeVal || ‘[not selected]’;
-var rawDate = document.getElementById(‘preferred-date’).value;
-var dateStr = rawDate
-? new Date(rawDate + ‘T12:00:00’).toLocaleDateString(‘en-US’, {weekday:‘long’,month:‘long’,day:‘numeric’,year:‘numeric’})
-: ‘Not specified’;
-var timeVal = document.getElementById(‘preferred-time’).value || ‘Not specified’;
-var expVal = document.getElementById(‘experience’).value || ‘’;
-var notes = document.getElementById(‘message’).value.trim();
-var fullName = [first, last].filter(Boolean).join(’ ‘) || ‘A client’;
-var msg = “Hi Jerry! Hope you’re doing well. “;
-msg += fullName + ’ is hoping to schedule a session with you ’;
-msg += ‘and wanted to check if the following works for you:\n\n’;
-msg += ‘SESSION REQUEST\n’;
-msg += ‘——————\n’;
-msg += ’Name: ’ + fullName + ‘\n’;
-if (phone) msg += ’Phone: ’ + phone + ‘\n’;
-if (email) msg += ’Email: ’ + email + ‘\n’;
-msg += ’\nSession: ’ + typeLabel + ‘\n’;
-msg += ’Date: ’ + dateStr + ‘\n’;
-msg += ’Time: ’ + timeVal + ‘\n’;
-var durVal = document.getElementById(‘duration’).value || ‘2’;
-msg += ‘Duration: ’ + durVal + ’ hour’ + (durVal === ‘1’ ? ‘’ : ‘s’) + ‘\n’;
-if (expVal) msg += ’Experience: ’ + expVal + ‘\n’;
-if (notes) msg += ’\nNotes: ’ + notes + ‘\n’;
-msg += ‘——————\n’;
-msg += ‘Please reply to confirm or suggest a different time. Thank you!’;
-return msg;
+  var first = document.getElementById('fname').value.trim();
+  var last = document.getElementById('lname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var typeVal = document.getElementById('session-type').value;
+  var typeLabel = typeVal === 'other'
+    ? (document.getElementById('other-type').value.trim() || '[not specified]')
+    : typeVal || '[not selected]';
+  var rawDate = document.getElementById('preferred-date').value;
+  var dateStr = rawDate
+    ? new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'})
+    : 'Not specified';
+  var timeVal = document.getElementById('preferred-time').value || 'Not specified';
+  var durVal = document.getElementById('duration').value || '2';
+  var expVal = document.getElementById('experience').value || '';
+  var notes = document.getElementById('message').value.trim();
+  var fullName = [first, last].filter(Boolean).join(' ') || 'A client';
+  var msg = "Hi Jerry! Hope you're doing well. ";
+  msg += fullName + ' is hoping to schedule a session with you ';
+  msg += 'and wanted to check if the following works for you:\n\n';
+  msg += 'SESSION REQUEST\n';
+  msg += '------------------\n';
+  msg += 'Name: ' + fullName + '\n';
+  if (phone) msg += 'Phone: ' + phone + '\n';
+  if (email) msg += 'Email: ' + email + '\n';
+  msg += '\nSession: ' + typeLabel + '\n';
+  msg += 'Date: ' + dateStr + '\n';
+  msg += 'Time: ' + timeVal + '\n';
+  msg += 'Duration: ' + durVal + ' hour' + (durVal === '1' ? '' : 's') + '\n';
+  if (expVal) msg += 'Experience: ' + expVal + '\n';
+  if (notes) msg += '\nNotes: ' + notes + '\n';
+  msg += '------------------\n';
+  msg += 'Please reply to confirm or suggest a different time. Thank you!';
+  return msg;
 }
 
 function updatePreview() {
-var el = document.getElementById(‘sms-preview-text’);
-var first = document.getElementById(‘fname’).value.trim();
-var phone = document.getElementById(‘phone’).value.trim();
-var type = document.getElementById(‘session-type’).value;
-if (!first && !phone && !type) {
-el.textContent = ‘Fill in the form above to preview your message.’;
-return;
-}
-el.textContent = buildSMS();
+  var el = document.getElementById('sms-preview-text');
+  var first = document.getElementById('fname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var type = document.getElementById('session-type').value;
+  if (!first && !phone && !type) {
+    el.textContent = 'Fill in the form above to preview your message.';
+    return;
+  }
+  el.textContent = buildSMS();
 }
 
-[‘fname’,‘lname’,‘phone’,‘email’,‘preferred-date’,‘message’,‘other-type’].forEach(function(id) {
-var el = document.getElementById(id);
-if (el) el.addEventListener(‘input’, updatePreview);
+['fname','lname','phone','email','preferred-date','message','other-type'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('input', updatePreview);
 });
-[‘session-type’,‘preferred-time’,‘experience’,‘duration’].forEach(function(id) {
-var el = document.getElementById(id);
-if (el) el.addEventListener(‘change’, updatePreview);
+['session-type','preferred-time','duration','experience'].forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('change', updatePreview);
 });
 
 function buildICS() {
-var first = document.getElementById(‘fname’).value.trim();
-var last = document.getElementById(‘lname’).value.trim();
-var fullName = [first, last].filter(Boolean).join(’ ’) || ‘Client’;
-var phone = document.getElementById(‘phone’).value.trim();
-var typeVal = document.getElementById(‘session-type’).value;
-var typeLabel = typeVal === ‘other’
-? (document.getElementById(‘other-type’).value.trim() || ‘Training Session’)
-: typeVal;
-var rawDate = document.getElementById(‘preferred-date’).value;
-var timeVal = document.getElementById(‘preferred-time’).value;
-var notes = document.getElementById(‘message’).value.trim();
-var d = new Date(rawDate + ‘T09:00:00’);
-if (timeVal.indexOf(‘7’) !== -1) d = new Date(rawDate + ‘T07:00:00’);
-else if (timeVal.indexOf(‘9’) !== -1) d = new Date(rawDate + ‘T09:00:00’);
-else if (timeVal.indexOf(‘12’) !== -1) d = new Date(rawDate + ‘T12:00:00’);
-else if (timeVal.indexOf(‘Late’) !== -1) d = new Date(rawDate + ‘T16:00:00’);
-function pad(n) { return n < 10 ? ‘0’ + n : ‘’ + n; }
-function fmt(dt) {
-return dt.getFullYear() + ‘’ + pad(dt.getMonth()+1) + ‘’ + pad(dt.getDate()) +
-‘T’ + pad(dt.getHours()) + ‘’ + pad(dt.getMinutes()) + ‘00’;
-}
-var start = fmt(d);
-var durationHrs = parseInt(document.getElementById(‘duration’).value) || 2;
-var end = fmt(new Date(d.getTime() + durationHrs * 60 * 60 * 1000));
-var now = fmt(new Date());
-var uid = now + ‘-jerry-marotta-session’;
-var desc = ’Session: ’ + typeLabel + ‘\nClient: ’ + fullName;
-if (phone) desc += ‘\nPhone: ’ + phone;
-if (notes) desc += ‘\nNotes: ’ + notes;
-desc += ‘\n\nJerry Marotta - Gold Seal Flight Instructor\nKnoxville TN | jerry.marotta@hotmail.com | (865) 724-7251’;
-var ics = [
-‘BEGIN:VCALENDAR’,
-‘VERSION:2.0’,
-‘PRODID:-//Jerry Marotta Aviation//Flight Session//EN’,
-‘CALSCALE:GREGORIAN’,
-‘METHOD:REQUEST’,
-‘BEGIN:VEVENT’,
-‘UID:’ + uid,
-‘DTSTAMP:’ + now + ‘Z’,
-‘DTSTART:’ + start,
-‘DTEND:’ + end,
-‘SUMMARY:’ + typeLabel + ’ with Jerry Marotta’,
-‘DESCRIPTION:’ + desc,
-‘LOCATION:Knoxville\, TN’,
-‘ORGANIZER;CN=Jerry Marotta:mailto:jerry.marotta@hotmail.com’,
-‘STATUS:TENTATIVE’,
-‘END:VEVENT’,
-‘END:VCALENDAR’
-].join(’\r\n’);
-return ics;
+  var first = document.getElementById('fname').value.trim();
+  var last = document.getElementById('lname').value.trim();
+  var fullName = [first, last].filter(Boolean).join(' ') || 'Client';
+  var phone = document.getElementById('phone').value.trim();
+  var typeVal = document.getElementById('session-type').value;
+  var typeLabel = typeVal === 'other'
+    ? (document.getElementById('other-type').value.trim() || 'Training Session')
+    : typeVal;
+  var rawDate = document.getElementById('preferred-date').value;
+  var timeVal = document.getElementById('preferred-time').value;
+  var durVal = parseInt(document.getElementById('duration').value) || 2;
+  var notes = document.getElementById('message').value.trim();
+  var d = new Date(rawDate + 'T09:00:00');
+  if (timeVal.indexOf('7') !== -1) d = new Date(rawDate + 'T07:00:00');
+  else if (timeVal.indexOf('9') !== -1) d = new Date(rawDate + 'T09:00:00');
+  else if (timeVal.indexOf('12') !== -1) d = new Date(rawDate + 'T12:00:00');
+  else if (timeVal.indexOf('Late') !== -1) d = new Date(rawDate + 'T16:00:00');
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function fmt(dt) {
+    return dt.getFullYear() + '' + pad(dt.getMonth()+1) + '' + pad(dt.getDate()) +
+      'T' + pad(dt.getHours()) + '' + pad(dt.getMinutes()) + '00';
+  }
+  var start = fmt(d);
+  var end = fmt(new Date(d.getTime() + durVal * 60 * 60 * 1000));
+  var now = fmt(new Date());
+  var uid = now + '-jerry-marotta-session';
+  var desc = 'Session: ' + typeLabel + '\\nClient: ' + fullName;
+  if (phone) desc += '\\nPhone: ' + phone;
+  if (notes) desc += '\\nNotes: ' + notes;
+  desc += '\\n\\nJerry Marotta - Gold Seal Flight Instructor\\nKnoxville TN | jerry.marotta@hotmail.com | (865) 724-7251';
+  var ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Jerry Marotta Aviation//Flight Session//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:REQUEST',
+    'BEGIN:VEVENT',
+    'UID:' + uid,
+    'DTSTAMP:' + now + 'Z',
+    'DTSTART:' + start,
+    'DTEND:' + end,
+    'SUMMARY:' + typeLabel + ' with Jerry Marotta',
+    'DESCRIPTION:' + desc,
+    'LOCATION:Knoxville\\, TN',
+    'ORGANIZER;CN=Jerry Marotta:mailto:jerry.marotta@hotmail.com',
+    'STATUS:TENTATIVE',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  return ics;
 }
 
 function downloadICS() {
-var ics = buildICS();
-var blob = new Blob([ics], {type: ‘text/calendar;charset=utf-8’});
-var url = URL.createObjectURL(blob);
-var a = document.createElement(‘a’);
-a.href = url;
-a.download = ‘jerry-marotta-session.ics’;
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
-URL.revokeObjectURL(url);
+  var ics = buildICS();
+  var blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'jerry-marotta-session.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 function handleSubmit() {
-var first = document.getElementById(‘fname’).value.trim();
-var phone = document.getElementById(‘phone’).value.trim();
-var session = document.getElementById(‘session-type’).value;
-var date = document.getElementById(‘preferred-date’).value;
-if (!first) { alert(‘Please enter your first name.’); return; }
-if (!phone) { alert(‘Please enter your phone number.’); return; }
-if (!session) { alert(‘Please select a session type.’); return; }
-if (!date) { alert(‘Please choose a preferred date.’); return; }
-if (session === ‘other’ && !document.getElementById(‘other-type’).value.trim()) {
-alert(‘Please describe your session request.’); return;
-}
-downloadICS();
-setTimeout(function() {
-window.location.href = ‘sms:’ + JERRY_NUMBER + ‘?body=’ + encodeURIComponent(buildSMS());
-}, 600);
+  var first = document.getElementById('fname').value.trim();
+  var phone = document.getElementById('phone').value.trim();
+  var session = document.getElementById('session-type').value;
+  var date = document.getElementById('preferred-date').value;
+  if (!first) { alert('Please enter your first name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  if (!session) { alert('Please select a session type.'); return; }
+  if (!date) { alert('Please choose a preferred date.'); return; }
+  if (session === 'other' && !document.getElementById('other-type').value.trim()) {
+    alert('Please describe your session request.'); return;
+  }
+  downloadICS();
+  setTimeout(function() {
+    window.location.href = 'sms:' + JERRY_NUMBER + '?body=' + encodeURIComponent(buildSMS());
+  }, 600);
 }
 
-var reveals = document.querySelectorAll(’.reveal’);
+var reveals = document.querySelectorAll('.reveal');
 var observer = new IntersectionObserver(function(entries) {
-entries.forEach(function(e) {
-if (e.isIntersecting) { e.target.classList.add(‘visible’); observer.unobserve(e.target); }
-});
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
 }, {threshold: 0.1});
 reveals.forEach(function(r) { observer.observe(r); });
 
-window.addEventListener(‘scroll’, function() {
-var current = ‘hero’;
-document.querySelectorAll(‘section[id]’).forEach(function(sec) {
-if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
-});
-document.querySelectorAll(’.bnav-item, .bnav-book’).forEach(function(n) { n.classList.remove(‘active’); });
-var active = document.querySelector(’.bottom-nav a[href=”#’ + current + ‘”]’);
-if (active) active.classList.add(‘active’);
+window.addEventListener('scroll', function() {
+  var current = 'hero';
+  document.querySelectorAll('section[id]').forEach(function(sec) {
+    if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
+  });
+  document.querySelectorAll('.bnav-item, .bnav-book').forEach(function(n) { n.classList.remove('active'); });
+  var active = document.querySelector('.bottom-nav a[href="#' + current + '"]');
+  if (active) active.classList.add('active');
 }, {passive: true});
 
-var dateInput = document.getElementById(‘preferred-date’);
-if (dateInput) dateInput.min = new Date().toISOString().split(‘T’)[0];
+var dateInput = document.getElementById('preferred-date');
+if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
 </script>
 
 </body>
