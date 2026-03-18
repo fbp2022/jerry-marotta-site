@@ -1,5 +1,5 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -260,7 +260,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       <h3>"I believe every student deserves an instructor who meets them where they are — and takes them higher."</h3>
       <ul class="contact-details">
         <li><div class="contact-icon">&#128205;</div><span>Knoxville, TN, USA</span></li>
-        <li><div class="contact-icon">&#9993;&#65039;</div><a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a></li>
+        <li><div class="contact-icon">&#9993;&#65039;</div><a href="/cdn-cgi/l/email-protection#3f555a4d4d4611525e4d504b4b5e7f57504b525e5653115c5052"><span class="__cf_email__" data-cfemail="563c3324242f783b372439222237163e39223b373f3a7835393b">[email&#160;protected]</span></a></li>
         <li><div class="contact-icon">&#128241;</div><a href="sms:8657247251">(865) 724-7251</a></li>
       </ul>
     </div>
@@ -324,7 +324,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
         <div class="sms-preview-text" id="sms-preview-text">Fill in the form above to preview your message.</div>
       </div>
       <button class="form-submit" onclick="handleSubmit()">Send Request via Text</button>
-      <p class="form-note">Tapping the button opens your phone's Messages app with everything pre-filled -- just hit Send. Jerry will reply to confirm your session.</p>
+      <p class="form-note">Tapping the button does two things automatically: (1) downloads a <strong style="color:var(--gold-light)">calendar invite (.ics)</strong> you can add to Google Calendar or Apple Calendar, and (2) opens your Messages app with the request pre-filled so Jerry gets notified instantly.</p>
     </div>
   </div>
 </section>
@@ -365,106 +365,186 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
   </a>
 </nav>
 
-<script>
-var JERRY_NUMBER = '8657247251';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+var JERRY_NUMBER = ‘8657247251’;
 
 function handleSessionType(val) {
-  var field = document.getElementById('other-field');
-  field.classList.toggle('visible', val === 'other');
-  updatePreview();
+var field = document.getElementById(‘other-field’);
+field.classList.toggle(‘visible’, val === ‘other’);
+updatePreview();
 }
 
 function buildSMS() {
-  var first = document.getElementById('fname').value.trim();
-  var last = document.getElementById('lname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var email = document.getElementById('email').value.trim();
-  var typeVal = document.getElementById('session-type').value;
-  var typeLabel = typeVal === 'other'
-    ? (document.getElementById('other-type').value.trim() || '[not specified]')
-    : typeVal || '[not selected]';
-  var rawDate = document.getElementById('preferred-date').value;
-  var dateStr = rawDate
-    ? new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'})
-    : 'Not specified';
-  var timeVal = document.getElementById('preferred-time').value || 'Not specified';
-  var expVal = document.getElementById('experience').value || '';
-  var notes = document.getElementById('message').value.trim();
-  var fullName = [first, last].filter(Boolean).join(' ') || 'A client';
-  var msg = 'Hi Jerry! Hope you\'re doing well. ';
-  msg += fullName + ' is hoping to schedule a session with you ';
-  msg += 'and wanted to check if the following works for you:\n\n';
-  msg += 'SESSION REQUEST\n';
-  msg += '------------------\n';
-  msg += 'Name: ' + fullName + '\n';
-  if (phone) msg += 'Phone: ' + phone + '\n';
-  if (email) msg += 'Email: ' + email + '\n';
-  msg += '\nSession: ' + typeLabel + '\n';
-  msg += 'Date: ' + dateStr + '\n';
-  msg += 'Time: ' + timeVal + '\n';
-  if (expVal) msg += 'Experience: ' + expVal + '\n';
-  if (notes) msg += '\nNotes: ' + notes + '\n';
-  msg += '------------------\n';
-  msg += 'Please reply to confirm or suggest a different time. Thank you!';
-  return msg;
+var first = document.getElementById(‘fname’).value.trim();
+var last = document.getElementById(‘lname’).value.trim();
+var phone = document.getElementById(‘phone’).value.trim();
+var email = document.getElementById(‘email’).value.trim();
+var typeVal = document.getElementById(‘session-type’).value;
+var typeLabel = typeVal === ‘other’
+? (document.getElementById(‘other-type’).value.trim() || ‘[not specified]’)
+: typeVal || ‘[not selected]’;
+var rawDate = document.getElementById(‘preferred-date’).value;
+var dateStr = rawDate
+? new Date(rawDate + ‘T12:00:00’).toLocaleDateString(‘en-US’, {weekday:‘long’,month:‘long’,day:‘numeric’,year:‘numeric’})
+: ‘Not specified’;
+var timeVal = document.getElementById(‘preferred-time’).value || ‘Not specified’;
+var expVal = document.getElementById(‘experience’).value || ‘’;
+var notes = document.getElementById(‘message’).value.trim();
+var fullName = [first, last].filter(Boolean).join(’ ’) || ‘A client’;
+var msg = ’Hi Jerry! Hope you're doing well. ’;
+msg += fullName + ’ is hoping to schedule a session with you ’;
+msg += ‘and wanted to check if the following works for you:\n\n’;
+msg += ‘SESSION REQUEST\n’;
+msg += ‘——————\n’;
+msg += ’Name: ’ + fullName + ‘\n’;
+if (phone) msg += ’Phone: ’ + phone + ‘\n’;
+if (email) msg += ’Email: ’ + email + ‘\n’;
+msg += ’\nSession: ’ + typeLabel + ‘\n’;
+msg += ’Date: ’ + dateStr + ‘\n’;
+msg += ’Time: ’ + timeVal + ‘\n’;
+if (expVal) msg += ’Experience: ’ + expVal + ‘\n’;
+if (notes) msg += ’\nNotes: ’ + notes + ‘\n’;
+msg += ‘——————\n’;
+msg += ‘Please reply to confirm or suggest a different time. Thank you!’;
+return msg;
 }
 
 function updatePreview() {
-  var el = document.getElementById('sms-preview-text');
-  var first = document.getElementById('fname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var type = document.getElementById('session-type').value;
-  if (!first && !phone && !type) {
-    el.textContent = 'Fill in the form above to preview your message.';
-    return;
-  }
-  el.textContent = buildSMS();
+var el = document.getElementById(‘sms-preview-text’);
+var first = document.getElementById(‘fname’).value.trim();
+var phone = document.getElementById(‘phone’).value.trim();
+var type = document.getElementById(‘session-type’).value;
+if (!first && !phone && !type) {
+el.textContent = ‘Fill in the form above to preview your message.’;
+return;
+}
+el.textContent = buildSMS();
 }
 
-['fname','lname','phone','email','preferred-date','message','other-type'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('input', updatePreview);
+[‘fname’,‘lname’,‘phone’,‘email’,‘preferred-date’,‘message’,‘other-type’].forEach(function(id) {
+var el = document.getElementById(id);
+if (el) el.addEventListener(‘input’, updatePreview);
 });
-['session-type','preferred-time','experience'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('change', updatePreview);
+[‘session-type’,‘preferred-time’,‘experience’].forEach(function(id) {
+var el = document.getElementById(id);
+if (el) el.addEventListener(‘change’, updatePreview);
 });
+
+function buildICS() {
+var first = document.getElementById(‘fname’).value.trim();
+var last = document.getElementById(‘lname’).value.trim();
+var fullName = [first, last].filter(Boolean).join(’ ’) || ‘Client’;
+var phone = document.getElementById(‘phone’).value.trim();
+var typeVal = document.getElementById(‘session-type’).value;
+var typeLabel = typeVal === ‘other’
+? (document.getElementById(‘other-type’).value.trim() || ‘Training Session’)
+: typeVal;
+var rawDate = document.getElementById(‘preferred-date’).value;
+var timeVal = document.getElementById(‘preferred-time’).value;
+var notes = document.getElementById(‘message’).value.trim();
+
+// Build start date — default to 9 AM if no time preference given
+var d = new Date(rawDate + ‘T09:00:00’);
+if (timeVal.indexOf(‘7’) !== -1) d = new Date(rawDate + ‘T07:00:00’);
+else if (timeVal.indexOf(‘9’) !== -1) d = new Date(rawDate + ‘T09:00:00’);
+else if (timeVal.indexOf(‘12’) !== -1) d = new Date(rawDate + ‘T12:00:00’);
+else if (timeVal.indexOf(‘4 PM’) !== -1 || timeVal.indexOf(‘Late’) !== -1) d = new Date(rawDate + ‘T16:00:00’);
+
+function pad(n) { return n < 10 ? ‘0’ + n : ‘’ + n; }
+function fmt(dt) {
+return dt.getFullYear() + ‘’ + pad(dt.getMonth()+1) + ‘’ + pad(dt.getDate()) +
+‘T’ + pad(dt.getHours()) + ‘’ + pad(dt.getMinutes()) + ‘00’;
+}
+
+var start = fmt(d);
+var end = fmt(new Date(d.getTime() + 2 * 60 * 60 * 1000)); // 2hr block
+var now = fmt(new Date());
+var uid = now + ‘-jerry-marotta@session’;
+
+var desc = ’Session: ’ + typeLabel + ’\nClient: ’ + fullName;
+if (phone) desc += ’\nPhone: ’ + phone;
+if (notes) desc += ’\nNotes: ’ + notes;
+desc += ‘\n\nJerry Marotta - Gold Seal Flight Instructor\nKnoxville, TN | jerry.marotta@hotmail.com | (865) 724-7251’;
+
+var ics = [
+‘BEGIN:VCALENDAR’,
+‘VERSION:2.0’,
+‘PRODID:-//Jerry Marotta Aviation//Flight Session//EN’,
+‘CALSCALE:GREGORIAN’,
+‘METHOD:REQUEST’,
+‘BEGIN:VEVENT’,
+‘UID:’ + uid,
+‘DTSTAMP:’ + now + ‘Z’,
+‘DTSTART:’ + start,
+‘DTEND:’ + end,
+‘SUMMARY:’ + typeLabel + ’ with Jerry Marotta’,
+‘DESCRIPTION:’ + desc,
+‘LOCATION:Knoxville\, TN’,
+‘ORGANIZER;CN=Jerry Marotta:mailto:jerry.marotta@hotmail.com’,
+‘STATUS:TENTATIVE’,
+‘END:VEVENT’,
+‘END:VCALENDAR’
+].join(’\r\n’);
+
+return ics;
+}
+
+function downloadICS() {
+var ics = buildICS();
+var blob = new Blob([ics], { type: ‘text/calendar;charset=utf-8’ });
+var url = URL.createObjectURL(blob);
+var a = document.createElement(‘a’);
+a.href = url;
+a.download = ‘jerry-marotta-session.ics’;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+URL.revokeObjectURL(url);
+}
 
 function handleSubmit() {
-  var first = document.getElementById('fname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var session = document.getElementById('session-type').value;
-  var date = document.getElementById('preferred-date').value;
-  if (!first) { alert('Please enter your first name.'); return; }
-  if (!phone) { alert('Please enter your phone number.'); return; }
-  if (!session) { alert('Please select a session type.'); return; }
-  if (!date) { alert('Please choose a preferred date.'); return; }
-  if (session === 'other' && !document.getElementById('other-type').value.trim()) {
-    alert('Please describe your session request.'); return;
-  }
-  window.location.href = 'sms:' + JERRY_NUMBER + '?body=' + encodeURIComponent(buildSMS());
+var first = document.getElementById(‘fname’).value.trim();
+var phone = document.getElementById(‘phone’).value.trim();
+var session = document.getElementById(‘session-type’).value;
+var date = document.getElementById(‘preferred-date’).value;
+if (!first) { alert(‘Please enter your first name.’); return; }
+if (!phone) { alert(‘Please enter your phone number.’); return; }
+if (!session) { alert(‘Please select a session type.’); return; }
+if (!date) { alert(‘Please choose a preferred date.’); return; }
+if (session === ‘other’ && !document.getElementById(‘other-type’).value.trim()) {
+alert(‘Please describe your session request.’); return;
+}
+// 1. Download the .ics calendar file for the client
+downloadICS();
+// 2. Small delay then open SMS app — allows the download to trigger first
+setTimeout(function() {
+window.location.href = ‘sms:’ + JERRY_NUMBER + ‘?body=’ + encodeURIComponent(buildSMS());
+}, 600);
 }
 
-var reveals = document.querySelectorAll('.reveal');
+var reveals = document.querySelectorAll(’.reveal’);
 var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
+entries.forEach(function(e) {
+if (e.isIntersecting) { e.target.classList.add(‘visible’); observer.unobserve(e.target); }
+});
 }, {threshold: 0.1});
 reveals.forEach(function(r) { observer.observe(r); });
 
-window.addEventListener('scroll', function() {
-  var current = 'hero';
-  document.querySelectorAll('section[id]').forEach(function(sec) {
-    if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
-  });
-  document.querySelectorAll('.bnav-item, .bnav-book').forEach(function(n) { n.classList.remove('active'); });
-  var active = document.querySelector('.bottom-nav a[href="#' + current + '"]');
-  if (active) active.classList.add('active');
+window.addEventListener(‘scroll’, function() {
+var current = ‘hero’;
+document.querySelectorAll(‘section[id]’).forEach(function(sec) {
+if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
+});
+document.querySelectorAll(’.bnav-item, .bnav-book’).forEach(function(n) { n.classList.remove(‘active’); });
+
+var active = document.querySelector(’.bottom-nav a[href=”#’ + current + ‘”]’);
+if (active) active.classList.add(‘active’);
 }, {passive: true});
 
-var dateInput = document.getElementById('preferred-date');
-if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+var dateInput = document.getElementById(‘preferred-date’);
+if (dateInput) dateInput.min = new Date().toISOString().split(‘T’)[0];
 </script>
+
 </body>
 </html>
