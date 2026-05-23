@@ -82,10 +82,11 @@ h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-s
 .schedule-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;margin-top:60px;align-items:start;}
 .schedule-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--cloud);margin-bottom:28px;line-height:1.5;}
 .contact-details{list-style:none;display:flex;flex-direction:column;gap:16px;}
-.contact-details li{display:flex;align-items:center;gap:14px;font-size:0.9rem;color:var(--cloud);}
-.contact-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;}
+.contact-details li{display:flex;align-items:flex-start;gap:14px;font-size:0.9rem;color:var(--cloud);}
+.contact-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;margin-top:2px;}
 .contact-details a{color:var(--gold);text-decoration:none;}
 .contact-details a:hover{color:var(--gold-light);}
+.contact-note{font-size:0.75rem;color:var(--muted);margin-top:6px;line-height:1.55;max-width:28ch;}
 .schedule-form{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);padding:48px;}
 .form-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);margin-bottom:12px;}
 .form-subtitle{font-size:0.85rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
@@ -106,6 +107,9 @@ h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-s
 .form-submit{width:100%;background:var(--gold);color:var(--navy);border:none;padding:18px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:background 0.2s;min-height:56px;-webkit-tap-highlight-color:transparent;}
 .form-submit:hover{background:var(--gold-light);}
 .form-note{font-size:0.72rem;color:var(--muted);margin-top:16px;line-height:1.6;}
+.form-emergency{font-size:0.72rem;color:var(--muted);margin-top:14px;line-height:1.6;padding-top:14px;border-top:1px solid rgba(201,168,76,0.12);}
+.form-emergency a{color:var(--gold);text-decoration:none;}
+.form-emergency a:hover{color:var(--gold-light);}
 footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding:48px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
 .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--gold);}
 .footer-logo span{color:var(--muted);}
@@ -113,6 +117,9 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
 .footer-links a{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--gold);}
 .footer-copy{font-size:0.7rem;color:rgba(138,155,175,0.45);letter-spacing:1px;}
+.footer-credit{display:block;margin-top:8px;font-size:0.65rem;color:rgba(138,155,175,0.35);letter-spacing:0.5px;}
+.footer-credit a{color:rgba(138,155,175,0.55);text-decoration:none;transition:color 0.2s;}
+.footer-credit a:hover{color:var(--gold);}
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:900;background:rgba(10,22,40,0.98);backdrop-filter:blur(20px);border-top:1px solid rgba(201,168,76,0.2);display:none;height:72px;}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);text-decoration:none;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
 .bnav-item.active,.bnav-item:active{color:var(--gold);}
@@ -310,19 +317,24 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       <ul class="contact-details">
         <li><div class="contact-icon">&#128205;</div><span>Knoxville, TN, USA</span></li>
         <li><div class="contact-icon">&#9993;&#65039;</div><a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a></li>
-        <li><div class="contact-icon">&#128241;</div><a href="sms:8657247251">(865) 724-7251</a></li>
+        <li><div class="contact-icon">&#128241;</div>
+          <div>
+            <a href="sms:8657247251">Text Jerry: (865) 724-7251</a>
+            <p class="contact-note">For emergencies only — please use the booking form to request a session.</p>
+          </div>
+        </li>
       </ul>
     </div>
     <div class="schedule-form reveal" style="transition-delay:0.15s">
       <div class="form-title">REQUEST A SESSION</div>
       <p class="form-subtitle">Fill out the form and tap <strong style="color:var(--gold)">Send Request</strong> — your phone's Messages app opens with everything pre-filled. Just hit Send and Jerry will confirm within 24 hours.</p>
       <div class="form-row">
-        <div class="form-group"><label for="fname">First Name *</label><input type="text" id="fname" placeholder="Jane" autocomplete="given-name"></div>
-        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Smith" autocomplete="family-name"></div>
+        <div class="form-group"><label for="fname">First Name *</label><input type="text" id="fname" placeholder="Jane" autocomplete="given-name" autocapitalize="words" enterkeyhint="next"></div>
+        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Smith" autocomplete="family-name" autocapitalize="words" enterkeyhint="next"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label for="phone">Your Phone *</label><input type="tel" id="phone" placeholder="(865) 555-0100" autocomplete="tel" inputmode="tel"></div>
-        <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="jane@email.com" autocomplete="email"></div>
+        <div class="form-group"><label for="phone">Your Phone *</label><input type="tel" id="phone" placeholder="(865) 555-0100" autocomplete="tel" inputmode="tel" enterkeyhint="next"></div>
+        <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="jane@email.com" autocomplete="email" inputmode="email" enterkeyhint="next"></div>
       </div>
       <div class="form-group">
         <label for="session-type">Session Type *</label>
@@ -337,7 +349,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       </div>
       <div class="form-group other-field" id="other-field">
         <label for="other-type">Please describe your session *</label>
-        <input type="text" id="other-type" placeholder="Describe what you're looking for...">
+        <input type="text" id="other-type" placeholder="Describe what you're looking for..." enterkeyhint="next">
       </div>
       <div class="form-row">
         <div class="form-group"><label for="preferred-date">Preferred Date *</label><input type="date" id="preferred-date"></div>
@@ -352,6 +364,23 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
             <option>Flexible</option>
           </select>
         </div>
+      </div>
+      <div class="form-group">
+        <label for="meet-airport">Requesting to Meet At *</label>
+        <select id="meet-airport" onchange="handleMeetLocation(this.value)">
+          <option value="">-- Select an airport --</option>
+          <option value="TYS — McGhee Tyson Airport (Alcoa)">TYS — McGhee Tyson Airport (Alcoa)</option>
+          <option value="DKX — Knoxville Downtown Island Airport">DKX — Knoxville Downtown Island Airport</option>
+          <option value="MMI — McMinn County Airport (Athens)">MMI — McMinn County Airport (Athens)</option>
+          <option value="GKT — Gatlinburg-Pigeon Forge Airport">GKT — Gatlinburg-Pigeon Forge Airport</option>
+          <option value="RVL — Rockwood Municipal Airport">RVL — Rockwood Municipal Airport</option>
+          <option value="MOR — Moore-Murrell Airport (Morristown)">MOR — Moore-Murrell Airport (Morristown)</option>
+          <option value="other">Other airport (type below)</option>
+        </select>
+      </div>
+      <div class="form-group other-field" id="meet-location-other-field">
+        <label for="meet-location-other">Airport name or identifier *</label>
+        <input type="text" id="meet-location-other" placeholder="e.g., KTNX, Oak Ridge" inputmode="text" autocapitalize="characters" autocomplete="off" enterkeyhint="next">
       </div>
       <div class="form-group">
         <label for="duration">Session Duration</label>
@@ -376,7 +405,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       </div>
       <div class="form-group">
         <label for="message">Additional Notes</label>
-        <textarea id="message" placeholder="Any questions or goals you'd like to share..."></textarea>
+        <textarea id="message" placeholder="Any questions or goals you'd like to share..." enterkeyhint="done"></textarea>
       </div>
       <div class="sms-preview">
         <div class="sms-preview-label">Preview -- what Jerry will receive</div>
@@ -384,6 +413,7 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
       </div>
       <button class="form-submit" onclick="handleSubmit()">Send Request via Text</button>
       <p class="form-note">Tapping the button does two things automatically: (1) downloads a <strong style="color:var(--gold-light)">calendar invite (.ics)</strong> you can add to Google Calendar or Apple Calendar, and (2) opens your Messages app with the request pre-filled so Jerry gets notified instantly.</p>
+      <p class="form-emergency">You can also text Jerry directly at <a href="sms:8657247251">(865) 724-7251</a> — but please use this form for session requests and save the direct line for emergencies.</p>
     </div>
   </div>
 </section>
@@ -396,7 +426,10 @@ footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#schedule">Contact</a></li>
   </ul>
-  <div class="footer-copy">&copy; 2026 Jerry Marotta Gold Seal Flight Instructing &mdash; Knoxville, TN</div>
+  <div class="footer-copy">
+    &copy; 2026 Jerry Marotta Gold Seal Flight Instructing &mdash; Knoxville, TN
+    <span class="footer-credit">Built by <a href="https://tristanmaratos.com" target="_blank" rel="noopener noreferrer">Tristan Maratos</a></span>
+  </div>
 </footer>
 
 <nav class="bottom-nav">
@@ -433,6 +466,20 @@ function handleSessionType(val) {
   updatePreview();
 }
 
+function handleMeetLocation(val) {
+  var field = document.getElementById('meet-location-other-field');
+  field.classList.toggle('visible', val === 'other');
+  updatePreview();
+}
+
+function getMeetLocation() {
+  var sel = document.getElementById('meet-airport').value;
+  if (sel === 'other') {
+    return document.getElementById('meet-location-other').value.trim();
+  }
+  return sel;
+}
+
 function buildSMS() {
   var first = document.getElementById('fname').value.trim();
   var last = document.getElementById('lname').value.trim();
@@ -447,6 +494,7 @@ function buildSMS() {
     ? new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'})
     : 'Not specified';
   var timeVal = document.getElementById('preferred-time').value || 'Not specified';
+  var meetLocation = getMeetLocation();
   var durVal = document.getElementById('duration').value || '2';
   var expVal = document.getElementById('experience').value || '';
   var notes = document.getElementById('message').value.trim();
@@ -462,6 +510,7 @@ function buildSMS() {
   msg += '\nSession: ' + typeLabel + '\n';
   msg += 'Date: ' + dateStr + '\n';
   msg += 'Time: ' + timeVal + '\n';
+  msg += 'Meet at: ' + (meetLocation || 'Not specified') + '\n';
   msg += 'Duration: ' + durVal + ' hour' + (durVal === '1' ? '' : 's') + '\n';
   if (expVal) msg += 'Experience: ' + expVal + '\n';
   if (notes) msg += '\nNotes: ' + notes + '\n';
@@ -482,11 +531,11 @@ function updatePreview() {
   el.textContent = buildSMS();
 }
 
-['fname','lname','phone','email','preferred-date','message','other-type'].forEach(function(id) {
+['fname','lname','phone','email','preferred-date','meet-location-other','message','other-type'].forEach(function(id) {
   var el = document.getElementById(id);
   if (el) el.addEventListener('input', updatePreview);
 });
-['session-type','preferred-time','duration','experience'].forEach(function(id) {
+['session-type','meet-airport','preferred-time','duration','experience'].forEach(function(id) {
   var el = document.getElementById(id);
   if (el) el.addEventListener('change', updatePreview);
 });
@@ -502,6 +551,7 @@ function buildICS() {
     : typeVal;
   var rawDate = document.getElementById('preferred-date').value;
   var timeVal = document.getElementById('preferred-time').value;
+  var meetLocation = getMeetLocation();
   var durVal = parseInt(document.getElementById('duration').value) || 2;
   var notes = document.getElementById('message').value.trim();
   var d = new Date(rawDate + 'T09:00:00');
@@ -520,6 +570,7 @@ function buildICS() {
   var uid = now + '-jerry-marotta-session';
   var desc = 'Session: ' + typeLabel + '\\nClient: ' + fullName;
   if (phone) desc += '\\nPhone: ' + phone;
+  if (meetLocation) desc += '\\nMeet at: ' + meetLocation;
   if (notes) desc += '\\nNotes: ' + notes;
   desc += '\\n\\nJerry Marotta - Gold Seal Flight Instructor\\nKnoxville TN | jerry.marotta@hotmail.com | (865) 724-7251';
   var ics = [
@@ -535,7 +586,7 @@ function buildICS() {
     'DTEND:' + end,
     'SUMMARY:' + typeLabel + ' with Jerry Marotta',
     'DESCRIPTION:' + desc,
-    'LOCATION:Knoxville\\, TN',
+    'LOCATION:' + (meetLocation || 'Knoxville\\, TN').replace(/,/g, '\\,'),
     'ORGANIZER;CN=Jerry Marotta:mailto:jerry.marotta@hotmail.com',
     'STATUS:TENTATIVE',
     'END:VEVENT',
@@ -562,10 +613,14 @@ function handleSubmit() {
   var phone = document.getElementById('phone').value.trim();
   var session = document.getElementById('session-type').value;
   var date = document.getElementById('preferred-date').value;
+  var meetAirport = document.getElementById('meet-airport').value;
+  var meetLocation = getMeetLocation();
   if (!first) { alert('Please enter your first name.'); return; }
   if (!phone) { alert('Please enter your phone number.'); return; }
   if (!session) { alert('Please select a session type.'); return; }
   if (!date) { alert('Please choose a preferred date.'); return; }
+  if (!meetAirport) { alert('Please select where you would like to meet.'); return; }
+  if (meetAirport === 'other' && !meetLocation) { alert('Please enter the airport name or identifier.'); return; }
   if (session === 'other' && !document.getElementById('other-type').value.trim()) {
     alert('Please describe your session request.'); return;
   }
