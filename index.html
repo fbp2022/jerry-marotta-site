@@ -1363,7 +1363,7 @@ footer span{color:var(--gold-light)}
       <header class="page-hero">
         <div class="section-label">Book a Lesson</div>
         <h1>Request a focused training session.</h1>
-        <p>Mobile requests open in your native Messages app. Desktop requests open in your default email application. Both download a tentative calendar invite.</p>
+        <p>Mobile requests open directly in your native Messages app. Desktop requests download a tentative calendar invite and open in your default email application.</p>
       </header>
       <div class="page-content">
         <div class="booking-layout">
@@ -1504,7 +1504,7 @@ footer span{color:var(--gold-light)}
           <div class="form-card">
             <div class="section-label">Best for lesson requests</div>
             <h2 style="font-size:3rem;color:var(--ink)">Use the booking page.</h2>
-            <p style="color:var(--muted);line-height:1.75;margin:14px 0 22px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email. Both include the same structured request and calendar invite.</p>
+            <p style="color:var(--muted);line-height:1.75;margin:14px 0 22px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email and downloads a tentative calendar invite.</p>
             <button class="btn btn-primary" data-view="book">Book a Lesson</button>
           </div>
         </div>
@@ -1867,21 +1867,23 @@ function submitBooking(event) {
   const fullName = [value('fname'), value('lname')].filter(Boolean).join(' ') || 'Prospective Student';
   const subject = 'Flight Training Request from ' + fullName;
 
-  downloadICS();
-
   if (isMobileDevice()) {
-    status.textContent = 'Calendar invite downloaded. Opening your Messages app now.';
+    status.textContent = 'Opening your Messages app now. Review the request, then tap Send.';
     const separator = isIOSDevice() ? '&' : '?';
-    setTimeout(() => {
-      window.location.href = 'sms:' + JERRY_NUMBER + separator + 'body=' + encodeURIComponent(requestText);
-    }, 450);
+
+    // Do not attempt an .ics download on mobile Safari. Triggering a Blob
+    // download and an SMS handoff from the same tap causes Safari to report
+    // that the calendar file cannot be downloaded.
+    window.location.href = 'sms:' + JERRY_NUMBER + separator + 'body=' + encodeURIComponent(requestText);
   } else {
+    downloadICS();
     status.textContent = 'Calendar invite downloaded. Opening your default email application now.';
+
     setTimeout(() => {
       window.location.href = 'mailto:' + JERRY_EMAIL +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(requestText);
-    }, 450);
+    }, 350);
   }
 }
 
@@ -1937,7 +1939,7 @@ function updateDeviceFlow() {
 
   if (mobile) {
     heading.textContent = 'Mobile booking';
-    copy.textContent = 'The form downloads a tentative calendar invite, then opens your native Messages app with the request ready to send.';
+    copy.textContent = 'The form opens your native Messages app with the request ready to send. No calendar file is downloaded on mobile.';
     submit.textContent = 'Send Request via Text';
   } else {
     heading.textContent = 'Desktop booking';
