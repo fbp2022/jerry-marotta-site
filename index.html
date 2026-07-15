@@ -378,6 +378,154 @@ footer{background:var(--ink);color:#91a2ac;padding:42px max(28px,calc((100vw - v
 footer strong{font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:2px;color:white}
 footer span{color:var(--gold-light)}
 
+/* Live Yelp section */
+.yelp-section{background:var(--paper)}
+.yelp-section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:28px;
+  margin-bottom:30px;
+}
+.yelp-section-head h2{
+  color:var(--ink);
+  font-size:clamp(3rem,5vw,5rem);
+  line-height:.95;
+}
+.yelp-live-panel{
+  display:grid;
+  grid-template-columns:310px minmax(0,1fr);
+  gap:24px;
+  align-items:stretch;
+}
+.yelp-summary-card{
+  background:var(--navy);
+  color:white;
+  padding:31px;
+  border-left:4px solid #d32323;
+  box-shadow:0 14px 36px rgba(8,21,33,.11);
+}
+.yelp-source{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:#d8e1e6;
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:1.25px;
+}
+.yelp-wordmark{
+  color:white;
+  background:#d32323;
+  padding:4px 7px;
+  border-radius:4px;
+  font-weight:700;
+  letter-spacing:.2px;
+  text-transform:none;
+}
+.yelp-score-row{
+  display:flex;
+  align-items:end;
+  gap:14px;
+  margin:25px 0 9px;
+}
+.yelp-score{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:4.9rem;
+  line-height:.8;
+  color:white;
+}
+.yelp-stars{
+  --rating-pct:0%;
+  position:relative;
+  display:inline-block;
+  font-size:1.35rem;
+  letter-spacing:2px;
+  line-height:1;
+  margin-bottom:5px;
+}
+.yelp-stars-base{color:#526572}
+.yelp-stars-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  width:var(--rating-pct);
+  overflow:hidden;
+  white-space:nowrap;
+  color:#ffcf67;
+}
+.yelp-review-count{
+  color:#c2ced4;
+  font-size:.75rem;
+  line-height:1.55;
+}
+.yelp-updated{
+  color:#93a6b0;
+  font-size:.62rem;
+  line-height:1.5;
+  margin-top:16px;
+}
+.yelp-summary-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:24px;
+}
+.yelp-summary-actions a{
+  min-height:42px;
+  padding:0 13px;
+  font-size:.57rem;
+}
+.yelp-review-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.yelp-review{
+  background:white;
+  border:1px solid var(--border);
+  padding:22px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 10px 25px rgba(8,21,33,.05);
+}
+.yelp-review-stars{
+  color:#d32323;
+  letter-spacing:1.5px;
+  font-size:.92rem;
+}
+.yelp-review-text{
+  color:#46545c;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.12rem;
+  line-height:1.58;
+  margin:15px 0 18px;
+  flex:1;
+}
+.yelp-review-footer{
+  border-top:1px solid var(--border);
+  padding-top:13px;
+  color:var(--muted);
+  font-size:.66rem;
+  line-height:1.5;
+}
+.yelp-review-footer strong{
+  display:block;
+  color:var(--ink);
+  font-size:.72rem;
+}
+.yelp-empty{
+  grid-column:1/-1;
+  background:var(--cream);
+  border:1px solid var(--border);
+  padding:28px;
+  color:var(--muted);
+  line-height:1.7;
+}
+.mobile-yelp-section{display:none}
+
+
 .mobile-training-list,
 .mobile-booking-progress,
 .wizard-actions,
@@ -734,6 +882,59 @@ footer span{color:var(--gold-light)}
     display:block;font-size:.5rem;text-transform:uppercase;
     letter-spacing:.68px;color:var(--muted);margin-top:5px;
   }
+  .mobile-yelp-section{
+    display:block;
+    padding:27px 18px;
+    background:var(--paper);
+  }
+  .mobile-yelp-section h2{
+    color:var(--ink);
+    font-size:2.55rem;
+    line-height:.95;
+  }
+  .mobile-yelp-card{
+    margin-top:15px;
+    background:var(--navy);
+    color:white;
+    border-radius:12px;
+    padding:20px;
+    border-left:4px solid #d32323;
+    box-shadow:0 12px 28px rgba(8,21,33,.13);
+  }
+  .mobile-yelp-score-row{
+    display:flex;
+    align-items:end;
+    gap:13px;
+    margin:16px 0 8px;
+  }
+  .mobile-yelp-card .yelp-score{font-size:4rem}
+  .mobile-yelp-card .yelp-stars{font-size:1.08rem}
+  .mobile-yelp-card .yelp-summary-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:18px;
+  }
+  .mobile-yelp-card .yelp-summary-actions a{
+    min-height:43px;
+    padding:0 8px;
+    font-size:.53rem;
+  }
+  .mobile-yelp-reviews{
+    display:grid;
+    gap:9px;
+    margin-top:11px;
+  }
+  .mobile-yelp-reviews .yelp-review{
+    min-height:0;
+    border-radius:10px;
+    padding:17px;
+  }
+  .mobile-yelp-reviews .yelp-review-text{
+    font-size:1rem;
+    margin:12px 0 15px;
+  }
+
   .mobile-cta{
     background:var(--rust);
     color:white;
@@ -1236,6 +1437,41 @@ footer span{color:var(--gold-light)}
           </div>
         </section>
 
+        <section class="section yelp-section" aria-labelledby="yelp-heading">
+          <div class="yelp-section-head">
+            <div>
+              <div class="section-label">Student Feedback</div>
+              <h2 id="yelp-heading">What pilots are saying.</h2>
+            </div>
+            <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Jerry on Yelp</a>
+          </div>
+
+          <div class="yelp-live-panel">
+            <aside class="yelp-summary-card">
+              <div class="yelp-source"><span class="yelp-wordmark">Yelp</span><span>Live business rating</span></div>
+              <div class="yelp-score-row">
+                <strong class="yelp-score" data-yelp-rating>—</strong>
+                <div>
+                  <div class="yelp-stars" data-yelp-stars role="img" aria-label="Yelp rating not loaded">
+                    <span class="yelp-stars-base">★★★★★</span>
+                    <span class="yelp-stars-fill">★★★★★</span>
+                  </div>
+                  <div class="yelp-review-count" data-yelp-count>Loading Yelp rating…</div>
+                </div>
+              </div>
+              <div class="yelp-updated" data-yelp-updated>The rating refreshes automatically after Yelp synchronization is configured.</div>
+              <div class="yelp-summary-actions">
+                <a class="btn btn-primary" href="https://www.yelp.com/writeareview/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Write a Review</a>
+                <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Read All Reviews</a>
+              </div>
+            </aside>
+
+            <div class="yelp-review-grid" data-yelp-reviews>
+              <div class="yelp-empty">Connecting to Jerry’s Yelp listing. Until live synchronization is activated, use the Yelp links to view the latest rating and reviews.</div>
+            </div>
+          </div>
+        </section>
+
         <section class="final-cta"><h2>Ready to become a better pilot?</h2><p>Use the focused booking page to request a session without making every visitor encounter a long form on the homepage.</p><button class="btn" style="background:white;color:var(--rust)" data-view="book">Request a Session</button></section>
       </div>
 
@@ -1308,6 +1544,34 @@ footer span{color:var(--gold-light)}
             <div class="mobile-credential"><strong>35+</strong><span>Years Aviation</span></div>
             <div class="mobile-credential"><strong>Gold Seal</strong><span>FAA Instructor</span></div>
             <div class="mobile-credential"><strong>CFII</strong><span>Instrument</span></div>
+          </div>
+        </section>
+
+        <section class="mobile-yelp-section" aria-labelledby="mobile-yelp-heading">
+          <div class="section-label">Student Feedback</div>
+          <h2 id="mobile-yelp-heading">Rated by pilots on Yelp.</h2>
+
+          <div class="mobile-yelp-card">
+            <div class="yelp-source"><span class="yelp-wordmark">Yelp</span><span>Live business rating</span></div>
+            <div class="mobile-yelp-score-row">
+              <strong class="yelp-score" data-yelp-rating>—</strong>
+              <div>
+                <div class="yelp-stars" data-yelp-stars role="img" aria-label="Yelp rating not loaded">
+                  <span class="yelp-stars-base">★★★★★</span>
+                  <span class="yelp-stars-fill">★★★★★</span>
+                </div>
+                <div class="yelp-review-count" data-yelp-count>Loading Yelp rating…</div>
+              </div>
+            </div>
+            <div class="yelp-updated" data-yelp-updated>The rating refreshes automatically after Yelp synchronization is configured.</div>
+            <div class="yelp-summary-actions">
+              <a class="btn btn-primary" href="https://www.yelp.com/writeareview/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Write a Review</a>
+              <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Read Reviews</a>
+            </div>
+          </div>
+
+          <div class="mobile-yelp-reviews" data-yelp-reviews>
+            <div class="yelp-empty">Use the Yelp links above to view the newest reviews while live synchronization is being configured.</div>
           </div>
         </section>
 
@@ -1847,6 +2111,7 @@ footer span{color:var(--gold-light)}
       <button class="mobile-sheet-action" data-view="chronicles"><strong>Chronicles</strong><span>True stories from the right seat</span></button>
       <a class="mobile-sheet-action" href="mailto:jerry.marotta@hotmail.com"><strong>Email Jerry</strong><span>Open your email application</span></a>
       <a class="mobile-sheet-action" href="sms:8657247251"><strong>Text Jerry</strong><span>Open your native Messages app</span></a>
+      <a class="mobile-sheet-action" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer"><strong>Yelp Reviews</strong><span>See the latest student feedback</span></a>
     </div>
   </aside>
 </div>
@@ -1856,6 +2121,9 @@ const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 
 const viewButtons = document.querySelectorAll('[data-view]');
 const views = document.querySelectorAll('.view');
+
+const YELP_DATA_URL = 'data/yelp.json';
+const YELP_BUSINESS_URL = 'https://www.yelp.com/biz/jerry-marotta-aviation-alcoa';
 
 const mobileSheet = document.getElementById('mobile-sheet');
 const mobileSheetBackdrop = document.getElementById('mobile-sheet-backdrop');
@@ -2204,6 +2472,132 @@ async function copyRequest() {
   }
 }
 
+function setYelpSummary(data) {
+  const rating = Number(data.rating);
+  const hasRating = Number.isFinite(rating) && rating > 0;
+  const reviewCount = Number(data.review_count) || 0;
+  const ratingText = hasRating ? rating.toFixed(1) : '—';
+  const starPercent = hasRating ? Math.max(0, Math.min(100, (rating / 5) * 100)) : 0;
+
+  document.querySelectorAll('[data-yelp-rating]').forEach(element => {
+    element.textContent = ratingText;
+  });
+
+  document.querySelectorAll('[data-yelp-stars]').forEach(element => {
+    element.style.setProperty('--rating-pct', starPercent + '%');
+    element.setAttribute('aria-label', hasRating ? ratingText + ' out of 5 stars on Yelp' : 'Yelp rating unavailable');
+  });
+
+  document.querySelectorAll('[data-yelp-count]').forEach(element => {
+    if (hasRating) {
+      element.textContent = reviewCount === 1 ? '1 Yelp review' : reviewCount + ' Yelp reviews';
+    } else {
+      element.textContent = 'View the current rating on Yelp';
+    }
+  });
+
+  document.querySelectorAll('[data-yelp-updated]').forEach(element => {
+    if (data.updated_at) {
+      const date = new Date(data.updated_at);
+      const formatted = Number.isNaN(date.getTime())
+        ? data.updated_at
+        : date.toLocaleString([], {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
+      element.textContent = 'Last synchronized with Yelp: ' + formatted;
+    } else {
+      element.textContent = 'Live synchronization is awaiting Yelp API configuration.';
+    }
+  });
+}
+
+function createYelpReviewCard(review) {
+  const article = document.createElement('article');
+  article.className = 'yelp-review';
+
+  const stars = document.createElement('div');
+  stars.className = 'yelp-review-stars';
+  const rating = Math.max(0, Math.min(5, Math.round(Number(review.rating) || 0)));
+  stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+  stars.setAttribute('aria-label', rating + ' out of 5 stars');
+
+  const text = document.createElement('p');
+  text.className = 'yelp-review-text';
+  text.textContent = review.text || 'Read this review on Yelp.';
+
+  const footer = document.createElement('div');
+  footer.className = 'yelp-review-footer';
+
+  const author = document.createElement('strong');
+  author.textContent = review.user_name || 'Yelp reviewer';
+
+  const details = document.createElement('span');
+  const reviewDate = review.time_created ? new Date(review.time_created) : null;
+  const dateText = reviewDate && !Number.isNaN(reviewDate.getTime())
+    ? reviewDate.toLocaleDateString([], {month:'short', day:'numeric', year:'numeric'})
+    : '';
+  details.textContent = dateText;
+
+  footer.append(author, details);
+  article.append(stars, text, footer);
+
+  if (review.url) {
+    article.tabIndex = 0;
+    article.setAttribute('role', 'link');
+    article.setAttribute('aria-label', 'Open ' + author.textContent + "'s review on Yelp");
+    const open = () => window.open(review.url, '_blank', 'noopener');
+    article.addEventListener('click', open);
+    article.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open();
+      }
+    });
+  }
+
+  return article;
+}
+
+function renderYelpReviews(data) {
+  const reviews = Array.isArray(data.reviews) ? data.reviews.slice(0, 3) : [];
+
+  document.querySelectorAll('[data-yelp-reviews]').forEach(container => {
+    container.replaceChildren();
+
+    if (!reviews.length) {
+      const fallback = document.createElement('div');
+      fallback.className = 'yelp-empty';
+      fallback.textContent = data.reviews_status === 'plan_required'
+        ? 'Jerry’s live rating and review count are synchronized. Yelp review excerpts require additional Yelp API access, so use “Read All Reviews” for the newest written feedback.'
+        : 'Written review excerpts are not available in the live feed yet. Use the Yelp links to read the newest feedback.';
+      container.append(fallback);
+      return;
+    }
+
+    reviews.forEach(review => {
+      container.append(createYelpReviewCard(review));
+    });
+  });
+}
+
+async function loadYelpData() {
+  try {
+    const response = await fetch(YELP_DATA_URL + '?v=' + Date.now(), {cache:'no-store'});
+    if (!response.ok) throw new Error('Yelp data request failed');
+    const data = await response.json();
+    setYelpSummary(data);
+    renderYelpReviews(data);
+  } catch (error) {
+    setYelpSummary({
+      rating:null,
+      review_count:null,
+      updated_at:null
+    });
+    renderYelpReviews({
+      reviews:[],
+      reviews_status:'unavailable'
+    });
+  }
+}
+
 function updateReadingProgress() {
   const progressWrap = document.getElementById('reading-progress');
   const progressBar = progressWrap ? progressWrap.querySelector('span') : null;
@@ -2320,6 +2714,7 @@ toggleConditionalFields();
 showBookingStep(1);
 showView((window.location.hash || '#home').slice(1), false);
 updateReadingProgress();
+loadYelpData();
 </script>
 </body>
 </html>
