@@ -154,7 +154,92 @@ h1 span{color:var(--gold-light)}
 .training-item{background:white;border:1px solid var(--border);padding:32px;display:grid;grid-template-columns:62px 1fr;gap:22px}
 .training-item .num{font-family:'Bebas Neue';font-size:2.7rem;color:var(--gold)}
 .training-item h3{font-size:1.8rem;color:var(--ink);margin-bottom:8px}
+
 .training-item p{color:var(--muted);line-height:1.7;font-size:.9rem}
+.training-item-copy{display:flex;flex-direction:column}
+.training-item-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:12px 0 15px;
+}
+.training-item-meta span{
+  display:inline-flex;
+  align-items:center;
+  min-height:25px;
+  padding:5px 9px;
+  background:var(--cream);
+  color:var(--rust);
+  border:1px solid rgba(166,79,50,.18);
+  font-size:.58rem;
+  font-weight:600;
+  letter-spacing:.85px;
+  text-transform:uppercase;
+}
+.training-item-list{
+  list-style:none;
+  display:grid;
+  gap:8px;
+  margin-top:14px;
+}
+.training-item-list li{
+  position:relative;
+  padding-left:18px;
+  color:#4f5c64;
+  font-size:.82rem;
+  line-height:1.55;
+}
+.training-item-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:.62em;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--gold);
+}
+.training-item-action{margin-top:auto;padding-top:20px}
+.training-item-action .btn{min-height:45px;padding:0 18px;font-size:.6rem}
+.training-location-note{
+  grid-column:1/-1;
+  background:var(--navy);
+  color:white;
+  padding:25px 28px;
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(270px,.7fr);
+  gap:24px;
+  align-items:center;
+  border-left:4px solid var(--gold);
+}
+.training-location-note h3{
+  color:white;
+  font-size:1.9rem;
+  margin-bottom:7px;
+}
+.training-location-note p{
+  color:#c5d1d7;
+  font-size:.84rem;
+  line-height:1.65;
+}
+.training-location-note strong{
+  color:var(--gold-light);
+}
+.training-location-airports{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  justify-content:flex-end;
+}
+.training-location-airports span{
+  border:1px solid rgba(223,183,104,.36);
+  color:var(--gold-light);
+  padding:6px 9px;
+  font-size:.58rem;
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+
 .chronicles-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:34px}
 .story-card{background:white;border:1px solid var(--border);overflow:hidden}
 .story-card-cover{background:var(--navy);color:white;padding:54px;min-height:300px;display:flex;flex-direction:column;justify-content:end}
@@ -771,8 +856,72 @@ footer span{color:var(--gold-light)}
     padding:16px 18px 18px 72px;
   }
   .mobile-training-detail p{font-size:.8rem;line-height:1.62;color:var(--muted)}
+  .mobile-training-detail .training-focus{
+    margin:14px 0 0;
+    padding:13px 14px;
+    border-left:3px solid var(--gold);
+    background:var(--cream);
+  }
+  .mobile-training-detail .training-focus strong{
+    display:block;
+    color:var(--ink);
+    font-family:'Bebas Neue';
+    font-size:1.15rem;
+    letter-spacing:.7px;
+    margin-bottom:4px;
+  }
+  .mobile-training-detail .training-focus span{
+    display:block;
+    color:var(--muted);
+    font-size:.73rem;
+    line-height:1.52;
+  }
+  .mobile-training-detail ul{
+    list-style:none;
+    display:grid;
+    gap:8px;
+    margin-top:14px;
+  }
+  .mobile-training-detail li{
+    position:relative;
+    padding-left:17px;
+    color:#4e5c64;
+    font-size:.76rem;
+    line-height:1.5;
+  }
+  .mobile-training-detail li::before{
+    content:'';
+    position:absolute;
+    left:0;
+    top:.58em;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--gold);
+  }
   .mobile-training-detail .btn{
-    margin-top:14px;min-height:44px;padding:0 17px;font-size:.58rem;
+    margin-top:16px;min-height:45px;padding:0 17px;font-size:.58rem;
+    width:100%;
+  }
+  .mobile-training-note{
+    background:var(--navy);
+    color:white;
+    border-radius:12px;
+    padding:18px;
+    margin-top:12px;
+  }
+  .mobile-training-note strong{
+    display:block;
+    color:var(--gold-light);
+    font-family:'Bebas Neue';
+    font-size:1.45rem;
+    letter-spacing:.7px;
+    margin-bottom:6px;
+  }
+  .mobile-training-note p{
+    color:#c4d1d8;
+    font-size:.76rem;
+    line-height:1.58;
   }
 
   /* Chronicles */
@@ -1205,61 +1354,210 @@ footer span{color:var(--gold-light)}
       <header class="page-hero">
         <div class="section-label">Training</div>
         <h1>Instruction built around the pilot.</h1>
-        <p>Compare Jerry’s core training services, then request the lesson that fits your goals.</p>
+        <p>Jerry’s approach starts with safety, keeps flying enjoyable, and adapts the training plan when a pilot needs a different explanation or method for something to finally click.</p>
       </header>
+
       <div class="page-content">
         <div class="training-list desktop-training-list">
-          <article class="training-item"><div class="num">01</div><div><h3>Primary Flight Training</h3><p>Structured instruction for student pilots, with clear objectives and honest feedback after every lesson.</p></div></article>
-          <article class="training-item"><div class="num">02</div><div><h3>Instrument Training</h3><p>Procedures, scan discipline, workload management, and sound aeronautical decision-making.</p></div></article>
-          <article class="training-item"><div class="num">03</div><div><h3>Checkride Preparation</h3><p>Targeted oral review and flight preparation based on the practical test standards and the pilot’s weak areas.</p></div></article>
-          <article class="training-item"><div class="num">04</div><div><h3>Ground Instruction</h3><p>Weather, systems, aerodynamics, navigation, regulations, and scenario-based decision-making.</p></div></article>
+          <article class="training-item">
+            <div class="num">01</div>
+            <div class="training-item-copy">
+              <h3>Primary &amp; Proficiency Flight Training</h3>
+              <div class="training-item-meta">
+                <span>Safety First</span>
+                <span>Discovery to Advanced</span>
+                <span>Your Aircraft or Rental</span>
+              </div>
+              <p>Flight training is for anyone who wants to become safer, sharper, and more comfortable in the airplane. Jerry works with first-time students, private pilots returning after time away, and experienced or commercial pilots who want to rebuild proficiency in aircraft such as the Cessna 172.</p>
+              <ul class="training-item-list">
+                <li>Discovery flights and first lessons for new students</li>
+                <li>Private-pilot training and maneuver proficiency</li>
+                <li>Rusty-pilot refreshers and return-to-flying sessions</li>
+                <li>Confidence, aircraft control, judgment, and safe decision-making</li>
+              </ul>
+              <div class="training-item-action">
+                <button class="btn btn-primary training-request" data-training-value="Flight Training Lesson">Request Flight Training</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="training-item">
+            <div class="num">02</div>
+            <div class="training-item-copy">
+              <h3>Instrument Training &amp; IPCs</h3>
+              <div class="training-item-meta">
+                <span>Full Rating</span>
+                <span>Instrument Proficiency Check</span>
+                <span>Step-by-Step</span>
+              </div>
+              <p>Instrument flying can feel like learning a new language. Jerry starts slowly and builds understanding in manageable pieces, especially when pilots are making the transition from colorful VFR charts to dense IFR plates, procedures, symbols, and new cockpit workload.</p>
+              <ul class="training-item-list">
+                <li>Full instrument-rating instruction</li>
+                <li>Instrument Proficiency Checks for rated pilots</li>
+                <li>Approach procedures, clearances, charts, and cockpit organization</li>
+                <li>Workload management and staying ahead of the airplane</li>
+              </ul>
+              <div class="training-item-action">
+                <button class="btn btn-primary training-request" data-training-value="Instrument Training">Request Instrument Training</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="training-item">
+            <div class="num">03</div>
+            <div class="training-item-copy">
+              <h3>Checkride Preparation</h3>
+              <div class="training-item-meta">
+                <span>Mock Oral</span>
+                <span>Mock Flight</span>
+                <span>Review &amp; Polish</span>
+              </div>
+              <p>Jerry can run a complete mock checkride or focus on the areas that need final review. The goal is not simply memorizing enough to pass. It is identifying weak areas, understanding the standards, and entering the practical test able to explain decisions and fly with confidence.</p>
+              <ul class="training-item-list">
+                <li>Mock oral examinations and scenario-based questions</li>
+                <li>Mock flight portions and maneuver evaluation</li>
+                <li>Technical review, knowledge-gap identification, and final polish</li>
+                <li>Preparation tailored to the certificate or rating being pursued</li>
+              </ul>
+              <div class="training-item-action">
+                <button class="btn btn-primary training-request" data-training-value="Checkride Preparation">Request Checkride Prep</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="training-item">
+            <div class="num">04</div>
+            <div class="training-item-copy">
+              <h3>In-Person Ground Instruction</h3>
+              <div class="training-item-meta">
+                <span>One-on-One</span>
+                <span>In Person</span>
+                <span>Built Around You</span>
+              </div>
+              <p>Jerry teaches the full range of ground topics and changes his explanation when the first method does not connect. Instead of pushing ahead while a student is lost, he identifies where the understanding breaks down and approaches the subject from another direction.</p>
+              <ul class="training-item-list">
+                <li>Aerodynamics, weather, navigation, systems, and regulations</li>
+                <li>Instrument charts, procedures, and oral-exam preparation</li>
+                <li>Dedicated ground sessions or ground instruction paired with flying</li>
+                <li>Currently offered in person; virtual instruction may be added later</li>
+              </ul>
+              <div class="training-item-action">
+                <button class="btn btn-primary training-request" data-training-value="Ground School Session">Request Ground Instruction</button>
+              </div>
+            </div>
+          </article>
+
+          <aside class="training-location-note">
+            <div>
+              <h3>Jerry meets the pilot and the airplane.</h3>
+              <p>As an independent instructor, Jerry can meet pilots who own an aircraft or who have arranged a rental. Training is conducted in the aircraft being flown, subject to its condition, documentation, insurance requirements, and Jerry’s familiarity and comfort with the aircraft.</p>
+              <p style="margin-top:9px"><strong>Common East Tennessee meeting areas include:</strong></p>
+            </div>
+            <div class="training-location-airports" aria-label="Common training airports">
+              <span>TYS</span>
+              <span>DKX</span>
+              <span>GKT</span>
+              <span>MMI</span>
+              <span>MOR</span>
+              <span>RZR</span>
+              <span>By Arrangement</span>
+            </div>
+          </aside>
         </div>
 
         <div class="mobile-training-list">
-          <details class="mobile-training-card" open>
+          <details class="mobile-training-card">
             <summary>
               <span class="mobile-training-number">01</span>
-              <span class="mobile-training-title"><strong>Primary Flight Training</strong><span>Student pilots and proficiency</span></span>
+              <span class="mobile-training-title"><strong>Primary &amp; Proficiency</strong><span>Discovery flights through rusty-pilot refreshers</span></span>
               <span class="mobile-training-chevron">＋</span>
             </summary>
             <div class="mobile-training-detail">
-              <p>Structured one-on-one instruction with clear objectives, honest debriefs, and lessons built around the pilot’s current ability and aircraft.</p>
-              <button class="btn btn-primary" data-view="book">Request This Training</button>
+              <p>Jerry works with brand-new students, private pilots returning after time away, and experienced pilots who want to rebuild confidence or proficiency in an aircraft such as the Cessna 172.</p>
+              <div class="training-focus">
+                <strong>Jerry’s priority</strong>
+                <span>Safety comes first. The second priority is keeping flying enjoyable so the pilot stays engaged and continues learning.</span>
+              </div>
+              <ul>
+                <li>Discovery flights and first lessons</li>
+                <li>Private-pilot training and maneuver practice</li>
+                <li>Rusty-pilot and return-to-flying sessions</li>
+                <li>Training in the pilot’s owned or rented aircraft</li>
+              </ul>
+              <button class="btn btn-primary training-request" data-training-value="Flight Training Lesson">Request This Training</button>
             </div>
           </details>
+
           <details class="mobile-training-card">
             <summary>
               <span class="mobile-training-number">02</span>
-              <span class="mobile-training-title"><strong>Instrument Training</strong><span>Procedures and decision-making</span></span>
+              <span class="mobile-training-title"><strong>Instrument Training</strong><span>Full ratings and Instrument Proficiency Checks</span></span>
               <span class="mobile-training-chevron">＋</span>
             </summary>
             <div class="mobile-training-detail">
-              <p>Develop scan discipline, procedural confidence, workload management, and aeronautical judgment for instrument conditions.</p>
-              <button class="btn btn-primary" data-view="book">Request This Training</button>
+              <p>Jerry slows the transition from VFR to IFR down into manageable steps. Charts, procedures, symbols, approaches, and cockpit workload are introduced without burying the pilot in everything at once.</p>
+              <div class="training-focus">
+                <strong>How he teaches it</strong>
+                <span>Start with the foundation, make sure it is understood, then add complexity as the pilot becomes ready for it.</span>
+              </div>
+              <ul>
+                <li>Full instrument-rating instruction</li>
+                <li>Instrument Proficiency Checks</li>
+                <li>Approach charts, clearances, and procedures</li>
+                <li>Workload management and staying ahead of the airplane</li>
+              </ul>
+              <button class="btn btn-primary training-request" data-training-value="Instrument Training">Request This Training</button>
             </div>
           </details>
+
           <details class="mobile-training-card">
             <summary>
               <span class="mobile-training-number">03</span>
-              <span class="mobile-training-title"><strong>Checkride Preparation</strong><span>Oral and flight readiness</span></span>
+              <span class="mobile-training-title"><strong>Checkride Preparation</strong><span>Mock checkrides, review, and final polish</span></span>
               <span class="mobile-training-chevron">＋</span>
             </summary>
             <div class="mobile-training-detail">
-              <p>Targeted preparation based on the practical test standards, with focused work on the pilot’s weak areas and confidence under pressure.</p>
-              <button class="btn btn-primary" data-view="book">Request This Training</button>
+              <p>Preparation can be as complete as a mock oral and mock flight, or as focused as reviewing technical weak points and polishing the areas that need attention before the practical test.</p>
+              <div class="training-focus">
+                <strong>What the session targets</strong>
+                <span>Knowledge, judgment, communication, maneuver standards, and the pilot’s ability to remain composed while being evaluated.</span>
+              </div>
+              <ul>
+                <li>Mock oral examinations</li>
+                <li>Mock flight portions</li>
+                <li>Scenario-based questions and technical review</li>
+                <li>Final review and confidence-building</li>
+              </ul>
+              <button class="btn btn-primary training-request" data-training-value="Checkride Preparation">Request This Training</button>
             </div>
           </details>
+
           <details class="mobile-training-card">
             <summary>
               <span class="mobile-training-number">04</span>
-              <span class="mobile-training-title"><strong>Ground Instruction</strong><span>Knowledge connected to flight</span></span>
+              <span class="mobile-training-title"><strong>Ground Instruction</strong><span>In-person, one-on-one knowledge development</span></span>
               <span class="mobile-training-chevron">＋</span>
             </summary>
             <div class="mobile-training-detail">
-              <p>Weather, aircraft systems, aerodynamics, navigation, regulations, and scenario-based decisions explained in practical terms.</p>
-              <button class="btn btn-primary" data-view="book">Request This Training</button>
+              <p>Jerry can cover the full range of ground topics. When a student is struggling, he changes the explanation and the training plan instead of repeating the same method and hoping it eventually works.</p>
+              <div class="training-focus">
+                <strong>Built around the student</strong>
+                <span>The goal is to identify exactly where the concept stopped making sense and approach it in a way that helps it finally click.</span>
+              </div>
+              <ul>
+                <li>Aerodynamics, weather, systems, navigation, and regulations</li>
+                <li>Instrument procedures and chart interpretation</li>
+                <li>Oral-exam and knowledge-test preparation</li>
+                <li>Currently offered in person</li>
+              </ul>
+              <button class="btn btn-primary training-request" data-training-value="Ground School Session">Request This Training</button>
             </div>
           </details>
+
+          <aside class="mobile-training-note">
+            <strong>Meet Jerry at the airplane.</strong>
+            <p>Jerry can instruct in a pilot’s owned or rented aircraft and regularly meets students around East Tennessee, including TYS, DKX, GKT, MMI, MOR, and RZR. Other airports may be arranged directly with him.</p>
+          </aside>
         </div>
       </div>
     </section>
@@ -1947,6 +2245,43 @@ function updateDeviceFlow() {
     submit.textContent = 'Send Request via Email';
   }
 }
+
+function selectTrainingAndOpenBooking(trainingValue) {
+  const sessionSelect = document.getElementById('session-type');
+  if (sessionSelect && trainingValue) {
+    sessionSelect.value = trainingValue;
+    toggleConditionalFields();
+    updateRequestPreview();
+  }
+
+  currentBookingStep = 1;
+  showView('book');
+
+  if (isMobileViewport()) {
+    showBookingStep(1);
+  }
+
+  const status = document.getElementById('form-status');
+  if (status && trainingValue) {
+    status.textContent = trainingValue + ' has been selected. Complete the request details below.';
+  }
+}
+
+document.querySelectorAll('.training-request').forEach(button => {
+  button.addEventListener('click', () => {
+    selectTrainingAndOpenBooking(button.dataset.trainingValue || '');
+  });
+});
+
+// Keep the mobile training page compact: opening one section closes the others.
+document.querySelectorAll('.mobile-training-card').forEach(card => {
+  card.addEventListener('toggle', () => {
+    if (!card.open) return;
+    document.querySelectorAll('.mobile-training-card').forEach(otherCard => {
+      if (otherCard !== card) otherCard.open = false;
+    });
+  });
+});
 
 document.querySelectorAll('[data-booking-next]').forEach(button => {
   button.addEventListener('click', () => {
