@@ -1,658 +1,906 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<meta name="theme-color" content="#0a1628">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#081521">
 <title>Jerry Marotta | Gold Seal Flight Instructor</title>
+<meta name="description" content="Gold Seal flight instruction, instrument training, checkride preparation, and Flight Instructor's Chronicles from Jerry Marotta in Knoxville, Tennessee.">
+<link rel="canonical" href="https://jerrymarottaaviation.com/">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="icon" href="/favicon.ico">
 <link rel="manifest" href="/site.webmanifest">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0a1628;--navy-mid:#122040;--navy-light:#1e3a6e;--gold:#c9a84c;--gold-light:#e8c97a;--sky:#4a7fc1;--cloud:#dce8f5;--white:#f5f7fa;--muted:#8a9baf;--charcoal:#1c2b3a;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;padding-bottom:80px;}
-nav.top-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(10,22,40,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.2);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:3px;color:var(--gold);text-decoration:none;}
-.nav-logo span{color:var(--white);}
-.nav-links{display:flex;gap:36px;list-style:none;}
-.nav-links a{text-decoration:none;color:var(--cloud);font-size:0.78rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}
-.nav-links a:hover{color:var(--gold);}
-.nav-links a:hover::after{transform:scaleX(1);}
-.nav-cta{background:var(--gold)!important;color:var(--navy)!important;padding:8px 20px;font-weight:500!important;}
-.nav-cta::after{display:none!important;}
-.nav-cta:hover{background:var(--gold-light)!important;}
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;padding:120px 60px 80px;}
-.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 60% 50%,rgba(74,127,193,0.12) 0%,transparent 70%),linear-gradient(160deg,rgba(10,22,40,0.93) 0%,rgba(13,31,60,0.88) 40%,rgba(17,30,53,0.95) 100%);}
-.hero-bg-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;opacity:0.18;}
-.horizon{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0.4;}
-.hero-content{position:relative;z-index:2;max-width:700px;}
-.hero-eyebrow{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:14px;}
-.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold);flex-shrink:0;}
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,8rem);line-height:0.92;letter-spacing:3px;color:var(--white);margin-bottom:8px;}
-h1 .gold{color:var(--gold);}
-.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--cloud);opacity:0.8;margin:20px 0 40px;line-height:1.6;}
-.hero-badges{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
-.badge{border:1px solid rgba(201,168,76,0.35);padding:6px 16px;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);background:rgba(201,168,76,0.06);}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
-.btn-primary{background:var(--gold);color:var(--navy);padding:16px 40px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:56px;transition:background 0.2s;-webkit-tap-highlight-color:transparent;}
-.btn-primary:hover{background:var(--gold-light);}
-.btn-outline{border:1px solid rgba(201,168,76,0.5);color:var(--gold);padding:16px 40px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;background:transparent;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:56px;transition:border-color 0.2s,background 0.2s;-webkit-tap-highlight-color:transparent;}
-.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);}
-section{padding:100px 60px;}
-.section-label{font-size:0.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
-.section-label::before{content:'';width:30px;height:1px;background:var(--gold);}
-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:2px;line-height:1;color:var(--white);margin-bottom:20px;}
-.section-divider{width:60px;height:2px;background:var(--gold);margin:24px 0;}
-#about{background:var(--charcoal);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.about-photo-frame{border:1px solid rgba(201,168,76,0.3);padding:12px;position:relative;}
-.about-photo-frame::before{content:'';position:absolute;top:-8px;left:-8px;width:60px;height:60px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);}
-.about-photo-frame::after{content:'';position:absolute;bottom:-8px;right:-8px;width:60px;height:60px;border-bottom:2px solid var(--gold);border-right:2px solid var(--gold);}
-.about-photo{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,0.15);margin-top:32px;}
-.stat{background:var(--charcoal);padding:20px;text-align:center;}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--gold);letter-spacing:2px;line-height:1;}
-.stat-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
-.about-text p{color:var(--cloud);opacity:0.8;line-height:1.85;font-size:0.95rem;margin-bottom:18px;}
-#services{background:var(--navy);}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:rgba(201,168,76,0.1);margin-top:60px;}
-.service-card{background:var(--navy);padding:44px 36px;position:relative;overflow:hidden;transition:background 0.3s;}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
-.service-card:hover{background:var(--navy-mid);}
-.service-card:hover::before{transform:scaleX(1);}
-.service-icon{font-size:2rem;margin-bottom:20px;display:block;}
-.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--white);margin-bottom:12px;}
-.service-card p{font-size:0.88rem;color:var(--muted);line-height:1.75;}
-.service-num{position:absolute;bottom:24px;right:24px;font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(201,168,76,0.07);letter-spacing:2px;line-height:1;}
-#gallery{background:var(--charcoal);}
-.gallery-intro{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--cloud);opacity:0.7;max-width:500px;line-height:1.7;margin-bottom:50px;}
-.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-auto-rows:220px;gap:4px;}
-.gallery-cell{background:var(--navy-mid);overflow:hidden;position:relative;}
-.gallery-cell:first-child{grid-row:span 2;}
-.gallery-cell img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;display:block;}
-.gallery-cell:hover img{transform:scale(1.04);}
-.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,0.5) 0%,transparent 50%);}
-#schedule{background:linear-gradient(160deg,rgba(10,22,40,0.97) 0%,rgba(13,31,60,0.95) 100%),url('images/flight-simulator.jpg') center/cover no-repeat;}
-.schedule-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;margin-top:60px;align-items:start;}
-.schedule-info h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--cloud);margin-bottom:28px;line-height:1.5;}
-.contact-details{list-style:none;display:flex;flex-direction:column;gap:16px;}
-.contact-details li{display:flex;align-items:flex-start;gap:14px;font-size:0.9rem;color:var(--cloud);}
-.contact-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;margin-top:2px;}
-.contact-details a{color:var(--gold);text-decoration:none;}
-.contact-details a:hover{color:var(--gold-light);}
-.contact-note{font-size:0.75rem;color:var(--muted);margin-top:6px;line-height:1.55;max-width:28ch;}
-.schedule-form{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.15);padding:48px;}
-.form-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--gold);margin-bottom:12px;}
-.form-subtitle{font-size:0.85rem;color:var(--muted);margin-bottom:28px;line-height:1.6;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
-.form-group label{font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
-.form-group input,.form-group select,.form-group textarea{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.2);color:var(--white);padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:1rem;outline:none;transition:border-color 0.2s;width:100%;-webkit-appearance:none;min-height:52px;}
-.form-group select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;}
-.form-group select option{background:var(--navy-mid);color:var(--white);}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);background:rgba(201,168,76,0.05);}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(138,155,175,0.5);}
-.form-group textarea{resize:vertical;min-height:90px;}
-.other-field{display:none;}
-.other-field.visible{display:flex;}
-.sms-preview{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);padding:16px;margin-bottom:16px;}
-.sms-preview-label{font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.sms-preview-text{font-family:'DM Sans',sans-serif;font-size:0.8rem;line-height:1.6;color:var(--cloud);white-space:pre-wrap;word-break:break-word;}
-.form-submit{width:100%;background:var(--gold);color:var(--navy);border:none;padding:18px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:background 0.2s;min-height:56px;-webkit-tap-highlight-color:transparent;}
-.form-submit:hover{background:var(--gold-light);}
-.form-note{font-size:0.72rem;color:var(--muted);margin-top:16px;line-height:1.6;}
-.form-emergency{font-size:0.72rem;color:var(--muted);margin-top:14px;line-height:1.6;padding-top:14px;border-top:1px solid rgba(201,168,76,0.12);}
-.form-emergency a{color:var(--gold);text-decoration:none;}
-.form-emergency a:hover{color:var(--gold-light);}
-footer{background:var(--navy);border-top:1px solid rgba(201,168,76,0.15);padding:48px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:3px;color:var(--gold);}
-.footer-logo span{color:var(--muted);}
-.footer-links{display:flex;gap:32px;list-style:none;}
-.footer-links a{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
-.footer-links a:hover{color:var(--gold);}
-.footer-copy{font-size:0.7rem;color:rgba(138,155,175,0.45);letter-spacing:1px;}
-.footer-credit{display:block;margin-top:8px;font-size:0.65rem;color:rgba(138,155,175,0.35);letter-spacing:0.5px;}
-.footer-credit a{color:rgba(138,155,175,0.55);text-decoration:none;transition:color 0.2s;}
-.footer-credit a:hover{color:var(--gold);}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:900;background:rgba(10,22,40,0.98);backdrop-filter:blur(20px);border-top:1px solid rgba(201,168,76,0.2);display:none;height:72px;}
-.bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);text-decoration:none;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
-.bnav-item.active,.bnav-item:active{color:var(--gold);}
-.bnav-item svg{width:22px;height:22px;}
-.bnav-label{font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
-.bnav-book{flex:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;-webkit-tap-highlight-color:transparent;}
-.bnav-book-circle{width:52px;height:52px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:-20px;box-shadow:0 4px 20px rgba(200,164,74,0.45);transition:background 0.2s;}
-.bnav-book:active .bnav-book-circle{background:var(--gold-light);}
-.bnav-book .bnav-label{color:var(--gold);}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}#hero .hero-eyebrow,#hero .hero-content,#hero h1,#hero .hero-subtitle,#hero .hero-badges,#hero .hero-btns{opacity:1;transform:none;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-@media(min-width:901px){
-  :root{--content-max:1240px;}
-  body{padding-bottom:0;}
-  nav.top-nav{padding:18px max(48px,calc((100% - var(--content-max)) / 2));}
-  section{padding:clamp(88px,10vw,140px) max(48px,calc((100% - var(--content-max)) / 2));}
-  footer{padding:48px max(48px,calc((100% - var(--content-max)) / 2));}
-  #hero{
-    display:grid;
-    grid-template-columns:minmax(0,min(52vw,640px)) minmax(0,1fr);
-    align-items:center;
-    column-gap:clamp(32px,4vw,72px);
-    padding:120px max(48px,calc((100% - var(--content-max)) / 2)) 88px;
-  }
-  .hero-content{max-width:640px;}
-  .hero-subtitle{font-size:1.35rem;max-width:36em;}
-  h1{font-size:clamp(4.5rem,7.5vw,7.25rem);}
-  #about{
-    grid-template-columns:minmax(280px,420px) minmax(0,1fr);
-    gap:clamp(48px,5vw,96px);
-    align-items:start;
-  }
-  .about-text p{font-size:1rem;}
-  .services-grid{
-    grid-template-columns:repeat(2,1fr);
-    margin-top:clamp(48px,6vw,72px);
-  }
-  .service-card{padding:48px 40px;}
-  .gallery-intro{max-width:42rem;font-size:1.2rem;}
-  .gallery-grid{
-    grid-template-columns:1.35fr 1fr 1fr;
-    grid-auto-rows:clamp(252px,30vh,400px);
-    gap:6px;
-    margin-top:clamp(40px,5vw,56px);
-  }
-  .schedule-layout{
-    gap:clamp(48px,6vw,100px);
-    margin-top:clamp(48px,6vw,72px);
-  }
-  .schedule-form{padding:56px 52px;}
+:root{
+  --ink:#081521;
+  --navy:#0d2436;
+  --navy-2:#15354a;
+  --paper:#fffaf1;
+  --cream:#f2eadc;
+  --mist:#dce5e8;
+  --blue-gray:#6f8793;
+  --gold:#bd812c;
+  --gold-light:#dfb768;
+  --rust:#a64f32;
+  --text:#15212a;
+  --muted:#66727a;
+  --white:#ffffff;
+  --border:rgba(8,21,33,.14);
+  --shadow:0 24px 70px rgba(8,21,33,.14);
+  --max:1240px;
 }
-@media(min-width:1200px){
-  .services-grid{grid-template-columns:repeat(4,1fr);}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--text);min-height:100vh}
+button,a,input,select,textarea{font:inherit}
+a{color:inherit}
+button{cursor:pointer}
+.site-shell{min-height:100vh}
+.desktop-nav{position:sticky;top:0;z-index:50;height:82px;background:rgba(8,21,33,.97);border-bottom:1px solid rgba(189,129,44,.65);display:flex;align-items:center;padding:0 max(28px,calc((100vw - var(--max))/2));gap:42px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:max-content}
+.brand-mark{width:44px;height:44px;display:grid;place-items:center;color:var(--gold);font-size:2rem;transform:rotate(-7deg)}
+.brand-copy strong{display:block;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:1.5rem;color:var(--white);line-height:1}
+.brand-copy small{display:block;color:var(--gold-light);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;margin-top:5px}
+.desktop-links{display:flex;align-items:center;gap:30px;margin-left:auto}
+.nav-btn{border:0;background:none;color:#d9e0e4;text-transform:uppercase;font-size:.72rem;font-weight:600;letter-spacing:1.8px;padding:31px 0 27px;position:relative}
+.nav-btn::after{content:'';position:absolute;left:0;right:0;bottom:20px;height:2px;background:var(--gold);transform:scaleX(0);transition:.2s}
+.nav-btn:hover,.nav-btn.active{color:var(--gold-light)}
+.nav-btn.active::after{transform:scaleX(1)}
+.nav-book{border:1px solid var(--gold);color:var(--gold-light);padding:12px 21px;background:transparent;text-transform:uppercase;font-size:.7rem;font-weight:600;letter-spacing:1.7px;border-radius:4px}
+.nav-book:hover{background:var(--gold);color:var(--ink)}
+.mobile-top,.mobile-bottom{display:none}
+.view{display:none;animation:fade .28s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:.45;transform:translateY(5px)}to{opacity:1;transform:none}}
+.hero{background:var(--ink);color:white;min-height:610px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.92fr);position:relative;overflow:hidden}
+.hero-copy{padding:92px max(48px,calc((100vw - var(--max))/2)) 90px;display:flex;flex-direction:column;justify-content:center;padding-right:60px;position:relative;z-index:2}
+.eyebrow{display:flex;align-items:center;gap:14px;color:var(--gold-light);text-transform:uppercase;font-size:.7rem;letter-spacing:3px;font-weight:600;margin-bottom:20px}
+.eyebrow::before{content:'';width:42px;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:'Bebas Neue',sans-serif;font-weight:400}
+h1{font-size:clamp(4.9rem,7.4vw,7.6rem);line-height:.88;letter-spacing:3px;max-width:720px}
+h1 span{color:var(--gold-light)}
+.hero-lede{font-family:'Cormorant Garamond',serif;font-size:1.45rem;line-height:1.5;color:#dce3e8;max-width:640px;margin:25px 0 34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{border:0;min-height:52px;padding:0 28px;text-transform:uppercase;letter-spacing:1.7px;font-size:.72rem;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;border-radius:3px}
+.btn-primary{background:var(--gold);color:var(--ink)}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-secondary{border:1px solid rgba(255,255,255,.38);color:white;background:transparent}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold-light)}
+.hero-visual{background:linear-gradient(135deg,var(--navy),#0a1722 70%);position:relative;min-height:610px;overflow:hidden;border-left:1px solid rgba(189,129,44,.25)}
+.horizon-line{position:absolute;left:-20%;right:-10%;top:47%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-light),transparent);transform:rotate(-8deg);opacity:.68}
+.instrument-ring{position:absolute;border:1px solid rgba(223,183,104,.2);border-radius:50%}
+.instrument-ring.one{width:420px;height:420px;right:-80px;top:60px}
+.instrument-ring.two{width:240px;height:240px;left:65px;bottom:50px}
+.instrument-ring::before,.instrument-ring::after{content:'';position:absolute;inset:14%;border:1px dashed rgba(220,229,232,.13);border-radius:50%}
+.instrument-ring::after{inset:32%;border-style:solid}
+.altimeter{position:absolute;right:18%;top:33%;width:178px;height:178px;border-radius:50%;border:6px solid #1d3444;background:#07111a;box-shadow:0 0 0 2px rgba(223,183,104,.35),0 28px 60px rgba(0,0,0,.38);display:grid;place-items:center}
+.altimeter::before{content:'';width:4px;height:68px;background:var(--gold-light);position:absolute;bottom:50%;left:50%;transform-origin:bottom;transform:translateX(-50%) rotate(37deg);border-radius:2px}
+.altimeter::after{content:'8500+';font-family:'Bebas Neue';font-size:2rem;letter-spacing:2px;color:white;transform:translateY(27px)}
+.visual-caption{position:absolute;left:55px;bottom:54px;max-width:330px}
+.visual-caption small{color:var(--gold-light);text-transform:uppercase;letter-spacing:2px;font-size:.66rem}
+.visual-caption strong{display:block;font-family:'Bebas Neue';font-size:2.5rem;line-height:1;color:white;letter-spacing:2px;margin-top:10px}
+.visual-caption p{font-size:.85rem;line-height:1.6;color:#aebcc5;margin-top:12px}
+.credential-strip{background:var(--cream);border-bottom:1px solid var(--border)}
+.credential-inner{max-width:var(--max);margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.credential{padding:26px 28px;border-right:1px solid var(--border)}
+.credential:last-child{border:0}
+.credential strong{font-family:'Bebas Neue';font-size:2rem;letter-spacing:1.5px;color:var(--rust)}
+.credential span{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1.6px;color:var(--muted);margin-top:3px}
+.section{padding:92px max(28px,calc((100vw - var(--max))/2))}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:38px}
+.section-label{color:var(--rust);text-transform:uppercase;font-size:.68rem;letter-spacing:2.5px;font-weight:600;margin-bottom:9px}
+.section h2,.page-hero h1{color:var(--ink);font-size:clamp(3rem,5vw,5rem);line-height:.95;letter-spacing:2px}
+.section-intro{max-width:590px;color:var(--muted);line-height:1.75;font-size:.96rem}
+.training-preview{background:var(--paper)}
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:white;border:1px solid var(--border);padding:28px;min-height:238px;box-shadow:0 12px 30px rgba(8,21,33,.05);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.card-index{font-family:'Bebas Neue';color:rgba(166,79,50,.38);font-size:2.3rem}
+.card h3{color:var(--ink);font-size:1.65rem;letter-spacing:1px;margin:18px 0 10px}
+.card p{color:var(--muted);font-size:.84rem;line-height:1.7}
+.card-link{display:inline-block;margin-top:18px;color:var(--rust);text-transform:uppercase;font-size:.68rem;font-weight:600;letter-spacing:1.4px;text-decoration:none}
+.chronicle-feature{background:var(--cream);display:grid;grid-template-columns:minmax(400px,.94fr) minmax(0,1.06fr);gap:0;padding:0}
+.chronicle-cover{background:linear-gradient(145deg,#06121d,#102c40 62%,#1c3c4d);min-height:530px;color:white;padding:58px max(48px,calc((100vw - var(--max))/2));padding-right:55px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.chronicle-cover::after{content:'';position:absolute;width:460px;height:460px;border-radius:50%;border:1px solid rgba(223,183,104,.16);right:-120px;bottom:-170px;box-shadow:0 0 0 46px rgba(223,183,104,.035),0 0 0 92px rgba(223,183,104,.025)}
+.chronicle-kicker{color:var(--gold-light);text-transform:uppercase;letter-spacing:2.4px;font-size:.7rem;font-weight:600}
+.chronicle-cover h2{font-size:clamp(4rem,6vw,6.5rem);color:white;line-height:.9;max-width:680px;margin:28px 0 22px;position:relative;z-index:2}
+.chronicle-cover .byline{font-family:'Cormorant Garamond';font-style:italic;font-size:1.25rem;color:#d8e1e6;position:relative;z-index:2}
+.chronicle-copy{padding:72px max(48px,calc((100vw - var(--max))/2));padding-left:70px;background:var(--cream);display:flex;flex-direction:column;justify-content:center}
+.chronicle-copy .meta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 22px}
+.pill{background:rgba(111,135,147,.14);color:var(--navy);font-size:.65rem;text-transform:uppercase;letter-spacing:1.3px;padding:7px 10px}
+.chronicle-copy p{color:#48565e;line-height:1.85;max-width:590px}
+.quote{border-left:3px solid var(--rust);padding-left:20px;font-family:'Cormorant Garamond';font-size:1.35rem;font-style:italic;color:var(--ink);margin:26px 0 30px;max-width:570px}
+.about-preview{background:var(--paper);display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.about-panel{background:var(--navy);color:white;padding:50px;box-shadow:var(--shadow)}
+.about-panel h3{font-size:3rem;line-height:1;color:white;margin-bottom:20px}
+.about-panel p{color:#c5d1d7;line-height:1.8}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
+.fact{background:#f6f0e5;border:1px solid var(--border);padding:22px}
+.fact strong{font-family:'Bebas Neue';font-size:2rem;color:var(--rust)}
+.fact span{display:block;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:1.3px;margin-top:4px}
+.final-cta{background:var(--rust);color:white;text-align:center;padding:76px 24px}
+.final-cta h2{font-size:clamp(3.4rem,5.8vw,5.5rem);color:white}
+.final-cta p{max-width:590px;margin:17px auto 28px;color:#fae9df;line-height:1.7}
+.page-hero{padding:76px max(28px,calc((100vw - var(--max))/2)) 50px;background:var(--cream);border-bottom:1px solid var(--border)}
+.page-hero p{max-width:690px;color:var(--muted);line-height:1.8;margin-top:15px}
+.page-content{padding:56px max(28px,calc((100vw - var(--max))/2)) 100px}
+.training-list{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.training-item{background:white;border:1px solid var(--border);padding:32px;display:grid;grid-template-columns:62px 1fr;gap:22px}
+.training-item .num{font-family:'Bebas Neue';font-size:2.7rem;color:var(--gold)}
+.training-item h3{font-size:1.8rem;color:var(--ink);margin-bottom:8px}
+.training-item p{color:var(--muted);line-height:1.7;font-size:.9rem}
+.chronicles-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:34px}
+.story-card{background:white;border:1px solid var(--border);overflow:hidden}
+.story-card-cover{background:var(--navy);color:white;padding:54px;min-height:300px;display:flex;flex-direction:column;justify-content:end}
+.story-card-cover small{color:var(--gold-light);text-transform:uppercase;letter-spacing:2px}
+.story-card-cover h2{font-size:4.2rem;line-height:.9;color:white;margin-top:15px}
+.story-card-body{padding:30px}
+.story-card-body p{color:var(--muted);line-height:1.75}
+.sidebar{background:var(--cream);padding:30px;align-self:start}
+.sidebar h3{font-size:1.75rem;color:var(--ink);margin-bottom:14px}
+.sidebar p{color:var(--muted);line-height:1.7;font-size:.88rem}
+.article{max-width:820px;margin:0 auto;background:white;border:1px solid var(--border);padding:60px}
+.article .article-kicker{color:var(--rust);font-size:.68rem;text-transform:uppercase;letter-spacing:2px;font-weight:600}
+.article h1{font-family:'Bebas Neue';font-size:clamp(4rem,7vw,6.8rem);line-height:.9;color:var(--ink);margin:15px 0 20px}
+.article .article-deck{font-family:'Cormorant Garamond';font-size:1.5rem;font-style:italic;color:#50606a;line-height:1.55;margin-bottom:38px}
+.article p{font-family:'Cormorant Garamond';font-size:1.22rem;line-height:1.75;color:#273640;margin-bottom:1.3em}
+.article blockquote{border-left:3px solid var(--gold);padding:18px 0 18px 24px;margin:36px 0;font-family:'Cormorant Garamond';font-size:1.55rem;font-style:italic;color:var(--navy)}
+.booking-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:34px}
+.contact-card{background:var(--navy);color:white;padding:38px;align-self:start}
+.contact-card h3{font-size:2.4rem;color:white;margin-bottom:15px}
+.contact-card p{color:#c4d1d8;line-height:1.75}
+.form-card{background:white;border:1px solid var(--border);padding:38px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.field.full{grid-column:1/-1}
+.field label{font-size:.65rem;text-transform:uppercase;letter-spacing:1.4px;font-weight:600;color:var(--muted)}
+.field input,.field select,.field textarea{border:1px solid #bbc6ca;background:#fbfaf6;min-height:50px;padding:13px;color:var(--text)}
+.field textarea{min-height:110px;resize:vertical}
+
+.about-photo-card{background:white;border:1px solid var(--border);padding:12px;box-shadow:var(--shadow)}
+.about-photo-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center}
+.about-copy-stack{display:flex;flex-direction:column;gap:22px}
+.booking-note{margin-top:20px;padding:18px;border-left:4px solid var(--rust);background:var(--cream);color:#48565e;font-size:.84rem;line-height:1.7}
+.booking-note strong{color:var(--ink)}
+.other-field{display:none}
+.other-field.visible{display:flex}
+.request-preview{grid-column:1/-1;background:var(--cream);border:1px solid var(--border);padding:18px;margin-bottom:4px}
+.request-preview-label{font-size:.62rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;color:var(--rust);margin-bottom:10px}
+.request-preview-text{white-space:pre-wrap;word-break:break-word;font-size:.8rem;line-height:1.65;color:#48565e}
+.form-actions{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-copy{border:1px solid var(--rust);background:transparent;color:var(--rust)}
+.btn-copy:hover{background:var(--rust);color:white}
+.form-status{grid-column:1/-1;min-height:1.4em;font-size:.76rem;color:var(--muted)}
+.article h2.article-subhead{font-size:2.5rem;color:var(--rust);margin:46px 0 18px;line-height:1}
+.article p.dialogue{font-style:italic;color:var(--navy)}
+.contact-links{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.contact-links a{color:var(--gold-light);text-decoration:none}
+
+footer{background:var(--ink);color:#91a2ac;padding:42px max(28px,calc((100vw - var(--max))/2));display:flex;justify-content:space-between;gap:30px;align-items:center;font-size:.73rem}
+footer strong{font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:2px;color:white}
+footer span{color:var(--gold-light)}
+.mobile-home-only{display:none}
+@media(max-width:1000px){
+  .desktop-nav{display:none}
+  .mobile-top{display:flex;position:sticky;top:0;z-index:60;height:64px;background:rgba(8,21,33,.98);border-bottom:1px solid rgba(189,129,44,.5);align-items:center;justify-content:space-between;padding:0 18px}
+  .mobile-top .brand-copy strong{font-size:1.25rem}
+  .mobile-top .brand-copy small{font-size:.55rem}
+  .mobile-top .brand-mark{width:32px;height:32px;font-size:1.45rem}
+  .mobile-menu-btn{border:1px solid rgba(223,183,104,.5);background:none;color:var(--gold-light);width:38px;height:38px;border-radius:50%;font-size:1.1rem}
+  .mobile-bottom{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;height:74px;background:rgba(8,21,33,.98);border-top:1px solid rgba(189,129,44,.5);padding-bottom:max(0px,env(safe-area-inset-bottom))}
+  .mobile-bottom button{flex:1;border:0;background:none;color:#91a2ac;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:.56rem;text-transform:uppercase;letter-spacing:.8px}
+  .mobile-bottom button span:first-child{font-size:1.15rem}
+  .mobile-bottom button.active{color:var(--gold-light)}
+  .mobile-bottom .mobile-book{position:relative;color:var(--gold-light)}
+  .mobile-bottom .mobile-book span:first-child{width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;margin-top:-20px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+  body{padding-bottom:74px}
+  .desktop-home-only{display:none!important}
+  .mobile-home-only{display:block}
+  .mobile-home{background:var(--paper)}
+  .mobile-hero{background:var(--ink);color:white;padding:46px 20px 34px}
+  .mobile-hero .eyebrow{font-size:.58rem;letter-spacing:2px;margin-bottom:16px}
+  .mobile-hero h1{font-size:4.4rem;line-height:.88}
+  .mobile-hero p{font-family:'Cormorant Garamond';font-size:1.15rem;line-height:1.5;color:#c9d4da;margin:18px 0 24px}
+  .mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mobile-actions .btn{padding:0 12px;min-height:48px;font-size:.65rem}
+  .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px 14px;background:var(--cream)}
+  .quick-card{background:white;border:1px solid var(--border);padding:15px 9px;text-align:center;min-height:90px;display:flex;flex-direction:column;justify-content:center}
+  .quick-card strong{font-family:'Bebas Neue';font-size:1.18rem;color:var(--ink);line-height:1}
+  .quick-card span{font-size:.56rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:6px}
+  .mobile-block{padding:30px 18px}
+  .mobile-block.alt{background:var(--cream)}
+  .mobile-block h2{font-size:2.7rem;color:var(--ink)}
+  .mobile-block .section-label{font-size:.58rem;margin-bottom:7px}
+  .mobile-story{background:var(--navy);color:white;padding:28px 23px;margin-top:18px;position:relative;overflow:hidden}
+  .mobile-story::after{content:'';position:absolute;width:180px;height:180px;border:1px solid rgba(223,183,104,.15);border-radius:50%;right:-70px;bottom:-85px}
+  .mobile-story small{color:var(--gold-light);text-transform:uppercase;letter-spacing:1.4px;font-size:.58rem}
+  .mobile-story h3{font-size:2.8rem;line-height:.9;color:white;margin:12px 0}
+  .mobile-story p{font-size:.82rem;color:#becbd2;line-height:1.65;margin-bottom:18px;max-width:92%}
+  .mobile-credentials{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,21,33,.12);margin-top:18px}
+  .mobile-credential{background:white;padding:18px 8px;text-align:center}
+  .mobile-credential strong{font-family:'Bebas Neue';font-size:1.65rem;color:var(--rust)}
+  .mobile-credential span{display:block;font-size:.52rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-top:3px}
+  .mobile-cta{background:var(--rust);color:white;padding:28px 22px;margin:0 18px 26px}
+  .mobile-cta h3{font-size:2.5rem;color:white}
+  .mobile-cta p{font-size:.82rem;line-height:1.6;color:#fae9df;margin:8px 0 17px}
+  .page-hero{padding:38px 20px 28px}
+  .page-hero h1{font-size:3.6rem}
+  .page-content{padding:28px 16px 40px}
+  .training-list{grid-template-columns:1fr}
+  .training-item{padding:23px;grid-template-columns:46px 1fr;gap:14px}
+  .chronicles-grid{grid-template-columns:1fr}
+  .story-card-cover{padding:35px 24px;min-height:250px}
+  .story-card-cover h2{font-size:3.35rem}
+  .sidebar{display:none}
+  .article{padding:30px 22px}
+  .article h1{font-size:4rem}
+  .article p{font-size:1.12rem}
+  .booking-layout{grid-template-columns:1fr}
+  .about-preview{grid-template-columns:1fr;gap:24px}
+  .contact-card{padding:26px}
+  .form-card{padding:23px}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  footer{display:none}
 }
-@media(max-width:900px){
-  nav.top-nav{padding:16px 24px;}
-  .nav-links{display:none;}
-  section{padding:60px 20px;}
-  #hero{padding:100px 20px 60px;}
-  #about{grid-template-columns:1fr;gap:40px;}
-  .schedule-layout{grid-template-columns:1fr;gap:40px;}
-  .gallery-grid{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:4px;}
-  .gallery-grid::-webkit-scrollbar{display:none;}
-  .gallery-cell{flex:0 0 78vw;height:220px;}
-  .gallery-cell:first-child{grid-row:unset;}
-  .schedule-form{padding:24px 16px;}
-  .form-row{grid-template-columns:1fr;}
-  footer{flex-direction:column;padding:32px 24px;text-align:center;}
-  .bottom-nav{display:flex;}
-  body{padding-bottom:80px;}
+@media(min-width:1001px){
+  .mobile-home-only{display:none!important}
 }
 </style>
 </head>
 <body>
+<div class="site-shell">
+  <nav class="desktop-nav">
+    <a class="brand" href="#" data-view="home">
+      <span class="brand-mark">✈</span>
+      <span class="brand-copy"><strong>Jerry Marotta</strong><small>Gold Seal Flight Instructor</small></span>
+    </a>
+    <div class="desktop-links">
+      <button class="nav-btn active" data-view="home">Home</button>
+      <button class="nav-btn" data-view="about">About</button>
+      <button class="nav-btn" data-view="training">Training</button>
+      <button class="nav-btn" data-view="chronicles">Chronicles</button>
+      <button class="nav-btn" data-view="contact">Contact</button>
+      <button class="nav-book" data-view="book">Book a Lesson</button>
+    </div>
+  </nav>
 
-<nav class="top-nav">
-  <a href="#hero" class="nav-logo">JERRY MAROTTA <span>// AVIATION</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#schedule" class="nav-cta">Book a Session</a></li>
-  </ul>
-</nav>
+  <div class="mobile-top">
+    <a class="brand" href="#" data-view="home">
+      <span class="brand-mark">✈</span>
+      <span class="brand-copy"><strong>Jerry Marotta</strong><small>Gold Seal Flight Instructor</small></span>
+    </a>
+    <button class="mobile-menu-btn" data-view="about" aria-label="Open about page">JM</button>
+  </div>
 
-<section id="hero">
-  <div class="hero-bg"><img class="hero-bg-img" src="images/jerry-with-plane.jpg" alt=""></div>
-  <div class="horizon"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Gold Seal Certified &bull; Knoxville, TN</div>
-    <h1>JERRY<br><span class="gold">MAROTTA</span></h1>
-    <div class="hero-subtitle">Elevating pilots through expert instruction,<br>precision training, and unmatched dedication.</div>
-    <div class="hero-badges">
-      <span class="badge">Gold Seal CFI</span>
-      <span class="badge">FAA Certified</span>
-      <span class="badge">All Skill Levels</span>
-      <span class="badge">Knoxville Area</span>
-    </div>
-    <div class="hero-btns">
-      <a href="#schedule" class="btn-primary">Book a Session</a>
-      <a href="#about" class="btn-outline">Learn More</a>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="reveal">
-    <div class="about-photo-frame">
-      <img class="about-photo" src="images/jerry-with-plane.jpg" alt="Jerry Marotta with his Travel Air biplane">
-    </div>
-    <div class="about-stats">
-      <div class="stat"><div class="stat-num">Gold</div><div class="stat-label">Seal Certified</div></div>
-      <div class="stat"><div class="stat-num">FAA</div><div class="stat-label">Certified CFII</div></div>
-      <div class="stat"><div class="stat-num">All</div><div class="stat-label">Skill Levels</div></div>
-      <div class="stat"><div class="stat-num">TN</div><div class="stat-label">Knoxville Area</div></div>
-    </div>
-  </div>
-  <div class="reveal" style="transition-delay:0.15s">
-    <div class="section-label">About Jerry</div>
-    <h2>GOLD SEAL<br>FLIGHT INSTRUCTOR</h2>
-    <div class="section-divider"></div>
-    <div class="about-text">
-      <p>Finding a reliable flight instructor who truly focuses on your individual needs can be challenging. As a FAA Gold Seal Certified Flight Instructor, Jerry Marotta brings an approach that motivates and guides students toward real-world competency and confidence in the cockpit.</p>
-      <p>Jerry designs every lesson around his students' specific goals — from first-time discovery flights to advanced maneuver training and checkride preparation. His instruction style emphasizes positive, constructive techniques that build lasting skills and genuine confidence.</p>
-      <p>Based in Knoxville, Tennessee, Jerry serves student pilots of all skill levels across the greater East Tennessee region.</p>
-    </div>
-    <a href="#schedule" class="btn-primary" style="margin-top:24px">Schedule Your Lesson</a>
-  </div>
-</section>
-
-<section id="services">
-  <div class="reveal">
-    <div class="section-label">What I Offer</div>
-    <h2>FLIGHT TRAINING<br>SERVICES</h2>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <span class="service-icon">&#9992;&#65039;</span>
-      <h3>Flight Training Lessons</h3>
-      <p>Structured one-on-one flight instruction tailored to your pace and goals. From primary maneuvers to complex aircraft — every lesson builds on the last.</p>
-      <div class="service-num">01</div>
-    </div>
-    <div class="service-card reveal" style="transition-delay:0.1s">
-      <span class="service-icon">&#128745;&#65039;</span>
-      <h3>Discovery / Intro Flights</h3>
-      <p>Never been in the cockpit? Experience the thrill of flight firsthand. A perfect first step for aspiring pilots of any age.</p>
-      <div class="service-num">02</div>
-    </div>
-    <div class="service-card reveal" style="transition-delay:0.2s">
-      <span class="service-icon">&#128218;</span>
-      <h3>Ground School Sessions</h3>
-      <p>In-depth academic instruction covering aerodynamics, navigation, weather, regulations, and everything needed to pass your FAA written exam.</p>
-      <div class="service-num">03</div>
-    </div>
-    <div class="service-card reveal" style="transition-delay:0.3s">
-      <span class="service-icon">&#127919;</span>
-      <h3>Check-Ride Prep</h3>
-      <p>Focused preparation for your FAA practical exam. Sharpen your oral knowledge and flight skills so you walk into your checkride ready to succeed.</p>
-      <div class="service-num">04</div>
-    </div>
-  </div>
-</section>
-
-<section id="gallery">
-  <div class="reveal">
-    <div class="section-label">From the Cockpit</div>
-    <h2>AERIAL<br>GALLERY</h2>
-    <p class="gallery-intro">The skies above East Tennessee offer some of the most breathtaking views imaginable — from mountain ridgelines to glittering city lights at altitude.</p>
-  </div>
-  <div class="gallery-grid reveal">
-    <div class="gallery-cell"><img src="images/gallery-01.jpg" alt="Night flight over Knoxville"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-02.jpg" alt="Mountain ridge"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-03.jpg" alt="Cockpit instruments"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-04.jpg" alt="Smoky Mountains aerial"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-05.jpg" alt="Ridge line aerial"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-06.jpg" alt="Above the clouds"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-07.jpg" alt="Lake and river aerial"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-08.jpg" alt="Snow covered mountains"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-09.jpg" alt="Jerry flying"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-10.jpg" alt="Wing above clouds"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-11.jpg" alt="Clouds and countryside"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-12.jpg" alt="Mountain valley"><div class="gallery-overlay"></div></div>
-    <div class="gallery-cell"><img src="images/gallery-13.jpeg" alt="Runway approach"><div class="gallery-overlay"></div></div>
-  </div>
-</section>
-
-<section id="schedule">
-  <div class="reveal">
-    <div class="section-label">Book a Session</div>
-    <h2>LET'S GET<br>YOU FLYING</h2>
-  </div>
-  <div class="schedule-layout">
-    <div class="schedule-info reveal">
-      <h3>"I believe every student deserves an instructor who meets them where they are — and takes them higher."</h3>
-      <ul class="contact-details">
-        <li><div class="contact-icon">&#128205;</div><span>Knoxville, TN, USA</span></li>
-        <li><div class="contact-icon">&#9993;&#65039;</div><a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a></li>
-        <li><div class="contact-icon">&#128241;</div>
-          <div>
-            <a href="sms:8657247251">Text Jerry: (865) 724-7251</a>
-            <p class="contact-note">For emergencies only — please use the booking form to request a session.</p>
+  <main>
+    <section class="view active" id="view-home">
+      <div class="desktop-home-only">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">Gold Seal CFII • Knoxville, Tennessee</div>
+            <h1>Experience that builds <span>better pilots.</span></h1>
+            <p class="hero-lede">Practical instruction, calm judgment, and real-world aviation lessons shaped by more than 8,500 flight hours.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" data-view="book">Book a Lesson</button>
+              <button class="btn btn-secondary" data-view="training">Explore Training</button>
+            </div>
           </div>
-        </li>
-      </ul>
-    </div>
-    <div class="schedule-form reveal" style="transition-delay:0.15s">
-      <div class="form-title">REQUEST A SESSION</div>
-      <p class="form-subtitle">Fill out the form and tap <strong style="color:var(--gold)">Send Request</strong> — your phone's Messages app opens with everything pre-filled. Just hit Send and Jerry will confirm within 24 hours.</p>
-      <div class="form-row">
-        <div class="form-group"><label for="fname">First Name *</label><input type="text" id="fname" placeholder="Jane" autocomplete="given-name" autocapitalize="words" enterkeyhint="next"></div>
-        <div class="form-group"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Smith" autocomplete="family-name" autocapitalize="words" enterkeyhint="next"></div>
+          <div class="hero-visual" aria-label="Abstract aviation instrument graphic">
+            <div class="horizon-line"></div>
+            <div class="instrument-ring one"></div>
+            <div class="instrument-ring two"></div>
+            <div class="altimeter"></div>
+            <div class="visual-caption"><small>Measured in experience</small><strong>35+ Years in Aviation</strong><p>Decades of practical judgment, calm instruction, and real-world experience.</p></div>
+          </div>
+        </div>
+        <div class="credential-strip">
+          <div class="credential-inner">
+            <div class="credential"><strong>8,500+</strong><span>Flight Hours</span></div>
+            <div class="credential"><strong>35+</strong><span>Years of Experience</span></div>
+            <div class="credential"><strong>Gold Seal</strong><span>FAA Flight Instructor</span></div>
+            <div class="credential"><strong>CFII</strong><span>Instrument Instruction</span></div>
+          </div>
+        </div>
+
+        <section class="section training-preview">
+          <div class="section-head">
+            <div><div class="section-label">Training</div><h2>Focused instruction.<br>Clear outcomes.</h2></div>
+            <p class="section-intro">Choose the type of training you need, then move directly into a focused booking experience.</p>
+          </div>
+          <div class="card-grid">
+            <article class="card"><div class="card-index">01</div><h3>Flight Training</h3><p>One-on-one instruction built around the student’s current ability, goals, and aircraft.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
+            <article class="card"><div class="card-index">02</div><h3>Instrument Training</h3><p>Procedural discipline, decision-making, and confidence for real instrument conditions.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
+            <article class="card"><div class="card-index">03</div><h3>Checkride Prep</h3><p>Focused oral and flight preparation aligned with the practical test standards.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
+            <article class="card"><div class="card-index">04</div><h3>Ground Instruction</h3><p>Clear explanations that connect knowledge to what the airplane is actually doing.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
+          </div>
+        </section>
+
+        <section class="chronicle-feature">
+          <div class="chronicle-cover">
+            <div class="chronicle-kicker">Flight Instructor’s Chronicles</div>
+            <h2>The Day Fear Took the Controls</h2>
+            <div class="byline">A true story from the right seat, by Jerry Marotta</div>
+          </div>
+          <div class="chronicle-copy">
+            <div class="section-label">Featured Chronicle</div>
+            <h2 style="font-size:3.7rem;color:var(--ink)">Real stories.<br>Real lessons.</h2>
+            <div class="meta"><span class="pill">Flight Safety</span><span class="pill">8 minute read</span><span class="pill">Instructor Perspective</span></div>
+            <p>A routine stall lesson became a fight for control when a student’s fear overrode everything he knew on the ground. Jerry explains what happened, how the airplane was recovered, and what the flight permanently taught him as an instructor.</p>
+            <div class="quote">“For several seconds, fear was flying the airplane. And as the instructor, it was my responsibility to take it back.”</div>
+            <div><button class="btn btn-primary" data-view="article">Read the Chronicle</button></div>
+          </div>
+        </section>
+
+        <section class="section about-preview">
+          <div class="about-photo-card">
+            <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta with his Travel Air biplane">
+          </div>
+          <div class="about-copy-stack">
+            <div class="about-panel">
+              <div class="section-label" style="color:var(--gold-light)">About Jerry</div>
+              <h3>Experience you can trust.</h3>
+              <p>Jerry combines technical knowledge with decades of judgment, perspective, and an ability to identify what each student needs next.</p>
+              <div style="margin-top:25px"><button class="btn btn-primary" data-view="about">Meet Jerry</button></div>
+            </div>
+            <div class="about-facts">
+              <div class="fact"><strong>8,500+</strong><span>Flight Hours</span></div>
+              <div class="fact"><strong>35+</strong><span>Years in Aviation</span></div>
+              <div class="fact"><strong>Gold Seal</strong><span>FAA CFI</span></div>
+              <div class="fact"><strong>East TN</strong><span>Training Area</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="final-cta"><h2>Ready to become a better pilot?</h2><p>Use the focused booking page to request a session without making every visitor encounter a long form on the homepage.</p><button class="btn" style="background:white;color:var(--rust)" data-view="book">Request a Session</button></section>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label for="phone">Your Phone *</label><input type="tel" id="phone" placeholder="(865) 555-0100" autocomplete="tel" inputmode="tel" enterkeyhint="next"></div>
-        <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="jane@email.com" autocomplete="email" inputmode="email" enterkeyhint="next"></div>
+
+      <div class="mobile-home-only mobile-home">
+        <section class="mobile-hero">
+          <div class="eyebrow">Gold Seal CFII • Knoxville</div>
+          <h1>Jerry<br><span style="color:var(--gold-light)">Marotta</span></h1>
+          <p>Practical instruction and real-world aviation judgment shaped by more than 8,500 flight hours.</p>
+          <div class="mobile-actions"><button class="btn btn-primary" data-view="book">Book a Lesson</button><button class="btn btn-secondary" data-view="training">Training</button></div>
+        </section>
+        <div class="quick-grid"><button class="quick-card" data-view="training"><strong>Flight</strong><span>Training</span></button><button class="quick-card" data-view="training"><strong>Instrument</strong><span>CFII</span></button><button class="quick-card" data-view="training"><strong>Checkride</strong><span>Preparation</span></button></div>
+        <section class="mobile-block">
+          <div class="section-label">Featured</div><h2>Flight Instructor’s Chronicles</h2>
+          <article class="mobile-story"><small>Flight Safety • 8 min read</small><h3>The Day Fear Took the Controls</h3><p>A stall lesson, a student frozen in panic, and the moment an instructor had to take command back.</p><button class="btn btn-primary" data-view="article">Read Story</button></article>
+        </section>
+        <section class="mobile-block alt"><div class="section-label">Credentials</div><h2>Experience that matters.</h2><div class="mobile-credentials"><div class="mobile-credential"><strong>8,500+</strong><span>Hours</span></div><div class="mobile-credential"><strong>35+</strong><span>Years</span></div><div class="mobile-credential"><strong>Gold</strong><span>Seal CFI</span></div></div></section>
+        <section class="mobile-cta"><h3>Train with Jerry.</h3><p>Complete one focused form, then send the request through text on mobile or email on desktop.</p><button class="btn" style="background:white;color:var(--rust)" data-view="book">Request Session</button></section>
       </div>
-      <div class="form-group">
-        <label for="session-type">Session Type *</label>
-        <select id="session-type" onchange="handleSessionType(this.value)">
-          <option value="">-- Select a session type --</option>
-          <option value="Flight Training Lesson">Flight Training Lesson</option>
-          <option value="Discovery / Intro Flight">Discovery / Intro Flight</option>
-          <option value="Ground School Session">Ground School Session</option>
-          <option value="Check-Ride Prep">Check-Ride Prep</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="form-group other-field" id="other-field">
-        <label for="other-type">Please describe your session *</label>
-        <input type="text" id="other-type" placeholder="Describe what you're looking for..." enterkeyhint="next">
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label for="preferred-date">Preferred Date *</label><input type="date" id="preferred-date"></div>
-        <div class="form-group">
-          <label for="preferred-time">Preferred Time</label>
-          <select id="preferred-time">
-            <option value="">-- Select --</option>
-            <option>Early Morning (7-9 AM)</option>
-            <option>Morning (9 AM-12 PM)</option>
-            <option>Afternoon (12-4 PM)</option>
-            <option>Late Afternoon (4-7 PM)</option>
-            <option>Flexible</option>
-          </select>
+    </section>
+
+    <section class="view" id="view-about">
+      <header class="page-hero"><div class="section-label">About Jerry</div><h1>Experience you can trust.</h1><p>Meet the instructor behind the training, the experience, and the stories from the right seat.</p></header>
+      <div class="page-content about-preview" style="padding-top:56px">
+        <div class="about-photo-card">
+          <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta with his Travel Air biplane">
+        </div>
+        <div class="about-copy-stack">
+          <div class="about-panel">
+            <h3>Gold Seal flight instruction.</h3>
+            <p>Finding a reliable flight instructor who truly focuses on your individual needs can be challenging. As an FAA Gold Seal Certified Flight Instructor, Jerry Marotta brings an approach that motivates and guides students toward real-world competency and confidence in the cockpit.</p>
+            <p style="margin-top:18px">Jerry designs every lesson around the student’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
+            <p style="margin-top:18px">Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
+          </div>
+          <div class="about-facts">
+            <div class="fact"><strong>8,500+</strong><span>Flight Hours</span></div>
+            <div class="fact"><strong>35+</strong><span>Years Experience</span></div>
+            <div class="fact"><strong>CFII</strong><span>Instrument Instructor</span></div>
+            <div class="fact"><strong>Gold Seal</strong><span>FAA Recognition</span></div>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label for="meet-airport">Requesting to Meet At *</label>
-        <select id="meet-airport" onchange="handleMeetLocation(this.value)">
-          <option value="">-- Select an airport --</option>
-          <option value="TYS — McGhee Tyson Airport (Alcoa)">TYS — McGhee Tyson Airport (Alcoa)</option>
-          <option value="Signature Air — McGhee Tyson (TYS)">Signature Air — McGhee Tyson (TYS)</option>
-          <option value="DKX — Knoxville Downtown Island Airport">DKX — Knoxville Downtown Island Airport</option>
-          <option value="MMI — McMinn County Airport (Athens)">MMI — McMinn County Airport (Athens)</option>
-          <option value="GKT — Gatlinburg-Pigeon Forge Airport">GKT — Gatlinburg-Pigeon Forge Airport</option>
-          <option value="RVL — Rockwood Municipal Airport">RVL — Rockwood Municipal Airport</option>
-          <option value="MOR — Moore-Murrell Airport (Morristown)">MOR — Moore-Murrell Airport (Morristown)</option>
-          <option value="other">Other airport (type below)</option>
-        </select>
-      </div>
-      <div class="form-group other-field" id="meet-location-other-field">
-        <label for="meet-location-other">Airport name or identifier *</label>
-        <input type="text" id="meet-location-other" placeholder="e.g., KTNX, Oak Ridge" inputmode="text" autocapitalize="characters" autocomplete="off" enterkeyhint="next">
-      </div>
-      <div class="form-group">
-        <label for="duration">Session Duration</label>
-        <select id="duration">
-          <option value="2">2 Hours (standard)</option>
-          <option value="3">3 Hours</option>
-          <option value="4">4 Hours</option>
-          <option value="5">5 Hours</option>
-          <option value="6">6 Hours (full day)</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="experience">Your Experience Level</label>
-        <select id="experience">
-          <option value="">-- Select --</option>
-          <option>No flight experience</option>
-          <option>Student pilot (in training)</option>
-          <option>Private Pilot Certificate holder</option>
-          <option>Instrument rated</option>
-          <option>Commercial / ATP</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="message">Additional Notes</label>
-        <textarea id="message" placeholder="Any questions or goals you'd like to share..." enterkeyhint="done"></textarea>
-      </div>
-      <div class="sms-preview">
-        <div class="sms-preview-label">Preview -- what Jerry will receive</div>
-        <div class="sms-preview-text" id="sms-preview-text">Fill in the form above to preview your message.</div>
-      </div>
-      <button class="form-submit" onclick="handleSubmit()">Send Request via Text</button>
-      <p class="form-note">Tapping the button does two things automatically: (1) downloads a <strong style="color:var(--gold-light)">calendar invite (.ics)</strong> you can add to Google Calendar or Apple Calendar, and (2) opens your Messages app with the request pre-filled so Jerry gets notified instantly.</p>
-      <p class="form-emergency">You can also text Jerry directly at <a href="sms:8657247251">(865) 724-7251</a> — but please use this form for session requests and save the direct line for emergencies.</p>
-    </div>
-  </div>
-</section>
+    </section>
 
-<footer>
-  <div class="footer-logo">JERRY MAROTTA <span>// AVIATION</span></div>
-  <ul class="footer-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#schedule">Contact</a></li>
-  </ul>
-  <div class="footer-copy">
-    &copy; 2026 Jerry Marotta Gold Seal Flight Instructing &mdash; Knoxville, TN
-    <span class="footer-credit">Built by <a href="https://tristanmaratos.com" target="_blank" rel="noopener noreferrer">Tristan Maratos</a></span>
-  </div>
-</footer>
+    <section class="view" id="view-training">
+      <header class="page-hero"><div class="section-label">Training</div><h1>Instruction built around the pilot.</h1><p>Compare Jerry’s core training services, then request the lesson that fits your goals.</p></header>
+      <div class="page-content"><div class="training-list">
+        <article class="training-item"><div class="num">01</div><div><h3>Primary Flight Training</h3><p>Structured instruction for student pilots, with clear objectives and honest feedback after every lesson.</p></div></article>
+        <article class="training-item"><div class="num">02</div><div><h3>Instrument Training</h3><p>Procedures, scan discipline, workload management, and sound aeronautical decision-making.</p></div></article>
+        <article class="training-item"><div class="num">03</div><div><h3>Checkride Preparation</h3><p>Targeted oral review and flight preparation based on the practical test standards and the pilot’s weak areas.</p></div></article>
+        <article class="training-item"><div class="num">04</div><div><h3>Ground Instruction</h3><p>Weather, systems, aerodynamics, navigation, regulations, and scenario-based decision-making.</p></div></article>
+      </div></div>
+    </section>
 
-<nav class="bottom-nav">
-  <a class="bnav-item" href="#hero">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12L12 4l9 8"/><path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9"/></svg>
-    <span class="bnav-label">Home</span>
-  </a>
-  <a class="bnav-item" href="#services">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 20L12 4l10 16"/><path d="M7 20l5-8 5 8"/></svg>
-    <span class="bnav-label">Services</span>
-  </a>
-  <a class="bnav-book" href="#schedule">
-    <div class="bnav-book-circle">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="14" x2="12" y2="18"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
-    </div>
-    <span class="bnav-label">Book</span>
-  </a>
-  <a class="bnav-item" href="#gallery">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-    <span class="bnav-label">Gallery</span>
-  </a>
-  <a class="bnav-item" href="#schedule">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-    <span class="bnav-label">Contact</span>
-  </a>
-</nav>
+    <section class="view" id="view-chronicles">
+      <header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1>True stories from the right seat.</h1><p>A dedicated home for Jerry’s aviation stories, teaching experiences, and the lessons that remain long after the flight is over.</p></header>
+      <div class="page-content"><div class="chronicles-grid">
+        <article class="story-card"><div class="story-card-cover"><small>Flight Safety • Featured Chronicle</small><h2>The Day Fear Took the Controls</h2></div><div class="story-card-body"><p>A student knew the recovery procedure in the classroom. In the airplane, fear took over. Jerry recounts the spin, the struggle for the controls, and the lessons he carried into every flight afterward.</p><div style="margin-top:22px"><button class="btn btn-primary" data-view="article">Read the Story</button></div></div></article>
+        <aside class="sidebar"><h3>Built to grow.</h3><p>This archive begins with Jerry’s first published Chronicle. New stories can be added here as he shares them, while the homepage continues to feature only the latest work.</p></aside>
+      </div></div>
+    </section>
 
+    <section class="view" id="view-article">
+      <header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1>The Day Fear Took the Controls</h1><p>A true account of fear, instinct, control, and the responsibilities carried by the instructor in the right seat.</p></header>
+      <div class="page-content"><article class="article">
+        <div class="article-kicker">By Jerry Marotta • Flight Safety • Instructor Perspective</div>
+        <h1>The Day Fear Took the Controls</h1>
+        <div class="article-deck">Everything happened in seconds.</div>
+        <p>Everything happened in seconds.</p>
+        <p>I was flying with a student, working on stalls. We had covered the procedure before the flight. He knew what the airplane was expected to do, what the stall would feel like, and how he was supposed to recover.</p>
+        <p>At least, he knew it in the classroom.</p>
+        <p>That is one of the first things instructors learn. A student can explain a maneuver perfectly while sitting safely on the ground and still react very differently when the nose suddenly drops below the horizon.</p>
+        <p>As the stall broke, the nose naturally dropped.</p>
+        <p>That sight terrified him.</p>
+        <p>Instead of relaxing the back pressure as we had practiced, he pulled back on the controls with every ounce of strength he had.</p>
+        <p>That was the first mistake.</p>
+        <p>When an airplane stalls, the wing has exceeded its critical angle of attack. Pulling farther back does not keep the airplane from descending. It increases the angle of attack and keeps the wing stalled. The instinct is understandable. The ground appears to be rising toward you, so every part of your body tells you to pull away from it.</p>
+        <p>But in a stall, that instinct can kill you.</p>
+        <p>At the same time, he pushed the rudder in the wrong direction.</p>
+        <p>The airplane rolled.</p>
+        <p>The wing quit flying.</p>
+        <p>We entered a spin.</p>
+        <p>I immediately reached over to recover the airplane, but the yoke would not move. It felt as though it had been welded in place.</p>
+        <p>For a split second, I could not understand why the controls were not responding. Then I looked at my student.</p>
+        <p>His eyes were enormous.</p>
+        <p>His arms were locked perfectly straight, every muscle in his body rigid. His hands were clamped around the controls in a death grip. One leg was driving the rudder pedal to the floor with all the strength he could muster.</p>
+        <p>He was not trying to fly anymore.</p>
+        <p>He was frozen in panic.</p>
+        <p>From an instructor’s perspective, that changed the nature of the emergency completely. The airplane itself was responding exactly as expected to the control inputs it was being given. The real problem was that the person making those inputs could no longer hear, reason, or respond.</p>
+        <p>I told him to release the controls.</p>
+        <p>He did not respond.</p>
+        <p>I tried to take the airplane from him, but he pulled harder. His entire body had become part of the control system, and fear had given him a level of strength I had not expected.</p>
+        <p>The airplane continued rotating.</p>
+        <p>The ground was rising rapidly.</p>
+        <p>There was not time for another explanation. There was not time to talk him through the recovery again. I had seconds.</p>
+        <p>I struck his arms and upper body hard enough to break his grip on the controls.</p>
+        <p>It was not anger.</p>
+        <p>It was not punishment.</p>
+        <p>It was not an instructional technique.</p>
+        <p>It was the only way I could regain control of the airplane before we ran out of altitude.</p>
+        <p>The instant he released the controls, I recovered from the spin and pulled the airplane out of the ensuing dive.</p>
+        <p>Then we flew away.</p>
+        <p>That part of the incident has always stayed with me because the recovery itself was almost routine once I had access to the controls. The airplane was recoverable. The obstacle was the student physically preventing the correct recovery inputs.</p>
+        <p>We returned to the airport and landed safely.</p>
+        <p>Only later did I ask him why he had finally let go.</p>
+        <p>His answer caught me completely off guard.</p>
+        <blockquote>He said, “The only reason I released the controls was because I knew you had three black belts in martial arts. I thought you were like Chuck Norris, and for one split second, I was more afraid of you than I was of hitting the ground.”</blockquote>
+        <p>I have no idea whether that was entirely true.</p>
+        <p>What I do know is that he released the controls, I recovered the airplane, and both of us walked away.</p>
+        <p>Back at the flight school, I told the story to the World War II Corsair pilot who had taught me aerobatics.</p>
+        <p>I explained how desperate the situation had become. I told him that when I realized the student was not going to release the controls voluntarily, I had decided I would do whatever was necessary to get him off them before we hit the ground.</p>
+        <p>He listened without interrupting.</p>
+        <p>When I finished, he looked at me quietly for a moment.</p>
+        <p>Then he asked one question.</p>
+        <p class="dialogue">“Were you prepared to do that?”</p>
+        <p class="dialogue">“Yes,” I answered.</p>
+        <p>He nodded once.</p>
+        <p>There was nothing more to say.</p>
+        <h2 class="article-subhead">That flight taught me several lessons as an instructor.</h2>
+        <p>The first was that knowledge and reaction are not the same thing. My student knew the stall-recovery procedure, but when confronted with the actual sight and sensation of the nose dropping, fear overrode his training.</p>
+        <p>The second was that an instructor must guard the controls during any maneuver in which a student’s incorrect reaction could quickly become dangerous. You do not wait until the airplane has fully departed controlled flight to become involved. You watch the student’s posture, grip, breathing, and control pressure. A rigid arm or tightening grip can be the first warning that the student is no longer processing the lesson normally.</p>
+        <p>The third was that altitude is not merely a number on the altimeter. It is time. Every second of delay consumes it. Every attempt to reason with a panicked student consumes more of it. An instructor must know when verbal instruction has failed and when immediate intervention is required.</p>
+        <h2 class="article-subhead">The student’s technical mistakes were straightforward.</h2>
+        <p>He maintained excessive back pressure after the stall.</p>
+        <p>He applied incorrect rudder.</p>
+        <p>He became rigid on the controls.</p>
+        <p>But the deeper mistake was allowing fear to replace judgment.</p>
+        <p>That is what made the event dangerous.</p>
+        <p>This is not a story about an instructor hitting a student.</p>
+        <p>It is a story about what can happen when a student’s survival instinct produces exactly the wrong control inputs, and when the instructor must regain command of the airplane before the situation becomes unrecoverable.</p>
+        <p>The airplane was still capable of flying.</p>
+        <p>The student was still capable of surviving.</p>
+        <p>But for several seconds, fear was flying the airplane.</p>
+        <p>And as the instructor, it was my responsibility to take it back.</p>
+        <div class="booking-note"><strong>Safety note:</strong> This personal account is presented for educational and storytelling purposes. It is not a substitute for instruction from a qualified flight instructor, an aircraft flight manual, or FAA-approved training guidance.</div>
+        <div style="margin-top:35px"><button class="btn btn-primary" data-view="chronicles">Back to Chronicles</button></div>
+      </article></div>
+    </section>
+
+    <section class="view" id="view-book">
+      <header class="page-hero"><div class="section-label">Book a Lesson</div><h1>Request a focused training session.</h1><p>On a phone, the completed request opens in the native Messages app. On a computer, it opens in the default email application. Both flows also download a tentative calendar invite.</p></header>
+      <div class="page-content"><div class="booking-layout">
+        <aside class="contact-card">
+          <h3>Request a session.</h3>
+          <p>Complete the form and review the request before sending it. Jerry will confirm the date, time, airport, and training details directly.</p>
+          <div class="contact-links">
+            <a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a>
+            <a href="sms:8657247251">(865) 724-7251</a>
+          </div>
+          <div class="booking-note"><strong id="device-flow-heading">Your device flow</strong><br><span id="device-flow-copy">The send method will be selected automatically for your device.</span></div>
+        </aside>
+        <form class="form-card" id="booking-form">
+          <div class="form-grid">
+            <div class="field"><label for="fname">First name *</label><input id="fname" name="fname" placeholder="Jane" autocomplete="given-name" required></div>
+            <div class="field"><label for="lname">Last name</label><input id="lname" name="lname" placeholder="Smith" autocomplete="family-name"></div>
+            <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" type="tel" placeholder="(865) 555-0100" autocomplete="tel" required></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" autocomplete="email"></div>
+
+            <div class="field full"><label for="session-type">Training type *</label>
+              <select id="session-type" name="session-type" required>
+                <option value="">Choose a session type</option>
+                <option value="Flight Training Lesson">Flight Training Lesson</option>
+                <option value="Instrument Training">Instrument Training</option>
+                <option value="Discovery / Intro Flight">Discovery / Intro Flight</option>
+                <option value="Ground School Session">Ground School Session</option>
+                <option value="Checkride Preparation">Checkride Preparation</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field full other-field" id="other-session-field"><label for="other-session">Describe the session *</label><input id="other-session" name="other-session" placeholder="Describe what you are looking for"></div>
+
+            <div class="field"><label for="preferred-date">Preferred date *</label><input id="preferred-date" name="preferred-date" type="date" required></div>
+            <div class="field"><label for="preferred-time">Preferred time</label>
+              <select id="preferred-time" name="preferred-time">
+                <option value="">Choose a time</option>
+                <option>Early Morning (7-9 AM)</option>
+                <option>Morning (9 AM-12 PM)</option>
+                <option>Afternoon (12-4 PM)</option>
+                <option>Late Afternoon (4-7 PM)</option>
+                <option>Flexible</option>
+              </select>
+            </div>
+
+            <div class="field full"><label for="meet-airport">Requesting to meet at *</label>
+              <select id="meet-airport" name="meet-airport" required>
+                <option value="">Choose an airport</option>
+                <option value="TYS — McGhee Tyson Airport (Alcoa)">TYS — McGhee Tyson Airport (Alcoa)</option>
+                <option value="Signature Air — McGhee Tyson (TYS)">Signature Air — McGhee Tyson (TYS)</option>
+                <option value="DKX — Knoxville Downtown Island Airport">DKX — Knoxville Downtown Island Airport</option>
+                <option value="MMI — McMinn County Airport (Athens)">MMI — McMinn County Airport (Athens)</option>
+                <option value="GKT — Gatlinburg-Pigeon Forge Airport">GKT — Gatlinburg-Pigeon Forge Airport</option>
+                <option value="RVL — Rockwood Municipal Airport">RVL — Rockwood Municipal Airport</option>
+                <option value="MOR — Moore-Murrell Airport (Morristown)">MOR — Moore-Murrell Airport (Morristown)</option>
+                <option value="other">Other airport</option>
+              </select>
+            </div>
+            <div class="field full other-field" id="other-airport-field"><label for="other-airport">Airport name or identifier *</label><input id="other-airport" name="other-airport" placeholder="Example: KCSV, Crossville"></div>
+
+            <div class="field"><label for="duration">Session duration</label>
+              <select id="duration" name="duration">
+                <option value="2">2 Hours (standard)</option>
+                <option value="3">3 Hours</option>
+                <option value="4">4 Hours</option>
+                <option value="5">5 Hours</option>
+                <option value="6">6 Hours (full day)</option>
+              </select>
+            </div>
+            <div class="field"><label for="experience">Experience level</label>
+              <select id="experience" name="experience">
+                <option value="">Choose a level</option>
+                <option>No flight experience</option>
+                <option>Student pilot (in training)</option>
+                <option>Private Pilot Certificate holder</option>
+                <option>Instrument rated</option>
+                <option>Commercial / ATP</option>
+              </select>
+            </div>
+
+            <div class="field full"><label for="message">Additional notes</label><textarea id="message" name="message" placeholder="Tell Jerry what you are working toward"></textarea></div>
+
+            <div class="request-preview">
+              <div class="request-preview-label">Preview of your request</div>
+              <div class="request-preview-text" id="request-preview-text">Fill in the form to preview the message Jerry will receive.</div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" id="booking-submit" type="submit">Send Request</button>
+              <button class="btn btn-copy" id="copy-request" type="button">Copy Request</button>
+            </div>
+            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+      </div></div>
+    </section>
+
+    <section class="view" id="view-contact">
+      <header class="page-hero"><div class="section-label">Contact</div><h1>Reach Jerry directly.</h1><p>Contact details remain available without forcing visitors through the full booking form.</p></header>
+      <div class="page-content"><div class="booking-layout"><div class="contact-card"><h3>Jerry Marotta Aviation</h3><p>Knoxville, Tennessee<br>jerry.marotta@hotmail.com<br>(865) 724-7251</p></div><div class="form-card"><div class="section-label">Best for lesson requests</div><h2 style="font-size:3rem;color:var(--ink)">Use the booking page.</h2><p style="color:var(--muted);line-height:1.8;margin:15px 0 24px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email. Both include the same structured request and calendar invite.</p><button class="btn btn-primary" data-view="book">Book a Lesson</button></div></div></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Jerry Marotta <span>// Aviation</span></strong></div><div>Gold Seal Flight Instruction • Knoxville, Tennessee<br><small>Built by <a href="https://tristanmaratos.com" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light)">Tristan Maratos</a></small></div></footer>
+
+  <nav class="mobile-bottom" aria-label="Mobile navigation">
+    <button class="active" data-view="home"><span>⌂</span><span>Home</span></button>
+    <button data-view="training"><span>△</span><span>Training</span></button>
+    <button class="mobile-book" data-view="book"><span>＋</span><span>Book</span></button>
+    <button data-view="chronicles"><span>▤</span><span>Chronicles</span></button>
+    <button data-view="contact"><span>✉</span><span>Contact</span></button>
+  </nav>
+</div>
 <script>
-var JERRY_NUMBER = '8657247251';
+const JERRY_NUMBER = '8657247251';
+const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 
-function handleSessionType(val) {
-  var field = document.getElementById('other-field');
-  field.classList.toggle('visible', val === 'other');
-  updatePreview();
+const viewButtons = document.querySelectorAll('[data-view]');
+const views = document.querySelectorAll('.view');
+
+function showView(name, updateHistory = true) {
+  const target = document.getElementById('view-' + name) ? name : 'home';
+  views.forEach(view => view.classList.toggle('active', view.id === 'view-' + target));
+  document.querySelectorAll('.nav-btn,.mobile-bottom button').forEach(button => {
+    button.classList.toggle('active', button.dataset.view === target);
+  });
+  if (updateHistory) {
+    const nextHash = target === 'home' ? '#home' : '#' + target;
+    if (window.location.hash !== nextHash) history.pushState({view: target}, '', nextHash);
+  }
+  window.scrollTo({top: 0, behavior: 'auto'});
 }
 
-function handleMeetLocation(val) {
-  var field = document.getElementById('meet-location-other-field');
-  field.classList.toggle('visible', val === 'other');
-  updatePreview();
+viewButtons.forEach(button => button.addEventListener('click', event => {
+  event.preventDefault();
+  showView(button.dataset.view);
+}));
+
+window.addEventListener('popstate', () => {
+  showView((window.location.hash || '#home').slice(1), false);
+});
+
+function isMobileDevice() {
+  if (navigator.userAgentData && typeof navigator.userAgentData.mobile === 'boolean') {
+    return navigator.userAgentData.mobile;
+  }
+  const ua = navigator.userAgent || '';
+  const isIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || isIPadOS;
+}
+
+function isIOSDevice() {
+  const ua = navigator.userAgent || '';
+  return /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
+
+function value(id) {
+  const element = document.getElementById(id);
+  return element ? element.value.trim() : '';
+}
+
+function getSessionType() {
+  const selected = value('session-type');
+  return selected === 'other' ? value('other-session') : selected;
 }
 
 function getMeetLocation() {
-  var sel = document.getElementById('meet-airport').value;
-  if (sel === 'other') {
-    return document.getElementById('meet-location-other').value.trim();
-  }
-  return sel;
+  const selected = value('meet-airport');
+  return selected === 'other' ? value('other-airport') : selected;
 }
 
-function buildSMS() {
-  var first = document.getElementById('fname').value.trim();
-  var last = document.getElementById('lname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var email = document.getElementById('email').value.trim();
-  var typeVal = document.getElementById('session-type').value;
-  var typeLabel = typeVal === 'other'
-    ? (document.getElementById('other-type').value.trim() || '[not specified]')
-    : typeVal || '[not selected]';
-  var rawDate = document.getElementById('preferred-date').value;
-  var dateStr = rawDate
-    ? new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long',month:'long',day:'numeric',year:'numeric'})
-    : 'Not specified';
-  var timeVal = document.getElementById('preferred-time').value || 'Not specified';
-  var meetLocation = getMeetLocation();
-  var durVal = document.getElementById('duration').value || '2';
-  var expVal = document.getElementById('experience').value || '';
-  var notes = document.getElementById('message').value.trim();
-  var fullName = [first, last].filter(Boolean).join(' ') || 'A client';
-  var msg = "Hi Jerry! Hope you're doing well. ";
-  msg += fullName + ' is hoping to schedule a session with you ';
-  msg += 'and wanted to check if the following works for you:\n\n';
-  msg += 'SESSION REQUEST\n';
-  msg += '------------------\n';
-  msg += 'Name: ' + fullName + '\n';
-  if (phone) msg += 'Phone: ' + phone + '\n';
-  if (email) msg += 'Email: ' + email + '\n';
-  msg += '\nSession: ' + typeLabel + '\n';
-  msg += 'Date: ' + dateStr + '\n';
-  msg += 'Time: ' + timeVal + '\n';
-  msg += 'Meet at: ' + (meetLocation || 'Not specified') + '\n';
-  msg += 'Duration: ' + durVal + ' hour' + (durVal === '1' ? '' : 's') + '\n';
-  if (expVal) msg += 'Experience: ' + expVal + '\n';
-  if (notes) msg += '\nNotes: ' + notes + '\n';
-  msg += '------------------\n';
-  msg += 'Please reply to confirm or suggest a different time. Thank you!';
-  return msg;
+function friendlyDate(rawDate) {
+  if (!rawDate) return 'Not specified';
+  return new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
 }
 
-function updatePreview() {
-  var el = document.getElementById('sms-preview-text');
-  var first = document.getElementById('fname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var type = document.getElementById('session-type').value;
-  if (!first && !phone && !type) {
-    el.textContent = 'Fill in the form above to preview your message.';
-    return;
-  }
-  el.textContent = buildSMS();
+function buildRequestText() {
+  const first = value('fname');
+  const last = value('lname');
+  const fullName = [first, last].filter(Boolean).join(' ') || 'A prospective student';
+  const phone = value('phone');
+  const email = value('email');
+  const sessionType = getSessionType() || 'Not specified';
+  const dateText = friendlyDate(value('preferred-date'));
+  const preferredTime = value('preferred-time') || 'Not specified';
+  const meetLocation = getMeetLocation() || 'Not specified';
+  const duration = value('duration') || '2';
+  const experience = value('experience');
+  const notes = value('message');
+
+  let request = 'Hi Jerry,\\n\\n';
+  request += 'I would like to request a flight training session.\\n\\n';
+  request += 'SESSION REQUEST\\n';
+  request += '-------------------------\\n';
+  request += 'Name: ' + fullName + '\\n';
+  if (phone) request += 'Phone: ' + phone + '\\n';
+  if (email) request += 'Email: ' + email + '\\n';
+  request += '\\nSession: ' + sessionType + '\\n';
+  request += 'Preferred Date: ' + dateText + '\\n';
+  request += 'Preferred Time: ' + preferredTime + '\\n';
+  request += 'Meet At: ' + meetLocation + '\\n';
+  request += 'Duration: ' + duration + ' hours\\n';
+  if (experience) request += 'Experience: ' + experience + '\\n';
+  if (notes) request += '\\nAdditional Notes:\\n' + notes + '\\n';
+  request += '-------------------------\\n';
+  request += 'Please reply to confirm or suggest another time.\\n\\nThank you!';
+  return request;
 }
 
-['fname','lname','phone','email','preferred-date','meet-location-other','message','other-type'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('input', updatePreview);
-});
-['session-type','meet-airport','preferred-time','duration','experience'].forEach(function(id) {
-  var el = document.getElementById(id);
-  if (el) el.addEventListener('change', updatePreview);
-});
+function updateRequestPreview() {
+  const preview = document.getElementById('request-preview-text');
+  if (!preview) return;
+  const hasContent = value('fname') || value('phone') || value('session-type') || value('preferred-date');
+  preview.textContent = hasContent ? buildRequestText() : 'Fill in the form to preview the message Jerry will receive.';
+}
+
+function toggleConditionalFields() {
+  const sessionOther = document.getElementById('other-session-field');
+  const airportOther = document.getElementById('other-airport-field');
+  sessionOther.classList.toggle('visible', value('session-type') === 'other');
+  airportOther.classList.toggle('visible', value('meet-airport') === 'other');
+  document.getElementById('other-session').required = value('session-type') === 'other';
+  document.getElementById('other-airport').required = value('meet-airport') === 'other';
+  updateRequestPreview();
+}
+
+function calendarTimeFor(date, preferredTime) {
+  const timeMap = {
+    'Early Morning (7-9 AM)': '07:00:00',
+    'Morning (9 AM-12 PM)': '09:00:00',
+    'Afternoon (12-4 PM)': '12:00:00',
+    'Late Afternoon (4-7 PM)': '16:00:00',
+    'Flexible': '09:00:00'
+  };
+  return new Date(date + 'T' + (timeMap[preferredTime] || '09:00:00'));
+}
+
+function pad(number) {
+  return number < 10 ? '0' + number : String(number);
+}
+
+function formatICSDate(date) {
+  return date.getFullYear() + pad(date.getMonth() + 1) + pad(date.getDate()) +
+    'T' + pad(date.getHours()) + pad(date.getMinutes()) + '00';
+}
+
+function escapeICS(text) {
+  return String(text || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/\n/g, '\\n')
+    .replace(/,/g, '\\,')
+    .replace(/;/g, '\\;');
+}
 
 function buildICS() {
-  var first = document.getElementById('fname').value.trim();
-  var last = document.getElementById('lname').value.trim();
-  var fullName = [first, last].filter(Boolean).join(' ') || 'Client';
-  var phone = document.getElementById('phone').value.trim();
-  var typeVal = document.getElementById('session-type').value;
-  var typeLabel = typeVal === 'other'
-    ? (document.getElementById('other-type').value.trim() || 'Training Session')
-    : typeVal;
-  var rawDate = document.getElementById('preferred-date').value;
-  var timeVal = document.getElementById('preferred-time').value;
-  var meetLocation = getMeetLocation();
-  var durVal = parseInt(document.getElementById('duration').value) || 2;
-  var notes = document.getElementById('message').value.trim();
-  var d = new Date(rawDate + 'T09:00:00');
-  if (timeVal.indexOf('7') !== -1) d = new Date(rawDate + 'T07:00:00');
-  else if (timeVal.indexOf('9') !== -1) d = new Date(rawDate + 'T09:00:00');
-  else if (timeVal.indexOf('12') !== -1) d = new Date(rawDate + 'T12:00:00');
-  else if (timeVal.indexOf('Late') !== -1) d = new Date(rawDate + 'T16:00:00');
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-  function fmt(dt) {
-    return dt.getFullYear() + '' + pad(dt.getMonth()+1) + '' + pad(dt.getDate()) +
-      'T' + pad(dt.getHours()) + '' + pad(dt.getMinutes()) + '00';
-  }
-  var start = fmt(d);
-  var end = fmt(new Date(d.getTime() + durVal * 60 * 60 * 1000));
-  var now = fmt(new Date());
-  var uid = now + '-jerry-marotta-session';
-  var desc = 'Session: ' + typeLabel + '\\nClient: ' + fullName;
-  if (phone) desc += '\\nPhone: ' + phone;
-  if (meetLocation) desc += '\\nMeet at: ' + meetLocation;
-  if (notes) desc += '\\nNotes: ' + notes;
-  desc += '\\n\\nJerry Marotta - Gold Seal Flight Instructor\\nKnoxville TN | jerry.marotta@hotmail.com | (865) 724-7251';
-  var ics = [
+  const first = value('fname');
+  const last = value('lname');
+  const fullName = [first, last].filter(Boolean).join(' ') || 'Client';
+  const sessionType = getSessionType() || 'Training Session';
+  const rawDate = value('preferred-date');
+  const preferredTime = value('preferred-time');
+  const duration = parseInt(value('duration'), 10) || 2;
+  const meetLocation = getMeetLocation() || 'Knoxville, TN';
+  const startDate = calendarTimeFor(rawDate, preferredTime);
+  const endDate = new Date(startDate.getTime() + duration * 60 * 60 * 1000);
+  const now = new Date();
+  const uid = formatICSDate(now) + '-' + Math.random().toString(36).slice(2) + '@jerrymarottaaviation.com';
+
+  let description = 'Session: ' + sessionType + '\\nClient: ' + fullName;
+  if (value('phone')) description += '\\nPhone: ' + value('phone');
+  if (value('email')) description += '\\nEmail: ' + value('email');
+  if (value('experience')) description += '\\nExperience: ' + value('experience');
+  if (value('message')) description += '\\nNotes: ' + value('message');
+  description += '\\n\\nTentative request. Jerry will confirm the final date, time, location, and training details.';
+
+  return [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Jerry Marotta Aviation//Flight Session//EN',
     'CALSCALE:GREGORIAN',
-    'METHOD:REQUEST',
+    'METHOD:PUBLISH',
     'BEGIN:VEVENT',
     'UID:' + uid,
-    'DTSTAMP:' + now + 'Z',
-    'DTSTART:' + start,
-    'DTEND:' + end,
-    'SUMMARY:' + typeLabel + ' with Jerry Marotta',
-    'DESCRIPTION:' + desc,
-    'LOCATION:' + (meetLocation || 'Knoxville\\, TN').replace(/,/g, '\\,'),
-    'ORGANIZER;CN=Jerry Marotta:mailto:jerry.marotta@hotmail.com',
+    'DTSTAMP:' + formatICSDate(now) + 'Z',
+    'DTSTART:' + formatICSDate(startDate),
+    'DTEND:' + formatICSDate(endDate),
+    'SUMMARY:' + escapeICS(sessionType + ' with Jerry Marotta'),
+    'DESCRIPTION:' + escapeICS(description),
+    'LOCATION:' + escapeICS(meetLocation),
+    'ORGANIZER;CN=Jerry Marotta:mailto:' + JERRY_EMAIL,
     'STATUS:TENTATIVE',
     'END:VEVENT',
     'END:VCALENDAR'
-  ].join('\r\n');
-  return ics;
+  ].join('\\r\\n');
 }
 
 function downloadICS() {
-  var ics = buildICS();
-  var blob = new Blob([ics], {type: 'text/calendar;charset=utf-8'});
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = 'jerry-marotta-session.ics';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const blob = new Blob([buildICS()], {type: 'text/calendar;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'jerry-marotta-session-request.ics';
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function handleSubmit() {
-  var first = document.getElementById('fname').value.trim();
-  var phone = document.getElementById('phone').value.trim();
-  var session = document.getElementById('session-type').value;
-  var date = document.getElementById('preferred-date').value;
-  var meetAirport = document.getElementById('meet-airport').value;
-  var meetLocation = getMeetLocation();
-  if (!first) { alert('Please enter your first name.'); return; }
-  if (!phone) { alert('Please enter your phone number.'); return; }
-  if (!session) { alert('Please select a session type.'); return; }
-  if (!date) { alert('Please choose a preferred date.'); return; }
-  if (!meetAirport) { alert('Please select where you would like to meet.'); return; }
-  if (meetAirport === 'other' && !meetLocation) { alert('Please enter the airport name or identifier.'); return; }
-  if (session === 'other' && !document.getElementById('other-type').value.trim()) {
-    alert('Please describe your session request.'); return;
+function validateBookingForm() {
+  const form = document.getElementById('booking-form');
+  if (!form.reportValidity()) return false;
+  if (value('session-type') === 'other' && !value('other-session')) {
+    document.getElementById('other-session').focus();
+    return false;
   }
-  downloadICS();
-  setTimeout(function() {
-    window.location.href = 'sms:' + JERRY_NUMBER + '?body=' + encodeURIComponent(buildSMS());
-  }, 600);
+  if (value('meet-airport') === 'other' && !value('other-airport')) {
+    document.getElementById('other-airport').focus();
+    return false;
+  }
+  return true;
 }
 
-document.body.classList.add('js-loaded');
-var reveals = document.querySelectorAll('.reveal');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, {threshold: 0.1});
-reveals.forEach(function(r) { observer.observe(r); });
+function submitBooking(event) {
+  event.preventDefault();
+  if (!validateBookingForm()) return;
 
-window.addEventListener('scroll', function() {
-  var current = 'hero';
-  document.querySelectorAll('section[id]').forEach(function(sec) {
-    if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
-  });
-  document.querySelectorAll('.bnav-item, .bnav-book').forEach(function(n) { n.classList.remove('active'); });
-  var active = document.querySelector('.bottom-nav a[href="#' + current + '"]');
-  if (active) active.classList.add('active');
-}, {passive: true});
+  const status = document.getElementById('form-status');
+  const requestText = buildRequestText();
+  const fullName = [value('fname'), value('lname')].filter(Boolean).join(' ') || 'Prospective Student';
+  const subject = 'Flight Training Request from ' + fullName;
 
-var dateInput = document.getElementById('preferred-date');
-if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+  downloadICS();
+
+  if (isMobileDevice()) {
+    status.textContent = 'Calendar invite downloaded. Opening your Messages app now.';
+    const separator = isIOSDevice() ? '&' : '?';
+    setTimeout(() => {
+      window.location.href = 'sms:' + JERRY_NUMBER + separator + 'body=' + encodeURIComponent(requestText);
+    }, 450);
+  } else {
+    status.textContent = 'Calendar invite downloaded. Opening your default email application now.';
+    setTimeout(() => {
+      window.location.href = 'mailto:' + JERRY_EMAIL +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(requestText);
+    }, 450);
+  }
+}
+
+async function copyRequest() {
+  const status = document.getElementById('form-status');
+  const text = buildRequestText();
+  try {
+    await navigator.clipboard.writeText(text);
+    status.textContent = 'Request copied to your clipboard.';
+  } catch (error) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+    status.textContent = 'Request copied to your clipboard.';
+  }
+}
+
+function updateDeviceFlow() {
+  const mobile = isMobileDevice();
+  const heading = document.getElementById('device-flow-heading');
+  const copy = document.getElementById('device-flow-copy');
+  const submit = document.getElementById('booking-submit');
+
+  if (mobile) {
+    heading.textContent = 'Mobile booking';
+    copy.textContent = 'The form downloads a tentative calendar invite, then opens your native Messages app with the request ready to send.';
+    submit.textContent = 'Send Request via Text';
+  } else {
+    heading.textContent = 'Desktop booking';
+    copy.textContent = 'The form downloads a tentative calendar invite, then opens your default email application with the request ready to send.';
+    submit.textContent = 'Send Request via Email';
+  }
+}
+
+const bookingForm = document.getElementById('booking-form');
+bookingForm.addEventListener('submit', submitBooking);
+document.getElementById('copy-request').addEventListener('click', copyRequest);
+document.getElementById('session-type').addEventListener('change', toggleConditionalFields);
+document.getElementById('meet-airport').addEventListener('change', toggleConditionalFields);
+
+document.querySelectorAll('#booking-form input, #booking-form select, #booking-form textarea').forEach(element => {
+  element.addEventListener('input', updateRequestPreview);
+  element.addEventListener('change', updateRequestPreview);
+});
+
+const dateInput = document.getElementById('preferred-date');
+dateInput.min = new Date().toISOString().split('T')[0];
+
+updateDeviceFlow();
+toggleConditionalFields();
+showView((window.location.hash || '#home').slice(1), false);
 </script>
-
 </body>
 </html>
