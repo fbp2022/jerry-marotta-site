@@ -1679,22 +1679,22 @@ function buildRequestText() {
   const experience = value('experience');
   const notes = value('message');
 
-  let request = 'Hi Jerry,\\n\\n';
-  request += 'I would like to request a flight training session.\\n\\n';
-  request += 'SESSION REQUEST\\n';
-  request += '-------------------------\\n';
-  request += 'Name: ' + fullName + '\\n';
-  if (phone) request += 'Phone: ' + phone + '\\n';
-  if (email) request += 'Email: ' + email + '\\n';
-  request += '\\nSession: ' + sessionType + '\\n';
-  request += 'Preferred Date: ' + dateText + '\\n';
-  request += 'Preferred Time: ' + preferredTime + '\\n';
-  request += 'Meet At: ' + meetLocation + '\\n';
-  request += 'Duration: ' + duration + ' hours\\n';
-  if (experience) request += 'Experience: ' + experience + '\\n';
-  if (notes) request += '\\nAdditional Notes:\\n' + notes + '\\n';
-  request += '-------------------------\\n';
-  request += 'Please reply to confirm or suggest another time.\\n\\nThank you!';
+  let request = 'Hi Jerry,\n\n';
+  request += 'I would like to request a flight training session.\n\n';
+  request += 'SESSION REQUEST\n';
+  request += '-------------------------\n';
+  request += 'Name: ' + fullName + '\n';
+  if (phone) request += 'Phone: ' + phone + '\n';
+  if (email) request += 'Email: ' + email + '\n';
+  request += '\nSession: ' + sessionType + '\n';
+  request += 'Preferred Date: ' + dateText + '\n';
+  request += 'Preferred Time: ' + preferredTime + '\n';
+  request += 'Meet At: ' + meetLocation + '\n';
+  request += 'Duration: ' + duration + ' hours\n';
+  if (experience) request += 'Experience: ' + experience + '\n';
+  if (notes) request += '\nAdditional Notes:\n' + notes + '\n';
+  request += '-------------------------\n';
+  request += 'Please reply to confirm or suggest another time.\n\nThank you!';
   return request;
 }
 
