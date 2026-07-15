@@ -127,7 +127,22 @@ h1 span{color:var(--gold-light)}
 .final-cta h2{font-size:clamp(3.4rem,5.8vw,5.5rem);color:white}
 .final-cta p{max-width:590px;margin:17px auto 28px;color:#fae9df;line-height:1.7}
 .page-hero{padding:76px max(28px,calc((100vw - var(--max))/2)) 50px;background:var(--cream);border-bottom:1px solid var(--border)}
+
 .page-hero p{max-width:690px;color:var(--muted);line-height:1.8;margin-top:15px}
+.chronicles-banner{
+  width:100%;
+  background:var(--ink);
+  border-bottom:1px solid rgba(189,129,44,.65);
+  overflow:hidden;
+}
+.chronicles-banner img{
+  display:block;
+  width:100%;
+  height:clamp(330px,27vw,500px);
+  object-fit:cover;
+  object-position:center;
+}
+
 .page-content{padding:56px max(28px,calc((100vw - var(--max))/2)) 100px}
 .training-list{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .training-item{background:white;border:1px solid var(--border);padding:32px;display:grid;grid-template-columns:62px 1fr;gap:22px}
@@ -230,6 +245,10 @@ footer span{color:var(--gold-light)}
   .mobile-cta p{font-size:.82rem;line-height:1.6;color:#fae9df;margin:8px 0 17px}
   .page-hero{padding:38px 20px 28px}
   .page-hero h1{font-size:3.6rem}
+  .chronicles-banner img{
+    height:245px;
+    object-position:left center;
+  }
   .page-content{padding:28px 16px 40px}
   .training-list{grid-template-columns:1fr}
   .training-item{padding:23px;grid-template-columns:46px 1fr;gap:14px}
@@ -411,7 +430,9 @@ footer span{color:var(--gold-light)}
     </section>
 
     <section class="view" id="view-chronicles">
-      <header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1>True stories from the right seat.</h1><p>A dedicated home for Jerry’s aviation stories, teaching experiences, and the lessons that remain long after the flight is over.</p></header>
+      <header class="chronicles-banner">
+        <img src="images/Chronicles.png" alt="The Instructor's Chronicles — True Stories from the Right Seat, by Jerry Marotta">
+      </header>
       <div class="page-content"><div class="chronicles-grid">
         <article class="story-card"><div class="story-card-cover"><small>Flight Safety • Featured Chronicle</small><h2>The Day Fear Took the Controls</h2></div><div class="story-card-body"><p>A student knew the recovery procedure in the classroom. In the airplane, fear took over. Jerry recounts the spin, the struggle for the controls, and the lessons he carried into every flight afterward.</p><div style="margin-top:22px"><button class="btn btn-primary" data-view="article">Read the Story</button></div></div></article>
         <aside class="sidebar"><h3>Built to grow.</h3><p>This archive begins with Jerry’s first published Chronicle. New stories can be added here as he shares them, while the homepage continues to feature only the latest work.</p></aside>
