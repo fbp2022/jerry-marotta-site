@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#081521">
 <title>Jerry Marotta | Gold Seal Flight Instructor</title>
 <meta name="description" content="Gold Seal flight instruction, instrument training, checkride preparation, and Flight Instructor's Chronicles from Jerry Marotta in Knoxville, Tennessee.">
@@ -35,11 +35,17 @@
   --max:1240px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--text);min-height:100vh}
 button,a,input,select,textarea{font:inherit}
 a{color:inherit}
 button{cursor:pointer}
+button,a{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:3px solid rgba(223,183,104,.72);
+  outline-offset:3px;
+}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .site-shell{min-height:100vh}
 .desktop-nav{position:sticky;top:0;z-index:50;height:82px;background:rgba(8,21,33,.97);border-bottom:1px solid rgba(189,129,44,.65);display:flex;align-items:center;padding:0 max(28px,calc((100vw - var(--max))/2));gap:42px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:max-content}
@@ -179,6 +185,93 @@ h1 span{color:var(--gold-light)}
 
 .about-photo-card{background:white;border:1px solid var(--border);padding:12px;box-shadow:var(--shadow)}
 .about-photo-card img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center}
+
+/* Dedicated About page */
+.about-page-hero{
+  background:var(--paper);
+  padding:64px max(28px,calc((100vw - var(--max))/2));
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(480px,1.2fr);
+  gap:clamp(42px,6vw,86px);
+  align-items:center;
+  border-bottom:1px solid var(--border);
+}
+.about-page-copy .section-label{margin-bottom:18px}
+.about-page-copy h1{
+  color:var(--ink);
+  font-size:clamp(4.7rem,7vw,7rem);
+  max-width:620px;
+}
+.about-page-subline{
+  margin:22px 0 28px;
+  color:var(--rust);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.45rem;
+  letter-spacing:2px;
+}
+.about-page-copy p{
+  color:#45535d;
+  line-height:1.8;
+  max-width:620px;
+  margin-bottom:17px;
+}
+.about-page-signature{
+  margin-top:28px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.1rem;
+  font-style:italic;
+  color:var(--ink);
+}
+.about-page-role{
+  color:var(--muted);
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  margin-top:2px;
+}
+.about-page-photo{
+  background:white;
+  border:1px solid var(--border);
+  padding:12px;
+  box-shadow:var(--shadow);
+  border-radius:4px;
+}
+.about-page-photo img{
+  display:block;
+  width:100%;
+  height:clamp(450px,39vw,650px);
+  object-fit:cover;
+  object-position:center;
+  border-radius:2px;
+}
+.about-page-stats{
+  background:var(--ink);
+  color:white;
+  padding:28px max(28px,calc((100vw - var(--max))/2));
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+}
+.about-page-stat{
+  padding:12px 24px;
+  border-right:1px solid rgba(255,255,255,.16);
+}
+.about-page-stat:last-child{border-right:0}
+.about-page-stat strong{
+  display:block;
+  color:var(--gold-light);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.25rem;
+  letter-spacing:1.5px;
+}
+.about-page-stat span{
+  display:block;
+  color:#d5dde2;
+  font-size:.68rem;
+  text-transform:uppercase;
+  letter-spacing:1.4px;
+  margin-top:3px;
+}
 .about-copy-stack{display:flex;flex-direction:column;gap:22px}
 .booking-note{margin-top:20px;padding:18px;border-left:4px solid var(--rust);background:var(--cream);color:#48565e;font-size:.84rem;line-height:1.7}
 .booking-note strong{color:var(--ink)}
@@ -199,72 +292,685 @@ h1 span{color:var(--gold-light)}
 footer{background:var(--ink);color:#91a2ac;padding:42px max(28px,calc((100vw - var(--max))/2));display:flex;justify-content:space-between;gap:30px;align-items:center;font-size:.73rem}
 footer strong{font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:2px;color:white}
 footer span{color:var(--gold-light)}
+
+.mobile-training-list,
+.mobile-booking-progress,
+.wizard-actions,
+.article-mobile-bar,
+.mobile-sheet-backdrop,
+.mobile-sheet,
+.reading-progress,
+.about-mobile-details{display:none}
+.booking-step{display:contents}
+.mobile-proof,
+.mobile-service-rail,
+.contact-actions{display:none}
+
 .mobile-home-only{display:none}
 @media(max-width:1000px){
+  :root{
+    --mobile-header:68px;
+    --mobile-nav:72px;
+  }
+
+  body{
+    padding-bottom:calc(var(--mobile-nav) + 24px + env(safe-area-inset-bottom));
+    scroll-padding-top:calc(var(--mobile-header) + env(safe-area-inset-top));
+    scroll-padding-bottom:calc(var(--mobile-nav) + 28px + env(safe-area-inset-bottom));
+    background:var(--paper);
+  }
+
   .desktop-nav{display:none}
-  .mobile-top{display:flex;position:sticky;top:0;z-index:60;height:64px;background:rgba(8,21,33,.98);border-bottom:1px solid rgba(189,129,44,.5);align-items:center;justify-content:space-between;padding:0 18px}
-  .mobile-top .brand-copy strong{font-size:1.25rem}
-  .mobile-top .brand-copy small{font-size:.55rem}
-  .mobile-top .brand-mark{width:32px;height:32px;font-size:1.45rem}
-  .mobile-menu-btn{border:1px solid rgba(223,183,104,.5);background:none;color:var(--gold-light);width:38px;height:38px;border-radius:50%;font-size:1.1rem}
-  .mobile-bottom{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;height:74px;background:rgba(8,21,33,.98);border-top:1px solid rgba(189,129,44,.5);padding-bottom:max(0px,env(safe-area-inset-bottom))}
-  .mobile-bottom button{flex:1;border:0;background:none;color:#91a2ac;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:.56rem;text-transform:uppercase;letter-spacing:.8px}
-  .mobile-bottom button span:first-child{font-size:1.15rem}
+
+  /* Mobile top bar */
+  .mobile-top{
+    display:flex;
+    position:sticky;
+    top:0;
+    z-index:70;
+    min-height:calc(var(--mobile-header) + env(safe-area-inset-top));
+    padding:env(safe-area-inset-top) 15px 0;
+    background:rgba(8,21,33,.985);
+    border-bottom:1px solid rgba(189,129,44,.55);
+    box-shadow:0 8px 24px rgba(8,21,33,.16);
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mobile-top .brand{gap:10px;min-width:0}
+  .mobile-top .brand-copy{min-width:0}
+  .mobile-top .brand-copy strong{
+    font-size:1.16rem;
+    letter-spacing:2.4px;
+    white-space:nowrap;
+  }
+  .mobile-top .brand-copy small{
+    font-size:.51rem;
+    letter-spacing:1.45px;
+    white-space:nowrap;
+  }
+  .mobile-top .brand-mark{
+    width:32px;
+    height:32px;
+    font-size:0;
+    transform:none;
+    flex:0 0 auto;
+  }
+  .mobile-top .brand-mark svg{
+    width:28px;
+    height:28px;
+    stroke:var(--gold);
+  }
+  .mobile-more-btn{
+    border:1px solid rgba(223,183,104,.55);
+    background:rgba(255,255,255,.02);
+    color:var(--gold-light);
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    flex:0 0 auto;
+  }
+  .mobile-more-btn svg{width:21px;height:21px}
+
+  /* Mobile More sheet */
+  .mobile-sheet-backdrop{
+    display:block;
+    position:fixed;
+    inset:0;
+    z-index:110;
+    background:rgba(4,12,18,.58);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .22s ease;
+  }
+  .mobile-sheet{
+    display:block;
+    position:fixed;
+    left:10px;
+    right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    z-index:120;
+    background:var(--paper);
+    border:1px solid var(--border);
+    border-radius:20px;
+    box-shadow:0 28px 90px rgba(4,12,18,.38);
+    padding:10px 14px 18px;
+    transform:translateY(calc(100% + 30px));
+    transition:transform .25s cubic-bezier(.2,.8,.2,1);
+  }
+  .mobile-sheet-backdrop.open{opacity:1;pointer-events:auto}
+  .mobile-sheet.open{transform:translateY(0)}
+  .mobile-sheet-handle{
+    width:42px;height:4px;border-radius:8px;background:#c8c1b6;margin:2px auto 14px;
+  }
+  .mobile-sheet-head{
+    display:flex;align-items:center;justify-content:space-between;padding:0 5px 12px;
+  }
+  .mobile-sheet-head strong{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:1.75rem;
+    letter-spacing:1.2px;
+    color:var(--ink);
+  }
+  .mobile-sheet-close{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
+    background:white;color:var(--ink);font-size:1.15rem;
+  }
+  .mobile-sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .mobile-sheet-action{
+    min-height:68px;
+    border:1px solid var(--border);
+    background:white;
+    color:var(--ink);
+    border-radius:12px;
+    padding:13px;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    gap:4px;
+  }
+  .mobile-sheet-action strong{
+    font-family:'Bebas Neue';font-size:1.2rem;letter-spacing:.8px;
+  }
+  .mobile-sheet-action span{font-size:.65rem;color:var(--muted);line-height:1.35}
+
+  /* Bottom app navigation */
+  .mobile-bottom{
+    display:flex;
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:90;
+    min-height:calc(var(--mobile-nav) + env(safe-area-inset-bottom));
+    padding:6px 4px env(safe-area-inset-bottom);
+    background:rgba(8,21,33,.985);
+    border-top:1px solid rgba(189,129,44,.5);
+    box-shadow:0 -10px 28px rgba(8,21,33,.18);
+  }
+  .mobile-bottom button{
+    flex:1;
+    min-width:0;
+    border:0;
+    background:none;
+    color:#90a1aa;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    font-size:.55rem;
+    text-transform:uppercase;
+    letter-spacing:.72px;
+    padding:4px 1px;
+    position:relative;
+  }
+  .mobile-bottom button svg{
+    width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;
+  }
   .mobile-bottom button.active{color:var(--gold-light)}
-  .mobile-bottom .mobile-book{position:relative;color:var(--gold-light)}
-  .mobile-bottom .mobile-book span:first-child{width:46px;height:46px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;margin-top:-20px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
-  body{padding-bottom:74px}
+  .mobile-bottom button.active::after{
+    content:'';
+    position:absolute;
+    top:0;
+    width:24px;height:2px;
+    background:var(--gold);
+    border-radius:4px;
+  }
+  .mobile-bottom .mobile-book{color:var(--gold-light)}
+  .mobile-bottom .mobile-book::after{display:none}
+  .mobile-bottom .mobile-book .mobile-book-icon{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--gold);color:var(--ink);
+    display:grid;place-items:center;
+    margin-top:-23px;
+    box-shadow:0 8px 22px rgba(0,0,0,.38);
+    border:3px solid var(--ink);
+  }
+  .mobile-bottom .mobile-book .mobile-book-icon svg{width:23px;height:23px}
+
   .desktop-home-only{display:none!important}
   .mobile-home-only{display:block}
   .mobile-home{background:var(--paper)}
-  .mobile-hero{background:var(--ink);color:white;padding:46px 20px 34px}
-  .mobile-hero .eyebrow{font-size:.58rem;letter-spacing:2px;margin-bottom:16px}
-  .mobile-hero h1{font-size:4.4rem;line-height:.88}
-  .mobile-hero p{font-family:'Cormorant Garamond';font-size:1.15rem;line-height:1.5;color:#c9d4da;margin:18px 0 24px}
-  .mobile-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .mobile-actions .btn{padding:0 12px;min-height:48px;font-size:.65rem}
-  .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px 14px;background:var(--cream)}
-  .quick-card{background:white;border:1px solid var(--border);padding:15px 9px;text-align:center;min-height:90px;display:flex;flex-direction:column;justify-content:center}
-  .quick-card strong{font-family:'Bebas Neue';font-size:1.18rem;color:var(--ink);line-height:1}
-  .quick-card span{font-size:.56rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-top:6px}
-  .mobile-block{padding:30px 18px}
-  .mobile-block.alt{background:var(--cream)}
-  .mobile-block h2{font-size:2.7rem;color:var(--ink)}
-  .mobile-block .section-label{font-size:.58rem;margin-bottom:7px}
-  .mobile-story{background:var(--navy);color:white;padding:28px 23px;margin-top:18px;position:relative;overflow:hidden}
-  .mobile-story::after{content:'';position:absolute;width:180px;height:180px;border:1px solid rgba(223,183,104,.15);border-radius:50%;right:-70px;bottom:-85px}
-  .mobile-story small{color:var(--gold-light);text-transform:uppercase;letter-spacing:1.4px;font-size:.58rem}
-  .mobile-story h3{font-size:2.8rem;line-height:.9;color:white;margin:12px 0}
-  .mobile-story p{font-size:.82rem;color:#becbd2;line-height:1.65;margin-bottom:18px;max-width:92%}
-  .mobile-credentials{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(8,21,33,.12);margin-top:18px}
-  .mobile-credential{background:white;padding:18px 8px;text-align:center}
-  .mobile-credential strong{font-family:'Bebas Neue';font-size:1.65rem;color:var(--rust)}
-  .mobile-credential span{display:block;font-size:.52rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-top:3px}
-  .mobile-cta{background:var(--rust);color:white;padding:28px 22px;margin:0 18px 26px}
-  .mobile-cta h3{font-size:2.5rem;color:white}
-  .mobile-cta p{font-size:.82rem;line-height:1.6;color:#fae9df;margin:8px 0 17px}
-  .page-hero{padding:38px 20px 28px}
-  .page-hero h1{font-size:3.6rem}
-  .chronicles-banner img{
-    height:245px;
-    object-position:left center;
+
+  /* Mobile home */
+  .mobile-hero{
+    background:
+      radial-gradient(circle at 90% 10%,rgba(189,129,44,.14),transparent 30%),
+      linear-gradient(155deg,var(--ink),#0c2638);
+    color:white;
+    padding:32px 18px 27px;
   }
-  .page-content{padding:28px 16px 40px}
-  .training-list{grid-template-columns:1fr}
-  .training-item{padding:23px;grid-template-columns:46px 1fr;gap:14px}
+  .mobile-hero .eyebrow{
+    font-size:.56rem;letter-spacing:1.8px;margin-bottom:14px;gap:9px;
+  }
+  .mobile-hero .eyebrow::before{width:28px}
+  .mobile-hero h1{
+    font-size:clamp(3.65rem,16vw,4.65rem);
+    line-height:.86;
+    letter-spacing:2.2px;
+  }
+  .mobile-hero p{
+    font-family:'Cormorant Garamond';
+    font-size:1.08rem;
+    line-height:1.48;
+    color:#cbd6dc;
+    margin:16px 0 18px;
+    max-width:33rem;
+  }
+  .mobile-proof{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-bottom:20px;
+  }
+  .mobile-proof span{
+    border:1px solid rgba(223,183,104,.34);
+    background:rgba(255,255,255,.035);
+    color:#ead09a;
+    padding:6px 9px;
+    border-radius:999px;
+    font-size:.56rem;
+    text-transform:uppercase;
+    letter-spacing:.9px;
+  }
+  .mobile-actions{display:grid;grid-template-columns:1.25fr .75fr;gap:9px}
+  .mobile-actions .btn{
+    padding:0 10px;min-height:48px;font-size:.63rem;border-radius:5px;
+  }
+
+  .mobile-service-section{padding:25px 0 20px;background:var(--cream)}
+  .mobile-service-section .mobile-section-head{padding:0 18px 12px}
+  .mobile-service-section h2{font-size:2.55rem;color:var(--ink);line-height:.95}
+  .mobile-service-rail{
+    display:flex;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory;
+    gap:11px;
+    padding:4px 18px 14px;
+    scrollbar-width:none;
+  }
+  .mobile-service-rail::-webkit-scrollbar{display:none}
+  .mobile-service-card{
+    flex:0 0 min(82vw,320px);
+    scroll-snap-align:start;
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    text-align:left;
+    min-height:175px;
+    box-shadow:0 9px 24px rgba(8,21,33,.06);
+    position:relative;
+    overflow:hidden;
+  }
+  .mobile-service-card::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold);
+  }
+  .mobile-service-card small{
+    color:var(--rust);text-transform:uppercase;font-size:.56rem;letter-spacing:1.2px;
+  }
+  .mobile-service-card h3{
+    color:var(--ink);font-size:1.85rem;line-height:1;margin:12px 0 8px;
+  }
+  .mobile-service-card p{font-size:.78rem;color:var(--muted);line-height:1.58}
+  .mobile-service-card .rail-link{
+    display:inline-block;margin-top:15px;color:var(--rust);
+    font-size:.63rem;text-transform:uppercase;letter-spacing:1.1px;font-weight:600;
+  }
+  .rail-hint{
+    padding:0 18px;
+    color:var(--muted);
+    font-size:.62rem;
+    letter-spacing:.5px;
+  }
+
+  .mobile-block{padding:27px 18px}
+  .mobile-block.alt{background:var(--cream)}
+  .mobile-block h2{font-size:2.55rem;color:var(--ink);line-height:.95}
+  .mobile-block .section-label{font-size:.56rem;margin-bottom:7px}
+
+  .mobile-story{
+    background:linear-gradient(145deg,var(--navy),#0a1b29);
+    color:white;
+    padding:24px 21px;
+    margin-top:15px;
+    border-radius:12px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 14px 34px rgba(8,21,33,.16);
+  }
+  .mobile-story::after{
+    content:'';
+    position:absolute;
+    width:180px;height:180px;
+    border:1px solid rgba(223,183,104,.13);
+    border-radius:50%;
+    right:-75px;bottom:-90px;
+  }
+  .mobile-story small{
+    color:var(--gold-light);
+    text-transform:uppercase;
+    letter-spacing:1.25px;
+    font-size:.56rem;
+  }
+  .mobile-story h3{
+    font-size:2.55rem;
+    line-height:.91;
+    color:white;
+    margin:11px 0;
+    max-width:315px;
+  }
+  .mobile-story p{
+    font-size:.79rem;color:#c1cdd3;line-height:1.58;margin-bottom:17px;max-width:93%;
+  }
+  .mobile-story .btn{min-height:46px;padding:0 19px;font-size:.61rem}
+
+  .mobile-credentials{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    background:none;
+    margin-top:15px;
+  }
+  .mobile-credential{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:16px 10px;
+    text-align:center;
+  }
+  .mobile-credential strong{
+    font-family:'Bebas Neue';font-size:1.7rem;color:var(--rust);line-height:1;
+  }
+  .mobile-credential span{
+    display:block;font-size:.5rem;text-transform:uppercase;
+    letter-spacing:.68px;color:var(--muted);margin-top:5px;
+  }
+  .mobile-cta{
+    background:var(--rust);
+    color:white;
+    padding:24px 21px;
+    margin:0 18px 24px;
+    border-radius:12px;
+  }
+  .mobile-cta h3{font-size:2.3rem;color:white;line-height:.95}
+  .mobile-cta p{font-size:.79rem;line-height:1.55;color:#fae9df;margin:8px 0 15px}
+  .mobile-cta .btn{min-height:46px;width:100%}
+
+  /* Shared mobile page structure */
+  .view.active{min-height:calc(100svh - var(--mobile-header))}
+  .page-hero{
+    padding:31px 18px 24px;
+    background:var(--cream);
+  }
+  .page-hero .section-label{font-size:.56rem}
+  .page-hero h1{font-size:3.25rem;line-height:.92}
+  .page-hero p{font-size:.84rem;line-height:1.62;margin-top:12px}
+  .page-content{padding:22px 14px 34px}
+
+  /* About */
+  .about-page-hero{
+    grid-template-columns:1fr;
+    padding:18px 16px 28px;
+    gap:22px;
+  }
+  .about-page-photo{
+    order:1;
+    padding:7px;
+    border-radius:12px;
+    box-shadow:0 13px 32px rgba(8,21,33,.12);
+  }
+  .about-page-photo img{
+    height:auto;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    object-position:center top;
+    border-radius:8px;
+  }
+  .about-page-copy{order:2}
+  .about-page-copy h1{font-size:3.65rem;line-height:.9}
+  .about-page-subline{font-size:1.05rem;margin:16px 0 18px}
+  .about-page-copy p{font-size:.87rem;line-height:1.68}
+  .about-full-bio{display:none}
+  .about-mobile-details{
+    display:block;
+    border-top:1px solid var(--border);
+    margin-top:14px;
+    padding-top:14px;
+  }
+  .about-mobile-details summary{
+    color:var(--rust);
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    font-weight:600;
+    cursor:pointer;
+    list-style:none;
+  }
+  .about-mobile-details summary::-webkit-details-marker{display:none}
+  .about-mobile-details summary::after{content:'＋';float:right;font-size:1rem}
+  .about-mobile-details[open] summary::after{content:'−'}
+  .about-mobile-details p{margin-top:14px}
+  .about-page-signature{font-size:1.8rem}
+  .about-page-stats{
+    grid-template-columns:1fr 1fr;
+    padding:14px;
+    gap:8px;
+  }
+  .about-page-stat{
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:9px;
+    padding:15px 10px;
+  }
+  .about-page-stat strong{font-size:1.75rem}
+  .about-page-stat span{font-size:.49rem;letter-spacing:.7px}
+
+  /* Training accordions */
+  .desktop-training-list{display:none}
+  .mobile-training-list{display:flex;flex-direction:column;gap:10px}
+  .mobile-training-card{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 8px 22px rgba(8,21,33,.05);
+  }
+  .mobile-training-card summary{
+    list-style:none;
+    min-height:76px;
+    padding:16px 17px;
+    display:grid;
+    grid-template-columns:44px 1fr 24px;
+    align-items:center;
+    gap:11px;
+    cursor:pointer;
+  }
+  .mobile-training-card summary::-webkit-details-marker{display:none}
+  .mobile-training-number{
+    font-family:'Bebas Neue';
+    font-size:1.9rem;
+    color:var(--gold);
+  }
+  .mobile-training-title strong{
+    display:block;font-family:'Bebas Neue';font-size:1.42rem;color:var(--ink);line-height:1;
+  }
+  .mobile-training-title span{
+    display:block;font-size:.6rem;color:var(--muted);margin-top:4px;
+  }
+  .mobile-training-chevron{
+    color:var(--rust);
+    transition:transform .2s;
+    font-size:1.05rem;
+  }
+  .mobile-training-card[open] .mobile-training-chevron{transform:rotate(45deg)}
+  .mobile-training-detail{
+    border-top:1px solid var(--border);
+    padding:16px 18px 18px 72px;
+  }
+  .mobile-training-detail p{font-size:.8rem;line-height:1.62;color:var(--muted)}
+  .mobile-training-detail .btn{
+    margin-top:14px;min-height:44px;padding:0 17px;font-size:.58rem;
+  }
+
+  /* Chronicles */
+  .chronicles-banner{
+    background:#071521;
+    border-bottom:1px solid rgba(189,129,44,.65);
+  }
+  .chronicles-banner img{
+    display:block;
+    width:100%;
+    height:auto;
+    object-fit:contain;
+    object-position:center;
+  }
+  #view-chronicles .page-content{padding:18px 13px 34px}
+  #view-chronicles .chronicles-grid{gap:0}
+  #view-chronicles .story-card{
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 10px 28px rgba(8,21,33,.08);
+  }
+  #view-chronicles .story-card-cover{
+    min-height:0;
+    padding:26px 20px 24px;
+  }
+  #view-chronicles .story-card-cover small{
+    display:block;font-size:.54rem;line-height:1.45;letter-spacing:1.25px;
+  }
+  #view-chronicles .story-card-cover h2{
+    font-size:2.55rem;line-height:.93;margin-top:11px;
+  }
+  #view-chronicles .story-card-body{padding:19px}
+  #view-chronicles .story-card-body p{font-size:.83rem;line-height:1.62}
+  #view-chronicles .story-card-body .btn{width:100%;min-height:47px}
   .chronicles-grid{grid-template-columns:1fr}
-  .story-card-cover{padding:35px 24px;min-height:250px}
-  .story-card-cover h2{font-size:3.35rem}
   .sidebar{display:none}
-  .article{padding:30px 22px}
-  .article h1{font-size:4rem}
-  .article p{font-size:1.12rem}
-  .booking-layout{grid-template-columns:1fr}
-  .about-preview{grid-template-columns:1fr;gap:24px}
-  .contact-card{padding:26px}
-  .form-card{padding:23px}
-  .form-grid{grid-template-columns:1fr}
+
+  /* Article reading mode */
+  #view-article>.page-hero{display:none}
+  .article-mobile-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:48px;
+    padding:0 15px;
+    background:var(--cream);
+    border-bottom:1px solid var(--border);
+  }
+  .article-mobile-bar button{
+    border:0;background:none;color:var(--rust);
+    font-size:.64rem;text-transform:uppercase;letter-spacing:1px;font-weight:600;
+  }
+  .article-mobile-bar span{font-size:.62rem;color:var(--muted)}
+  .reading-progress{
+    display:block;
+    position:fixed;
+    top:calc(var(--mobile-header) + env(safe-area-inset-top));
+    left:0;right:0;
+    z-index:85;
+    height:3px;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .2s;
+  }
+  .reading-progress.visible{opacity:1}
+  .reading-progress span{
+    display:block;height:100%;width:0;background:var(--gold);
+    transition:width .08s linear;
+  }
+  #view-article .page-content{padding:14px 10px 34px}
+  .article{
+    border:0;
+    border-radius:12px;
+    padding:25px 18px 30px;
+    box-shadow:0 10px 26px rgba(8,21,33,.05);
+  }
+  .article .article-kicker{font-size:.56rem;line-height:1.5}
+  .article h1{font-size:3.45rem;line-height:.89;margin:12px 0 16px}
+  .article .article-deck{font-size:1.25rem;margin-bottom:27px}
+  .article p{font-size:1.08rem;line-height:1.72;margin-bottom:1.12em}
+  .article blockquote{
+    margin:28px 0;padding:16px 0 16px 18px;font-size:1.3rem;line-height:1.48;
+  }
+  .article h2.article-subhead{font-size:2.2rem;margin:37px 0 15px}
+  .article-end-actions{
+    display:grid;grid-template-columns:1fr;gap:9px;
+    border-top:1px solid var(--border);
+    margin-top:34px;padding-top:22px;
+  }
+  .article-end-actions .btn{width:100%;min-height:47px}
+
+  /* Booking wizard */
+  #view-book .page-hero{padding-bottom:20px}
+  #view-book .booking-layout{grid-template-columns:1fr;gap:13px}
+  #view-book .contact-card{
+    padding:18px;
+    border-radius:12px;
+  }
+  #view-book .contact-card h3{font-size:1.85rem}
+  #view-book .contact-card p{font-size:.78rem;line-height:1.55}
+  #view-book .contact-links{display:none}
+  #view-book .booking-note{margin-top:13px;padding:12px;font-size:.73rem}
+  .form-card{
+    padding:17px;
+    border-radius:12px;
+    box-shadow:0 10px 28px rgba(8,21,33,.06);
+  }
+  .form-grid{display:block}
+  .mobile-booking-progress{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+    margin-bottom:18px;
+  }
+  .booking-progress-item{
+    border:0;background:none;padding:0;color:var(--muted);text-align:left;
+  }
+  .booking-progress-item span{
+    display:grid;place-items:center;
+    width:30px;height:30px;border-radius:50%;
+    border:1px solid #b8c2c7;
+    background:#f6f2e9;
+    font-family:'Bebas Neue';font-size:1rem;
+    margin-bottom:6px;
+  }
+  .booking-progress-item small{
+    display:block;font-size:.49rem;text-transform:uppercase;letter-spacing:.7px;
+  }
+  .booking-progress-item.active{color:var(--rust)}
+  .booking-progress-item.active span{
+    background:var(--rust);border-color:var(--rust);color:white;
+  }
+  .booking-progress-item.complete span{
+    background:var(--gold);border-color:var(--gold);color:var(--ink);
+  }
+  .booking-step{display:none}
+  .booking-step.active{
+    display:grid;
+    grid-template-columns:1fr;
+    animation:stepIn .22s ease;
+  }
+  @keyframes stepIn{from{opacity:.4;transform:translateX(8px)}to{opacity:1;transform:none}}
+  .field{margin-bottom:14px}
+  .field label{font-size:.59rem}
+  .field input,.field select,.field textarea{
+    min-height:52px;
+    border-radius:8px;
+    font-size:16px;
+    padding:13px 12px;
+  }
+  .field textarea{min-height:104px}
   .field.full{grid-column:auto}
+  .wizard-actions{
+    display:flex;
+    gap:9px;
+    margin-top:5px;
+  }
+  .wizard-actions .btn{flex:1;min-height:47px;padding:0 10px;font-size:.59rem}
+  .wizard-back{
+    border:1px solid var(--border);background:white;color:var(--ink);
+  }
+  .request-preview{
+    padding:14px;border-radius:9px;margin-bottom:12px;
+  }
+  .request-preview-text{
+    max-height:230px;overflow:auto;font-size:.73rem;line-height:1.55;
+  }
+  .form-actions{display:grid;grid-template-columns:1fr;gap:9px}
+  .form-actions .btn{width:100%;min-height:49px}
+  .form-status{font-size:.7rem;margin-top:7px}
+
+  /* Contact */
+  #view-contact .booking-layout{grid-template-columns:1fr;gap:12px}
+  #view-contact .contact-card,
+  #view-contact .form-card{padding:21px;border-radius:12px}
+  .contact-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+    margin-top:18px;
+  }
+  .contact-action{
+    min-height:70px;
+    border:1px solid rgba(223,183,104,.3);
+    background:rgba(255,255,255,.035);
+    color:white;
+    border-radius:10px;
+    padding:12px;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+  }
+  .contact-action strong{font-family:'Bebas Neue';font-size:1.25rem;color:var(--gold-light)}
+  .contact-action span{font-size:.62rem;color:#c4d1d8}
+  #view-contact .form-card .btn{width:100%}
+
   footer{display:none}
 }
 @media(min-width:1001px){
@@ -290,12 +996,17 @@ footer span{color:var(--gold-light)}
   </nav>
 
   <div class="mobile-top">
-    <a class="brand" href="#" data-view="home">
-      <span class="brand-mark">✈</span>
+    <a class="brand" href="#" data-view="home" aria-label="Jerry Marotta Aviation home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M3 13.2 21 7l-7.2 7.2v5.3l-2.2 1.2-2-4-3.7 2.2-1.2-1.2 2.2-3.7-4-2z" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
       <span class="brand-copy"><strong>Jerry Marotta</strong><small>Gold Seal Flight Instructor</small></span>
     </a>
-    <button class="mobile-menu-btn" data-view="about" aria-label="Open about page">JM</button>
+    <button class="mobile-more-btn" id="mobile-more-btn" type="button" aria-label="Open more options" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.4" fill="currentColor"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><circle cx="19" cy="12" r="1.4" fill="currentColor"/></svg>
+    </button>
   </div>
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"><span></span></div>
 
   <main>
     <section class="view active" id="view-home">
@@ -384,49 +1095,173 @@ footer span{color:var(--gold-light)}
           <div class="eyebrow">Gold Seal CFII • Knoxville</div>
           <h1>Jerry<br><span style="color:var(--gold-light)">Marotta</span></h1>
           <p>Practical instruction and real-world aviation judgment shaped by more than 8,500 flight hours.</p>
-          <div class="mobile-actions"><button class="btn btn-primary" data-view="book">Book a Lesson</button><button class="btn btn-secondary" data-view="training">Training</button></div>
+          <div class="mobile-proof" aria-label="Jerry's qualifications">
+            <span>Gold Seal CFI</span>
+            <span>CFII</span>
+            <span>8,500+ Hours</span>
+          </div>
+          <div class="mobile-actions">
+            <button class="btn btn-primary" data-view="book">Book a Lesson</button>
+            <button class="btn btn-secondary" data-view="chronicles">Stories</button>
+          </div>
         </section>
-        <div class="quick-grid"><button class="quick-card" data-view="training"><strong>Flight</strong><span>Training</span></button><button class="quick-card" data-view="training"><strong>Instrument</strong><span>CFII</span></button><button class="quick-card" data-view="training"><strong>Checkride</strong><span>Preparation</span></button></div>
+
+        <section class="mobile-service-section">
+          <div class="mobile-section-head">
+            <div class="section-label">Training</div>
+            <h2>Choose your next objective.</h2>
+          </div>
+          <div class="mobile-service-rail" aria-label="Training options">
+            <button class="mobile-service-card" data-view="training">
+              <small>Primary</small>
+              <h3>Flight Training</h3>
+              <p>Structured instruction with clear objectives, direct feedback, and lessons built around your pace.</p>
+              <span class="rail-link">Explore training →</span>
+            </button>
+            <button class="mobile-service-card" data-view="training">
+              <small>Instrument</small>
+              <h3>CFII Training</h3>
+              <p>Procedures, scan discipline, workload management, and sound decision-making for instrument flying.</p>
+              <span class="rail-link">Explore training →</span>
+            </button>
+            <button class="mobile-service-card" data-view="training">
+              <small>Practical Test</small>
+              <h3>Checkride Prep</h3>
+              <p>Focused oral and flight preparation based on the standards and the areas that need attention.</p>
+              <span class="rail-link">Explore training →</span>
+            </button>
+            <button class="mobile-service-card" data-view="training">
+              <small>Knowledge</small>
+              <h3>Ground Instruction</h3>
+              <p>Clear explanations that connect weather, systems, regulations, and aerodynamics to real flying.</p>
+              <span class="rail-link">Explore training →</span>
+            </button>
+          </div>
+          <div class="rail-hint">Swipe to compare training options.</div>
+        </section>
+
         <section class="mobile-block">
-          <div class="section-label">Featured</div><h2>Flight Instructor’s Chronicles</h2>
-          <article class="mobile-story"><small>Flight Safety • 8 min read</small><h3>The Day Fear Took the Controls</h3><p>A stall lesson, a student frozen in panic, and the moment an instructor had to take command back.</p><button class="btn btn-primary" data-view="article">Read Story</button></article>
+          <div class="section-label">Featured Chronicle</div>
+          <h2>Lessons that stay with you.</h2>
+          <article class="mobile-story">
+            <small>Flight Safety • 8 min read</small>
+            <h3>The Day Fear Took the Controls</h3>
+            <p>A stall lesson, a student frozen in panic, and the moment an instructor had to take command back.</p>
+            <button class="btn btn-primary" data-view="article">Read the Story</button>
+          </article>
         </section>
-        <section class="mobile-block alt"><div class="section-label">Credentials</div><h2>Experience that matters.</h2><div class="mobile-credentials"><div class="mobile-credential"><strong>8,500+</strong><span>Hours</span></div><div class="mobile-credential"><strong>35+</strong><span>Years</span></div><div class="mobile-credential"><strong>Gold</strong><span>Seal CFI</span></div></div></section>
-        <section class="mobile-cta"><h3>Train with Jerry.</h3><p>Complete one focused form, then send the request through text on mobile or email on desktop.</p><button class="btn" style="background:white;color:var(--rust)" data-view="book">Request Session</button></section>
+
+        <section class="mobile-block alt">
+          <div class="section-label">At a Glance</div>
+          <h2>Experience that matters.</h2>
+          <div class="mobile-credentials">
+            <div class="mobile-credential"><strong>8,500+</strong><span>Flight Hours</span></div>
+            <div class="mobile-credential"><strong>35+</strong><span>Years Aviation</span></div>
+            <div class="mobile-credential"><strong>Gold Seal</strong><span>FAA Instructor</span></div>
+            <div class="mobile-credential"><strong>CFII</strong><span>Instrument</span></div>
+          </div>
+        </section>
+
+        <section class="mobile-cta">
+          <h3>Ready to train?</h3>
+          <p>Complete a short request. On mobile, the site opens your native Messages app with everything ready to send.</p>
+          <button class="btn" style="background:white;color:var(--rust)" data-view="book">Request a Session</button>
+        </section>
       </div>
     </section>
 
     <section class="view" id="view-about">
-      <header class="page-hero"><div class="section-label">About Jerry</div><h1>Experience you can trust.</h1><p>Meet the instructor behind the training, the experience, and the stories from the right seat.</p></header>
-      <div class="page-content about-preview" style="padding-top:56px">
-        <div class="about-photo-card">
-          <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta with his Travel Air biplane">
-        </div>
-        <div class="about-copy-stack">
-          <div class="about-panel">
-            <h3>Gold Seal flight instruction.</h3>
-            <p>Finding a reliable flight instructor who truly focuses on your individual needs can be challenging. As an FAA Gold Seal Certified Flight Instructor, Jerry Marotta brings an approach that motivates and guides students toward real-world competency and confidence in the cockpit.</p>
-            <p style="margin-top:18px">Jerry designs every lesson around the student’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
-            <p style="margin-top:18px">Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
+      <div class="about-page-hero">
+        <div class="about-page-copy">
+          <div class="section-label">About Jerry</div>
+          <h1>Experience you can trust.</h1>
+          <div class="about-page-subline">35+ years. 8,500+ hours. Countless lessons carried forward.</div>
+          <p>Finding a reliable flight instructor who truly focuses on your individual needs can be challenging. As an FAA Gold Seal Certified Flight Instructor, Jerry Marotta brings an approach that motivates and guides students toward real-world competency and confidence in the cockpit.</p>
+          <div class="about-full-bio">
+            <p>Jerry designs every lesson around the pilot’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
+            <p>Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
           </div>
-          <div class="about-facts">
-            <div class="fact"><strong>8,500+</strong><span>Flight Hours</span></div>
-            <div class="fact"><strong>35+</strong><span>Years Experience</span></div>
-            <div class="fact"><strong>CFII</strong><span>Instrument Instructor</span></div>
-            <div class="fact"><strong>Gold Seal</strong><span>FAA Recognition</span></div>
-          </div>
+          <details class="about-mobile-details">
+            <summary>Read Jerry’s full background</summary>
+            <p>Jerry designs every lesson around the pilot’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
+            <p>Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
+          </details>
+          <div class="about-page-signature">Jerry Marotta</div>
+          <div class="about-page-role">Gold Seal Flight Instructor</div>
         </div>
+        <div class="about-page-photo">
+          <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta standing beside his red Travel Air biplane" loading="lazy" decoding="async">
+        </div>
+      </div>
+      <div class="about-page-stats">
+        <div class="about-page-stat"><strong>8,500+</strong><span>Flight Hours</span></div>
+        <div class="about-page-stat"><strong>35+</strong><span>Years in Aviation</span></div>
+        <div class="about-page-stat"><strong>Gold Seal</strong><span>FAA Flight Instructor</span></div>
+        <div class="about-page-stat"><strong>CFII</strong><span>Instrument Instructor</span></div>
       </div>
     </section>
 
     <section class="view" id="view-training">
-      <header class="page-hero"><div class="section-label">Training</div><h1>Instruction built around the pilot.</h1><p>Compare Jerry’s core training services, then request the lesson that fits your goals.</p></header>
-      <div class="page-content"><div class="training-list">
-        <article class="training-item"><div class="num">01</div><div><h3>Primary Flight Training</h3><p>Structured instruction for student pilots, with clear objectives and honest feedback after every lesson.</p></div></article>
-        <article class="training-item"><div class="num">02</div><div><h3>Instrument Training</h3><p>Procedures, scan discipline, workload management, and sound aeronautical decision-making.</p></div></article>
-        <article class="training-item"><div class="num">03</div><div><h3>Checkride Preparation</h3><p>Targeted oral review and flight preparation based on the practical test standards and the pilot’s weak areas.</p></div></article>
-        <article class="training-item"><div class="num">04</div><div><h3>Ground Instruction</h3><p>Weather, systems, aerodynamics, navigation, regulations, and scenario-based decision-making.</p></div></article>
-      </div></div>
+      <header class="page-hero">
+        <div class="section-label">Training</div>
+        <h1>Instruction built around the pilot.</h1>
+        <p>Compare Jerry’s core training services, then request the lesson that fits your goals.</p>
+      </header>
+      <div class="page-content">
+        <div class="training-list desktop-training-list">
+          <article class="training-item"><div class="num">01</div><div><h3>Primary Flight Training</h3><p>Structured instruction for student pilots, with clear objectives and honest feedback after every lesson.</p></div></article>
+          <article class="training-item"><div class="num">02</div><div><h3>Instrument Training</h3><p>Procedures, scan discipline, workload management, and sound aeronautical decision-making.</p></div></article>
+          <article class="training-item"><div class="num">03</div><div><h3>Checkride Preparation</h3><p>Targeted oral review and flight preparation based on the practical test standards and the pilot’s weak areas.</p></div></article>
+          <article class="training-item"><div class="num">04</div><div><h3>Ground Instruction</h3><p>Weather, systems, aerodynamics, navigation, regulations, and scenario-based decision-making.</p></div></article>
+        </div>
+
+        <div class="mobile-training-list">
+          <details class="mobile-training-card" open>
+            <summary>
+              <span class="mobile-training-number">01</span>
+              <span class="mobile-training-title"><strong>Primary Flight Training</strong><span>Student pilots and proficiency</span></span>
+              <span class="mobile-training-chevron">＋</span>
+            </summary>
+            <div class="mobile-training-detail">
+              <p>Structured one-on-one instruction with clear objectives, honest debriefs, and lessons built around the pilot’s current ability and aircraft.</p>
+              <button class="btn btn-primary" data-view="book">Request This Training</button>
+            </div>
+          </details>
+          <details class="mobile-training-card">
+            <summary>
+              <span class="mobile-training-number">02</span>
+              <span class="mobile-training-title"><strong>Instrument Training</strong><span>Procedures and decision-making</span></span>
+              <span class="mobile-training-chevron">＋</span>
+            </summary>
+            <div class="mobile-training-detail">
+              <p>Develop scan discipline, procedural confidence, workload management, and aeronautical judgment for instrument conditions.</p>
+              <button class="btn btn-primary" data-view="book">Request This Training</button>
+            </div>
+          </details>
+          <details class="mobile-training-card">
+            <summary>
+              <span class="mobile-training-number">03</span>
+              <span class="mobile-training-title"><strong>Checkride Preparation</strong><span>Oral and flight readiness</span></span>
+              <span class="mobile-training-chevron">＋</span>
+            </summary>
+            <div class="mobile-training-detail">
+              <p>Targeted preparation based on the practical test standards, with focused work on the pilot’s weak areas and confidence under pressure.</p>
+              <button class="btn btn-primary" data-view="book">Request This Training</button>
+            </div>
+          </details>
+          <details class="mobile-training-card">
+            <summary>
+              <span class="mobile-training-number">04</span>
+              <span class="mobile-training-title"><strong>Ground Instruction</strong><span>Knowledge connected to flight</span></span>
+              <span class="mobile-training-chevron">＋</span>
+            </summary>
+            <div class="mobile-training-detail">
+              <p>Weather, aircraft systems, aerodynamics, navigation, regulations, and scenario-based decisions explained in practical terms.</p>
+              <button class="btn btn-primary" data-view="book">Request This Training</button>
+            </div>
+          </details>
+        </div>
+      </div>
     </section>
 
     <section class="view" id="view-chronicles">
@@ -440,6 +1275,10 @@ footer span{color:var(--gold-light)}
     </section>
 
     <section class="view" id="view-article">
+      <div class="article-mobile-bar">
+        <button type="button" data-view="chronicles">← Chronicles</button>
+        <span>8 minute read</span>
+      </div>
       <header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1>The Day Fear Took the Controls</h1><p>A true account of fear, instinct, control, and the responsibilities carried by the instructor in the right seat.</p></header>
       <div class="page-content"><article class="article">
         <div class="article-kicker">By Jerry Marotta • Flight Safety • Instructor Perspective</div>
@@ -513,120 +1352,205 @@ footer span{color:var(--gold-light)}
         <p>And as the instructor, it was my responsibility to take it back.</p>
         <div class="booking-note"><strong>Safety note:</strong> This personal account is presented for educational and storytelling purposes. It is not a substitute for instruction from a qualified flight instructor, an aircraft flight manual, or FAA-approved training guidance.</div>
         <div style="margin-top:35px"><button class="btn btn-primary" data-view="chronicles">Back to Chronicles</button></div>
+        <div class="article-end-actions">
+          <button class="btn btn-primary" data-view="book">Train With Jerry</button>
+          <button class="btn btn-copy" data-view="chronicles">Back to Chronicles</button>
+        </div>
       </article></div>
     </section>
 
     <section class="view" id="view-book">
-      <header class="page-hero"><div class="section-label">Book a Lesson</div><h1>Request a focused training session.</h1><p>On a phone, the completed request opens in the native Messages app. On a computer, it opens in the default email application. Both flows also download a tentative calendar invite.</p></header>
-      <div class="page-content"><div class="booking-layout">
-        <aside class="contact-card">
-          <h3>Request a session.</h3>
-          <p>Complete the form and review the request before sending it. Jerry will confirm the date, time, airport, and training details directly.</p>
-          <div class="contact-links">
-            <a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a>
-            <a href="sms:8657247251">(865) 724-7251</a>
-          </div>
-          <div class="booking-note"><strong id="device-flow-heading">Your device flow</strong><br><span id="device-flow-copy">The send method will be selected automatically for your device.</span></div>
-        </aside>
-        <form class="form-card" id="booking-form">
-          <div class="form-grid">
-            <div class="field"><label for="fname">First name *</label><input id="fname" name="fname" placeholder="Jane" autocomplete="given-name" required></div>
-            <div class="field"><label for="lname">Last name</label><input id="lname" name="lname" placeholder="Smith" autocomplete="family-name"></div>
-            <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" type="tel" placeholder="(865) 555-0100" autocomplete="tel" required></div>
-            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" autocomplete="email"></div>
-
-            <div class="field full"><label for="session-type">Training type *</label>
-              <select id="session-type" name="session-type" required>
-                <option value="">Choose a session type</option>
-                <option value="Flight Training Lesson">Flight Training Lesson</option>
-                <option value="Instrument Training">Instrument Training</option>
-                <option value="Discovery / Intro Flight">Discovery / Intro Flight</option>
-                <option value="Ground School Session">Ground School Session</option>
-                <option value="Checkride Preparation">Checkride Preparation</option>
-                <option value="other">Other</option>
-              </select>
+      <header class="page-hero">
+        <div class="section-label">Book a Lesson</div>
+        <h1>Request a focused training session.</h1>
+        <p>Mobile requests open in your native Messages app. Desktop requests open in your default email application. Both download a tentative calendar invite.</p>
+      </header>
+      <div class="page-content">
+        <div class="booking-layout">
+          <aside class="contact-card">
+            <h3>Simple, direct booking.</h3>
+            <p>Tell Jerry what you need, choose a preferred date and airport, then review the request before your phone opens Messages.</p>
+            <div class="contact-links">
+              <a href="mailto:jerry.marotta@hotmail.com">jerry.marotta@hotmail.com</a>
+              <a href="sms:8657247251">(865) 724-7251</a>
             </div>
-            <div class="field full other-field" id="other-session-field"><label for="other-session">Describe the session *</label><input id="other-session" name="other-session" placeholder="Describe what you are looking for"></div>
+            <div class="booking-note"><strong id="device-flow-heading">Your device flow</strong><br><span id="device-flow-copy">The send method will be selected automatically for your device.</span></div>
+          </aside>
 
-            <div class="field"><label for="preferred-date">Preferred date *</label><input id="preferred-date" name="preferred-date" type="date" required></div>
-            <div class="field"><label for="preferred-time">Preferred time</label>
-              <select id="preferred-time" name="preferred-time">
-                <option value="">Choose a time</option>
-                <option>Early Morning (7-9 AM)</option>
-                <option>Morning (9 AM-12 PM)</option>
-                <option>Afternoon (12-4 PM)</option>
-                <option>Late Afternoon (4-7 PM)</option>
-                <option>Flexible</option>
-              </select>
+          <form class="form-card" id="booking-form">
+            <div class="mobile-booking-progress" aria-label="Booking progress">
+              <button class="booking-progress-item active" type="button" data-booking-step="1"><span>1</span><small>Your Info</small></button>
+              <button class="booking-progress-item" type="button" data-booking-step="2"><span>2</span><small>Lesson</small></button>
+              <button class="booking-progress-item" type="button" data-booking-step="3"><span>3</span><small>Review</small></button>
             </div>
 
-            <div class="field full"><label for="meet-airport">Requesting to meet at *</label>
-              <select id="meet-airport" name="meet-airport" required>
-                <option value="">Choose an airport</option>
-                <option value="TYS — McGhee Tyson Airport (Alcoa)">TYS — McGhee Tyson Airport (Alcoa)</option>
-                <option value="Signature Air — McGhee Tyson (TYS)">Signature Air — McGhee Tyson (TYS)</option>
-                <option value="DKX — Knoxville Downtown Island Airport">DKX — Knoxville Downtown Island Airport</option>
-                <option value="MMI — McMinn County Airport (Athens)">MMI — McMinn County Airport (Athens)</option>
-                <option value="GKT — Gatlinburg-Pigeon Forge Airport">GKT — Gatlinburg-Pigeon Forge Airport</option>
-                <option value="RVL — Rockwood Municipal Airport">RVL — Rockwood Municipal Airport</option>
-                <option value="MOR — Moore-Murrell Airport (Morristown)">MOR — Moore-Murrell Airport (Morristown)</option>
-                <option value="other">Other airport</option>
-              </select>
-            </div>
-            <div class="field full other-field" id="other-airport-field"><label for="other-airport">Airport name or identifier *</label><input id="other-airport" name="other-airport" placeholder="Example: KCSV, Crossville"></div>
+            <div class="form-grid">
+              <div class="booking-step active" data-step="1">
+                <div class="field"><label for="fname">First name *</label><input id="fname" name="fname" placeholder="Jane" autocomplete="given-name" enterkeyhint="next" required></div>
+                <div class="field"><label for="lname">Last name</label><input id="lname" name="lname" placeholder="Smith" autocomplete="family-name" enterkeyhint="next"></div>
+                <div class="field"><label for="phone">Your phone *</label><input id="phone" name="phone" type="tel" placeholder="(865) 555-0100" autocomplete="tel" inputmode="tel" enterkeyhint="next" required></div>
+                <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" autocomplete="email" inputmode="email" enterkeyhint="next"></div>
+                <div class="wizard-actions">
+                  <button class="btn btn-primary" type="button" data-booking-next="2">Continue</button>
+                </div>
+              </div>
 
-            <div class="field"><label for="duration">Session duration</label>
-              <select id="duration" name="duration">
-                <option value="2">2 Hours (standard)</option>
-                <option value="3">3 Hours</option>
-                <option value="4">4 Hours</option>
-                <option value="5">5 Hours</option>
-                <option value="6">6 Hours (full day)</option>
-              </select>
-            </div>
-            <div class="field"><label for="experience">Experience level</label>
-              <select id="experience" name="experience">
-                <option value="">Choose a level</option>
-                <option>No flight experience</option>
-                <option>Student pilot (in training)</option>
-                <option>Private Pilot Certificate holder</option>
-                <option>Instrument rated</option>
-                <option>Commercial / ATP</option>
-              </select>
-            </div>
+              <div class="booking-step" data-step="2">
+                <div class="field full"><label for="session-type">Training type *</label>
+                  <select id="session-type" name="session-type" required>
+                    <option value="">Choose a session type</option>
+                    <option value="Flight Training Lesson">Flight Training Lesson</option>
+                    <option value="Instrument Training">Instrument Training</option>
+                    <option value="Discovery / Intro Flight">Discovery / Intro Flight</option>
+                    <option value="Ground School Session">Ground School Session</option>
+                    <option value="Checkride Preparation">Checkride Preparation</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="field full other-field" id="other-session-field"><label for="other-session">Describe the session *</label><input id="other-session" name="other-session" placeholder="Describe what you are looking for"></div>
 
-            <div class="field full"><label for="message">Additional notes</label><textarea id="message" name="message" placeholder="Tell Jerry what you are working toward"></textarea></div>
+                <div class="field"><label for="preferred-date">Preferred date *</label><input id="preferred-date" name="preferred-date" type="date" required></div>
+                <div class="field"><label for="preferred-time">Preferred time</label>
+                  <select id="preferred-time" name="preferred-time">
+                    <option value="">Choose a time</option>
+                    <option>Early Morning (7-9 AM)</option>
+                    <option>Morning (9 AM-12 PM)</option>
+                    <option>Afternoon (12-4 PM)</option>
+                    <option>Late Afternoon (4-7 PM)</option>
+                    <option>Flexible</option>
+                  </select>
+                </div>
 
-            <div class="request-preview">
-              <div class="request-preview-label">Preview of your request</div>
-              <div class="request-preview-text" id="request-preview-text">Fill in the form to preview the message Jerry will receive.</div>
-            </div>
+                <div class="field full"><label for="meet-airport">Requesting to meet at *</label>
+                  <select id="meet-airport" name="meet-airport" required>
+                    <option value="">Choose an airport</option>
+                    <option value="TYS — McGhee Tyson Airport (Alcoa)">TYS — McGhee Tyson Airport (Alcoa)</option>
+                    <option value="Signature Air — McGhee Tyson (TYS)">Signature Air — McGhee Tyson (TYS)</option>
+                    <option value="DKX — Knoxville Downtown Island Airport">DKX — Knoxville Downtown Island Airport</option>
+                    <option value="MMI — McMinn County Airport (Athens)">MMI — McMinn County Airport (Athens)</option>
+                    <option value="GKT — Gatlinburg-Pigeon Forge Airport">GKT — Gatlinburg-Pigeon Forge Airport</option>
+                    <option value="RVL — Rockwood Municipal Airport">RVL — Rockwood Municipal Airport</option>
+                    <option value="MOR — Moore-Murrell Airport (Morristown)">MOR — Moore-Murrell Airport (Morristown)</option>
+                    <option value="other">Other airport</option>
+                  </select>
+                </div>
+                <div class="field full other-field" id="other-airport-field"><label for="other-airport">Airport name or identifier *</label><input id="other-airport" name="other-airport" placeholder="Example: KCSV, Crossville"></div>
 
-            <div class="form-actions">
-              <button class="btn btn-primary" id="booking-submit" type="submit">Send Request</button>
-              <button class="btn btn-copy" id="copy-request" type="button">Copy Request</button>
+                <div class="field"><label for="duration">Session duration</label>
+                  <select id="duration" name="duration">
+                    <option value="2">2 Hours (standard)</option>
+                    <option value="3">3 Hours</option>
+                    <option value="4">4 Hours</option>
+                    <option value="5">5 Hours</option>
+                    <option value="6">6 Hours (full day)</option>
+                  </select>
+                </div>
+                <div class="field"><label for="experience">Experience level</label>
+                  <select id="experience" name="experience">
+                    <option value="">Choose a level</option>
+                    <option>No flight experience</option>
+                    <option>Student pilot (in training)</option>
+                    <option>Private Pilot Certificate holder</option>
+                    <option>Instrument rated</option>
+                    <option>Commercial / ATP</option>
+                  </select>
+                </div>
+                <div class="wizard-actions">
+                  <button class="btn wizard-back" type="button" data-booking-back="1">Back</button>
+                  <button class="btn btn-primary" type="button" data-booking-next="3">Review</button>
+                </div>
+              </div>
+
+              <div class="booking-step" data-step="3">
+                <div class="field full"><label for="message">Additional notes</label><textarea id="message" name="message" placeholder="Tell Jerry what you are working toward"></textarea></div>
+
+                <div class="request-preview">
+                  <div class="request-preview-label">Preview of your request</div>
+                  <div class="request-preview-text" id="request-preview-text">Fill in the form to preview the message Jerry will receive.</div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" id="booking-submit" type="submit">Send Request</button>
+                  <button class="btn btn-copy" id="copy-request" type="button">Copy Request</button>
+                </div>
+                <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+
+                <div class="wizard-actions">
+                  <button class="btn wizard-back" type="button" data-booking-back="2">Back to Lesson Details</button>
+                </div>
+              </div>
             </div>
-            <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-          </div>
-        </form>
-      </div></div>
+          </form>
+        </div>
+      </div>
     </section>
 
     <section class="view" id="view-contact">
-      <header class="page-hero"><div class="section-label">Contact</div><h1>Reach Jerry directly.</h1><p>Contact details remain available without forcing visitors through the full booking form.</p></header>
-      <div class="page-content"><div class="booking-layout"><div class="contact-card"><h3>Jerry Marotta Aviation</h3><p>Knoxville, Tennessee<br>jerry.marotta@hotmail.com<br>(865) 724-7251</p></div><div class="form-card"><div class="section-label">Best for lesson requests</div><h2 style="font-size:3rem;color:var(--ink)">Use the booking page.</h2><p style="color:var(--muted);line-height:1.8;margin:15px 0 24px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email. Both include the same structured request and calendar invite.</p><button class="btn btn-primary" data-view="book">Book a Lesson</button></div></div></div>
+      <header class="page-hero">
+        <div class="section-label">Contact</div>
+        <h1>Reach Jerry directly.</h1>
+        <p>Use the booking page for lesson requests or reach Jerry directly when you need a quick response.</p>
+      </header>
+      <div class="page-content">
+        <div class="booking-layout">
+          <div class="contact-card">
+            <h3>Jerry Marotta Aviation</h3>
+            <p>Knoxville, Tennessee<br>Gold Seal Flight Instructor and CFII</p>
+            <div class="contact-actions">
+              <a class="contact-action" href="mailto:jerry.marotta@hotmail.com"><strong>Email</strong><span>jerry.marotta@hotmail.com</span></a>
+              <a class="contact-action" href="sms:8657247251"><strong>Text</strong><span>(865) 724-7251</span></a>
+            </div>
+          </div>
+          <div class="form-card">
+            <div class="section-label">Best for lesson requests</div>
+            <h2 style="font-size:3rem;color:var(--ink)">Use the booking page.</h2>
+            <p style="color:var(--muted);line-height:1.75;margin:14px 0 22px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email. Both include the same structured request and calendar invite.</p>
+            <button class="btn btn-primary" data-view="book">Book a Lesson</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer><div><strong>Jerry Marotta <span>// Aviation</span></strong></div><div>Gold Seal Flight Instruction • Knoxville, Tennessee<br><small>Built by <a href="https://tristanmaratos.com" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light)">Tristan Maratos</a></small></div></footer>
 
   <nav class="mobile-bottom" aria-label="Mobile navigation">
-    <button class="active" data-view="home"><span>⌂</span><span>Home</span></button>
-    <button data-view="training"><span>△</span><span>Training</span></button>
-    <button class="mobile-book" data-view="book"><span>＋</span><span>Book</span></button>
-    <button data-view="chronicles"><span>▤</span><span>Chronicles</span></button>
-    <button data-view="contact"><span>✉</span><span>Contact</span></button>
+    <button class="active" data-view="home" aria-label="Home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4l8.5 7.5"/><path d="M5.5 10.2V20h5v-5h3v5h5v-9.8"/></svg>
+      <span>Home</span>
+    </button>
+    <button data-view="training" aria-label="Training">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19 12 5l9 14"/><path d="M7.5 19 12 12l4.5 7"/></svg>
+      <span>Training</span>
+    </button>
+    <button class="mobile-book" data-view="book" aria-label="Book a lesson">
+      <span class="mobile-book-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
+      <span>Book</span>
+    </button>
+    <button data-view="chronicles" aria-label="Chronicles">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+      <span>Chronicles</span>
+    </button>
+    <button data-view="contact" aria-label="Contact">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+      <span>Contact</span>
+    </button>
   </nav>
+
+  <div class="mobile-sheet-backdrop" id="mobile-sheet-backdrop"></div>
+  <aside class="mobile-sheet" id="mobile-sheet" aria-hidden="true" aria-label="More options">
+    <div class="mobile-sheet-handle"></div>
+    <div class="mobile-sheet-head">
+      <strong>More</strong>
+      <button class="mobile-sheet-close" id="mobile-sheet-close" type="button" aria-label="Close more options">×</button>
+    </div>
+    <div class="mobile-sheet-grid">
+      <button class="mobile-sheet-action" data-view="about"><strong>About Jerry</strong><span>Experience, credentials, and background</span></button>
+      <button class="mobile-sheet-action" data-view="chronicles"><strong>Chronicles</strong><span>True stories from the right seat</span></button>
+      <a class="mobile-sheet-action" href="mailto:jerry.marotta@hotmail.com"><strong>Email Jerry</strong><span>Open your email application</span></a>
+      <a class="mobile-sheet-action" href="sms:8657247251"><strong>Text Jerry</strong><span>Open your native Messages app</span></a>
+    </div>
+  </aside>
 </div>
 <script>
 const JERRY_NUMBER = '8657247251';
@@ -635,17 +1559,62 @@ const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 const viewButtons = document.querySelectorAll('[data-view]');
 const views = document.querySelectorAll('.view');
 
+const mobileSheet = document.getElementById('mobile-sheet');
+const mobileSheetBackdrop = document.getElementById('mobile-sheet-backdrop');
+const mobileMoreButton = document.getElementById('mobile-more-btn');
+const mobileSheetClose = document.getElementById('mobile-sheet-close');
+let currentBookingStep = 1;
+
+function isMobileViewport() {
+  return window.matchMedia('(max-width: 1000px)').matches;
+}
+
+function setMobileSheet(open) {
+  if (!mobileSheet || !mobileSheetBackdrop || !mobileMoreButton) return;
+  mobileSheet.classList.toggle('open', open);
+  mobileSheetBackdrop.classList.toggle('open', open);
+  mobileSheet.setAttribute('aria-hidden', String(!open));
+  mobileMoreButton.setAttribute('aria-expanded', String(open));
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+
+function closeMobileSheet() {
+  setMobileSheet(false);
+}
+
+if (mobileMoreButton) mobileMoreButton.addEventListener('click', () => setMobileSheet(true));
+if (mobileSheetClose) mobileSheetClose.addEventListener('click', closeMobileSheet);
+if (mobileSheetBackdrop) mobileSheetBackdrop.addEventListener('click', closeMobileSheet);
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeMobileSheet();
+});
+
 function showView(name, updateHistory = true) {
   const target = document.getElementById('view-' + name) ? name : 'home';
   views.forEach(view => view.classList.toggle('active', view.id === 'view-' + target));
   document.querySelectorAll('.nav-btn,.mobile-bottom button').forEach(button => {
-    button.classList.toggle('active', button.dataset.view === target);
+    const active = button.dataset.view === target;
+    button.classList.toggle('active', active);
+    if (active) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
   });
+
+  closeMobileSheet();
+
+  const readingProgress = document.getElementById('reading-progress');
+  if (readingProgress) readingProgress.classList.toggle('visible', target === 'article');
+
+  if (target === 'book' && isMobileViewport()) {
+    showBookingStep(currentBookingStep);
+  }
+
   if (updateHistory) {
     const nextHash = target === 'home' ? '#home' : '#' + target;
     if (window.location.hash !== nextHash) history.pushState({view: target}, '', nextHash);
   }
+
   window.scrollTo({top: 0, behavior: 'auto'});
+  requestAnimationFrame(updateReadingProgress);
 }
 
 viewButtons.forEach(button => button.addEventListener('click', event => {
@@ -828,16 +1797,63 @@ function downloadICS() {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function validateBookingForm() {
-  const form = document.getElementById('booking-form');
-  if (!form.reportValidity()) return false;
-  if (value('session-type') === 'other' && !value('other-session')) {
+function validateBookingStep(step) {
+  const container = document.querySelector('.booking-step[data-step="' + step + '"]');
+  if (!container) return true;
+
+  const controls = Array.from(container.querySelectorAll('input,select,textarea'));
+  for (const control of controls) {
+    const conditionalParent = control.closest('.other-field');
+    if (conditionalParent && !conditionalParent.classList.contains('visible')) continue;
+    if (!control.checkValidity()) {
+      control.reportValidity();
+      control.focus();
+      return false;
+    }
+  }
+
+  if (step === 2 && value('session-type') === 'other' && !value('other-session')) {
     document.getElementById('other-session').focus();
     return false;
   }
-  if (value('meet-airport') === 'other' && !value('other-airport')) {
+  if (step === 2 && value('meet-airport') === 'other' && !value('other-airport')) {
     document.getElementById('other-airport').focus();
     return false;
+  }
+  return true;
+}
+
+function showBookingStep(step) {
+  const clampedStep = Math.min(3, Math.max(1, Number(step) || 1));
+  currentBookingStep = clampedStep;
+
+  document.querySelectorAll('.booking-step').forEach(section => {
+    section.classList.toggle('active', Number(section.dataset.step) === clampedStep);
+  });
+
+  document.querySelectorAll('.booking-progress-item').forEach(item => {
+    const itemStep = Number(item.dataset.bookingStep);
+    item.classList.toggle('active', itemStep === clampedStep);
+    item.classList.toggle('complete', itemStep < clampedStep);
+  });
+
+  if (clampedStep === 3) updateRequestPreview();
+
+  if (isMobileViewport()) {
+    const form = document.getElementById('booking-form');
+    if (form) {
+      const top = form.getBoundingClientRect().top + window.scrollY - 82;
+      window.scrollTo({top: Math.max(0, top), behavior: 'smooth'});
+    }
+  }
+}
+
+function validateBookingForm() {
+  for (let step = 1; step <= 3; step += 1) {
+    if (!validateBookingStep(step)) {
+      if (isMobileViewport()) showBookingStep(step);
+      return false;
+    }
   }
   return true;
 }
@@ -888,6 +1904,31 @@ async function copyRequest() {
   }
 }
 
+function updateReadingProgress() {
+  const progressWrap = document.getElementById('reading-progress');
+  const progressBar = progressWrap ? progressWrap.querySelector('span') : null;
+  const articleView = document.getElementById('view-article');
+  const article = articleView ? articleView.querySelector('.article') : null;
+
+  if (!progressWrap || !progressBar || !article || !articleView.classList.contains('active') || !isMobileViewport()) {
+    if (progressBar) progressBar.style.width = '0%';
+    return;
+  }
+
+  const articleTop = article.offsetTop;
+  const articleHeight = article.offsetHeight;
+  const viewportHeight = window.innerHeight;
+  const scrollable = Math.max(1, articleHeight - viewportHeight + 80);
+  const progress = Math.min(1, Math.max(0, (window.scrollY - articleTop + 80) / scrollable));
+  progressBar.style.width = (progress * 100).toFixed(1) + '%';
+}
+
+window.addEventListener('scroll', updateReadingProgress, {passive:true});
+window.addEventListener('resize', () => {
+  updateDeviceFlow();
+  updateReadingProgress();
+});
+
 function updateDeviceFlow() {
   const mobile = isMobileDevice();
   const heading = document.getElementById('device-flow-heading');
@@ -905,6 +1946,24 @@ function updateDeviceFlow() {
   }
 }
 
+document.querySelectorAll('[data-booking-next]').forEach(button => {
+  button.addEventListener('click', () => {
+    const nextStep = Number(button.dataset.bookingNext);
+    if (validateBookingStep(currentBookingStep)) showBookingStep(nextStep);
+  });
+});
+
+document.querySelectorAll('[data-booking-back]').forEach(button => {
+  button.addEventListener('click', () => showBookingStep(Number(button.dataset.bookingBack)));
+});
+
+document.querySelectorAll('.booking-progress-item').forEach(button => {
+  button.addEventListener('click', () => {
+    const requestedStep = Number(button.dataset.bookingStep);
+    if (requestedStep < currentBookingStep) showBookingStep(requestedStep);
+  });
+});
+
 const bookingForm = document.getElementById('booking-form');
 bookingForm.addEventListener('submit', submitBooking);
 document.getElementById('copy-request').addEventListener('click', copyRequest);
@@ -921,7 +1980,9 @@ dateInput.min = new Date().toISOString().split('T')[0];
 
 updateDeviceFlow();
 toggleConditionalFields();
+showBookingStep(1);
 showView((window.location.hash || '#home').slice(1), false);
+updateReadingProgress();
 </script>
 </body>
 </html>
