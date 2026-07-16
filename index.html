@@ -555,6 +555,115 @@ footer span{color:var(--gold-light)}
 .yelp-live-count{color:var(--muted);font-size:.67rem}
 .yelp-live-updated{color:var(--muted);font-size:.57rem;line-height:1.5;min-height:2.8em}
 .yelp-rating-card .btn{width:100%;min-height:40px;margin-top:14px;padding:0 9px;font-size:.53rem}
+
+.yelp-excerpts-section{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--border);
+}
+.yelp-excerpts-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:12px;
+}
+.yelp-excerpts-head h3{
+  color:var(--ink);
+  font-size:1.8rem;
+  line-height:1;
+}
+.yelp-excerpts-head p{
+  max-width:470px;
+  color:var(--muted);
+  font-size:.66rem;
+  line-height:1.5;
+}
+.yelp-excerpt-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.yelp-excerpt-card{
+  appearance:none;
+  width:100%;
+  height:210px;
+  background:white;
+  color:inherit;
+  border:1px solid var(--border);
+  border-left:4px solid #d32323;
+  padding:17px;
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  border-radius:7px;
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 9px 22px rgba(8,21,33,.05);
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.yelp-excerpt-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(211,35,35,.45);
+  box-shadow:0 15px 32px rgba(8,21,33,.09);
+}
+.yelp-excerpt-card::after{
+  content:'Read excerpt';
+  position:absolute;
+  left:17px;
+  right:17px;
+  bottom:11px;
+  padding-top:12px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),white 34%);
+  color:#b31c1c;
+  font-size:.5rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.yelp-excerpt-stars{
+  color:#d32323;
+  letter-spacing:1.4px;
+  font-size:.9rem;
+}
+.yelp-excerpt-text{
+  color:#46545c;
+  font-family:'Cormorant Garamond',serif;
+  font-size:.98rem;
+  line-height:1.45;
+  margin:11px 0 11px;
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  flex:1;
+}
+.yelp-excerpt-footer{
+  border-top:1px solid var(--border);
+  padding-top:9px;
+  padding-bottom:18px;
+  color:var(--muted);
+  font-size:.58rem;
+  line-height:1.4;
+}
+.yelp-excerpt-footer strong{
+  display:block;
+  color:var(--ink);
+  font-size:.66rem;
+}
+.yelp-excerpt-empty{
+  grid-column:1/-1;
+  padding:16px;
+  background:var(--cream);
+  color:var(--muted);
+  border:1px solid var(--border);
+  font-size:.68rem;
+  line-height:1.55;
+}
+@media(max-width:1180px) and (min-width:1001px){
+  .yelp-excerpt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 .review-dialog{width:min(720px,calc(100vw - 34px));max-height:min(82vh,850px);border:0;padding:0;border-radius:14px;background:var(--paper);color:var(--text);box-shadow:0 34px 100px rgba(4,12,18,.45)}
 .review-dialog::backdrop{background:rgba(4,12,18,.72)}
 .review-dialog-shell{display:flex;flex-direction:column;max-height:min(82vh,850px)}
@@ -1123,6 +1232,23 @@ footer span{color:var(--gold-light)}
     font-size:1.02rem;
     margin:13px 0 16px;
   }
+
+  .mobile-yelp-excerpts{
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px solid var(--border);
+  }
+  .mobile-yelp-excerpts .yelp-excerpts-head{
+    display:block;
+    margin-bottom:9px;
+  }
+  .mobile-yelp-excerpts .yelp-excerpts-head h3{font-size:1.45rem}
+  .mobile-yelp-excerpts .yelp-excerpts-head p{margin-top:4px;font-size:.61rem}
+  .mobile-yelp-excerpts .yelp-excerpt-grid{grid-template-columns:1fr;gap:8px}
+  .mobile-yelp-excerpts .yelp-excerpt-card{height:175px;padding:15px}
+  .mobile-yelp-excerpts .yelp-excerpt-text{-webkit-line-clamp:3;font-size:.91rem}
+  .mobile-yelp-excerpts .yelp-excerpt-card::after{left:15px;right:15px;bottom:9px}
+
   .mobile-review-form{
     margin-top:12px;
     background:var(--cream);
@@ -1713,7 +1839,7 @@ footer span{color:var(--gold-light)}
                   <div><div class="yelp-live-stars" data-yelp-live-stars role="img" aria-label="Yelp rating unavailable"><span class="yelp-live-stars-base">★★★★★</span><span class="yelp-live-stars-fill">★★★★★</span></div><div class="yelp-live-count" data-yelp-live-count>View Yelp for the current rating</div></div>
                 </div>
                 <div class="yelp-live-updated" data-yelp-live-updated>The public Yelp listing is always available below.</div>
-                <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Jerry on Yelp</a>
+                <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">View Jerry on Yelp</a>
               </div>
             </aside>
 
@@ -1725,6 +1851,19 @@ footer span{color:var(--gold-light)}
                 <div class="testimonial-footer"><strong>Tristan M.</strong><span>Private Pilot · Instrument Student<br>Student since 2018</span></div>
               </button>
               </div>
+
+              <section class="yelp-excerpts-section" aria-labelledby="desktop-yelp-excerpts-heading">
+                <div class="yelp-excerpts-head">
+                  <div>
+                    <div class="section-label">From Yelp</div>
+                    <h3 id="desktop-yelp-excerpts-heading">Recent Yelp excerpts</h3>
+                  </div>
+                  <p>Yelp provides a limited set of excerpts through its API. Website reviews above remain separate and are de-duplicated against these excerpts.</p>
+                </div>
+                <div class="yelp-excerpt-grid" data-yelp-excerpt-list="desktop">
+                  <div class="yelp-excerpt-empty">Yelp excerpts will appear here after the Yelp API workflow runs and the connected plan allows review access.</div>
+                </div>
+              </section>
 
               <div class="review-form-panel" id="desktop-leave-review">
               <div class="review-form-head">
@@ -1813,8 +1952,8 @@ footer span{color:var(--gold-light)}
               <div class="yelp-external-note">
                 <p><strong>Prefer Yelp?</strong> Website testimonials and Yelp reviews are kept separate so visitors always know where each rating comes from.</p>
                 <div class="yelp-external-actions">
-                  <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
-                  <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp Reviews</a>
+                  <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
+                  <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp Reviews</a>
                 </div>
               </div>
             </div>
@@ -1915,7 +2054,7 @@ footer span{color:var(--gold-light)}
             <p class="review-disclosure">Website reviews are moderated before publication. Yelp maintains its own separate rating.</p>
             <div class="review-summary-actions">
               <button class="btn btn-primary" type="button" data-scroll-to-review="mobile-leave-review">Leave a Review</button>
-              <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Yelp</a>
+              <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Yelp</a>
             </div>
           </div>
 
@@ -1923,8 +2062,19 @@ footer span{color:var(--gold-light)}
             <div class="yelp-rating-source"><strong>Yelp</strong><span>Live external rating</span></div>
             <div class="yelp-rating-row"><strong class="yelp-live-score" data-yelp-live-rating>—</strong><div><div class="yelp-live-stars" data-yelp-live-stars role="img" aria-label="Yelp rating unavailable"><span class="yelp-live-stars-base">★★★★★</span><span class="yelp-live-stars-fill">★★★★★</span></div><div class="yelp-live-count" data-yelp-live-count>View Yelp for the current rating</div></div></div>
             <div class="yelp-live-updated" data-yelp-live-updated>The public Yelp listing is always available below.</div>
-            <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Yelp Rating</a>
+            <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">View Yelp Rating</a>
           </div>
+
+          <section class="mobile-yelp-excerpts" aria-labelledby="mobile-yelp-excerpts-heading">
+            <div class="yelp-excerpts-head">
+              <div class="section-label">From Yelp</div>
+              <h3 id="mobile-yelp-excerpts-heading">Recent Yelp excerpts</h3>
+              <p>Shown only when Yelp makes excerpts available through the connected API plan.</p>
+            </div>
+            <div class="yelp-excerpt-grid" data-yelp-excerpt-list="mobile">
+              <div class="yelp-excerpt-empty">Yelp excerpts will appear here after synchronization.</div>
+            </div>
+          </section>
 
           <div class="mobile-testimonial-list" data-testimonial-list>
             <button class="testimonial-card" type="button" data-testimonial-id="tristan-m-student-since-2018" aria-label="Read the full review from Tristan M.">
@@ -2021,8 +2171,8 @@ footer span{color:var(--gold-light)}
           <div class="mobile-review-yelp">
             <p><strong>Already use Yelp?</strong> You can also publish your feedback on Jerry’s Yelp listing. Yelp ratings are not combined with the website average.</p>
             <div class="mobile-review-yelp-actions">
-              <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
-              <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp</a>
+              <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
+              <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp</a>
             </div>
           </div>
         </section>
@@ -2531,7 +2681,8 @@ footer span{color:var(--gold-light)}
   <dialog class="review-dialog" id="review-dialog" aria-labelledby="review-dialog-name">
     <div class="review-dialog-shell">
       <div class="review-dialog-head"><div><div class="review-dialog-stars" id="review-dialog-stars"></div><strong id="review-dialog-name">Student Review</strong><span id="review-dialog-relationship"></span></div><button class="review-dialog-close" type="button" id="review-dialog-close" aria-label="Close review">×</button></div>
-      <div class="review-dialog-body"><p class="review-dialog-text" id="review-dialog-text"></p></div>
+      <div class="review-dialog-body"><p class="review-dialog-text" id="review-dialog-text"></p>
+        <a class="btn btn-copy" id="review-dialog-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;margin-top:20px">Read on Yelp</a></div>
     </div>
   </dialog>
 
@@ -2989,12 +3140,146 @@ function renderTestimonials(reviews) {
 
 const reviewDialog=document.getElementById('review-dialog');
 const reviewDialogClose=document.getElementById('review-dialog-close');
-function openReviewDialog(review){if(!reviewDialog)return;document.getElementById('review-dialog-stars').textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);document.getElementById('review-dialog-name').textContent=review.name;document.getElementById('review-dialog-relationship').textContent=review.detail?review.relationship+' · '+review.detail:review.relationship;document.getElementById('review-dialog-text').textContent=review.text;if(typeof reviewDialog.showModal==='function')reviewDialog.showModal();else reviewDialog.setAttribute('open','');}
+function openReviewDialog(review){if(!reviewDialog)return;document.getElementById('review-dialog-stars').textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);document.getElementById('review-dialog-name').textContent=review.name;document.getElementById('review-dialog-relationship').textContent=review.detail?review.relationship+' · '+review.detail:review.relationship;document.getElementById('review-dialog-text').textContent=review.text;const dialogLink=document.getElementById('review-dialog-link');if(dialogLink){if(review.url){dialogLink.href=review.url;dialogLink.style.display='inline-flex';}else{dialogLink.removeAttribute('href');dialogLink.style.display='none';}}if(typeof reviewDialog.showModal==='function')reviewDialog.showModal();else reviewDialog.setAttribute('open','');}
 function closeReviewDialog(){if(!reviewDialog)return;if(typeof reviewDialog.close==='function')reviewDialog.close();else reviewDialog.removeAttribute('open');}
 if(reviewDialogClose)reviewDialogClose.addEventListener('click',closeReviewDialog);
 if(reviewDialog)reviewDialog.addEventListener('click',event=>{if(event.target===reviewDialog)closeReviewDialog();});
-function renderYelpLiveRating(data){const rating=Number(data.rating);const count=Number(data.review_count);const hasRating=Number.isFinite(rating)&&rating>0;const percentage=hasRating?Math.max(0,Math.min(100,rating/5*100)):0;document.querySelectorAll('[data-yelp-live-rating]').forEach(el=>el.textContent=hasRating?rating.toFixed(1):'—');document.querySelectorAll('[data-yelp-live-stars]').forEach(el=>{el.style.setProperty('--yelp-rating-pct',percentage+'%');el.setAttribute('aria-label',hasRating?rating.toFixed(1)+' out of 5 stars on Yelp':'Yelp rating unavailable');});document.querySelectorAll('[data-yelp-live-count]').forEach(el=>el.textContent=hasRating&&Number.isFinite(count)?(count===1?'1 Yelp review':count+' Yelp reviews'):'View Yelp for the current rating');document.querySelectorAll('[data-yelp-live-updated]').forEach(el=>{if(!data.updated_at){el.textContent='The public Yelp listing is always available below.';return;}const date=new Date(data.updated_at);el.textContent=Number.isNaN(date.getTime())?'Synchronized with Yelp':'Synchronized '+date.toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'});});}
-async function loadYelpLiveRating(){try{const response=await fetch(YELP_LIVE_DATA_URL+'?v='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('Yelp live-rating data could not be loaded.');renderYelpLiveRating(await response.json());}catch(error){renderYelpLiveRating({});console.warn(error.message);}}
+function normalizeReviewerName(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+}
+
+function normalizeReviewText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isDuplicateYelpExcerpt(yelpReview) {
+  const yelpName = normalizeReviewerName(yelpReview.user_name);
+  const yelpText = normalizeReviewText(yelpReview.text);
+
+  return approvedTestimonials.some(siteReview => {
+    const siteName = normalizeReviewerName(siteReview.name);
+    const siteText = normalizeReviewText(siteReview.text);
+    const namesMatch = yelpName && siteName && (yelpName === siteName || yelpName.startsWith(siteName) || siteName.startsWith(yelpName));
+    const textOverlap = yelpText && siteText && (
+      siteText.includes(yelpText) ||
+      yelpText.includes(siteText) ||
+      siteText.slice(0, 120) === yelpText.slice(0, 120)
+    );
+    return namesMatch && textOverlap;
+  });
+}
+
+function createYelpExcerptCard(review) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'yelp-excerpt-card';
+  button.setAttribute('aria-label', 'Read Yelp excerpt from ' + (review.user_name || 'Yelp reviewer'));
+
+  const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
+  const stars = document.createElement('div');
+  stars.className = 'yelp-excerpt-stars';
+  stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+  const text = document.createElement('p');
+  text.className = 'yelp-excerpt-text';
+  text.textContent = review.text || 'Read this review on Yelp.';
+
+  const footer = document.createElement('div');
+  footer.className = 'yelp-excerpt-footer';
+  const name = document.createElement('strong');
+  name.textContent = review.user_name || 'Yelp reviewer';
+  const source = document.createElement('span');
+  source.textContent = 'Yelp review excerpt';
+  footer.append(name, source);
+
+  button.append(stars, text, footer);
+  button.addEventListener('click', () => openReviewDialog({
+    rating,
+    name: review.user_name || 'Yelp reviewer',
+    relationship: 'Yelp review excerpt',
+    detail: '',
+    text: review.text || 'Read this review on Yelp.',
+    url: review.url || ''
+  }));
+  return button;
+}
+
+function renderYelpExcerpts(data) {
+  const reviews = Array.isArray(data.reviews)
+    ? data.reviews.filter(review => review && review.text && !isDuplicateYelpExcerpt(review)).slice(0, 3)
+    : [];
+
+  document.querySelectorAll('[data-yelp-excerpt-list]').forEach(container => {
+    container.replaceChildren();
+
+    if (!reviews.length) {
+      const empty = document.createElement('div');
+      empty.className = 'yelp-excerpt-empty';
+      empty.textContent = data.reviews_status === 'plan_required'
+        ? 'The live Yelp rating is connected, but review excerpts require additional Yelp API access. Use the Yelp link to read all reviews.'
+        : 'No Yelp excerpts are available in the live feed yet. Use the Yelp link to read the latest reviews.';
+      container.append(empty);
+      return;
+    }
+
+    reviews.forEach(review => container.append(createYelpExcerptCard(review)));
+  });
+}
+
+function renderYelpLiveRating(data) {
+  const rating = Number(data.rating);
+  const count = Number(data.review_count);
+  const hasRating = Number.isFinite(rating) && rating > 0;
+  const percentage = hasRating ? Math.max(0, Math.min(100, rating / 5 * 100)) : 0;
+
+  document.querySelectorAll('[data-yelp-live-rating]').forEach(element => {
+    element.textContent = hasRating ? rating.toFixed(1) : '—';
+  });
+
+  document.querySelectorAll('[data-yelp-live-stars]').forEach(element => {
+    element.style.setProperty('--yelp-rating-pct', percentage + '%');
+    element.setAttribute(
+      'aria-label',
+      hasRating ? rating.toFixed(1) + ' out of 5 stars on Yelp' : 'Yelp rating unavailable'
+    );
+  });
+
+  document.querySelectorAll('[data-yelp-live-count]').forEach(element => {
+    element.textContent = hasRating && Number.isFinite(count)
+      ? (count === 1 ? '1 Yelp review' : count + ' Yelp reviews')
+      : 'View Yelp for the current rating';
+  });
+
+  document.querySelectorAll('[data-yelp-live-updated]').forEach(element => {
+    if (!data.updated_at) {
+      element.textContent = 'The public Yelp listing is always available below.';
+      return;
+    }
+    const date = new Date(data.updated_at);
+    element.textContent = Number.isNaN(date.getTime())
+      ? 'Synchronized with Yelp'
+      : 'Synchronized ' + date.toLocaleDateString([], {month:'short', day:'numeric', year:'numeric'});
+  });
+
+  renderYelpExcerpts(data);
+}
+
+async function loadYelpLiveRating() {
+  try {
+    const response = await fetch(YELP_LIVE_DATA_URL + '?v=' + Date.now(), {cache:'no-store'});
+    if (!response.ok) throw new Error('Yelp live data could not be loaded.');
+    renderYelpLiveRating(await response.json());
+  } catch (error) {
+    renderYelpLiveRating({reviews:[], reviews_status:'unavailable'});
+    console.warn(error.message);
+  }
+}
 
 async function loadTestimonials() {
   try {
@@ -3190,8 +3475,7 @@ toggleConditionalFields();
 showBookingStep(1);
 showView((window.location.hash || '#home').slice(1), false);
 updateReadingProgress();
-loadTestimonials();
-loadYelpLiveRating();
+loadTestimonials().finally(loadYelpLiveRating);
 </script>
 </body>
 </html>

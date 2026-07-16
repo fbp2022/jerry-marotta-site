@@ -24,5 +24,18 @@ Add one unique object to `data/testimonials.json` with `id`, `rating`, `name`, `
 
 The action refreshes the Yelp average and review count every six hours. Yelp written reviews remain on Yelp.
 
-Yelp listing: https://www.yelp.com/biz/jerry-marotta-aviation-alcoa
-Yelp review form: https://www.yelp.com/writeareview/biz/jerry-marotta-aviation-alcoa
+Yelp listing: https://www.yelp.com/biz/jerry-marotta-alcoa
+Yelp review form: https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa
+
+
+## Yelp review excerpts
+
+The updater now calls both:
+
+- `GET /v3/businesses/jerry-marotta-alcoa`
+- `GET /v3/businesses/jerry-marotta-alcoa/reviews?limit=3&sort_by=yelp_sort`
+
+Yelp's review endpoint returns only a limited set of excerpts and may require an
+Enhanced or Premium Yelp Places API plan. When excerpts are unavailable, the live
+rating and review count still update. The site filters Yelp excerpts against the
+approved website testimonials to reduce duplicates.
