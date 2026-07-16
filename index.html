@@ -398,14 +398,19 @@ footer span{color:var(--gold-light)}
   gap:24px;
   align-items:start;
 }
+.review-sidebar{
+  display:grid;
+  gap:14px;
+  position:sticky;
+  top:108px;
+}
+.review-sidebar .review-summary-card{position:static}
 .review-summary-card{
   background:var(--navy);
   color:white;
   padding:31px;
   border-left:4px solid var(--gold);
   box-shadow:0 14px 36px rgba(8,21,33,.11);
-  position:sticky;
-  top:108px;
 }
 .review-summary-label{
   color:var(--gold-light);
@@ -469,17 +474,44 @@ footer span{color:var(--gold-light)}
 .review-main{min-width:0}
 .testimonial-grid{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:14px;
 }
 .testimonial-card{
+  appearance:none;
+  width:100%;
+  height:230px;
   background:white;
+  color:inherit;
   border:1px solid var(--border);
-  padding:24px;
-  min-height:270px;
+  padding:19px;
   display:flex;
   flex-direction:column;
+  text-align:left;
   box-shadow:0 10px 25px rgba(8,21,33,.05);
+  border-radius:7px;
+  overflow:hidden;
+  position:relative;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.testimonial-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(189,129,44,.5);
+  box-shadow:0 16px 34px rgba(8,21,33,.1);
+}
+.testimonial-card::after{
+  content:'Read full review';
+  position:absolute;
+  left:19px;
+  right:19px;
+  bottom:13px;
+  padding-top:13px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0),white 34%);
+  color:var(--rust);
+  font-size:.55rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 .testimonial-stars{
   color:var(--gold);
@@ -489,32 +521,51 @@ footer span{color:var(--gold-light)}
 .testimonial-text{
   color:#3e4d56;
   font-family:'Cormorant Garamond',serif;
-  font-size:1.13rem;
-  line-height:1.58;
-  margin:16px 0 20px;
-  white-space:pre-line;
+  font-size:1.02rem;
+  line-height:1.48;
+  margin:12px 0 13px;
+  display:-webkit-box;
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
   flex:1;
 }
 .testimonial-footer{
   border-top:1px solid var(--border);
-  padding-top:14px;
+  padding-top:10px;
+  padding-bottom:20px;
   color:var(--muted);
-  font-size:.67rem;
-  line-height:1.55;
+  font-size:.62rem;
+  line-height:1.42;
 }
 .testimonial-footer strong{
   display:block;
   color:var(--ink);
   font-size:.78rem;
 }
-.testimonial-badge{
-  display:inline-block;
-  margin-top:7px;
-  color:var(--rust);
-  font-size:.55rem;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
+
+.yelp-rating-card{background:white;border:1px solid var(--border);border-left:4px solid #d32323;padding:21px;box-shadow:0 10px 25px rgba(8,21,33,.05)}
+.yelp-rating-source{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.58rem;text-transform:uppercase;letter-spacing:1px}
+.yelp-rating-source strong{background:#d32323;color:white;border-radius:4px;padding:4px 7px;text-transform:none;letter-spacing:0}
+.yelp-rating-row{display:flex;align-items:end;gap:11px;margin:16px 0 7px}
+.yelp-live-score{color:var(--ink);font-family:'Bebas Neue';font-size:3.3rem;line-height:.82}
+.yelp-live-stars{--yelp-rating-pct:0%;position:relative;display:inline-block;font-size:1.02rem;letter-spacing:1.3px;line-height:1;margin-bottom:4px}
+.yelp-live-stars-base{color:#c7cdd0}
+.yelp-live-stars-fill{position:absolute;left:0;top:0;width:var(--yelp-rating-pct);overflow:hidden;white-space:nowrap;color:#d32323}
+.yelp-live-count{color:var(--muted);font-size:.67rem}
+.yelp-live-updated{color:var(--muted);font-size:.57rem;line-height:1.5;min-height:2.8em}
+.yelp-rating-card .btn{width:100%;min-height:40px;margin-top:14px;padding:0 9px;font-size:.53rem}
+.review-dialog{width:min(720px,calc(100vw - 34px));max-height:min(82vh,850px);border:0;padding:0;border-radius:14px;background:var(--paper);color:var(--text);box-shadow:0 34px 100px rgba(4,12,18,.45)}
+.review-dialog::backdrop{background:rgba(4,12,18,.72)}
+.review-dialog-shell{display:flex;flex-direction:column;max-height:min(82vh,850px)}
+.review-dialog-head{display:flex;justify-content:space-between;align-items:start;gap:20px;padding:24px 25px 18px;background:var(--navy);color:white;border-bottom:1px solid rgba(223,183,104,.34)}
+.review-dialog-stars{color:var(--gold-light);letter-spacing:1.8px;margin-bottom:9px}
+.review-dialog-head strong{display:block;font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:.7px}
+.review-dialog-head span{display:block;color:#bdcad0;font-size:.69rem;margin-top:3px}
+.review-dialog-close{flex:0 0 auto;width:39px;height:39px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;color:white;font-size:1.25rem}
+.review-dialog-body{overflow:auto;padding:25px}
+.review-dialog-text{color:#33434c;font-family:'Cormorant Garamond';font-size:1.28rem;line-height:1.68;white-space:pre-line}
+
 .review-form-panel{
   margin-top:22px;
   background:var(--cream);
@@ -671,6 +722,10 @@ footer span{color:var(--gold-light)}
 .contact-actions{display:none}
 
 .mobile-home-only{display:none}
+@media(max-width:1180px) and (min-width:1001px){
+  .testimonial-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
 @media(max-width:1000px){
   :root{
     --mobile-header:68px;
@@ -1043,9 +1098,22 @@ footer span{color:var(--gold-light)}
   }
   .mobile-testimonial-list{
     display:grid;
-    gap:10px;
+    gap:9px;
     margin-top:11px;
   }
+  .mobile-testimonial-list .testimonial-card{height:188px;padding:16px}
+  .mobile-testimonial-list .testimonial-text{-webkit-line-clamp:4;font-size:.94rem;line-height:1.43}
+  .mobile-testimonial-list .testimonial-footer{font-size:.58rem;padding-bottom:19px}
+  .mobile-testimonial-list .testimonial-card::after{left:16px;right:16px;bottom:10px;font-size:.49rem}
+  .mobile-yelp-live{margin-top:10px;background:white;border:1px solid var(--border);border-left:4px solid #d32323;border-radius:10px;padding:16px}
+  .mobile-yelp-live .yelp-live-score{font-size:2.9rem}
+  .mobile-yelp-live .btn{width:100%;min-height:42px;margin-top:12px}
+  .review-dialog{width:calc(100vw - 18px);max-height:88svh;margin:auto;border-radius:16px}
+  .review-dialog-shell{max-height:88svh}
+  .review-dialog-head{padding:20px 18px 16px}
+  .review-dialog-body{padding:20px 18px 25px}
+  .review-dialog-text{font-size:1.13rem;line-height:1.64}
+
   .mobile-testimonial-list .testimonial-card{
     min-height:0;
     border-radius:10px;
@@ -1625,40 +1693,37 @@ footer span{color:var(--gold-light)}
           </div>
 
           <div class="review-system">
-            <aside class="review-summary-card">
-              <div class="review-summary-label">Approved website testimonials</div>
-              <div class="review-score-row">
-                <strong class="review-average" data-review-average>5.0</strong>
-                <div>
-                  <div class="review-stars" data-review-stars role="img" aria-label="5.0 out of 5 stars">
-                  <span class="review-stars-base">★★★★★</span>
-                  <span class="review-stars-fill">★★★★★</span>
+            <aside class="review-sidebar">
+              <div class="review-summary-card">
+                <div class="review-summary-label">Website reviews</div>
+                <div class="review-score-row">
+                  <strong class="review-average" data-review-average>5.0</strong>
+                  <div>
+                    <div class="review-stars" data-review-stars role="img" aria-label="5.0 out of 5 stars"><span class="review-stars-base">★★★★★</span><span class="review-stars-fill">★★★★★</span></div>
+                    <div class="review-count" data-review-count>1 website review</div>
+                  </div>
                 </div>
-                  <div class="review-count" data-review-count>1 approved review</div>
-                </div>
+                <p class="review-disclosure">Calculated from moderated reviews submitted directly through this website. Yelp remains a separate external rating.</p>
+                <div class="review-summary-actions"><button class="btn btn-primary" type="button" data-scroll-to-review="desktop-leave-review">Leave a Website Review</button></div>
               </div>
-              <p class="review-disclosure">This average is calculated only from reviews submitted directly to this website and approved before publication. Yelp maintains a separate rating.</p>
-              <div class="review-summary-actions">
-                <button class="btn btn-primary" type="button" data-scroll-to-review="desktop-leave-review">Leave a Website Review</button>
-                <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Jerry on Yelp</a>
+              <div class="yelp-rating-card">
+                <div class="yelp-rating-source"><strong>Yelp</strong><span>Live external rating</span></div>
+                <div class="yelp-rating-row">
+                  <strong class="yelp-live-score" data-yelp-live-rating>—</strong>
+                  <div><div class="yelp-live-stars" data-yelp-live-stars role="img" aria-label="Yelp rating unavailable"><span class="yelp-live-stars-base">★★★★★</span><span class="yelp-live-stars-fill">★★★★★</span></div><div class="yelp-live-count" data-yelp-live-count>View Yelp for the current rating</div></div>
+                </div>
+                <div class="yelp-live-updated" data-yelp-live-updated>The public Yelp listing is always available below.</div>
+                <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Jerry on Yelp</a>
               </div>
             </aside>
 
             <div class="review-main">
               <div class="testimonial-grid" data-testimonial-list>
-                <article class="testimonial-card">
+                <button class="testimonial-card" type="button" data-testimonial-id="tristan-m-student-since-2018" aria-label="Read the full review from Tristan M.">
                 <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me. When the lesson began, he was focused, knowledgeable, and completely engaged.
-
-Jerry is patient and willing to explain something slowly or approach it several different ways when you do not understand it the first time. Because he has so much experience, he can explain not only what you are learning, but why it is taught that way, how it applies in real flying, and when you may actually need it.
-
-He does not just teach you how to perform maneuvers or pass a checkride. He teaches you to think before you act, ask questions, and weigh the risks before every flight. Jerry has been my instructor since 2018, from my private pilot training into my instrument training. He does not simply produce pilots who can fly an airplane—he produces pilots who think.</p>
-                <div class="testimonial-footer">
-                  <strong>Tristan M.</strong>
-                  <span>Private Pilot · Instrument Student<br>Student since 2018</span>
-                  <span class="testimonial-badge">Approved website testimonial</span>
-                </div>
-              </article>
+                <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me.…</p>
+                <div class="testimonial-footer"><strong>Tristan M.</strong><span>Private Pilot · Instrument Student<br>Student since 2018</span></div>
+              </button>
               </div>
 
               <div class="review-form-panel" id="desktop-leave-review">
@@ -1741,7 +1806,7 @@ He does not just teach you how to perform maneuvers or pass a checkride. He teac
                   <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
                 </div>
 
-                <p class="review-privacy">Submissions are delivered securely through Formspree to Tristan at the site-management address. Reviews are manually approved before being added to the public testimonial file.</p>
+                
               </form>
             </div>
 
@@ -1836,7 +1901,7 @@ He does not just teach you how to perform maneuvers or pass a checkride. He teac
           <h2 id="mobile-reviews-heading">Experiences from the right seat.</h2>
 
           <div class="mobile-review-summary">
-            <div class="review-summary-label">Approved website testimonials</div>
+            <div class="review-summary-label">Website reviews</div>
             <div class="review-score-row">
               <strong class="review-average" data-review-average>5.0</strong>
               <div>
@@ -1844,30 +1909,29 @@ He does not just teach you how to perform maneuvers or pass a checkride. He teac
                   <span class="review-stars-base">★★★★★</span>
                   <span class="review-stars-fill">★★★★★</span>
                 </div>
-                <div class="review-count" data-review-count>1 approved review</div>
+                <div class="review-count" data-review-count>1 website review</div>
               </div>
             </div>
-            <p class="review-disclosure">Website reviews are approved before publication. Yelp maintains its own separate rating.</p>
+            <p class="review-disclosure">Website reviews are moderated before publication. Yelp maintains its own separate rating.</p>
             <div class="review-summary-actions">
               <button class="btn btn-primary" type="button" data-scroll-to-review="mobile-leave-review">Leave a Review</button>
               <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">Yelp</a>
             </div>
           </div>
 
+          <div class="mobile-yelp-live">
+            <div class="yelp-rating-source"><strong>Yelp</strong><span>Live external rating</span></div>
+            <div class="yelp-rating-row"><strong class="yelp-live-score" data-yelp-live-rating>—</strong><div><div class="yelp-live-stars" data-yelp-live-stars role="img" aria-label="Yelp rating unavailable"><span class="yelp-live-stars-base">★★★★★</span><span class="yelp-live-stars-fill">★★★★★</span></div><div class="yelp-live-count" data-yelp-live-count>View Yelp for the current rating</div></div></div>
+            <div class="yelp-live-updated" data-yelp-live-updated>The public Yelp listing is always available below.</div>
+            <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-aviation-alcoa" target="_blank" rel="noopener noreferrer">View Yelp Rating</a>
+          </div>
+
           <div class="mobile-testimonial-list" data-testimonial-list>
-            <article class="testimonial-card">
+            <button class="testimonial-card" type="button" data-testimonial-id="tristan-m-student-since-2018" aria-label="Read the full review from Tristan M.">
                 <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
-                <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me. When the lesson began, he was focused, knowledgeable, and completely engaged.
-
-Jerry is patient and willing to explain something slowly or approach it several different ways when you do not understand it the first time. Because he has so much experience, he can explain not only what you are learning, but why it is taught that way, how it applies in real flying, and when you may actually need it.
-
-He does not just teach you how to perform maneuvers or pass a checkride. He teaches you to think before you act, ask questions, and weigh the risks before every flight. Jerry has been my instructor since 2018, from my private pilot training into my instrument training. He does not simply produce pilots who can fly an airplane—he produces pilots who think.</p>
-                <div class="testimonial-footer">
-                  <strong>Tristan M.</strong>
-                  <span>Private Pilot · Instrument Student<br>Student since 2018</span>
-                  <span class="testimonial-badge">Approved website testimonial</span>
-                </div>
-              </article>
+                <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me.…</p>
+                <div class="testimonial-footer"><strong>Tristan M.</strong><span>Private Pilot · Instrument Student<br>Student since 2018</span></div>
+              </button>
           </div>
 
           <div class="mobile-review-form" id="mobile-leave-review">
@@ -1950,7 +2014,7 @@ He does not just teach you how to perform maneuvers or pass a checkride. He teac
                   <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
                 </div>
 
-                <p class="review-privacy">Submissions are delivered securely through Formspree to Tristan at the site-management address. Reviews are manually approved before being added to the public testimonial file.</p>
+                
               </form>
             </div>
 
@@ -2464,6 +2528,13 @@ He does not just teach you how to perform maneuvers or pass a checkride. He teac
 
   <footer><div><strong>Jerry Marotta <span>// Aviation</span></strong></div><div>Gold Seal Flight Instruction • Knoxville, Tennessee<br><small>Built by <a href="https://tristanmaratos.com" target="_blank" rel="noopener noreferrer" style="color:var(--gold-light)">Tristan Maratos</a></small></div></footer>
 
+  <dialog class="review-dialog" id="review-dialog" aria-labelledby="review-dialog-name">
+    <div class="review-dialog-shell">
+      <div class="review-dialog-head"><div><div class="review-dialog-stars" id="review-dialog-stars"></div><strong id="review-dialog-name">Student Review</strong><span id="review-dialog-relationship"></span></div><button class="review-dialog-close" type="button" id="review-dialog-close" aria-label="Close review">×</button></div>
+      <div class="review-dialog-body"><p class="review-dialog-text" id="review-dialog-text"></p></div>
+    </div>
+  </dialog>
+
   <nav class="mobile-bottom" aria-label="Mobile navigation">
     <button class="active" data-view="home" aria-label="Home">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4l8.5 7.5"/><path d="M5.5 10.2V20h5v-5h3v5h5v-9.8"/></svg>
@@ -2511,6 +2582,7 @@ const viewButtons = document.querySelectorAll('[data-view]');
 const views = document.querySelectorAll('.view');
 
 const TESTIMONIALS_DATA_URL = 'data/testimonials.json';
+const YELP_LIVE_DATA_URL = 'data/yelp.json';
 const REVIEW_FORM_ENDPOINT = 'https://formspree.io/f/xykrkebj';
 
 const mobileSheet = document.getElementById('mobile-sheet');
@@ -2862,14 +2934,15 @@ async function copyRequest() {
 
 function normalizeTestimonial(review) {
   const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
-  return {
-    id: review.id || '',
-    rating,
-    name: review.name || 'Anonymous student',
-    relationship: review.relationship || 'Aviation student',
-    detail: review.detail || '',
-    text: review.text || ''
-  };
+  return {id:String(review.id || '').trim(),rating,name:String(review.name || 'Anonymous student').trim(),relationship:String(review.relationship || 'Aviation student').trim(),detail:String(review.detail || '').trim(),text:String(review.text || '').trim()};
+}
+function testimonialFingerprint(review) {
+  const normalize = value => String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  return review.id ? 'id:' + normalize(review.id) : 'content:' + normalize(review.name) + '|' + normalize(review.text);
+}
+function deduplicateTestimonials(reviews) {
+  const seen = new Set();
+  return reviews.map(normalizeTestimonial).filter(review => review.text).filter(review => {const key=testimonialFingerprint(review);if(seen.has(key)) return false;seen.add(key);return true;});
 }
 
 function calculateTestimonialAverage(reviews) {
@@ -2877,44 +2950,19 @@ function calculateTestimonialAverage(reviews) {
   return reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
 }
 
+let approvedTestimonials = [];
 function createTestimonialCard(review) {
-  const article = document.createElement('article');
-  article.className = 'testimonial-card';
-
-  const stars = document.createElement('div');
-  stars.className = 'testimonial-stars';
-  stars.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-  stars.setAttribute('aria-label', review.rating + ' out of 5 stars');
-
-  const text = document.createElement('p');
-  text.className = 'testimonial-text';
-  text.textContent = review.text;
-
-  const footer = document.createElement('div');
-  footer.className = 'testimonial-footer';
-
-  const name = document.createElement('strong');
-  name.textContent = review.name;
-
-  const relationship = document.createElement('span');
-  relationship.textContent = review.detail
-    ? review.relationship + '\n' + review.detail
-    : review.relationship;
-  relationship.style.whiteSpace = 'pre-line';
-
-  const badge = document.createElement('span');
-  badge.className = 'testimonial-badge';
-  badge.textContent = 'Approved website testimonial';
-
-  footer.append(name, relationship, badge);
-  article.append(stars, text, footer);
-  return article;
+  const button=document.createElement('button');button.type='button';button.className='testimonial-card';button.dataset.testimonialId=review.id;button.setAttribute('aria-label','Read the full review from '+review.name);
+  const stars=document.createElement('div');stars.className='testimonial-stars';stars.textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);stars.setAttribute('aria-label',review.rating+' out of 5 stars');
+  const text=document.createElement('p');text.className='testimonial-text';text.textContent=review.text;
+  const footer=document.createElement('div');footer.className='testimonial-footer';const name=document.createElement('strong');name.textContent=review.name;const relationship=document.createElement('span');relationship.textContent=review.detail?review.relationship+'\n'+review.detail:review.relationship;relationship.style.whiteSpace='pre-line';footer.append(name,relationship);button.append(stars,text,footer);button.addEventListener('click',()=>openReviewDialog(review));return button;
 }
 
 function renderTestimonials(reviews) {
-  const normalized = reviews.map(normalizeTestimonial).filter(review => review.text.trim());
+  const normalized = deduplicateTestimonials(reviews);
   if (!normalized.length) return;
 
+  approvedTestimonials = normalized;
   const average = calculateTestimonialAverage(normalized);
   const ratingPercent = Math.max(0, Math.min(100, (average / 5) * 100));
 
@@ -2924,13 +2972,13 @@ function renderTestimonials(reviews) {
 
   document.querySelectorAll('[data-review-stars]').forEach(element => {
     element.style.setProperty('--rating-pct', ratingPercent + '%');
-    element.setAttribute('aria-label', average.toFixed(1) + ' out of 5 stars from approved website testimonials');
+    element.setAttribute('aria-label', average.toFixed(1) + ' out of 5 stars from website reviews');
   });
 
   document.querySelectorAll('[data-review-count]').forEach(element => {
     element.textContent = normalized.length === 1
-      ? '1 approved review'
-      : normalized.length + ' approved reviews';
+      ? '1 website review'
+      : normalized.length + ' website reviews';
   });
 
   document.querySelectorAll('[data-testimonial-list]').forEach(container => {
@@ -2939,6 +2987,15 @@ function renderTestimonials(reviews) {
   });
 }
 
+const reviewDialog=document.getElementById('review-dialog');
+const reviewDialogClose=document.getElementById('review-dialog-close');
+function openReviewDialog(review){if(!reviewDialog)return;document.getElementById('review-dialog-stars').textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);document.getElementById('review-dialog-name').textContent=review.name;document.getElementById('review-dialog-relationship').textContent=review.detail?review.relationship+' · '+review.detail:review.relationship;document.getElementById('review-dialog-text').textContent=review.text;if(typeof reviewDialog.showModal==='function')reviewDialog.showModal();else reviewDialog.setAttribute('open','');}
+function closeReviewDialog(){if(!reviewDialog)return;if(typeof reviewDialog.close==='function')reviewDialog.close();else reviewDialog.removeAttribute('open');}
+if(reviewDialogClose)reviewDialogClose.addEventListener('click',closeReviewDialog);
+if(reviewDialog)reviewDialog.addEventListener('click',event=>{if(event.target===reviewDialog)closeReviewDialog();});
+function renderYelpLiveRating(data){const rating=Number(data.rating);const count=Number(data.review_count);const hasRating=Number.isFinite(rating)&&rating>0;const percentage=hasRating?Math.max(0,Math.min(100,rating/5*100)):0;document.querySelectorAll('[data-yelp-live-rating]').forEach(el=>el.textContent=hasRating?rating.toFixed(1):'—');document.querySelectorAll('[data-yelp-live-stars]').forEach(el=>{el.style.setProperty('--yelp-rating-pct',percentage+'%');el.setAttribute('aria-label',hasRating?rating.toFixed(1)+' out of 5 stars on Yelp':'Yelp rating unavailable');});document.querySelectorAll('[data-yelp-live-count]').forEach(el=>el.textContent=hasRating&&Number.isFinite(count)?(count===1?'1 Yelp review':count+' Yelp reviews'):'View Yelp for the current rating');document.querySelectorAll('[data-yelp-live-updated]').forEach(el=>{if(!data.updated_at){el.textContent='The public Yelp listing is always available below.';return;}const date=new Date(data.updated_at);el.textContent=Number.isNaN(date.getTime())?'Synchronized with Yelp':'Synchronized '+date.toLocaleDateString([],{month:'short',day:'numeric',year:'numeric'});});}
+async function loadYelpLiveRating(){try{const response=await fetch(YELP_LIVE_DATA_URL+'?v='+Date.now(),{cache:'no-store'});if(!response.ok)throw new Error('Yelp live-rating data could not be loaded.');renderYelpLiveRating(await response.json());}catch(error){renderYelpLiveRating({});console.warn(error.message);}}
+
 async function loadTestimonials() {
   try {
     const response = await fetch(TESTIMONIALS_DATA_URL + '?v=' + Date.now(), {cache:'no-store'});
@@ -2946,7 +3003,7 @@ async function loadTestimonials() {
     const data = await response.json();
     if (Array.isArray(data.reviews)) renderTestimonials(data.reviews);
   } catch (error) {
-    // The initial approved review is server-rendered in the page, so the
+    // The initial website review is server-rendered in the page, so the
     // section remains complete even if the optional JSON file is unavailable.
     console.warn(error.message);
   }
@@ -3134,6 +3191,7 @@ showBookingStep(1);
 showView((window.location.hash || '#home').slice(1), false);
 updateReadingProgress();
 loadTestimonials();
+loadYelpLiveRating();
 </script>
 </body>
 </html>
