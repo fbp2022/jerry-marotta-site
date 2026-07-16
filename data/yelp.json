@@ -1,10 +1,11 @@
 {
-  "status": "setup_required",
+  "status": "ok",
   "business_alias": "jerry-marotta-alcoa",
-  "rating": null,
-  "review_count": null,
-  "reviews_status": "unavailable",
+  "name": "Jerry Marotta Aviation",
+  "rating": 5,
+  "review_count": 1,
+  "reviews_status": "temporarily_unavailable",
   "reviews": [],
-  "url": "https://www.yelp.com/biz/jerry-marotta-alcoa",
-  "updated_at": null
+  "url": "https://www.yelp.com/biz/jerry-marotta-aviation-alcoa?adjust_creative=Cx59YgrNH-nkv-FqokB31A&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=Cx59YgrNH-nkv-FqokB31A",
+  "updated_at": "2026-07-16T16:27:02.286Z"
 }
