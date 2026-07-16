@@ -1852,7 +1852,7 @@ footer span{color:var(--gold-light)}
               </button>
               </div>
 
-              <section class="yelp-excerpts-section" aria-labelledby="desktop-yelp-excerpts-heading">
+              <section class="yelp-excerpts-section" aria-labelledby="desktop-yelp-excerpts-heading" hidden>
                 <div class="yelp-excerpts-head">
                   <div>
                     <div class="section-label">From Yelp</div>
@@ -1871,7 +1871,8 @@ footer span{color:var(--gold-light)}
                   <div class="section-label">Submit for Approval</div>
                   <h3>Leave Jerry a review.</h3>
                 </div>
-                </div>
+                <p>Your submission goes to Tristan for moderation. It will never publish automatically.</p>
+              </div>
 
               <form class="review-form" action="https://formspree.io/f/xykrkebj" method="POST" data-review-form>
                 <input type="hidden" name="_subject" value="New Jerry Marotta Aviation website review">
@@ -2064,7 +2065,7 @@ footer span{color:var(--gold-light)}
             <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">View Yelp Rating</a>
           </div>
 
-          <section class="mobile-yelp-excerpts" aria-labelledby="mobile-yelp-excerpts-heading">
+          <section class="mobile-yelp-excerpts" aria-labelledby="mobile-yelp-excerpts-heading" hidden>
             <div class="yelp-excerpts-head">
               <div class="section-label">From Yelp</div>
               <h3 id="mobile-yelp-excerpts-heading">Recent Yelp excerpts</h3>
@@ -3211,23 +3212,28 @@ function createYelpExcerptCard(review) {
 
 function renderYelpExcerpts(data) {
   const reviews = Array.isArray(data.reviews)
-    ? data.reviews.filter(review => review && review.text && !isDuplicateYelpExcerpt(review)).slice(0, 3)
+    ? data.reviews
+        .filter(review => review && review.text && !isDuplicateYelpExcerpt(review))
+        .slice(0, 3)
     : [];
 
   document.querySelectorAll('[data-yelp-excerpt-list]').forEach(container => {
-    container.replaceChildren();
+    const section = container.closest(
+      '.yelp-excerpts-section, .mobile-yelp-excerpts'
+    );
 
     if (!reviews.length) {
-      const empty = document.createElement('div');
-      empty.className = 'yelp-excerpt-empty';
-      empty.textContent = data.reviews_status === 'plan_required'
-        ? 'The live Yelp rating is connected, but review excerpts require additional Yelp API access. Use the Yelp link to read all reviews.'
-        : 'No Yelp excerpts are available in the live feed yet. Use the Yelp link to read the latest reviews.';
-      container.append(empty);
+      container.replaceChildren();
+      if (section) section.hidden = true;
       return;
     }
 
-    reviews.forEach(review => container.append(createYelpExcerptCard(review)));
+    if (section) section.hidden = false;
+    container.replaceChildren();
+
+    reviews.forEach(review => {
+      container.append(createYelpExcerptCard(review));
+    });
   });
 }
 
