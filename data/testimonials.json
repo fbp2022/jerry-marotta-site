@@ -1,0 +1,14 @@
+{
+  "label": "Approved website testimonials",
+  "updated_at": "2026-07-15",
+  "reviews": [
+    {
+      "id": "tristan-m-student-since-2018",
+      "rating": 5,
+      "name": "Tristan M.",
+      "relationship": "Private Pilot · Instrument Student",
+      "detail": "Student since 2018",
+      "text": "I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me. When the lesson began, he was focused, knowledgeable, and completely engaged.\n\nJerry is patient and willing to explain something slowly or approach it several different ways when you do not understand it the first time. Because he has so much experience, he can explain not only what you are learning, but why it is taught that way, how it applies in real flying, and when you may actually need it.\n\nHe does not just teach you how to perform maneuvers or pass a checkride. He teaches you to think before you act, ask questions, and weigh the risks before every flight. Jerry has been my instructor since 2018, from my private pilot training into my instrument training. He does not simply produce pilots who can fly an airplane—he produces pilots who think."
+    }
+  ]
+}
