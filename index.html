@@ -558,7 +558,7 @@ footer{background:var(--ink);color:#91a2ac;padding:42px max(28px,calc((100vw - v
 footer strong{font-family:'Bebas Neue';font-size:1.4rem;letter-spacing:2px;color:white}
 footer span{color:var(--gold-light)}
 
-/* Approved testimonials and moderated review submissions */
+/* Approved student testimonials */
 .reviews-section{background:var(--paper)}
 .reviews-section-head{
   display:flex;
@@ -855,117 +855,7 @@ footer span{color:var(--gold-light)}
 .review-dialog-body{overflow:auto;padding:25px}
 .review-dialog-text{color:#33434c;font-family:'Cormorant Garamond';font-size:1.28rem;line-height:1.68;white-space:pre-line}
 
-.review-form-panel{
-  margin-top:22px;
-  background:var(--cream);
-  border:1px solid var(--border);
-  padding:30px;
-}
-.review-form-head{
-  display:flex;
-  align-items:start;
-  justify-content:space-between;
-  gap:24px;
-  margin-bottom:24px;
-}
-.review-form-head h3{
-  color:var(--ink);
-  font-size:2.6rem;
-  line-height:.95;
-}
-.review-form-head p{
-  max-width:520px;
-  color:var(--muted);
-  font-size:.82rem;
-  line-height:1.65;
-}
-.review-form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-.review-form .field{margin-bottom:0}
-.review-form .field.full{grid-column:1/-1}
-.star-field{
-  grid-column:1/-1;
-  border:0;
-  min-width:0;
-}
-.star-field legend{
-  font-size:.65rem;
-  text-transform:uppercase;
-  letter-spacing:1.4px;
-  font-weight:600;
-  color:var(--muted);
-  margin-bottom:9px;
-}
-.star-selector{
-  display:inline-flex;
-  flex-direction:row-reverse;
-  gap:4px;
-}
-.star-selector input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-.star-selector label{
-  color:#acb5ba;
-  font-size:2.1rem;
-  line-height:1;
-  cursor:pointer;
-  transition:color .14s,transform .14s;
-}
-.star-selector label:hover,
-.star-selector label:hover~label,
-.star-selector input:checked~label{
-  color:#e4a938;
-}
-.star-selector label:hover{transform:translateY(-1px)}
-.review-consent{
-  grid-column:1/-1;
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  color:#4f5c64;
-  font-size:.76rem;
-  line-height:1.55;
-}
-.review-consent input{
-  width:18px;
-  height:18px;
-  flex:0 0 auto;
-  margin-top:1px;
-}
-.review-submit-row{
-  grid-column:1/-1;
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.review-submit-row .btn{min-height:49px}
-.review-form-status{
-  min-height:1.4em;
-  color:var(--muted);
-  font-size:.74rem;
-  line-height:1.5;
-}
-.review-form-status.success{color:#24633b}
-.review-form-status.error{color:#9b2c2c}
-.review-privacy{
-  grid-column:1/-1;
-  color:var(--muted);
-  font-size:.62rem;
-  line-height:1.55;
-}
-.review-honeypot{
-  position:absolute!important;
-  left:-10000px!important;
-  width:1px!important;
-  height:1px!important;
-  overflow:hidden!important;
-}
+
 .yelp-external-note{
   grid-column:1/-1;
   background:white;
@@ -1382,7 +1272,7 @@ footer span{color:var(--gold-light)}
   .mobile-review-summary .review-average{font-size:4rem}
   .mobile-review-summary .review-stars{font-size:1.08rem}
   .mobile-review-summary .review-summary-actions{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     display:grid;
   }
   .mobile-testimonial-list{
@@ -1429,40 +1319,7 @@ footer span{color:var(--gold-light)}
   .mobile-yelp-excerpts .yelp-excerpt-text{-webkit-line-clamp:3;font-size:.91rem}
   .mobile-yelp-excerpts .yelp-excerpt-card::after{left:15px;right:15px;bottom:9px}
 
-  .mobile-review-form{
-    margin-top:12px;
-    background:var(--cream);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:18px;
-  }
-  .mobile-review-form h3{
-    color:var(--ink);
-    font-size:2rem;
-    line-height:.95;
-    margin-bottom:7px;
-  }
-  .mobile-review-form>p{
-    color:var(--muted);
-    font-size:.74rem;
-    line-height:1.58;
-    margin-bottom:17px;
-  }
-  .mobile-review-form .review-form{
-    display:block;
-  }
-  .mobile-review-form .field{margin-bottom:13px}
-  .mobile-review-form .star-field{margin-bottom:15px}
-  .mobile-review-form .star-selector label{font-size:2.15rem}
-  .mobile-review-form .review-consent{margin:14px 0}
-  .mobile-review-form .review-submit-row{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:8px;
-  }
-  .mobile-review-form .review-submit-row .btn{width:100%}
-  .mobile-review-form .review-form-status{margin-top:8px}
-  .mobile-review-form .review-privacy{margin-top:11px}
+
   .mobile-review-yelp{
     margin-top:11px;
     background:white;
@@ -2020,7 +1877,6 @@ footer span{color:var(--gold-light)}
               <div class="section-label">Student Reviews</div>
               <h2 id="reviews-heading">Experiences from the right seat.</h2>
             </div>
-            <button class="btn btn-copy" type="button" data-scroll-to-review="desktop-leave-review">Leave a Review</button>
           </div>
 
           <div class="review-system">
@@ -2031,11 +1887,10 @@ footer span{color:var(--gold-light)}
                   <strong class="review-average" data-review-average>5.0</strong>
                   <div>
                     <div class="review-stars" data-review-stars role="img" aria-label="5.0 out of 5 stars"><span class="review-stars-base">★★★★★</span><span class="review-stars-fill">★★★★★</span></div>
-                    <div class="review-count" data-review-count>1 website review</div>
+                    <div class="review-count" data-review-count>2 website reviews</div>
                   </div>
                 </div>
-                <p class="review-disclosure">Calculated from moderated reviews submitted directly through this website. Yelp remains a separate external rating.</p>
-                <div class="review-summary-actions"><button class="btn btn-primary" type="button" data-scroll-to-review="desktop-leave-review">Leave a Website Review</button></div>
+                <p class="review-disclosure">Calculated from approved student reviews published on this website. Yelp remains a separate external rating.</p>
               </div>
               <div class="yelp-rating-card">
                 <div class="yelp-rating-source"><strong>Yelp</strong><span>Live external rating</span></div>
@@ -2055,6 +1910,11 @@ footer span{color:var(--gold-light)}
                 <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me.…</p>
                 <div class="testimonial-footer"><strong>Tristan M.</strong><span>Private Pilot · Instrument Student<br>Student since 2018</span></div>
               </button>
+                <button class="testimonial-card" type="button" data-testimonial-id="dylan-b-instrument-student-2026" aria-label="Read the full review from Dylan B.">
+                  <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                  <p class="testimonial-text">Jerry is an excellent instructor who emphasizes both safety and efficiency. Before training with him, I had two instructors who struggled with punctuality and communication. Jerry is always prepared, thorough, and every lesson has a clear purpose. He has a wealth of experience and tailors his instruction to each student's needs. I highly recommend him to anyone pursuing their private pilot certificate.</p>
+                  <div class="testimonial-footer"><strong>Dylan B.</strong><span>Instrument Student</span></div>
+                </button>
               </div>
 
               <section class="yelp-excerpts-section" aria-labelledby="desktop-yelp-excerpts-heading" hidden>
@@ -2070,92 +1930,9 @@ footer span{color:var(--gold-light)}
                 </div>
               </section>
 
-              <div class="review-form-panel" id="desktop-leave-review">
-              <div class="review-form-head">
-                <div>
-                  <div class="section-label">Submit for Approval</div>
-                  <h3>Leave Jerry a review.</h3>
-                </div>
-                <p>Your submission goes to Tristan for moderation. It will never publish automatically.</p>
-              </div>
-
-              <form class="review-form" action="https://formspree.io/f/xykrkebj" method="POST" data-review-form>
-                <input type="hidden" name="_subject" value="New Jerry Marotta Aviation website review">
-                <input type="hidden" name="submission_source" value="jerrymarottaaviation.com">
-                <div class="review-honeypot" aria-hidden="true">
-                  <label for="desktop-company">Leave this field empty</label>
-                  <input id="desktop-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
-                </div>
-
-                <fieldset class="star-field">
-                  <legend>Your rating *</legend>
-                  <div class="star-selector" aria-label="Choose a rating from one to five stars">
-                    <input id="desktop-star-5" type="radio" name="rating" value="5" required>
-                    <label for="desktop-star-5" title="5 stars" aria-label="5 stars">★</label>
-                    <input id="desktop-star-4" type="radio" name="rating" value="4">
-                    <label for="desktop-star-4" title="4 stars" aria-label="4 stars">★</label>
-                    <input id="desktop-star-3" type="radio" name="rating" value="3">
-                    <label for="desktop-star-3" title="3 stars" aria-label="3 stars">★</label>
-                    <input id="desktop-star-2" type="radio" name="rating" value="2">
-                    <label for="desktop-star-2" title="2 stars" aria-label="2 stars">★</label>
-                    <input id="desktop-star-1" type="radio" name="rating" value="1">
-                    <label for="desktop-star-1" title="1 star" aria-label="1 star">★</label>
-                  </div>
-                </fieldset>
-
-                <div class="field">
-                  <label for="desktop-review-name">Your name *</label>
-                  <input id="desktop-review-name" name="reviewer_name" autocomplete="name" required placeholder="How your name should appear">
-                </div>
-
-                <div class="field">
-                  <label for="desktop-review-email">Email for verification *</label>
-                  <input id="desktop-review-email" name="reviewer_email" type="email" autocomplete="email" required placeholder="Not displayed publicly">
-                </div>
-
-                <div class="field full">
-                  <label for="desktop-relationship">Your aviation relationship *</label>
-                  <select id="desktop-relationship" name="relationship" required>
-                    <option value="">Choose one</option>
-                    <option>Discovery Flight Student</option>
-                    <option>Private Pilot Student</option>
-                    <option>Private Pilot</option>
-                    <option>Instrument Student</option>
-                    <option>Instrument-Rated Pilot</option>
-                    <option>Commercial Pilot</option>
-                    <option>Flight Review / Proficiency Student</option>
-                    <option>Checkride Preparation Student</option>
-                    <option>Ground Instruction Student</option>
-                    <option>Other Aviation Student or Pilot</option>
-                  </select>
-                </div>
-
-                <div class="field full">
-                  <label for="desktop-review-text">Your review *</label>
-                  <textarea id="desktop-review-text" name="review" minlength="40" maxlength="2500" required placeholder="Describe your experience training with Jerry. Specific memories and examples are especially helpful."></textarea>
-                </div>
-
-                <label class="review-consent">
-                  <input type="checkbox" name="permission_to_publish" value="Yes" required>
-                  <span>I give permission for this review, my selected rating, my display name, and my aviation relationship to appear publicly on Jerry’s website. My email address will remain private.</span>
-                </label>
-
-                <label class="review-consent">
-                  <input type="checkbox" name="experience_confirmation" value="Yes" required>
-                  <span>I confirm that this review reflects my own experience with Jerry Marotta.</span>
-                </label>
-
-                <div class="review-submit-row">
-                  <button class="btn btn-primary" type="submit">Submit for Approval</button>
-                  <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
-                </div>
-
-                
-              </form>
-            </div>
 
               <div class="yelp-external-note">
-                <p><strong>Prefer Yelp?</strong> Website testimonials and Yelp reviews are kept separate so visitors always know where each rating comes from.</p>
+                <p><strong>Want to leave a review?</strong> Use Jerry’s Yelp listing. Website testimonials and Yelp reviews are kept separate so visitors always know where each rating comes from.</p>
                 <div class="yelp-external-actions">
                   <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
                   <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp Reviews</a>
@@ -2253,13 +2030,12 @@ footer span{color:var(--gold-light)}
                   <span class="review-stars-base">★★★★★</span>
                   <span class="review-stars-fill">★★★★★</span>
                 </div>
-                <div class="review-count" data-review-count>1 website review</div>
+                <div class="review-count" data-review-count>2 website reviews</div>
               </div>
             </div>
-            <p class="review-disclosure">Website reviews are moderated before publication. Yelp maintains its own separate rating.</p>
+            <p class="review-disclosure">Website reviews are approved before publication. Yelp maintains its own separate rating.</p>
             <div class="review-summary-actions">
-              <button class="btn btn-primary" type="button" data-scroll-to-review="mobile-leave-review">Leave a Review</button>
-              <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Yelp</a>
+              <a class="btn btn-secondary" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Read Reviews on Yelp</a>
             </div>
           </div>
 
@@ -2287,94 +2063,16 @@ footer span{color:var(--gold-light)}
                 <p class="testimonial-text">I met Jerry in 2018 while I was working on my private pilot certificate. The first time I saw him, he was sitting in the office playing guitar. Honestly, it made me a little nervous because he seemed so relaxed, and I wondered what kind of instructor he was going to be. Once we got into the airplane, I immediately understood. Playing guitar was simply how he relaxed before his next student arrived—and that student was me.…</p>
                 <div class="testimonial-footer"><strong>Tristan M.</strong><span>Private Pilot · Instrument Student<br>Student since 2018</span></div>
               </button>
+              <button class="testimonial-card" type="button" data-testimonial-id="dylan-b-instrument-student-2026" aria-label="Read the full review from Dylan B.">
+                <div class="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+                <p class="testimonial-text">Jerry is an excellent instructor who emphasizes both safety and efficiency. Before training with him, I had two instructors who struggled with punctuality and communication. Jerry is always prepared, thorough, and every lesson has a clear purpose. He has a wealth of experience and tailors his instruction to each student's needs. I highly recommend him to anyone pursuing their private pilot certificate.</p>
+                <div class="testimonial-footer"><strong>Dylan B.</strong><span>Instrument Student</span></div>
+              </button>
           </div>
 
-          <div class="mobile-review-form" id="mobile-leave-review">
-              <div class="review-form-head" style="display:block;margin-bottom:0">
-                <div>
-                  <div class="section-label">Submit for Approval</div>
-                  <h3>Leave Jerry a review.</h3>
-                </div>
-                <p>Your submission goes to Tristan for moderation. It will never publish automatically.</p>
-              </div>
-
-              <form class="review-form" action="https://formspree.io/f/xykrkebj" method="POST" data-review-form>
-                <input type="hidden" name="_subject" value="New Jerry Marotta Aviation website review">
-                <input type="hidden" name="submission_source" value="jerrymarottaaviation.com">
-                <div class="review-honeypot" aria-hidden="true">
-                  <label for="mobile-company">Leave this field empty</label>
-                  <input id="mobile-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
-                </div>
-
-                <fieldset class="star-field">
-                  <legend>Your rating *</legend>
-                  <div class="star-selector" aria-label="Choose a rating from one to five stars">
-                    <input id="mobile-star-5" type="radio" name="rating" value="5" required>
-                    <label for="mobile-star-5" title="5 stars" aria-label="5 stars">★</label>
-                    <input id="mobile-star-4" type="radio" name="rating" value="4">
-                    <label for="mobile-star-4" title="4 stars" aria-label="4 stars">★</label>
-                    <input id="mobile-star-3" type="radio" name="rating" value="3">
-                    <label for="mobile-star-3" title="3 stars" aria-label="3 stars">★</label>
-                    <input id="mobile-star-2" type="radio" name="rating" value="2">
-                    <label for="mobile-star-2" title="2 stars" aria-label="2 stars">★</label>
-                    <input id="mobile-star-1" type="radio" name="rating" value="1">
-                    <label for="mobile-star-1" title="1 star" aria-label="1 star">★</label>
-                  </div>
-                </fieldset>
-
-                <div class="field">
-                  <label for="mobile-review-name">Your name *</label>
-                  <input id="mobile-review-name" name="reviewer_name" autocomplete="name" required placeholder="How your name should appear">
-                </div>
-
-                <div class="field">
-                  <label for="mobile-review-email">Email for verification *</label>
-                  <input id="mobile-review-email" name="reviewer_email" type="email" autocomplete="email" required placeholder="Not displayed publicly">
-                </div>
-
-                <div class="field full">
-                  <label for="mobile-relationship">Your aviation relationship *</label>
-                  <select id="mobile-relationship" name="relationship" required>
-                    <option value="">Choose one</option>
-                    <option>Discovery Flight Student</option>
-                    <option>Private Pilot Student</option>
-                    <option>Private Pilot</option>
-                    <option>Instrument Student</option>
-                    <option>Instrument-Rated Pilot</option>
-                    <option>Commercial Pilot</option>
-                    <option>Flight Review / Proficiency Student</option>
-                    <option>Checkride Preparation Student</option>
-                    <option>Ground Instruction Student</option>
-                    <option>Other Aviation Student or Pilot</option>
-                  </select>
-                </div>
-
-                <div class="field full">
-                  <label for="mobile-review-text">Your review *</label>
-                  <textarea id="mobile-review-text" name="review" minlength="40" maxlength="2500" required placeholder="Describe your experience training with Jerry. Specific memories and examples are especially helpful."></textarea>
-                </div>
-
-                <label class="review-consent">
-                  <input type="checkbox" name="permission_to_publish" value="Yes" required>
-                  <span>I give permission for this review, my selected rating, my display name, and my aviation relationship to appear publicly on Jerry’s website. My email address will remain private.</span>
-                </label>
-
-                <label class="review-consent">
-                  <input type="checkbox" name="experience_confirmation" value="Yes" required>
-                  <span>I confirm that this review reflects my own experience with Jerry Marotta.</span>
-                </label>
-
-                <div class="review-submit-row">
-                  <button class="btn btn-primary" type="submit">Submit for Approval</button>
-                  <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
-                </div>
-
-                
-              </form>
-            </div>
 
           <div class="mobile-review-yelp">
-            <p><strong>Already use Yelp?</strong> You can also publish your feedback on Jerry’s Yelp listing. Yelp ratings are not combined with the website average.</p>
+            <p><strong>Want to leave a review?</strong> Use Jerry’s Yelp listing. Yelp ratings are not combined with the website average.</p>
             <div class="mobile-review-yelp-actions">
               <a class="btn btn-copy" href="https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Write on Yelp</a>
               <a class="btn btn-copy" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer">Read Yelp</a>
@@ -3006,7 +2704,7 @@ footer span{color:var(--gold-light)}
       <button class="mobile-sheet-action" data-view="chronicles"><strong>Chronicles</strong><span>True stories from the right seat</span></button>
       <a class="mobile-sheet-action" href="mailto:jerry.marotta@hotmail.com"><strong>Email Jerry</strong><span>Open your email application</span></a>
       <a class="mobile-sheet-action" href="sms:8657247251"><strong>Text Jerry</strong><span>Open your native Messages app</span></a>
-      <button class="mobile-sheet-action" type="button" data-mobile-review-action><strong>Leave a Review</strong><span>Submit feedback for approval</span></button>
+      <a class="mobile-sheet-action" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer"><strong>Yelp Reviews</strong><span>Read Jerry’s public Yelp reviews</span></a>
     </div>
   </aside>
 </div>
@@ -3019,7 +2717,6 @@ const views = document.querySelectorAll('.view');
 
 const TESTIMONIALS_DATA_URL = 'data/testimonials.json';
 const YELP_LIVE_DATA_URL = 'data/yelp.json';
-const REVIEW_FORM_ENDPOINT = 'https://formspree.io/f/xykrkebj';
 
 const mobileSheet = document.getElementById('mobile-sheet');
 const mobileSheetBackdrop = document.getElementById('mobile-sheet-backdrop');
@@ -3584,70 +3281,6 @@ async function loadTestimonials() {
   }
 }
 
-function scrollToReviewForm(targetId) {
-  const target = document.getElementById(targetId);
-  if (!target) return;
-  target.scrollIntoView({behavior:'smooth', block:'start'});
-  const firstRating = target.querySelector('input[name="rating"]');
-  if (firstRating) {
-    setTimeout(() => firstRating.focus({preventScroll:true}), 450);
-  }
-}
-
-document.querySelectorAll('[data-scroll-to-review]').forEach(button => {
-  button.addEventListener('click', () => {
-    scrollToReviewForm(button.dataset.scrollToReview);
-  });
-});
-
-document.querySelectorAll('[data-mobile-review-action]').forEach(button => {
-  button.addEventListener('click', () => {
-    showView('home');
-    setTimeout(() => scrollToReviewForm('mobile-leave-review'), 80);
-  });
-});
-
-document.querySelectorAll('[data-review-form]').forEach(form => {
-  form.addEventListener('submit', async event => {
-    event.preventDefault();
-
-    const status = form.querySelector('[data-review-form-status]');
-    const submitButton = form.querySelector('button[type="submit"]');
-
-    if (!form.reportValidity()) return;
-
-    status.className = 'review-form-status';
-    status.textContent = 'Submitting your review for approval…';
-    submitButton.disabled = true;
-    submitButton.setAttribute('aria-busy', 'true');
-
-    try {
-      const response = await fetch(form.action || REVIEW_FORM_ENDPOINT, {
-        method:'POST',
-        body:new FormData(form),
-        headers:{Accept:'application/json'}
-      });
-
-      if (!response.ok) {
-        const payload = await response.json().catch(() => ({}));
-        const message = Array.isArray(payload.errors)
-          ? payload.errors.map(error => error.message).join(' ')
-          : 'The review could not be submitted. Please try again.';
-        throw new Error(message);
-      }
-
-      form.reset();
-      status.className = 'review-form-status success';
-      status.textContent = 'Thank you. Your review was sent to Tristan for approval and will not appear publicly until it has been reviewed.';
-    } catch (error) {
-      status.className = 'review-form-status error';
-      status.textContent = error.message || 'The review could not be submitted. Please try again.';
-    } finally {
-      submitButton.disabled = false;
-      submitButton.removeAttribute('aria-busy');
-    }
-  });
-});
 
 function updateReadingProgress() {
   const progressWrap = document.getElementById('reading-progress');
