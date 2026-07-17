@@ -276,7 +276,7 @@ h1 span{color:var(--gold-light)}
   background:var(--paper);
   padding:64px max(28px,calc((100vw - var(--max))/2));
   display:grid;
-  grid-template-columns:minmax(0,.9fr) minmax(480px,1.2fr);
+  grid-template-columns:minmax(0,1fr) minmax(470px,.95fr);
   gap:clamp(42px,6vw,86px);
   align-items:center;
   border-bottom:1px solid var(--border);
@@ -284,24 +284,37 @@ h1 span{color:var(--gold-light)}
 .about-page-copy .section-label{margin-bottom:18px}
 .about-page-copy h1{
   color:var(--ink);
-  font-size:clamp(4.7rem,7vw,7rem);
-  max-width:620px;
+  font-size:clamp(4.5rem,6.8vw,7rem);
+  line-height:.88;
+  max-width:720px;
 }
 .about-page-subline{
-  margin:22px 0 28px;
+  margin:22px 0 24px;
   color:var(--rust);
   font-family:'Bebas Neue',sans-serif;
   font-size:1.45rem;
-  letter-spacing:2px;
+  letter-spacing:1.8px;
+  max-width:670px;
 }
-.about-page-copy p{
+.about-page-copy>p{
   color:#45535d;
-  line-height:1.8;
-  max-width:620px;
+  line-height:1.82;
+  max-width:680px;
   margin-bottom:17px;
 }
+.about-page-hero-quote{
+  margin:27px 0 0;
+  padding:20px 0 20px 22px;
+  border-left:4px solid var(--gold);
+  color:var(--ink);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.75rem;
+  font-style:italic;
+  line-height:1.35;
+  max-width:650px;
+}
 .about-page-signature{
-  margin-top:28px;
+  margin-top:25px;
   font-family:'Cormorant Garamond',serif;
   font-size:2.1rem;
   font-style:italic;
@@ -324,7 +337,7 @@ h1 span{color:var(--gold-light)}
 .about-page-photo img{
   display:block;
   width:100%;
-  height:clamp(450px,39vw,650px);
+  height:clamp(500px,42vw,690px);
   object-fit:cover;
   object-position:center;
   border-radius:2px;
@@ -356,6 +369,173 @@ h1 span{color:var(--gold-light)}
   text-transform:uppercase;
   letter-spacing:1.4px;
   margin-top:3px;
+}
+.about-story-wrap{
+  background:var(--cream);
+  padding:72px max(28px,calc((100vw - var(--max))/2)) 88px;
+}
+.about-story-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.about-story-card{
+  background:white;
+  border:1px solid var(--border);
+  padding:36px;
+  box-shadow:0 12px 30px rgba(8,21,33,.05);
+}
+.about-story-card.wide{grid-column:1/-1}
+.about-story-card.dark{
+  background:var(--navy);
+  color:white;
+  border-color:rgba(255,255,255,.08);
+  border-left:4px solid var(--gold);
+}
+.about-story-card .section-label{margin-bottom:10px}
+.about-story-card h2{
+  color:var(--ink);
+  font-size:clamp(2.7rem,4vw,4.3rem);
+  line-height:.94;
+  margin-bottom:19px;
+}
+.about-story-card.dark h2{color:white}
+.about-story-card p{
+  color:#4a5860;
+  line-height:1.82;
+  font-size:.92rem;
+  margin-bottom:15px;
+}
+.about-story-card p:last-child{margin-bottom:0}
+.about-story-card.dark p{color:#c5d1d7}
+.about-story-pullquote{
+  margin:25px 0;
+  padding:22px 24px;
+  background:var(--ink);
+  color:white;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.62rem;
+  font-style:italic;
+  line-height:1.42;
+  border-left:4px solid var(--gold);
+}
+.about-gold-standard{
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin:26px 0 20px;
+}
+.about-gold-standard li{
+  background:var(--cream);
+  border:1px solid var(--border);
+  padding:18px;
+  color:#4a5860;
+  font-size:.74rem;
+  line-height:1.55;
+}
+.about-gold-standard strong{
+  display:block;
+  color:var(--rust);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.35rem;
+  line-height:1;
+  letter-spacing:.7px;
+  margin-bottom:7px;
+}
+.about-faa-note{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-top:18px;
+  padding-top:17px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:.66rem;
+  line-height:1.55;
+}
+.about-faa-note a{
+  color:var(--rust);
+  font-weight:600;
+  text-underline-offset:3px;
+}
+.about-nobu-story{
+  display:grid;
+  grid-template-columns:minmax(0,1.12fr) minmax(280px,.88fr);
+  gap:32px;
+  align-items:start;
+}
+.about-nobu-aside{
+  background:var(--cream);
+  border:1px solid var(--border);
+  padding:25px;
+}
+.about-nobu-aside strong{
+  display:block;
+  color:var(--rust);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.75rem;
+  letter-spacing:.8px;
+  margin-bottom:10px;
+}
+.about-nobu-aside p{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.18rem;
+  line-height:1.55;
+  color:var(--ink);
+}
+.about-philosophy-list{
+  list-style:none;
+  display:grid;
+  gap:12px;
+  margin-top:20px;
+}
+.about-philosophy-list li{
+  position:relative;
+  padding-left:21px;
+  color:#d2dde2;
+  font-size:.84rem;
+  line-height:1.6;
+}
+.about-philosophy-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:.62em;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold);
+}
+.about-page-cta{
+  grid-column:1/-1;
+  background:var(--rust);
+  color:white;
+  padding:38px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+}
+.about-page-cta h2{
+  color:white;
+  font-size:3.4rem;
+  line-height:.92;
+}
+.about-page-cta p{
+  color:#fae9df;
+  max-width:650px;
+  line-height:1.7;
+  margin-top:10px;
+}
+.about-page-cta .btn{
+  flex:0 0 auto;
+  background:white;
+  color:var(--rust);
+}
+.about-page-cta .btn:hover{
+  background:var(--gold-light);
+  color:var(--ink);
 }
 .about-copy-stack{display:flex;flex-direction:column;gap:22px}
 .booking-note{margin-top:20px;padding:18px;border-left:4px solid var(--rust);background:var(--cream);color:#48565e;font-size:.84rem;line-height:1.7}
@@ -1349,29 +1529,14 @@ footer span{color:var(--gold-light)}
     border-radius:8px;
   }
   .about-page-copy{order:2}
-  .about-page-copy h1{font-size:3.65rem;line-height:.9}
-  .about-page-subline{font-size:1.05rem;margin:16px 0 18px}
-  .about-page-copy p{font-size:.87rem;line-height:1.68}
-  .about-full-bio{display:none}
-  .about-mobile-details{
-    display:block;
-    border-top:1px solid var(--border);
-    margin-top:14px;
-    padding-top:14px;
+  .about-page-copy h1{font-size:3.55rem;line-height:.89}
+  .about-page-subline{font-size:1.02rem;margin:16px 0 17px}
+  .about-page-copy>p{font-size:.86rem;line-height:1.68}
+  .about-page-hero-quote{
+    font-size:1.35rem;
+    margin-top:20px;
+    padding:15px 0 15px 16px;
   }
-  .about-mobile-details summary{
-    color:var(--rust);
-    font-size:.68rem;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-weight:600;
-    cursor:pointer;
-    list-style:none;
-  }
-  .about-mobile-details summary::-webkit-details-marker{display:none}
-  .about-mobile-details summary::after{content:'＋';float:right;font-size:1rem}
-  .about-mobile-details[open] summary::after{content:'−'}
-  .about-mobile-details p{margin-top:14px}
   .about-page-signature{font-size:1.8rem}
   .about-page-stats{
     grid-template-columns:1fr 1fr;
@@ -1385,6 +1550,46 @@ footer span{color:var(--gold-light)}
   }
   .about-page-stat strong{font-size:1.75rem}
   .about-page-stat span{font-size:.49rem;letter-spacing:.7px}
+  .about-story-wrap{padding:22px 14px 34px}
+  .about-story-grid{grid-template-columns:1fr;gap:11px}
+  .about-story-card,
+  .about-story-card.wide{
+    grid-column:auto;
+    padding:22px 19px;
+    border-radius:11px;
+  }
+  .about-story-card h2{font-size:2.55rem;margin-bottom:14px}
+  .about-story-card p{font-size:.82rem;line-height:1.7}
+  .about-story-pullquote{
+    margin:18px 0;
+    padding:17px;
+    font-size:1.28rem;
+  }
+  .about-gold-standard{
+    grid-template-columns:1fr;
+    gap:8px;
+    margin:18px 0 15px;
+  }
+  .about-gold-standard li{
+    padding:15px;
+    font-size:.72rem;
+  }
+  .about-nobu-story{grid-template-columns:1fr;gap:14px}
+  .about-nobu-aside{padding:18px}
+  .about-nobu-aside p{font-size:1.05rem}
+  .about-page-cta{
+    grid-column:auto;
+    padding:25px 20px;
+    border-radius:11px;
+    display:block;
+  }
+  .about-page-cta h2{font-size:2.65rem}
+  .about-page-cta p{font-size:.8rem;line-height:1.6}
+  .about-page-cta .btn{
+    width:100%;
+    margin-top:17px;
+    min-height:47px;
+  }
 
   /* Training accordions */
   .desktop-training-list{display:none}
@@ -1868,9 +2073,10 @@ footer span{color:var(--gold-light)}
               <div class="review-form-panel" id="desktop-leave-review">
               <div class="review-form-head">
                 <div>
-                  <div class="section-label">Submit </div>
+                  <div class="section-label">Submit for Approval</div>
                   <h3>Leave Jerry a review.</h3>
                 </div>
+                <p>Your submission goes to Tristan for moderation. It will never publish automatically.</p>
               </div>
 
               <form class="review-form" action="https://formspree.io/f/xykrkebj" method="POST" data-review-form>
@@ -1940,7 +2146,7 @@ footer span{color:var(--gold-light)}
                 </label>
 
                 <div class="review-submit-row">
-                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <button class="btn btn-primary" type="submit">Submit for Approval</button>
                   <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
                 </div>
 
@@ -2086,7 +2292,7 @@ footer span{color:var(--gold-light)}
           <div class="mobile-review-form" id="mobile-leave-review">
               <div class="review-form-head" style="display:block;margin-bottom:0">
                 <div>
-                  <div class="section-label">Submit</div>
+                  <div class="section-label">Submit for Approval</div>
                   <h3>Leave Jerry a review.</h3>
                 </div>
                 <p>Your submission goes to Tristan for moderation. It will never publish automatically.</p>
@@ -2159,7 +2365,7 @@ footer span{color:var(--gold-light)}
                 </label>
 
                 <div class="review-submit-row">
-                  <button class="btn btn-primary" type="submit">Submit</button>
+                  <button class="btn btn-primary" type="submit">Submit for Approval</button>
                   <div class="review-form-status" role="status" aria-live="polite" data-review-form-status></div>
                 </div>
 
@@ -2187,31 +2393,111 @@ footer span{color:var(--gold-light)}
     <section class="view" id="view-about">
       <div class="about-page-hero">
         <div class="about-page-copy">
-          <div class="section-label">About Jerry</div>
-          <h1>Experience you can trust.</h1>
-          <div class="about-page-subline">35+ years. 8,500+ hours. Countless lessons carried forward.</div>
-          <p>Finding a reliable flight instructor who truly focuses on your individual needs can be challenging. As an FAA Gold Seal Certified Flight Instructor, Jerry Marotta brings an approach that motivates and guides students toward real-world competency and confidence in the cockpit.</p>
-          <div class="about-full-bio">
-            <p>Jerry designs every lesson around the pilot’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
-            <p>Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
-          </div>
-          <details class="about-mobile-details">
-            <summary>Read Jerry’s full background</summary>
-            <p>Jerry designs every lesson around the pilot’s specific goals, from primary training and instrument instruction to ground sessions and checkride preparation. His instruction emphasizes positive, constructive techniques that build lasting skill and sound judgment.</p>
-            <p>Based in Knoxville, Tennessee, Jerry serves pilots throughout the greater East Tennessee region.</p>
-          </details>
+          <div class="section-label">About Jerry — In His Own Words</div>
+          <h1>I don’t just teach people to fly. I teach them to think.</h1>
+          <div class="about-page-subline">From teaching martial arts and restoring muscle cars to creating aviators.</div>
+
+          <p>I have spent more than 35 years in aviation and logged more than 8,500 flight hours, but the part of this work that has meant the most to me has always been teaching.</p>
+
+          <p>Long before I became a flight instructor, I taught martial arts. I enjoyed helping students develop discipline, work through frustration, and grow into something they did not yet believe they could become. Later, after earning my commercial pilot certificate, I became friends with an Air Force colonel who was also a flight instructor. Flying with him convinced me that the same things I valued in teaching martial arts belonged in aviation.</p>
+
+          <blockquote class="about-page-hero-quote">“I switched from restoring muscle cars to creating aviators.”</blockquote>
+
           <div class="about-page-signature">Jerry Marotta</div>
-          <div class="about-page-role">Gold Seal Flight Instructor</div>
+          <div class="about-page-role">FAA Gold Seal Flight Instructor · CFII</div>
         </div>
+
         <div class="about-page-photo">
           <img src="images/jerry-with-plane.jpg" alt="Jerry Marotta standing beside his red Travel Air biplane" loading="lazy" decoding="async">
         </div>
       </div>
+
       <div class="about-page-stats">
         <div class="about-page-stat"><strong>8,500+</strong><span>Flight Hours</span></div>
         <div class="about-page-stat"><strong>35+</strong><span>Years in Aviation</span></div>
         <div class="about-page-stat"><strong>Gold Seal</strong><span>FAA Flight Instructor</span></div>
         <div class="about-page-stat"><strong>CFII</strong><span>Instrument Instructor</span></div>
+      </div>
+
+      <div class="about-story-wrap">
+        <div class="about-story-grid">
+          <article class="about-story-card">
+            <div class="section-label">Why I Became an Instructor</div>
+            <h2>Teaching was already part of who I was.</h2>
+
+            <p>When I began flying with that Air Force colonel, I had recently reached the commercial-pilot level. He was an instructor as well as a military aviator, and the time I spent flying with him changed the direction of my career. He showed me that instructing was not simply demonstrating maneuvers. It was helping another person develop judgment, discipline, and confidence.</p>
+
+            <p>I decided to pursue my flight-instructor certificate. Once I began instructing, I liked it so much that I changed careers. I moved away from restoring muscle cars and committed myself to developing pilots.</p>
+
+            <blockquote class="about-story-pullquote">The machine still matters—but now the real work is helping the person in the other seat grow.</blockquote>
+          </article>
+
+          <article class="about-story-card dark">
+            <div class="section-label" style="color:var(--gold-light)">How I Teach</div>
+            <h2>Safety first. Then make it enjoyable.</h2>
+
+            <p>I do not believe every student should be taught in exactly the same way. When someone is struggling, my responsibility is to recognize where the understanding broke down and change the lesson until the idea makes sense.</p>
+
+            <ul class="about-philosophy-list">
+              <li>I explain why a lesson matters and how it applies outside the training environment.</li>
+              <li>I want pilots to ask questions instead of pretending they understand.</li>
+              <li>I teach students to pause, evaluate the risk, and think before committing to a flight.</li>
+              <li>I give honest feedback without taking the enjoyment out of aviation.</li>
+            </ul>
+          </article>
+
+          <article class="about-story-card wide">
+            <div class="section-label">What the Gold Seal Means to Me</div>
+            <h2>A title tied directly to student success.</h2>
+
+            <p>Right after I started flight instructing, I learned about the FAA Gold Seal standard. That caught my attention because it was not simply another written test or another line on a certificate. The recognition was connected to a high level of instructional activity, deeper ground-instructor qualifications, and the actual performance of the students an instructor prepared.</p>
+
+            <p>I decided to make the Gold Seal one of my first major goals. I expanded my instrument knowledge, added an instrument ground-instructor certificate, and worked under the pressure of preparing a large group of students for their practical tests. I reached the Gold Seal standard during my first year as a new instructor, and I was extremely proud of it.</p>
+
+            <ul class="about-gold-standard" aria-label="FAA Gold Seal qualification standards">
+              <li><strong>Advanced credentials</strong>A commercial pilot certificate with an instrument rating—or an airline transport pilot certificate.</li>
+              <li><strong>Ground instruction</strong>An advanced or instrument ground-instructor rating.</li>
+              <li><strong>Student results</strong>At least 10 applicants recommended within 24 calendar months, with at least 80 percent passing on their first attempt, or qualifying equivalent examiner activity.</li>
+            </ul>
+
+            <p>To me, the seal represents responsibility. When I recommend someone for a practical test, I am placing my name behind that pilot’s preparation. Passing matters, but building a pilot who can think and make safe decisions after the checkride matters even more.</p>
+
+            <div class="about-faa-note">
+              <span>Formal qualification summary based on the FAA’s current Gold Seal guidance.</span>
+              <a href="https://www.faa.gov/documentLibrary/media/Advisory_Circular/AC_61-65K.pdf" target="_blank" rel="noopener noreferrer">View FAA AC 61-65K</a>
+            </div>
+          </article>
+
+          <article class="about-story-card wide">
+            <div class="section-label">The Students Behind the Seal</div>
+            <h2>The lessons went both directions.</h2>
+
+            <div class="about-nobu-story">
+              <div>
+                <p>Many of the students I trained during that first year came from Japan. The language barrier could make instruction challenging, but those students brought an extraordinary amount of dedication, gratitude, and hard work. Teaching them forced me to become a clearer and more adaptable instructor.</p>
+
+                <p>One student, Nobu, surprised me during our first cross-country lesson. His navigation was so strong that I briefly wondered whether the FAA had sent someone to evaluate me. I later learned that he had retired from the Japanese military after serving as a navigator aboard a P-3 Orion maritime patrol aircraft.</p>
+
+                <p>As Christmas approached, Nobu was running out of time to complete his training before returning to Japan. I told him we would stay as late as necessary, and we studied for his oral examination until midnight. He completed the process and returned home as a pilot.</p>
+
+                <p>Later, he sent me a photograph of himself with his family while wearing his military uniform, medals, and decorations. I wish I still knew where that photograph was, but I have never forgotten what it represented.</p>
+              </div>
+
+              <aside class="about-nobu-aside">
+                <strong>Why that moment stayed with me</strong>
+                <p>A certificate is a piece of paper. What matters is seeing a student return home carrying a new ability, a new confidence, and something they worked hard to earn.</p>
+              </aside>
+            </div>
+          </article>
+
+          <section class="about-page-cta">
+            <div>
+              <h2>Tell me where you are in your flying.</h2>
+              <p>Whether you are beginning, returning after time away, preparing for a checkride, or moving into instrument flying, I will build the instruction around the pilot you are today and the pilot you are working to become.</p>
+            </div>
+            <button class="btn" data-view="book">Book a Lesson</button>
+          </section>
+        </div>
       </div>
     </section>
 
