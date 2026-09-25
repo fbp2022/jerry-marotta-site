@@ -268,27 +268,46 @@
     });
 
     // Keep the home page feature pointed at the newest published Chronicle.
+    // Each part of the desktop feature and the phone card is updated
+    // explicitly; the static quote belongs to the original story, so it is
+    // hidden when a different story is featured.
     var latest = list[0];
     var home = document.getElementById('view-home');
     if (!home) return;
-    var links = home.querySelectorAll('a[href^="/chronicles/"]:not([href="/chronicles/"])');
-    if (!links.length) return;
-    var oldHref = links[0].getAttribute('href');
-    var oldSlug = (oldHref.match(/\/chronicles\/([a-z0-9-]+)\/?$/) || [])[1];
+    var firstLink = home.querySelector('a[href^="/chronicles/"]:not([href="/chronicles/"])');
+    if (!firstLink) return;
+    var oldSlug = (firstLink.getAttribute('href').match(/\/chronicles\/(?:\?story=)?([a-z0-9-]+)\/?$/) || [])[1];
     if (oldSlug === latest.slug) return;
-    var newHref = chronicleUrl(latest.slug);
-    var oldTitle = null;
-    home.querySelectorAll('h2, h3').forEach(function (heading) {
-      var container = heading.closest('div, article, section');
-      if (!container || !container.querySelector('a[href="' + oldHref + '"]')) return;
-      oldTitle = oldTitle || normalize(heading.textContent);
-      if (normalize(heading.textContent) !== oldTitle) return;
-      heading.textContent = latest.title;
-      var summary = heading.nextElementSibling;
-      if (summary && summary.tagName === 'P') summary.textContent = latest.summary || latest.deck || '';
-      container.querySelectorAll('.quote').forEach(function (quote) { quote.hidden = true; });
+
+    var url = chronicleUrl(latest.slug);
+    var summary = latest.summary || latest.deck || '';
+    var minutes = latest.read_minutes ? latest.read_minutes + ' minute read' : '';
+
+    home.querySelectorAll('.chronicle-feature').forEach(function (feature) {
+      var coverTitle = feature.querySelector('.chronicle-cover h2');
+      if (coverTitle) coverTitle.textContent = latest.title;
+      var meta = feature.querySelector('.meta');
+      if (meta) {
+        meta.replaceChildren();
+        [latest.category, minutes].filter(Boolean).forEach(function (label) {
+          meta.append(element('span', 'pill', label));
+        });
+      }
+      var text = feature.querySelector('.chronicle-copy > p');
+      if (text) text.textContent = summary;
+      feature.querySelectorAll('.quote').forEach(function (quote) { quote.hidden = true; });
+      feature.querySelectorAll('a[href^="/chronicles/"]:not([href="/chronicles/"])').forEach(function (a) { a.setAttribute('href', url); });
     });
-    links.forEach(function (a) { if (a.getAttribute('href') === oldHref) a.setAttribute('href', newHref); });
+
+    home.querySelectorAll('.mobile-story').forEach(function (card) {
+      var small = card.querySelector('small');
+      if (small) small.textContent = [latest.category, latest.read_minutes ? latest.read_minutes + ' min read' : ''].filter(Boolean).join(' • ');
+      var heading = card.querySelector('h3, h2');
+      if (heading) heading.textContent = latest.title;
+      var text = card.querySelector('p');
+      if (text) text.textContent = summary;
+      card.querySelectorAll('a[href^="/chronicles/"]:not([href="/chronicles/"])').forEach(function (a) { a.setAttribute('href', url); });
+    });
   }
 
   function storySlug() {
