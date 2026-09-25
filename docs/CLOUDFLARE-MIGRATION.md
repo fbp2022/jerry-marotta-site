@@ -41,3 +41,11 @@ read-only browser data and is not combined with first-party testimonials.
 5. Add the production custom domain and DNS only after preview validation.
 6. Replace the temporary `/admin/` footer destination with the Access-protected
    admin application after it exists.
+
+## Repository deployment foundation
+
+`wrangler.toml` and `migrations/0001_content.sql` are ready for a Pages/D1
+deployment. Before any deploy, replace the placeholder D1 database ID, apply
+the migration, and configure Access to require the two named MFA identities on
+both `/admin/*` and `/api/admin/*`. The Worker/API must validate the Access JWT
+server-side before it reads or writes D1; do not deploy a write API beforehand.
