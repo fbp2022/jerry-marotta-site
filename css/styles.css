@@ -31,9 +31,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 .site-shell{min-height:100vh}
-.desktop-nav{position:sticky;top:0;z-index:50;height:82px;background:rgba(8,21,33,.97);border-bottom:1px solid rgba(189,129,44,.65);display:flex;align-items:center;padding:0 max(28px,calc((100vw - var(--max))/2));gap:42px}
+.desktop-nav{position:sticky;top:0;z-index:50;height:96px;background:rgba(8,21,33,.97);border-bottom:1px solid rgba(189,129,44,.65);display:flex;align-items:center;padding:0 max(28px,calc((100vw - var(--max))/2));gap:32px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:max-content}
-.brand-mark{width:76px;height:44px;display:block;object-fit:contain}
+.brand-mark{width:164px;height:76px;display:block;object-fit:cover;object-position:center 49%;filter:drop-shadow(0 1px 3px rgba(0,0,0,.28))}
 .brand-copy strong{display:block;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:1.5rem;color:var(--white);line-height:1}
 .brand-copy small{display:block;color:var(--gold-light);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;margin-top:5px}
 .desktop-links{display:flex;align-items:center;gap:30px;margin-left:auto}
@@ -931,9 +931,11 @@ footer span{color:var(--gold-light)}
     white-space:nowrap;
   }
   .mobile-top .brand-mark{
-    width:32px;
-    height:32px;
+    width:88px;
+    height:46px;
     font-size:0;
+    object-fit:cover;
+    object-position:center 49%;
     transform:none;
     flex:0 0 auto;
   }
