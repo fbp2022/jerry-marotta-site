@@ -4,8 +4,10 @@ const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 const viewButtons = document.querySelectorAll('[data-view]');
 const views = document.querySelectorAll('.view');
 
-const TESTIMONIALS_DATA_URL = 'data/testimonials.json';
-const YELP_LIVE_DATA_URL = 'data/yelp.json';
+const TESTIMONIALS_DATA_URL = '/data/testimonials.json';
+const YELP_LIVE_DATA_URL = '/data/yelp.json';
+const ROUTES = {home:'/', about:'/about/', training:'/training/', chronicles:'/chronicles/', article:'/chronicles/the-day-fear-took-the-controls/', book:'/book/', contact:'/contact/'};
+const viewFromPath = () => Object.entries(ROUTES).find(([, path]) => path === window.location.pathname)?.[0] || 'home';
 
 const mobileSheet = document.getElementById('mobile-sheet');
 const mobileSheetBackdrop = document.getElementById('mobile-sheet-backdrop');
@@ -57,8 +59,8 @@ function showView(name, updateHistory = true) {
   }
 
   if (updateHistory) {
-    const nextHash = target === 'home' ? '#home' : '#' + target;
-    if (window.location.hash !== nextHash) history.pushState({view: target}, '', nextHash);
+    const nextPath = ROUTES[target];
+    if (window.location.pathname !== nextPath) history.pushState({view: target}, '', nextPath);
   }
 
   window.scrollTo({top: 0, behavior: 'auto'});
@@ -71,7 +73,7 @@ viewButtons.forEach(button => button.addEventListener('click', event => {
 }));
 
 window.addEventListener('popstate', () => {
-  showView((window.location.hash || '#home').slice(1), false);
+  showView(viewFromPath(), false);
 });
 
 function isMobileDevice() {
@@ -685,6 +687,6 @@ dateInput.min = new Date().toISOString().split('T')[0];
 updateDeviceFlow();
 toggleConditionalFields();
 showBookingStep(1);
-showView((window.location.hash || '#home').slice(1), false);
+showView(viewFromPath(), false);
 updateReadingProgress();
 loadTestimonials().finally(loadYelpLiveRating);

@@ -16,6 +16,8 @@
   --shadow:0 24px 70px rgba(8,21,33,.14);
   --max:1240px;
 }
+
+.site-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,4vw,64px);background:var(--ink);color:rgba(255,255,255,.65);font-size:.7rem;letter-spacing:.08em}.site-footer p{margin:0}.site-footer a{color:rgba(255,255,255,.65);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}.site-footer a:hover{color:white}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--text);min-height:100vh}
@@ -1018,7 +1020,7 @@ footer span{color:var(--gold-light)}
   .mobile-sheet-action span{font-size:.65rem;color:var(--muted);line-height:1.35}
 
   /* Bottom app navigation */
-  .mobile-bottom{
+.mobile-bottom{
     display:flex;
     position:fixed;
     left:0;right:0;bottom:0;
