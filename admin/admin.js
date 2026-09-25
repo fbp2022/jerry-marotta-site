@@ -361,6 +361,8 @@
   // arrows, or hidden. Everything shows in the frame before it is saved.
   var device = 'desktop';
   var arrangeMode = false;
+  var fitFrame = null;
+  window.addEventListener('resize', function () { if (fitFrame) fitFrame(); });
 
   var EDIT_CSS = [
     '[data-cms-edit]{cursor:text;border-radius:3px}',
@@ -447,6 +449,29 @@
         : 'Click any text on the page and type. Changes appear right here. Press “Save changes” at the bottom when you’re happy.'),
       h('div', {class: 'frame-wrap' + (device === 'phone' ? ' phone' : '')}, frame),
       h('p', {class: 'muted small', text: 'Flight hours, years, phone number, and email change everywhere at once under Key facts & contact. Testimonials and Chronicles have their own sections.'}));
+
+    // "Computer" renders the page at a real desktop width and scales it down
+    // to fit, so the desktop layout shows even on a smaller screen.
+    function fit() {
+      var wrap = frame.parentElement;
+      if (!wrap || !wrap.isConnected) return;
+      if (device !== 'desktop') {
+        frame.removeAttribute('style');
+        wrap.style.height = '';
+        return;
+      }
+      var desktopWidth = 1280;
+      var scale = Math.min(1, wrap.clientWidth / desktopWidth);
+      var height = Math.max(520, window.innerHeight - 250);
+      wrap.style.height = height + 'px';
+      frame.style.width = desktopWidth + 'px';
+      frame.style.height = Math.round(height / scale) + 'px';
+      frame.style.minHeight = '0';
+      frame.style.transform = 'scale(' + scale + ')';
+      frame.style.transformOrigin = '0 0';
+    }
+    fitFrame = fit;
+    fit();
 
     frame.addEventListener('load', function () {
       waitForFrame(frame).then(function (w) {
