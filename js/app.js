@@ -404,7 +404,7 @@ const YELP_LISTING_URL = 'https://www.yelp.com/biz/jerry-marotta-alcoa';
 const YELP_WRITE_REVIEW_URL = 'https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa';
 
 function renderYelpLinks() {
-  document.querySelectorAll('.yelp-rating-row').forEach(row => { row.hidden = true; });
+  document.querySelectorAll('.yelp-rating-row').forEach(row => { row.style.display = 'none'; });
   document.querySelectorAll('.yelp-excerpts-section, .mobile-yelp-excerpts').forEach(section => { section.hidden = true; });
 
   document.querySelectorAll('.yelp-rating-source span').forEach(element => {
