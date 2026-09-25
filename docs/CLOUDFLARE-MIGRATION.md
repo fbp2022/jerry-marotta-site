@@ -2,6 +2,11 @@
 
 ## What runs where
 
+- **GitHub** holds all code and design, and **GitHub Pages** serves the public
+  site at jerrymarottaaviation.com. Nothing about the domain or DNS changes.
+- **Cloudflare** holds the stored content, the admin login, and the content
+  API. The admin screen's code lives in this repository but is served from
+  Cloudflare so it can sit behind the login.
 - **Cloudflare Pages** project jerry-marotta-aviation builds this repository.
   main is production (jerry-marotta-aviation.pages.dev); every other branch
   gets a preview URL.
@@ -11,9 +16,12 @@
   /admin and /api/admin on the pages.dev hostname and its preview subdomains.
   Login method is One-time PIN (a code emailed to the admin). Only the two
   allowed admin emails pass the policy.
-- The public site is still served from GitHub Pages at jerrymarottaaviation.com
-  until DNS is moved to Cloudflare. The public site works in both places; the
-  admin and content API only work on Cloudflare.
+- js/cms.js on jerrymarottaaviation.com reads published content from
+  https://jerry-marotta-aviation.pages.dev/api/content (CORS allows the
+  jerrymarottaaviation.com origins). The footer Admin link points to
+  https://jerry-marotta-aviation.pages.dev/admin/.
+- Chronicles written in the admin open at /chronicles/?story=<slug> on the
+  GitHub Pages site. Editing the existing static story replaces its text.
 
 ## Pages secrets (set in the dashboard, never in this repository)
 
@@ -61,8 +69,8 @@ shows Yelp as links only (read reviews and write a review). The
 update-yelp.yml workflow is disabled. If Jerry claims the listing, Yelp's
 official review badge can be embedded instead.
 
-## Remaining step
+## Optional later
 
-Move jerrymarottaaviation.com DNS to Cloudflare, attach it to the Pages
-project as a custom domain, and add the custom domain's /admin and /api/admin
-paths to the Access application.
+If the domain is ever pointed at Cloudflare Pages instead of GitHub Pages, add
+its /admin and /api/admin paths to the Access application. Nothing else needs
+to change; the code already works on either host.
