@@ -355,27 +355,33 @@
         activityList(state.audit.slice(0, 6))));
   }
 
-  // ---------- page text editor ----------
-  function loadPageItems(page) {
-    if (state.pages[page.id]) return Promise.resolve(state.pages[page.id]);
-    return fetch(page.path, {cache: 'no-store'})
-      .then(function (response) {
-        if (!response.ok) throw new Error('Could not load ' + page.path);
-        return response.text();
-      })
-      .then(function (html) {
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        var byHash = new Map();
-        JMCMS.collect(doc).forEach(function (item) {
-          if (item.view !== page.id) return;
-          var existing = byHash.get(item.hash);
-          if (existing) existing.count += 1;
-          else byHash.set(item.hash, {hash: item.hash, view: item.view, type: item.type, text: item.text, html: item.html, count: 1});
-        });
-        state.pages[page.id] = Array.from(byHash.values());
-        return state.pages[page.id];
-      });
-  }
+  // ---------- visual page editor ----------
+  // The real page loads in a frame (?cms-edit=1 keeps it original). Text is
+  // edited in place; in "Move & hide" mode sections can be dragged, moved with
+  // arrows, or hidden. Everything shows in the frame before it is saved.
+  var device = 'desktop';
+  var arrangeMode = false;
+
+  var EDIT_CSS = [
+    '[data-cms-edit]{cursor:text;border-radius:3px}',
+    '[data-cms-edit]:hover{outline:2px dashed rgba(223,183,104,.95);outline-offset:3px}',
+    '[data-cms-edit]:focus{outline:2px solid #dfb768;outline-offset:3px;background:rgba(223,183,104,.14)}',
+    '[data-cms-dirty]{outline:2px solid #e39b2d !important;outline-offset:3px}',
+    '[data-cms-section]{position:relative !important;outline:2px dashed rgba(63,119,163,.6);outline-offset:-3px;cursor:grab}',
+    '[data-cms-section]:hover{outline:3px solid #3f77a3}',
+    '[data-cms-section][data-cms-hidden]{opacity:.35;filter:grayscale(1)}',
+    '.cms-dragging{opacity:.45}',
+    '.cms-drop-before{box-shadow:inset 0 6px 0 #dfb768 !important}',
+    '.cms-drop-after{box-shadow:inset 0 -6px 0 #dfb768 !important}',
+    '.cms-drop-before.cms-row{box-shadow:inset 6px 0 0 #dfb768 !important}',
+    '.cms-drop-after.cms-row{box-shadow:inset -6px 0 0 #dfb768 !important}',
+    '.cms-handle{position:absolute;top:8px;right:8px;z-index:9999;display:flex;gap:4px;font:600 12px/1 system-ui,Segoe UI,Arial,sans-serif;letter-spacing:0;text-transform:none}',
+    '.cms-handle button,.cms-handle span{background:#081521;color:#fff;border:0;border-radius:6px;padding:7px 9px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.25)}',
+    '.cms-handle span{cursor:grab;background:#3f77a3}',
+    '.cms-handle .cms-hide{background:#b3261e}',
+    '.cms-handle .cms-show{background:#1f7a4d}',
+    '.cms-hidden-badge{position:absolute;top:8px;left:8px;z-index:9999;background:#b3261e;color:#fff;font:700 11px/1 system-ui,sans-serif;padding:6px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.06em}'
+  ].join('');
 
   function savedText(key) {
     var row = state.settings.get(key);
@@ -383,90 +389,294 @@
     try { return JSON.parse(row.value).html; } catch (e) { return null; }
   }
 
-  function textBlock(item) {
-    var key = 'text:' + item.hash;
-    var saved = savedText(key);
-    var baseline = saved !== null ? saved : item.html;
-    var pending = state.dirty.get(key);
-    var current = pending === undefined ? baseline : (pending === null ? item.html : pending.html);
-    var singleLine = /heading|Label|Button/.test(item.type);
+  function savedLayout(key) {
+    var row = state.settings.get(key);
+    if (!row) return null;
+    try { return JSON.parse(row.value); } catch (e) { return null; }
+  }
 
-    var editor = h('div', {class: 'rich' + (singleLine ? ' single' : ''), contenteditable: 'true', role: 'textbox', spellcheck: 'true',
-      'aria-multiline': singleLine ? 'false' : 'true', 'aria-label': item.type + ': ' + item.text.slice(0, 80)});
-    editor.innerHTML = current;
-    plainPaste(editor, singleLine);
+  function waitForFrame(frame) {
+    return new Promise(function (resolve, reject) {
+      var tries = 0;
+      (function check() {
+        var w = frame.contentWindow;
+        if (w && w.JMCMS && w.document.readyState !== 'loading') { resolve(w); return; }
+        tries += 1;
+        if (tries > 60) { reject(new Error('The page preview did not finish loading. Try reloading.')); return; }
+        setTimeout(check, 100);
+      })();
+    });
+  }
 
-    var restore = h('button', {type: 'button', class: 'link-btn', text: 'Restore original wording'});
-    var error = h('p', {class: 'field-error', hidden: true, text: 'This text can’t be empty. Restore the original or type new wording.'});
-    var block = h('article', {class: 'block', dataset: {search: item.text.toLowerCase()}},
-      h('div', {class: 'block-head'},
-        h('div', {class: 'badges'},
-          h('span', {class: 'badge type', text: item.type}),
-          item.count > 1 ? h('span', {class: 'badge', title: 'This text appears in more than one place (for example the computer and phone layouts). One edit updates all of them.', text: 'Appears ' + item.count + '×'}) : null,
-          h('span', {class: 'badge edited', text: 'Changed from original'}),
-          h('span', {class: 'badge unsaved', text: 'Unsaved'})),
-        restore),
-      singleLine ? null : inlineTools(editor),
-      editor,
-      error,
-      h('details', {class: 'original'}, h('summary', {text: 'Original wording'}), h('p', {text: item.text})));
-
-    function sync() {
-      var html = editor.innerHTML.trim();
-      var empty = !norm(editor.textContent);
-      error.hidden = !empty;
-      if (empty || html === baseline) state.dirty.delete(key);
-      else if (html === item.html) state.dirty.set(key, null);
-      else state.dirty.set(key, {html: html, view: item.view, original: item.text});
-      var pendingNow = state.dirty.get(key);
-      var effective = pendingNow === undefined ? baseline : (pendingNow === null ? item.html : pendingNow.html);
-      block.classList.toggle('is-dirty', state.dirty.has(key));
-      block.classList.toggle('is-edited', effective !== item.html);
-      restore.hidden = html === item.html;
-      updateSavebar();
-    }
-
-    editor.addEventListener('input', sync);
-    restore.addEventListener('click', function () { editor.innerHTML = item.html; sync(); });
-    sync();
-    return block;
+  function segButton(label, active, onclick) {
+    return h('button', {type: 'button', class: 'seg' + (active ? ' active' : ''), 'aria-pressed': String(active), onclick: onclick}, label);
   }
 
   function renderPage(id) {
     var page = PAGES.find(function (p) { return p.id === id; }) || PAGES[0];
     setTitle(page.label, page.path);
-    var search = h('input', {type: 'search', class: 'search', placeholder: 'Find text on this page…', 'aria-label': 'Find text on this page'});
-    var onlyEdited = h('input', {type: 'checkbox'});
-    var count = h('span', {class: 'muted small'});
-    var list = h('div', {class: 'block-list'}, h('p', {class: 'loading', text: 'Loading the ' + page.label + ' page…'}));
+
+    var frame = h('iframe', {class: 'page-frame', title: 'Editable preview of the ' + page.label + ' page', src: page.path + '?cms-edit=1'});
+    var status = h('span', {class: 'editor-status', text: 'Loading the page…'});
+    var restoreBtn = toolButton('Restore original', 'Put the selected text back to its original wording', function () {});
+    restoreBtn.disabled = true;
+    var frameDoc = null;
+    function run(command, value) { if (frameDoc) frameDoc.execCommand(command, false, value); }
+    var textTools = h('div', {class: 'tools inline'},
+      toolButton(h('strong', {text: 'B'}), 'Bold', function () { run('bold'); }),
+      toolButton(h('em', {text: 'I'}), 'Italic', function () { run('italic'); }),
+      toolButton('Link', 'Add link', function () {
+        var url = window.prompt('Link address (for example https://… or /book/):', 'https://');
+        if (!url) return;
+        if (!/^(https?:|mailto:|tel:|sms:|\/)/i.test(url)) { toast('Links must start with https://, /, mailto:, or tel:', 'error'); return; }
+        run('createLink', url);
+      }),
+      restoreBtn);
 
     viewEl.append(
-      h('div', {class: 'callout'},
-        h('strong', {text: 'How this works'}),
-        h('p', {text: 'Click any text below and type. When you’re happy, press “Save changes” at the bottom of the screen. Text that appears in both the computer and phone layouts is listed once, and one edit updates both.'})),
-      h('div', {class: 'toolbar'}, search, h('label', {class: 'check'}, onlyEdited, ' Changed text only'), count),
-      list);
+      h('div', {class: 'editor-bar'},
+        h('div', {class: 'seg-group', role: 'group', 'aria-label': 'Editing mode'},
+          segButton('✎ Edit text', !arrangeMode, function () { arrangeMode = false; route(); }),
+          segButton('⇅ Move & hide sections', arrangeMode, function () { arrangeMode = true; route(); })),
+        arrangeMode ? null : textTools,
+        h('div', {class: 'seg-group', role: 'group', 'aria-label': 'Preview size'},
+          segButton('Computer', device === 'desktop', function () { device = 'desktop'; route(); }),
+          segButton('Phone', device === 'phone', function () { device = 'phone'; route(); }))),
+      h('p', {class: 'editor-help'}, status, ' ', arrangeMode
+        ? 'Drag a section to a new spot, or use its ↑ ↓ buttons. “Hide” takes a section off the page; “Show” brings it back.'
+        : 'Click any text on the page and type. Changes appear right here. Press “Save changes” at the bottom when you’re happy.'),
+      h('div', {class: 'frame-wrap' + (device === 'phone' ? ' phone' : '')}, frame),
+      h('p', {class: 'muted small', text: 'Flight hours, years, phone number, and email change everywhere at once under Key facts & contact. Testimonials and Chronicles have their own sections.'}));
 
-    loadPageItems(page).then(function (items) {
-      if (!items.length) { list.replaceChildren(h('p', {class: 'empty-line', text: 'No editable text was found on this page.'})); return; }
-      list.replaceChildren.apply(list, items.map(textBlock));
-      function filter() {
-        var q = search.value.trim().toLowerCase();
-        var shown = 0;
-        list.querySelectorAll('.block').forEach(function (block) {
-          var match = (!q || block.dataset.search.indexOf(q) >= 0 || block.querySelector('.rich').textContent.toLowerCase().indexOf(q) >= 0) &&
-            (!onlyEdited.checked || block.classList.contains('is-edited') || block.classList.contains('is-dirty'));
-          block.hidden = !match;
-          if (match) shown += 1;
-        });
-        count.textContent = shown + ' of ' + items.length + ' text blocks';
-      }
-      search.addEventListener('input', filter);
-      onlyEdited.addEventListener('change', filter);
-      filter();
-    }).catch(function (err) {
-      list.replaceChildren(h('p', {class: 'field-error', text: err.message}));
+    frame.addEventListener('load', function () {
+      waitForFrame(frame).then(function (w) {
+        var d = w.document;
+        frameDoc = d;
+        var style = d.createElement('style');
+        style.textContent = EDIT_CSS;
+        d.head.appendChild(style);
+        // Links, buttons and forms don't navigate while editing.
+        d.addEventListener('click', function (event) {
+          if (event.target.closest('.cms-handle')) return;
+          if (event.target.closest('a, button, summary, label, input, select, textarea')) event.preventDefault();
+        }, true);
+        d.addEventListener('submit', function (event) { event.preventDefault(); }, true);
+        if (arrangeMode) setupArrange(w, d, page, status);
+        else setupText(w, d, page, status, restoreBtn);
+      }).catch(function (err) { status.textContent = err.message; });
     });
+  }
+
+  function setupText(w, d, page, status, restoreBtn) {
+    var groups = {};
+    w.JMCMS.collect(d).forEach(function (item) {
+      if (item.view !== page.id) return;
+      (groups[item.hash] = groups[item.hash] || []).push(item);
+    });
+    var current = null;
+
+    Object.keys(groups).forEach(function (hashKey) {
+      var list = groups[hashKey];
+      var original = list[0].html;
+      var key = 'text:' + hashKey;
+      var saved = savedText(key);
+      var baseline = saved !== null ? saved : original;
+      var pending = state.dirty.get(key);
+      var start = pending === undefined ? baseline : (pending === null ? original : pending.html);
+      var singleLine = /heading|Label|Button/.test(list[0].type);
+
+      function sync(source) {
+        var html = source.innerHTML.trim();
+        list.forEach(function (item) { if (item.el !== source) item.el.innerHTML = html; });
+        var empty = !norm(source.textContent);
+        if (empty || html === baseline) state.dirty.delete(key);
+        else if (html === original) state.dirty.set(key, null);
+        else state.dirty.set(key, {html: html, view: page.id, original: list[0].text});
+        list.forEach(function (item) { item.el.toggleAttribute('data-cms-dirty', state.dirty.has(key)); });
+        restoreBtn.disabled = html === original;
+        updateSavebar();
+      }
+
+      list.forEach(function (item) {
+        var node = item.el;
+        if (start !== original) node.innerHTML = start;
+        node.contentEditable = 'true';
+        node.spellcheck = true;
+        node.setAttribute('data-cms-edit', '');
+        node.title = list[0].type + ': click to edit';
+        node.toggleAttribute('data-cms-dirty', state.dirty.has(key));
+        node.addEventListener('keydown', function (event) { if (singleLine && event.key === 'Enter') event.preventDefault(); });
+        node.addEventListener('paste', function (event) {
+          event.preventDefault();
+          var text = event.clipboardData.getData('text/plain');
+          if (singleLine) text = text.replace(/\s+/g, ' ');
+          d.execCommand('insertText', false, text);
+        });
+        node.addEventListener('focus', function () {
+          current = {el: node, original: original, sync: sync};
+          restoreBtn.disabled = node.innerHTML.trim() === original;
+        });
+        node.addEventListener('input', function () { sync(node); });
+      });
+    });
+
+    restoreBtn.onclick = function () {
+      if (!current) return;
+      current.el.innerHTML = current.original;
+      current.sync(current.el);
+    };
+    var count = Object.keys(groups).length;
+    status.textContent = count ? count + ' editable text areas on this page.' : 'No editable text on this page.';
+  }
+
+  function setupArrange(w, d, page, status) {
+    var groups = w.JMCMS.layoutGroups(d).filter(function (group) {
+      return group.view === page.id && group.container.getClientRects().length;
+    });
+    var dragging = null;
+
+    groups.forEach(function (group) {
+      var key = 'layout:' + group.key;
+      var saved = savedLayout(key);
+      var pending = state.dirty.get(key);
+      var layout = pending === undefined ? saved : pending;
+      var byKey = {};
+      group.children.forEach(function (child) { byKey[child.key] = child.el; });
+      var originalOrder = group.children.map(function (child) { return child.key; });
+      var order = originalOrder.slice();
+      var hidden = [];
+      if (layout) {
+        var listed = (layout.order || []).filter(function (k) { return byKey[k]; });
+        order = listed.concat(originalOrder.filter(function (k) { return listed.indexOf(k) < 0; }));
+        hidden = (layout.hidden || []).filter(function (k) { return byKey[k]; });
+      }
+      var first = group.children[0].el.getBoundingClientRect();
+      var second = group.children[1].el.getBoundingClientRect();
+      var horizontal = Math.abs(first.top - second.top) < 8;
+
+      function same(a, b) { return a.join(',') === b.join(','); }
+
+      function paint() {
+        order.forEach(function (k) { group.container.appendChild(byKey[k]); });
+        order.forEach(function (k, index) {
+          var node = byKey[k];
+          var isHidden = hidden.indexOf(k) >= 0;
+          node.toggleAttribute('data-cms-hidden', isHidden);
+          var handle = node.querySelector(':scope > .cms-handle');
+          handle.querySelector('.cms-up').disabled = index === 0;
+          handle.querySelector('.cms-down').disabled = index === order.length - 1;
+          var toggle = handle.querySelector('.cms-toggle');
+          toggle.textContent = isHidden ? 'Show' : 'Hide';
+          toggle.className = 'cms-toggle ' + (isHidden ? 'cms-show' : 'cms-hide');
+          var badge = node.querySelector(':scope > .cms-hidden-badge');
+          if (isHidden && !badge) {
+            badge = d.createElement('div');
+            badge.className = 'cms-hidden-badge';
+            badge.textContent = 'Hidden on website';
+            node.appendChild(badge);
+          } else if (!isHidden && badge) {
+            badge.remove();
+          }
+        });
+      }
+
+      function commit() {
+        var isOriginal = same(order, originalOrder) && !hidden.length;
+        var matchesSaved = saved ? same(order, saved.order || []) && same(hidden, saved.hidden || []) : isOriginal;
+        if (matchesSaved) state.dirty.delete(key);
+        else if (isOriginal) state.dirty.set(key, null);
+        else state.dirty.set(key, {order: order.slice(), hidden: hidden.slice()});
+        updateSavebar();
+        paint();
+      }
+
+      function move(k, delta) {
+        var index = order.indexOf(k);
+        var target = index + delta;
+        if (target < 0 || target >= order.length) return;
+        order.splice(index, 1);
+        order.splice(target, 0, k);
+        commit();
+      }
+
+      group.children.forEach(function (child) {
+        var node = child.el;
+        var k = child.key;
+        if (!node.getClientRects().length && hidden.indexOf(k) < 0) return;
+        node.setAttribute('data-cms-section', '');
+        node.draggable = true;
+        if (horizontal) node.classList.add('cms-row');
+        var handle = d.createElement('div');
+        handle.className = 'cms-handle';
+        var grip = d.createElement('span');
+        grip.textContent = '⠿ Drag';
+        function button(className, label, onclick) {
+          var b = d.createElement('button');
+          b.type = 'button';
+          b.className = className;
+          b.textContent = label;
+          b.addEventListener('click', function (event) { event.preventDefault(); event.stopPropagation(); onclick(); });
+          return b;
+        }
+        handle.append(grip,
+          button('cms-up', horizontal ? '←' : '↑', function () { move(k, -1); }),
+          button('cms-down', horizontal ? '→' : '↓', function () { move(k, 1); }),
+          button('cms-toggle', 'Hide', function () {
+            var at = hidden.indexOf(k);
+            if (at >= 0) hidden.splice(at, 1); else hidden.push(k);
+            commit();
+          }));
+        node.appendChild(handle);
+
+        node.addEventListener('dragstart', function (event) {
+          event.stopPropagation();
+          dragging = {group: group, key: k};
+          event.dataTransfer.effectAllowed = 'move';
+          event.dataTransfer.setData('text/plain', k);
+          node.classList.add('cms-dragging');
+        });
+        node.addEventListener('dragend', function (event) {
+          event.stopPropagation();
+          dragging = null;
+          d.querySelectorAll('.cms-dragging, .cms-drop-before, .cms-drop-after').forEach(function (n) {
+            n.classList.remove('cms-dragging', 'cms-drop-before', 'cms-drop-after');
+          });
+        });
+        function side(event) {
+          var rect = node.getBoundingClientRect();
+          return horizontal
+            ? (event.clientX < rect.left + rect.width / 2 ? 'before' : 'after')
+            : (event.clientY < rect.top + rect.height / 2 ? 'before' : 'after');
+        }
+        node.addEventListener('dragover', function (event) {
+          if (!dragging || dragging.group !== group) return;
+          event.preventDefault();
+          event.stopPropagation();
+          var where = side(event);
+          node.classList.toggle('cms-drop-before', where === 'before' && dragging.key !== k);
+          node.classList.toggle('cms-drop-after', where === 'after' && dragging.key !== k);
+        });
+        node.addEventListener('dragleave', function () { node.classList.remove('cms-drop-before', 'cms-drop-after'); });
+        node.addEventListener('drop', function (event) {
+          if (!dragging || dragging.group !== group) return;
+          event.preventDefault();
+          event.stopPropagation();
+          var moving = dragging.key;
+          node.classList.remove('cms-drop-before', 'cms-drop-after');
+          if (moving === k) return;
+          var where = side(event);
+          order.splice(order.indexOf(moving), 1);
+          var at = order.indexOf(k) + (where === 'after' ? 1 : 0);
+          order.splice(at, 0, moving);
+          commit();
+        });
+      });
+
+      paint();
+    });
+
+    var total = groups.reduce(function (sum, group) { return sum + group.children.length; }, 0);
+    status.textContent = total ? total + ' movable sections on this page.' : 'This page has no movable sections.';
   }
 
   // ---------- key facts ----------
