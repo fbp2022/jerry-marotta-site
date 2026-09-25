@@ -962,32 +962,22 @@
 
   // ---------- yelp ----------
   function renderYelp() {
-    setTitle('Yelp (read-only)', '/');
-    var panel = h('section', {class: 'panel'}, h('p', {class: 'loading', text: 'Loading Yelp data…'}));
+    setTitle('Yelp (read-only)', 'https://www.yelp.com/biz/jerry-marotta-alcoa');
     viewEl.append(
       h('div', {class: 'callout'},
         h('strong', {text: 'Yelp reviews can’t be edited here'}),
-        h('p', {text: 'Yelp reviews belong to Yelp and the reviewers. The website copies Jerry’s Yelp rating automatically. Website testimonials are managed separately under Testimonials.'})),
-      panel);
-    fetch('/data/yelp.json', {cache: 'no-store'})
-      .then(function (response) { return response.json(); })
-      .then(function (data) {
-        var statusText = {
-          ok: 'Review excerpts are syncing normally.',
-          plan_required: 'Yelp’s current plan does not allow review excerpts. The rating and review count still update.',
-          temporarily_unavailable: 'Yelp did not return review excerpts on the last sync. The rating and review count still update.'
-        }[data.reviews_status] || 'Unknown status.';
-        panel.replaceChildren(
-          h('div', {class: 'stat-grid'},
-            statCard('Yelp rating', data.rating ? Number(data.rating).toFixed(1) + ' ★' : '—', 'on Yelp', data.url || '#'),
-            statCard('Yelp reviews', data.review_count == null ? '—' : data.review_count, 'total on Yelp', data.url || '#'),
-            statCard('Last synced', formatDate(data.updated_at), 'updates automatically', data.url || '#')),
-          h('p', {class: 'muted', text: statusText}),
-          h('p', {class: 'muted small', text: 'Yelp listing ID: ' + data.business_alias}),
-          h('div', {class: 'chip-row'},
-            h('a', {class: 'chip', href: data.url, target: '_blank', rel: 'noopener', text: 'Open Jerry’s Yelp page ↗'})));
-      })
-      .catch(function () { panel.replaceChildren(h('p', {class: 'field-error', text: 'Could not load the Yelp data file.'})); });
+        h('p', {text: 'Yelp reviews belong to Yelp and the reviewers. The website links visitors to Jerry’s Yelp page to read and write reviews. Website testimonials are managed separately under Testimonials.'})),
+      h('section', {class: 'panel'},
+        h('h3', {text: 'How Yelp appears on the website'}),
+        h('p', {class: 'muted', text: 'The website shows “Read reviews on Yelp” and “Write a review on Yelp” buttons. It does not copy Yelp’s rating or reviews, so it can never show out-of-date numbers.'}),
+        h('div', {class: 'chip-row'},
+          h('a', {class: 'chip', href: 'https://www.yelp.com/biz/jerry-marotta-alcoa', target: '_blank', rel: 'noopener', text: 'Open Jerry’s Yelp page ↗'}),
+          h('a', {class: 'chip', href: 'https://biz.yelp.com/', target: '_blank', rel: 'noopener', text: 'Yelp for Business ↗'}))),
+      h('section', {class: 'panel'},
+        h('h3', {text: 'Good to know'}),
+        h('ul', {class: 'plain-list'},
+          h('li', {text: 'Yelp decides which reviews are “recommended.” Reviews it doesn’t recommend are hidden at the bottom of the Yelp page, and no one can change that from the website.'}),
+          h('li', {text: 'Jerry’s listing is currently unclaimed. Claiming it for free at biz.yelp.com lets Jerry respond to reviews and add Yelp’s official review badge to the website.'}))));
   }
 
   // ---------- activity ----------
