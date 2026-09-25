@@ -19,5 +19,5 @@ export async function onRequestGet({request, env}) {
   ).bind(slug).first();
   if (!row) return json({error: 'Unknown Chronicle'}, 404, cors);
 
-  return json({chronicle: row}, 200, {...cors, 'cache-control': 'public, max-age=30'});
+  return json({chronicle: row}, 200, {...cors, 'cache-control': 'no-cache'});
 }
