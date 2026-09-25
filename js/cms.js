@@ -112,6 +112,57 @@
     return items;
   }
 
+  // Groups of sections that can be reordered or hidden from the admin's
+  // visual editor. Keys come from each section's original text, so they are
+  // computed before any saved text is applied.
+  var LAYOUT_CONTAINERS = [
+    '.desktop-home-only', '.mobile-home-only', '#view-about', '.about-story-grid',
+    '.about-page-stats', '.card-grid', '.mobile-service-rail',
+    '.desktop-training-list', '.mobile-training-list'
+  ];
+
+  function sectionKey(el) {
+    var text = normalize(el.textContent).slice(0, 300);
+    return hash(el.tagName + '|' + (text || String(el.className)));
+  }
+
+  function layoutGroups(doc) {
+    var groups = [];
+    LAYOUT_CONTAINERS.forEach(function (selector) {
+      Array.prototype.forEach.call(doc.querySelectorAll(selector), function (container, index) {
+        var view = container.closest('section.view');
+        var children = Array.prototype.filter.call(container.children, function (child) {
+          return !/^(SCRIPT|STYLE|TEMPLATE)$/.test(child.tagName);
+        });
+        if (children.length < 2) return;
+        groups.push({
+          key: hash(selector + '#' + index),
+          selector: selector,
+          view: view ? view.id.replace(/^view-/, '') : '',
+          container: container,
+          children: children.map(function (child) { return {key: sectionKey(child), el: child}; })
+        });
+      });
+    });
+    return groups;
+  }
+
+  function applyLayout(layouts, groups) {
+    groups.forEach(function (group) {
+      var layout = layouts[group.key];
+      if (!layout) return;
+      var byKey = {};
+      group.children.forEach(function (child) { byKey[child.key] = child.el; });
+      var placed = [];
+      (layout.order || []).forEach(function (key) {
+        if (byKey[key] && placed.indexOf(byKey[key]) < 0) placed.push(byKey[key]);
+      });
+      group.children.forEach(function (child) { if (placed.indexOf(child.el) < 0) placed.push(child.el); });
+      placed.forEach(function (node) { group.container.appendChild(node); });
+      (layout.hidden || []).forEach(function (key) { if (byKey[key]) byKey[key].style.display = 'none'; });
+    });
+  }
+
   function cleanNode(node) {
     Array.prototype.slice.call(node.childNodes).forEach(function (child) {
       if (child.nodeType === 3) return;
@@ -328,6 +379,8 @@
 
   function apply(data) {
     if (!data) return;
+    var layouts = data.layouts || {};
+    var groups = Object.keys(layouts).length ? layoutGroups(document) : [];
     var texts = data.texts || {};
     if (Object.keys(texts).length) {
       collect(document).forEach(function (item) {
@@ -335,12 +388,17 @@
       });
     }
     applyFacts(data.facts || {});
+    applyLayout(layouts, groups);
     applyChronicles(data.chronicles);
   }
 
-  window.JMCMS = {collect: collect, hash: hash, normalize: normalize, load: load, originalFacts: ORIGINAL_FACTS, chronicleUrl: chronicleUrl};
+  window.JMCMS = {collect: collect, hash: hash, normalize: normalize, load: load, originalFacts: ORIGINAL_FACTS, chronicleUrl: chronicleUrl, layoutGroups: layoutGroups};
 
-  if (!document.documentElement.hasAttribute('data-cms-admin')) {
+  // ?cms-edit=1 is the admin's visual editor: show the original page and let
+  // the admin apply saved and unsaved changes itself.
+  var EDIT_MODE = /[?&]cms-edit=1(&|$)/.test(location.search);
+
+  if (!document.documentElement.hasAttribute('data-cms-admin') && !EDIT_MODE) {
     markActiveNav();
     pointAdminLinks();
     showStory();
