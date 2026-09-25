@@ -33,7 +33,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 .site-shell{min-height:100vh}
 .desktop-nav{position:sticky;top:0;z-index:50;height:82px;background:rgba(8,21,33,.97);border-bottom:1px solid rgba(189,129,44,.65);display:flex;align-items:center;padding:0 max(28px,calc((100vw - var(--max))/2));gap:42px}
 .brand{display:flex;align-items:center;gap:14px;text-decoration:none;min-width:max-content}
-.brand-mark{width:44px;height:44px;display:grid;place-items:center;color:var(--gold);font-size:2rem;transform:rotate(-7deg)}
+.brand-mark{width:76px;height:44px;display:block;object-fit:contain}
 .brand-copy strong{display:block;font-family:'Bebas Neue',sans-serif;letter-spacing:3px;font-size:1.5rem;color:var(--white);line-height:1}
 .brand-copy small{display:block;color:var(--gold-light);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;margin-top:5px}
 .desktop-links{display:flex;align-items:center;gap:30px;margin-left:auto}
