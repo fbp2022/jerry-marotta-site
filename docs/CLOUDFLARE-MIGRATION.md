@@ -1,51 +1,68 @@
-# Cloudflare migration and secure content management
+# Cloudflare hosting and website admin
 
-## Current routing
+## What runs where
 
-The committed static site supports `/`, `/about/`, `/training/`,
-`/chronicles/`, `/chronicles/the-day-fear-took-the-controls/`, `/book/`, and
-`/contact/`. These are ordinary static directories, so GitHub Pages can serve
-them without rewrite rules. The shared client code uses the pathname rather
-than hash navigation.
+- **Cloudflare Pages** project jerry-marotta-aviation builds this repository.
+  main is production (jerry-marotta-aviation.pages.dev); every other branch
+  gets a preview URL.
+- **Cloudflare D1** database jerry-marotta-content (binding DB, see
+  wrangler.toml) stores admin-managed content.
+- **Cloudflare Access** application "Jerry Marotta Website Admin" protects
+  /admin and /api/admin on the pages.dev hostname and its preview subdomains.
+  Login method is One-time PIN (a code emailed to the admin). Only the two
+  allowed admin emails pass the policy.
+- The public site is still served from GitHub Pages at jerrymarottaaviation.com
+  until DNS is moved to Cloudflare. The public site works in both places; the
+  admin and content API only work on Cloudflare.
 
-## Target architecture
+## Pages secrets (set in the dashboard, never in this repository)
 
-Use Cloudflare Pages for the public static site, a Pages Function or Worker for
-`/api/*`, D1 for structured editable content, and R2 only for future uploaded
-images/documents. Protect `/admin/*` and `/api/admin/*` with Cloudflare Access.
-Create two individually named Access identities (the owner and Jerry), require
-MFA through the selected identity provider, and use least-privilege roles.
+| Name | Purpose |
+| --- | --- |
+| ACCESS_TEAM_DOMAIN | Zero Trust team domain used to verify Access tokens |
+| ACCESS_AUD | Audience tag of the Access application |
+| ADMIN_EMAILS | Comma-separated allowlist checked after Access |
 
-The public app must read only published content through a public read endpoint;
-all writes, drafts, publishing, and media uploads must require Access and a
-server-side role check. Never place Cloudflare API tokens, D1 credentials, or
-admin credentials in this repository or browser JavaScript.
+If any of these are missing, /api/admin/* refuses every request.
 
-## Initial content model
+## Code layout
 
-`site_settings` stores phone, email, home copy, hero statistics, About copy,
-and training copy. `chronicles` stores slug, title, summary, body, status, and
-publication dates. `testimonials` stores first-party direct testimonials with
-separate `reviewer_name`, `attribution_label`, `text`, optional `rating`, and
-publication status fields. The reviewer name may remain blank until Jerry knows
-who supplied it. Keep Yelp synchronized separately: its public JSON remains
-read-only browser data and is not combined with first-party testimonials.
+- functions/_lib/access.js verifies the Cf-Access-Jwt-Assertion token
+  (signature, audience, issuer, expiry, allowlisted email).
+- functions/api/admin/[[path]].js is the admin API. Writes must be same-origin
+  JSON; rich text is sanitized server-side; every change is written to
+  audit_log.
+- functions/api/content.js is the public read-only feed of published content.
+- functions/chronicles/[[path]].js renders published D1 Chronicles with the
+  site's article layout and falls through to static files otherwise.
+- js/cms.js applies saved page text and key facts on top of the static HTML.
+  The static HTML is always the fallback.
+- admin/ is the admin application.
 
-## Deployment steps requiring an owner
+## Editable content model
 
-1. Create the Cloudflare account/project and connect this repository.
-2. Configure Pages with no secret-bearing client build variables.
-3. Create D1 and apply an audited migration; create an R2 bucket only when
-   uploads are needed.
-4. Configure Cloudflare Access policies for the two named admin accounts.
-5. Add the production custom domain and DNS only after preview validation.
-6. Replace the temporary `/admin/` footer destination with the Access-protected
-   admin application after it exists.
+- Page text: site_settings rows keyed text:<hash>, where the hash is taken from
+  the element's original wording (js/cms.js collect()). If the static wording
+  changes in the HTML, the old edit simply stops applying.
+- Key facts: site_settings rows fact:flight_hours, fact:years,
+  fact:phone_display, fact:phone_digits, fact:email.
+- Testimonials and Chronicles: their own tables, with draft/published status.
 
-## Repository deployment foundation
+## Migrations
 
-`wrangler.toml` and `migrations/0001_content.sql` are ready for a Pages/D1
-deployment. Before any deploy, replace the placeholder D1 database ID, apply
-the migration, and configure Access to require the two named MFA identities on
-both `/admin/*` and `/api/admin/*`. The Worker/API must validate the Access JWT
-server-side before it reads or writes D1; do not deploy a write API beforehand.
+Applied to the remote database and recorded in d1_migrations:
+0001_content.sql and 0002_admin.sql. Apply future migrations with
+wrangler d1 migrations apply jerry-marotta-content --remote.
+
+## Yelp
+
+Yelp's API trial expired, and its terms do not allow scraping, so the site
+shows Yelp as links only (read reviews and write a review). The
+update-yelp.yml workflow is disabled. If Jerry claims the listing, Yelp's
+official review badge can be embedded instead.
+
+## Remaining step
+
+Move jerrymarottaaviation.com DNS to Cloudflare, attach it to the Pages
+project as a custom domain, and add the custom domain's /admin and /api/admin
+paths to the Access application.
