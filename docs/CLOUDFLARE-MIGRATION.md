@@ -25,7 +25,10 @@ admin credentials in this repository or browser JavaScript.
 
 `site_settings` stores phone, email, home copy, hero statistics, About copy,
 and training copy. `chronicles` stores slug, title, summary, body, status, and
-publication dates. Keep Yelp synchronized separately: its public JSON remains
+publication dates. `testimonials` stores first-party direct testimonials with
+separate `reviewer_name`, `attribution_label`, `text`, optional `rating`, and
+publication status fields. The reviewer name may remain blank until Jerry knows
+who supplied it. Keep Yelp synchronized separately: its public JSON remains
 read-only browser data and is not combined with first-party testimonials.
 
 ## Deployment steps requiring an owner
