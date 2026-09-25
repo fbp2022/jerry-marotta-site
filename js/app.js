@@ -1,13 +1,9 @@
 const JERRY_NUMBER = '8657247251';
 const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 
-const viewButtons = document.querySelectorAll('[data-view]');
-const views = document.querySelectorAll('.view');
-
 const TESTIMONIALS_DATA_URL = '/data/testimonials.json';
 const YELP_LIVE_DATA_URL = '/data/yelp.json';
 const ROUTES = {home:'/', about:'/about/', training:'/training/', chronicles:'/chronicles/', article:'/chronicles/the-day-fear-took-the-controls/', book:'/book/', contact:'/contact/'};
-const viewFromPath = () => Object.entries(ROUTES).find(([, path]) => path === window.location.pathname)?.[0] || 'home';
 
 const mobileSheet = document.getElementById('mobile-sheet');
 const mobileSheetBackdrop = document.getElementById('mobile-sheet-backdrop');
@@ -37,43 +33,6 @@ if (mobileSheetClose) mobileSheetClose.addEventListener('click', closeMobileShee
 if (mobileSheetBackdrop) mobileSheetBackdrop.addEventListener('click', closeMobileSheet);
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closeMobileSheet();
-});
-
-function showView(name, updateHistory = true) {
-  const target = document.getElementById('view-' + name) ? name : 'home';
-  views.forEach(view => view.classList.toggle('active', view.id === 'view-' + target));
-  document.querySelectorAll('.nav-btn,.mobile-bottom button').forEach(button => {
-    const active = button.dataset.view === target;
-    button.classList.toggle('active', active);
-    if (active) button.setAttribute('aria-current', 'page');
-    else button.removeAttribute('aria-current');
-  });
-
-  closeMobileSheet();
-
-  const readingProgress = document.getElementById('reading-progress');
-  if (readingProgress) readingProgress.classList.toggle('visible', target === 'article');
-
-  if (target === 'book' && isMobileViewport()) {
-    showBookingStep(currentBookingStep);
-  }
-
-  if (updateHistory) {
-    const nextPath = ROUTES[target];
-    if (window.location.pathname !== nextPath) history.pushState({view: target}, '', nextPath);
-  }
-
-  window.scrollTo({top: 0, behavior: 'auto'});
-  requestAnimationFrame(updateReadingProgress);
-}
-
-viewButtons.forEach(button => button.addEventListener('click', event => {
-  event.preventDefault();
-  showView(button.dataset.view);
-}));
-
-window.addEventListener('popstate', () => {
-  showView(viewFromPath(), false);
 });
 
 function isMobileDevice() {
@@ -624,7 +583,7 @@ function selectTrainingAndOpenBooking(trainingValue) {
   }
 
   currentBookingStep = 1;
-  showView('book');
+  window.location.href = ROUTES.book;
 
   if (isMobileViewport()) {
     showBookingStep(1);
@@ -687,6 +646,5 @@ dateInput.min = new Date().toISOString().split('T')[0];
 updateDeviceFlow();
 toggleConditionalFields();
 showBookingStep(1);
-showView(viewFromPath(), false);
 updateReadingProgress();
 loadTestimonials().finally(loadYelpLiveRating);

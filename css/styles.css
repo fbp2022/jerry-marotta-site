@@ -1031,7 +1031,7 @@ footer span{color:var(--gold-light)}
     border-top:1px solid rgba(189,129,44,.5);
     box-shadow:0 -10px 28px rgba(8,21,33,.18);
   }
-  .mobile-bottom button{
+  .mobile-bottom a{
     flex:1;
     min-width:0;
     border:0;
@@ -1048,11 +1048,11 @@ footer span{color:var(--gold-light)}
     padding:4px 1px;
     position:relative;
   }
-  .mobile-bottom button svg{
+  .mobile-bottom a svg{
     width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;
   }
-  .mobile-bottom button.active{color:var(--gold-light)}
-  .mobile-bottom button.active::after{
+  .mobile-bottom a.active{color:var(--gold-light)}
+  .mobile-bottom a.active::after{
     content:'';
     position:absolute;
     top:0;

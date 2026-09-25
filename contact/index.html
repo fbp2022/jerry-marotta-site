@@ -20,21 +20,21 @@
 <body>
 <div class="site-shell">
   <nav class="desktop-nav">
-    <a class="brand" href="#" data-view="home" aria-label="Jerry Marotta Aviation home">
+    <a class="brand" href="/" aria-label="Jerry Marotta Aviation home">
       <img class="brand-mark" src="/images/winged-compass-logo.png" alt="Jerry Marotta Aviation winged compass">
     </a>
     <div class="desktop-links">
-      <button class="nav-btn active" data-view="home">Home</button>
-      <button class="nav-btn" data-view="about">About</button>
-      <button class="nav-btn" data-view="training">Training</button>
-      <button class="nav-btn" data-view="chronicles">Chronicles</button>
-      <button class="nav-btn" data-view="contact">Contact</button>
-      <button class="nav-book" data-view="book">Book a Lesson</button>
+      <a class="nav-btn active" href="/">Home</a>
+      <a class="nav-btn" href="/about/">About</a>
+      <a class="nav-btn" href="/training/">Training</a>
+      <a class="nav-btn" href="/chronicles/">Chronicles</a>
+      <a class="nav-btn" href="/contact/">Contact</a>
+      <a class="nav-book" href="/book/">Book a Lesson</a>
     </div>
   </nav>
 
   <div class="mobile-top">
-    <a class="brand" href="#" data-view="home" aria-label="Jerry Marotta Aviation home">
+    <a class="brand" href="/" aria-label="Jerry Marotta Aviation home">
       <img class="brand-mark" src="/images/winged-compass-logo.png" alt="Jerry Marotta Aviation winged compass">
     </a>
     <button class="mobile-more-btn" id="mobile-more-btn" type="button" aria-label="Open more options" aria-expanded="false">
@@ -44,7 +44,7 @@
   <div class="reading-progress" id="reading-progress" aria-hidden="true"><span></span></div>
 
   <main>
-    <section class="view active" id="view-home">
+    <section class="view" id="view-home">
       <div class="desktop-home-only">
         <div class="hero">
           <div class="hero-copy">
@@ -52,8 +52,8 @@
             <h1>Experience that builds <span>better pilots.</span></h1>
             <p class="hero-lede">Practical instruction, calm judgment, and real-world aviation lessons shaped by more than 8,500 flight hours.</p>
             <div class="hero-actions">
-              <button class="btn btn-primary" data-view="book">Book a Lesson</button>
-              <button class="btn btn-secondary" data-view="training">Explore Training</button>
+              <a class="btn btn-primary" href="/book/">Book a Lesson</a>
+              <a class="btn btn-secondary" href="/training/">Explore Training</a>
             </div>
           </div>
           <div class="hero-visual" aria-label="Abstract aviation instrument graphic">
@@ -79,10 +79,10 @@
             <p class="section-intro">Choose the type of training you need, then move directly into a focused booking experience.</p>
           </div>
           <div class="card-grid">
-            <article class="card"><div class="card-index">01</div><h3>Flight Training</h3><p>One-on-one instruction built around the student’s current ability, goals, and aircraft.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
-            <article class="card"><div class="card-index">02</div><h3>Instrument Training</h3><p>Procedural discipline, decision-making, and confidence for real instrument conditions.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
-            <article class="card"><div class="card-index">03</div><h3>Checkride Prep</h3><p>Focused oral and flight preparation aligned with the practical test standards.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
-            <article class="card"><div class="card-index">04</div><h3>Ground Instruction</h3><p>Clear explanations that connect knowledge to what the airplane is actually doing.</p><a class="card-link" href="#" data-view="training">See training →</a></article>
+            <article class="card"><div class="card-index">01</div><h3>Flight Training</h3><p>One-on-one instruction built around the student’s current ability, goals, and aircraft.</p><a class="card-link" href="/training/">See training →</a></article>
+            <article class="card"><div class="card-index">02</div><h3>Instrument Training</h3><p>Procedural discipline, decision-making, and confidence for real instrument conditions.</p><a class="card-link" href="/training/">See training →</a></article>
+            <article class="card"><div class="card-index">03</div><h3>Checkride Prep</h3><p>Focused oral and flight preparation aligned with the practical test standards.</p><a class="card-link" href="/training/">See training →</a></article>
+            <article class="card"><div class="card-index">04</div><h3>Ground Instruction</h3><p>Clear explanations that connect knowledge to what the airplane is actually doing.</p><a class="card-link" href="/training/">See training →</a></article>
           </div>
         </section>
 
@@ -98,7 +98,7 @@
             <div class="meta"><span class="pill">Flight Safety</span><span class="pill">8 minute read</span><span class="pill">Instructor Perspective</span></div>
             <p>A routine stall lesson became a fight for control when a student’s fear overrode everything he knew on the ground. Jerry explains what happened, how the airplane was recovered, and what the flight permanently taught him as an instructor.</p>
             <div class="quote">“For several seconds, fear was flying the airplane. And as the instructor, it was my responsibility to take it back.”</div>
-            <div><button class="btn btn-primary" data-view="article">Read the Chronicle</button></div>
+            <div><a class="btn btn-primary" href="/chronicles/the-day-fear-took-the-controls/">Read the Chronicle</a></div>
           </div>
         </section>
 
@@ -111,7 +111,7 @@
               <div class="section-label" style="color:var(--gold-light)">About Jerry</div>
               <h3>Experience you can trust.</h3>
               <p>Jerry combines technical knowledge with decades of judgment, perspective, and an ability to identify what each student needs next.</p>
-              <div style="margin-top:25px"><button class="btn btn-primary" data-view="about">Meet Jerry</button></div>
+              <div style="margin-top:25px"><a class="btn btn-primary" href="/about/">Meet Jerry</a></div>
             </div>
             <div class="about-facts">
               <div class="fact"><strong>8,500+</strong><span>Flight Hours</span></div>
@@ -193,7 +193,7 @@
           </div>
         </section>
 
-        <section class="final-cta"><h2>Ready to become a better pilot?</h2><p>Use the focused booking page to request a session without making every visitor encounter a long form on the homepage.</p><button class="btn" style="background:white;color:var(--rust)" data-view="book">Request a Session</button></section>
+        <section class="final-cta"><h2>Ready to become a better pilot?</h2><p>Use the focused booking page to request a session without making every visitor encounter a long form on the homepage.</p><a class="btn" style="background:white;color:var(--rust)" href="/book/">Request a Session</a></section>
       </div>
 
       <div class="mobile-home-only mobile-home">
@@ -207,8 +207,8 @@
             <span>8,500+ Hours</span>
           </div>
           <div class="mobile-actions">
-            <button class="btn btn-primary" data-view="book">Book a Lesson</button>
-            <button class="btn btn-secondary" data-view="chronicles">Stories</button>
+            <a class="btn btn-primary" href="/book/">Book a Lesson</a>
+            <a class="btn btn-secondary" href="/chronicles/">Stories</a>
           </div>
         </section>
 
@@ -218,30 +218,30 @@
             <h2>Choose your next objective.</h2>
           </div>
           <div class="mobile-service-rail" aria-label="Training options">
-            <button class="mobile-service-card" data-view="training">
+            <a class="mobile-service-card" href="/training/">
               <small>Primary</small>
               <h3>Flight Training</h3>
               <p>Structured instruction with clear objectives, direct feedback, and lessons built around your pace.</p>
               <span class="rail-link">Explore training →</span>
-            </button>
-            <button class="mobile-service-card" data-view="training">
+            </a>
+            <a class="mobile-service-card" href="/training/">
               <small>Instrument</small>
               <h3>CFII Training</h3>
               <p>Procedures, scan discipline, workload management, and sound decision-making for instrument flying.</p>
               <span class="rail-link">Explore training →</span>
-            </button>
-            <button class="mobile-service-card" data-view="training">
+            </a>
+            <a class="mobile-service-card" href="/training/">
               <small>Practical Test</small>
               <h3>Checkride Prep</h3>
               <p>Focused oral and flight preparation based on the standards and the areas that need attention.</p>
               <span class="rail-link">Explore training →</span>
-            </button>
-            <button class="mobile-service-card" data-view="training">
+            </a>
+            <a class="mobile-service-card" href="/training/">
               <small>Knowledge</small>
               <h3>Ground Instruction</h3>
               <p>Clear explanations that connect weather, systems, regulations, and aerodynamics to real flying.</p>
               <span class="rail-link">Explore training →</span>
-            </button>
+            </a>
           </div>
           <div class="rail-hint">Swipe to compare training options.</div>
         </section>
@@ -253,7 +253,7 @@
             <small>Flight Safety • 8 min read</small>
             <h3>The Day Fear Took the Controls</h3>
             <p>A stall lesson, a student frozen in panic, and the moment an instructor had to take command back.</p>
-            <button class="btn btn-primary" data-view="article">Read the Story</button>
+            <a class="btn btn-primary" href="/chronicles/the-day-fear-took-the-controls/">Read the Story</a>
           </article>
         </section>
 
@@ -334,7 +334,7 @@
         <section class="mobile-cta">
           <h3>Ready to train?</h3>
           <p>Complete a short request. On mobile, the site opens your native Messages app with everything ready to send.</p>
-          <button class="btn" style="background:white;color:var(--rust)" data-view="book">Request a Session</button>
+          <a class="btn" style="background:white;color:var(--rust)" href="/book/">Request a Session</a>
         </section>
       </div>
     </section>
@@ -444,7 +444,7 @@
               <h2>Tell me where you are in your flying.</h2>
               <p>Whether you are beginning, returning after time away, preparing for a checkride, or moving into instrument flying, I will build the instruction around the pilot you are today and the pilot you are working to become.</p>
             </div>
-            <button class="btn" data-view="book">Book a Lesson</button>
+            <a class="btn" href="/book/">Book a Lesson</a>
           </section>
         </div>
       </div>
@@ -667,14 +667,14 @@
         <img src="images/Chronicles.png" alt="The Instructor's Chronicles — True Stories from the Right Seat, by Jerry Marotta">
       </header>
       <div class="page-content"><div class="chronicles-grid">
-        <article class="story-card"><div class="story-card-cover"><small>Flight Safety • Featured Chronicle</small><h2>The Day Fear Took the Controls</h2></div><div class="story-card-body"><p>A student knew the recovery procedure in the classroom. In the airplane, fear took over. Jerry recounts the spin, the struggle for the controls, and the lessons he carried into every flight afterward.</p><div style="margin-top:22px"><button class="btn btn-primary" data-view="article">Read the Story</button></div></div></article>
+        <article class="story-card"><div class="story-card-cover"><small>Flight Safety • Featured Chronicle</small><h2>The Day Fear Took the Controls</h2></div><div class="story-card-body"><p>A student knew the recovery procedure in the classroom. In the airplane, fear took over. Jerry recounts the spin, the struggle for the controls, and the lessons he carried into every flight afterward.</p><div style="margin-top:22px"><a class="btn btn-primary" href="/chronicles/the-day-fear-took-the-controls/">Read the Story</a></div></div></article>
         <aside class="sidebar"><h3>Built to grow.</h3><p>This archive begins with Jerry’s first published Chronicle. New stories can be added here as he shares them, while the homepage continues to feature only the latest work.</p></aside>
       </div></div>
     </section>
 
     <section class="view" id="view-article">
       <div class="article-mobile-bar">
-        <button type="button" data-view="chronicles">← Chronicles</button>
+        <a type="button" href="/chronicles/">← Chronicles</a>
         <span>8 minute read</span>
       </div>
       <header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1>The Day Fear Took the Controls</h1><p>A true account of fear, instinct, control, and the responsibilities carried by the instructor in the right seat.</p></header>
@@ -749,10 +749,10 @@
         <p>But for several seconds, fear was flying the airplane.</p>
         <p>And as the instructor, it was my responsibility to take it back.</p>
         <div class="booking-note"><strong>Safety note:</strong> This personal account is presented for educational and storytelling purposes. It is not a substitute for instruction from a qualified flight instructor, an aircraft flight manual, or FAA-approved training guidance.</div>
-        <div style="margin-top:35px"><button class="btn btn-primary" data-view="chronicles">Back to Chronicles</button></div>
+        <div style="margin-top:35px"><a class="btn btn-primary" href="/chronicles/">Back to Chronicles</a></div>
         <div class="article-end-actions">
-          <button class="btn btn-primary" data-view="book">Train With Jerry</button>
-          <button class="btn btn-copy" data-view="chronicles">Back to Chronicles</button>
+          <a class="btn btn-primary" href="/book/">Train With Jerry</a>
+          <a class="btn btn-copy" href="/chronicles/">Back to Chronicles</a>
         </div>
       </article></div>
     </section>
@@ -883,7 +883,7 @@
       </div>
     </section>
 
-    <section class="view" id="view-contact">
+    <section class="view active" id="view-contact">
       <header class="page-hero">
         <div class="section-label">Contact</div>
         <h1>Reach Jerry directly.</h1>
@@ -903,7 +903,7 @@
             <div class="section-label">Best for lesson requests</div>
             <h2 style="font-size:3rem;color:var(--ink)">Use the booking page.</h2>
             <p style="color:var(--muted);line-height:1.75;margin:14px 0 22px">On mobile, the booking page prepares a native text message. On desktop, it prepares an email and downloads a tentative calendar invite.</p>
-            <button class="btn btn-primary" data-view="book">Book a Lesson</button>
+            <a class="btn btn-primary" href="/book/">Book a Lesson</a>
           </div>
         </div>
       </div>
@@ -921,26 +921,26 @@
   </dialog>
 
   <nav class="mobile-bottom" aria-label="Mobile navigation">
-    <button class="active" data-view="home" aria-label="Home">
+    <a class="active" aria-label="Home" href="/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 11.5 12 4l8.5 7.5"/><path d="M5.5 10.2V20h5v-5h3v5h5v-9.8"/></svg>
       <span>Home</span>
-    </button>
-    <button data-view="training" aria-label="Training">
+    </a>
+    <a aria-label="Training" href="/training/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19 12 5l9 14"/><path d="M7.5 19 12 12l4.5 7"/></svg>
       <span>Training</span>
-    </button>
-    <button class="mobile-book" data-view="book" aria-label="Book a lesson">
+    </a>
+    <a class="mobile-book" aria-label="Book a lesson" href="/book/">
       <span class="mobile-book-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span>
       <span>Book</span>
-    </button>
-    <button data-view="chronicles" aria-label="Chronicles">
+    </a>
+    <a aria-label="Chronicles" href="/chronicles/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
       <span>Chronicles</span>
-    </button>
-    <button data-view="contact" aria-label="Contact">
+    </a>
+    <a aria-label="Contact" href="/contact/">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17v11h-17z"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
       <span>Contact</span>
-    </button>
+    </a>
   </nav>
 
   <div class="mobile-sheet-backdrop" id="mobile-sheet-backdrop"></div>
@@ -951,8 +951,8 @@
       <button class="mobile-sheet-close" id="mobile-sheet-close" type="button" aria-label="Close more options">×</button>
     </div>
     <div class="mobile-sheet-grid">
-      <button class="mobile-sheet-action" data-view="about"><strong>About Jerry</strong><span>Experience, credentials, and background</span></button>
-      <button class="mobile-sheet-action" data-view="chronicles"><strong>Chronicles</strong><span>True stories from the right seat</span></button>
+      <a class="mobile-sheet-action" href="/about/"><strong>About Jerry</strong><span>Experience, credentials, and background</span></a>
+      <a class="mobile-sheet-action" href="/chronicles/"><strong>Chronicles</strong><span>True stories from the right seat</span></a>
       <a class="mobile-sheet-action" href="mailto:jerry.marotta@hotmail.com"><strong>Email Jerry</strong><span>Open your email application</span></a>
       <a class="mobile-sheet-action" href="sms:8657247251"><strong>Text Jerry</strong><span>Open your native Messages app</span></a>
       <a class="mobile-sheet-action" href="https://www.yelp.com/biz/jerry-marotta-alcoa" target="_blank" rel="noopener noreferrer"><strong>Yelp Reviews</strong><span>Read Jerry’s public Yelp reviews</span></a>
