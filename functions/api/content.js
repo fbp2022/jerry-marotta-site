@@ -18,9 +18,12 @@ export async function onRequestGet({request, env}) {
 
   const texts = {};
   const facts = {};
+  const layouts = {};
   for (const row of settings.results) {
     if (row.key.startsWith('text:')) {
       try { texts[row.key.slice(5)] = JSON.parse(row.value).html; } catch { /* skip malformed rows */ }
+    } else if (row.key.startsWith('layout:')) {
+      try { layouts[row.key.slice(7)] = JSON.parse(row.value); } catch { /* skip malformed rows */ }
     } else if (row.key.startsWith('fact:')) {
       facts[row.key.slice(5)] = row.value;
     }
@@ -29,6 +32,7 @@ export async function onRequestGet({request, env}) {
   return json({
     texts,
     facts,
+    layouts,
     testimonials: testimonials.results.map(row => ({
       id: row.id,
       name: row.reviewer_name || 'Flight training client',
