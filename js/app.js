@@ -1,6 +1,16 @@
 const JERRY_NUMBER = '8657247251';
 const JERRY_EMAIL = 'jerry.marotta@hotmail.com';
 
+// Contact details can be changed from the admin page; js/cms.js sets
+// window.JM_CONTACT when saved values exist.
+function contactNumber() {
+  return (window.JM_CONTACT && window.JM_CONTACT.phone) || JERRY_NUMBER;
+}
+
+function contactEmail() {
+  return (window.JM_CONTACT && window.JM_CONTACT.email) || JERRY_EMAIL;
+}
+
 const TESTIMONIALS_DATA_URL = '/data/testimonials.json';
 const YELP_LIVE_DATA_URL = '/data/yelp.json';
 const ROUTES = {home:'/', about:'/about/', training:'/training/', chronicles:'/chronicles/', article:'/chronicles/the-day-fear-took-the-controls/', book:'/book/', contact:'/contact/'};
@@ -187,7 +197,7 @@ function buildICS() {
     'SUMMARY:' + escapeICS(sessionType + ' with Jerry Marotta'),
     'DESCRIPTION:' + escapeICS(description),
     'LOCATION:' + escapeICS(meetLocation),
-    'ORGANIZER;CN=Jerry Marotta:mailto:' + JERRY_EMAIL,
+    'ORGANIZER;CN=Jerry Marotta:mailto:' + contactEmail(),
     'STATUS:TENTATIVE',
     'END:VEVENT',
     'END:VCALENDAR'
@@ -283,13 +293,13 @@ function submitBooking(event) {
     // Do not attempt an .ics download on mobile Safari. Triggering a Blob
     // download and an SMS handoff from the same tap causes Safari to report
     // that the calendar file cannot be downloaded.
-    window.location.href = 'sms:' + JERRY_NUMBER + separator + 'body=' + encodeURIComponent(requestText);
+    window.location.href = 'sms:' + contactNumber() + separator + 'body=' + encodeURIComponent(requestText);
   } else {
     downloadICS();
     status.textContent = 'Calendar invite downloaded. Opening your default email application now.';
 
     setTimeout(() => {
-      window.location.href = 'mailto:' + JERRY_EMAIL +
+      window.location.href = 'mailto:' + contactEmail() +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(requestText);
     }, 350);
@@ -343,9 +353,18 @@ function createTestimonialCard(review) {
   const footer=document.createElement('div');footer.className='testimonial-footer';const name=document.createElement('strong');name.textContent=review.name;const relationship=document.createElement('span');relationship.textContent=review.detail?review.relationship+'\n'+review.detail:review.relationship;relationship.style.whiteSpace='pre-line';footer.append(name,relationship);button.append(stars,text,footer);button.addEventListener('click',()=>openReviewDialog(review));return button;
 }
 
-function renderTestimonials(reviews) {
+function renderTestimonials(reviews, authoritative = false) {
   const normalized = deduplicateTestimonials(reviews);
-  if (!normalized.length) return;
+  if (!normalized.length) {
+    // The admin database is the source of truth once it responds: if every
+    // testimonial is unpublished, remove the server-rendered fallback too.
+    if (authoritative) {
+      approvedTestimonials = [];
+      document.querySelectorAll('[data-testimonial-list]').forEach(container => container.replaceChildren());
+      document.querySelectorAll('[data-review-count]').forEach(element => { element.textContent = 'No website reviews yet'; });
+    }
+    return;
+  }
 
   approvedTestimonials = normalized;
   const average = calculateTestimonialAverage(normalized);
@@ -421,6 +440,11 @@ async function loadYelpLiveRating() {
 }
 
 async function loadTestimonials() {
+  const cms = await cmsContent;
+  if (cms && Array.isArray(cms.testimonials)) {
+    renderTestimonials(cms.testimonials, true);
+    return;
+  }
   try {
     const response = await fetch(TESTIMONIALS_DATA_URL + '?v=' + Date.now(), {cache:'no-store'});
     if (!response.ok) throw new Error('Approved testimonial data could not be loaded.');
@@ -549,4 +573,17 @@ updateDeviceFlow();
 toggleConditionalFields();
 showBookingStep(1);
 updateReadingProgress();
+// Load the content layer (admin edits stored in Cloudflare D1). When the API
+// is unavailable the static page and JSON files remain the source of content.
+function loadCms() {
+  return new Promise(resolve => {
+    const script = document.createElement('script');
+    script.src = '/js/cms.js';
+    script.onload = () => resolve(window.JMCMS ? window.JMCMS.load() : null);
+    script.onerror = () => resolve(null);
+    document.head.appendChild(script);
+  });
+}
+
+const cmsContent = loadCms();
 loadTestimonials().finally(loadYelpLiveRating);

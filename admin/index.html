@@ -1,5 +1,69 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Site Admin | Jerry Marotta Aviation</title><link rel="stylesheet" href="/css/admin.css"></head>
-<body><main class="admin-shell"><a class="back" href="/">← Back to website</a><header><img src="/images/winged-compass-logo.png" alt="Jerry Marotta Aviation winged compass"><div><p class="eyebrow">Jerry Marotta Aviation</p><h1>Website updates</h1><p class="intro">This is where you will make simple website updates. Nothing can be changed yet—secure sign-in is being set up first.</p></div></header>
-<section class="setup"><strong>Setup in progress</strong><p>For your protection, editing will open only after secure Cloudflare sign-in and the website database are connected.</p></section>
-<section class="cards" aria-label="Future website updates"><article><span>1</span><h2>Home page</h2><p>Update the welcome message, highlights, years of experience, and flight hours.</p><button disabled>Update home page</button></article><article><span>2</span><h2>About Jerry</h2><p>Update Jerry’s story, credentials, and background information.</p><button disabled>Update About page</button></article><article><span>3</span><h2>Training</h2><p>Update lesson descriptions, training choices, and airports.</p><button disabled>Update training</button></article><article><span>4</span><h2>Contact details</h2><p>Update phone number, email address, and meeting information.</p><button disabled>Update contact details</button></article><article><span>5</span><h2>Chronicles</h2><p>Add a story, save a draft, or publish a new Chronicle.</p><button disabled>Manage Chronicles</button></article></section><section class="testimonial-preview" aria-labelledby="testimonial-heading"><p class="eyebrow">Direct website testimonials</p><h2 id="testimonial-heading">Name the person who shared a testimonial</h2><p>Use this for testimonials sent directly to Jerry. It is separate from Yelp. Once secure editing is activated, this change will appear on the website.</p><label for="reviewer-name">Reviewer name</label><input id="reviewer-name" type="text" placeholder="Enter reviewer name when known" disabled><label for="testimonial-text">Testimonial text</label><textarea id="testimonial-text" rows="4" placeholder="The direct testimonial text will appear here" disabled></textarea><button disabled>Save testimonial</button></section><p class="note">When this page is ready, only Jerry and the site owner will be able to sign in.</p></main></body></html>
+<html lang="en" data-cms-admin>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#081521">
+<title>Website Admin · Jerry Marotta Aviation</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="loading">
+<a class="skip" href="#view">Skip to content</a>
+<div class="admin-app">
+  <aside class="sidebar" aria-label="Admin menu">
+    <a class="brand" href="#/">
+      <img src="/images/winged-compass-logo.png" alt="">
+      <span>Jerry Marotta Aviation<small>Website admin</small></span>
+    </a>
+    <nav id="nav">
+      <a href="#/" data-route="dashboard"><span class="nav-icon" aria-hidden="true">◧</span>Dashboard</a>
+      <p class="nav-group">Pages</p>
+      <a href="#/page/home" data-route="page/home"><span class="nav-icon" aria-hidden="true">⌂</span>Home</a>
+      <a href="#/page/about" data-route="page/about"><span class="nav-icon" aria-hidden="true">✈</span>About</a>
+      <a href="#/page/training" data-route="page/training"><span class="nav-icon" aria-hidden="true">✦</span>Training</a>
+      <a href="#/page/chronicles" data-route="page/chronicles"><span class="nav-icon" aria-hidden="true">❡</span>Chronicles page</a>
+      <a href="#/page/book" data-route="page/book"><span class="nav-icon" aria-hidden="true">◷</span>Book a Lesson</a>
+      <a href="#/page/contact" data-route="page/contact"><span class="nav-icon" aria-hidden="true">✉</span>Contact</a>
+      <p class="nav-group">Content</p>
+      <a href="#/facts" data-route="facts"><span class="nav-icon" aria-hidden="true">#</span>Key facts &amp; contact</a>
+      <a href="#/testimonials" data-route="testimonials"><span class="nav-icon" aria-hidden="true">★</span>Testimonials <span class="nav-count" data-count="testimonials" hidden></span></a>
+      <a href="#/chronicles" data-route="chronicles"><span class="nav-icon" aria-hidden="true">✎</span>Chronicles <span class="nav-count" data-count="chronicles" hidden></span></a>
+      <p class="nav-group">Reference</p>
+      <a href="#/yelp" data-route="yelp"><span class="nav-icon" aria-hidden="true">◎</span>Yelp (read-only)</a>
+      <a href="#/activity" data-route="activity"><span class="nav-icon" aria-hidden="true">≡</span>Activity log</a>
+    </nav>
+    <div class="sidebar-foot">
+      <span id="who"></span>
+      <a href="/cdn-cgi/access/logout">Sign out</a>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+  <div class="main">
+    <header class="topbar">
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <h1 id="page-title">Loading…</h1>
+      <a class="btn ghost" id="view-live" href="/" target="_blank" rel="noopener" hidden>View on website ↗</a>
+    </header>
+    <main id="view" tabindex="-1">
+      <p class="loading">Loading your website content…</p>
+    </main>
+  </div>
+</div>
+<div class="savebar" id="savebar" hidden>
+  <span id="savebar-text"></span>
+  <div>
+    <button type="button" class="btn" id="discard">Discard</button>
+    <button type="button" class="btn primary" id="save-all">Save changes</button>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog id="modal" aria-label="Dialog"></dialog>
+<script src="/js/cms.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
