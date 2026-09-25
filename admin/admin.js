@@ -563,6 +563,7 @@
           var isHidden = hidden.indexOf(k) >= 0;
           node.toggleAttribute('data-cms-hidden', isHidden);
           var handle = node.querySelector(':scope > .cms-handle');
+          if (!handle) return;
           handle.querySelector('.cms-up').disabled = index === 0;
           handle.querySelector('.cms-down').disabled = index === order.length - 1;
           var toggle = handle.querySelector('.cms-toggle');
