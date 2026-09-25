@@ -378,146 +378,46 @@ function openReviewDialog(review){if(!reviewDialog)return;const stars=document.g
 function closeReviewDialog(){if(!reviewDialog)return;if(typeof reviewDialog.close==='function')reviewDialog.close();else reviewDialog.removeAttribute('open');}
 if(reviewDialogClose)reviewDialogClose.addEventListener('click',closeReviewDialog);
 if(reviewDialog)reviewDialog.addEventListener('click',event=>{if(event.target===reviewDialog)closeReviewDialog();});
-function normalizeReviewerName(value) {
-  return String(value || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '');
-}
+// Yelp is shown as links only. Yelp's API trial ended and its terms do not
+// allow copying the listing, so the site no longer displays a synced rating,
+// review count, or excerpts. Visitors read and write reviews on Yelp itself.
+const YELP_LISTING_URL = 'https://www.yelp.com/biz/jerry-marotta-alcoa';
+const YELP_WRITE_REVIEW_URL = 'https://www.yelp.com/writeareview/biz/jerry-marotta-alcoa';
 
-function normalizeReviewText(value) {
-  return String(value || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
+function renderYelpLinks() {
+  document.querySelectorAll('.yelp-rating-row').forEach(row => { row.hidden = true; });
+  document.querySelectorAll('.yelp-excerpts-section, .mobile-yelp-excerpts').forEach(section => { section.hidden = true; });
 
-function isDuplicateYelpExcerpt(yelpReview) {
-  const yelpName = normalizeReviewerName(yelpReview.user_name);
-  const yelpText = normalizeReviewText(yelpReview.text);
-
-  return approvedTestimonials.some(siteReview => {
-    const siteName = normalizeReviewerName(siteReview.name);
-    const siteText = normalizeReviewText(siteReview.text);
-    const namesMatch = yelpName && siteName && (yelpName === siteName || yelpName.startsWith(siteName) || siteName.startsWith(yelpName));
-    const textOverlap = yelpText && siteText && (
-      siteText.includes(yelpText) ||
-      yelpText.includes(siteText) ||
-      siteText.slice(0, 120) === yelpText.slice(0, 120)
-    );
-    return namesMatch && textOverlap;
-  });
-}
-
-function createYelpExcerptCard(review) {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'yelp-excerpt-card';
-  button.setAttribute('aria-label', 'Read Yelp excerpt from ' + (review.user_name || 'Yelp reviewer'));
-
-  const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
-  const stars = document.createElement('div');
-  stars.className = 'yelp-excerpt-stars';
-  stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
-
-  const text = document.createElement('p');
-  text.className = 'yelp-excerpt-text';
-  text.textContent = review.text || 'Read this review on Yelp.';
-
-  const footer = document.createElement('div');
-  footer.className = 'yelp-excerpt-footer';
-  const name = document.createElement('strong');
-  name.textContent = review.user_name || 'Yelp reviewer';
-  const source = document.createElement('span');
-  source.textContent = 'Yelp review excerpt';
-  footer.append(name, source);
-
-  button.append(stars, text, footer);
-  button.addEventListener('click', () => openReviewDialog({
-    rating,
-    name: review.user_name || 'Yelp reviewer',
-    relationship: 'Yelp review excerpt',
-    detail: '',
-    text: review.text || 'Read this review on Yelp.',
-    url: review.url || ''
-  }));
-  return button;
-}
-
-function renderYelpExcerpts(data) {
-  const reviews = Array.isArray(data.reviews)
-    ? data.reviews
-        .filter(review => review && review.text && !isDuplicateYelpExcerpt(review))
-        .slice(0, 3)
-    : [];
-
-  document.querySelectorAll('[data-yelp-excerpt-list]').forEach(container => {
-    const section = container.closest(
-      '.yelp-excerpts-section, .mobile-yelp-excerpts'
-    );
-
-    if (!reviews.length) {
-      container.replaceChildren();
-      if (section) section.hidden = true;
-      return;
-    }
-
-    if (section) section.hidden = false;
-    container.replaceChildren();
-
-    reviews.forEach(review => {
-      container.append(createYelpExcerptCard(review));
-    });
-  });
-}
-
-function renderYelpLiveRating(data) {
-  const rating = Number(data.rating);
-  const count = Number(data.review_count);
-  const hasRating = Number.isFinite(rating) && rating > 0;
-  const percentage = hasRating ? Math.max(0, Math.min(100, rating / 5 * 100)) : 0;
-
-  document.querySelectorAll('[data-yelp-live-rating]').forEach(element => {
-    element.textContent = hasRating ? rating.toFixed(1) : '—';
-  });
-
-  document.querySelectorAll('[data-yelp-live-stars]').forEach(element => {
-    element.style.setProperty('--yelp-rating-pct', percentage + '%');
-    element.setAttribute(
-      'aria-label',
-      hasRating ? rating.toFixed(1) + ' out of 5 stars on Yelp' : 'Yelp rating unavailable'
-    );
-  });
-
-  document.querySelectorAll('[data-yelp-live-count]').forEach(element => {
-    element.textContent = hasRating && Number.isFinite(count)
-      ? (count === 1 ? '1 Yelp review' : count + ' Yelp reviews')
-      : 'View Yelp for the current rating';
+  document.querySelectorAll('.yelp-rating-source span').forEach(element => {
+    element.textContent = 'Independent reviews';
   });
 
   document.querySelectorAll('[data-yelp-live-updated]').forEach(element => {
-    if (!data.updated_at) {
-      element.textContent = 'The public Yelp listing is always available below.';
-      return;
-    }
-    const date = new Date(data.updated_at);
-    element.textContent = Number.isNaN(date.getTime())
-      ? 'Synchronized with Yelp'
-      : 'Synchronized ' + date.toLocaleDateString([], {month:'short', day:'numeric', year:'numeric'});
+    element.textContent = 'Read Jerry’s current rating and reviews on Yelp, or share your own experience.';
   });
 
-  renderYelpExcerpts(data);
+  document.querySelectorAll('.yelp-rating-card, .mobile-yelp-live').forEach(card => {
+    const viewLink = card.querySelector('a[href*="yelp.com/biz/"]');
+    if (viewLink) viewLink.textContent = 'Read reviews on Yelp';
+    if (!card.querySelector('a[href*="writeareview"]')) {
+      const write = document.createElement('a');
+      write.className = 'btn btn-copy';
+      write.href = YELP_WRITE_REVIEW_URL;
+      write.target = '_blank';
+      write.rel = 'noopener noreferrer';
+      write.textContent = 'Write a review on Yelp';
+      write.style.marginTop = '10px';
+      card.append(write);
+    }
+  });
+
+  document.querySelectorAll('a[href^="https://www.yelp.com/biz/"]').forEach(link => {
+    link.href = YELP_LISTING_URL;
+  });
 }
 
 async function loadYelpLiveRating() {
-  try {
-    const response = await fetch(YELP_LIVE_DATA_URL + '?v=' + Date.now(), {cache:'no-store'});
-    if (!response.ok) throw new Error('Yelp live data could not be loaded.');
-    renderYelpLiveRating(await response.json());
-  } catch (error) {
-    renderYelpLiveRating({reviews:[], reviews_status:'unavailable'});
-    console.warn(error.message);
-  }
+  renderYelpLinks();
 }
 
 async function loadTestimonials() {
