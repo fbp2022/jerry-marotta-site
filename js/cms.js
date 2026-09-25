@@ -153,6 +153,13 @@
       }
     }
 
+    // The hero altimeter shows flight hours through CSS generated content.
+    if (facts.flight_hours && facts.flight_hours !== ORIGINAL_FACTS.flight_hours && /^[\d,]+$/.test(facts.flight_hours)) {
+      var style = document.createElement('style');
+      style.textContent = ".altimeter::after{content:'" + facts.flight_hours.replace(/,/g, '') + "+'}";
+      document.head.appendChild(style);
+    }
+
     var digits = facts.phone_digits && facts.phone_digits.replace(/\D/g, '');
     var email = facts.email;
     document.querySelectorAll('a[href^="sms:"], a[href^="tel:"], a[href^="mailto:"]').forEach(function (a) {
