@@ -751,7 +751,7 @@
 
     viewEl.append(h('div', {class: 'section-head'},
       h('p', {class: 'muted', text: 'Jerry’s stories from the right seat. Drafts stay private until you publish them. The newest published story is featured on the home page.'}),
-      h('a', {class: 'btn primary', href: '#/chronicles/edit/new', text: '+ Write a new Chronicle'})));
+      h('a', {class: 'btn primary', href: '#/chronicles/edit/new', text: '+ New post'})));
 
     if (!hasFeatured) {
       viewEl.append(h('div', {class: 'callout gold'},
@@ -833,21 +833,18 @@
     return norm(text).toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 90);
   }
 
+  // A short formatting bar, like a blog editor: paragraph, heading, bold,
+  // italic, quote, list, and link.
   function blockTools(editor) {
     function block(tag) { return function () { document.execCommand('formatBlock', false, tag); }; }
-    return h('div', {class: 'tools sticky'},
-      toolButton('Paragraph', 'Normal paragraph', block('p')),
+    return h('div', {class: 'tools post-tools'},
+      toolButton('Paragraph', 'Normal text', block('p')),
       toolButton('Heading', 'Section heading', block('h2')),
       toolButton(h('strong', {text: 'B'}), 'Bold', function () { document.execCommand('bold'); }),
       toolButton(h('em', {text: 'I'}), 'Italic', function () { document.execCommand('italic'); }),
-      toolButton('Quote', 'Quote', block('blockquote')),
+      toolButton('“ Quote', 'Quote', block('blockquote')),
       toolButton('• List', 'Bulleted list', function () { document.execCommand('insertUnorderedList'); }),
-      toolButton('Link', 'Add link', function () { addLink(editor); }),
-      toolButton('Safety note', 'Insert a safety note box', function () {
-        editor.focus();
-        document.execCommand('insertHTML', false, '<div class="booking-note"><strong>Safety note:</strong> Type the note here.</div><p><br></p>');
-      }),
-      toolButton('Clear', 'Remove formatting', function () { document.execCommand('removeFormat'); }));
+      toolButton('Link', 'Add link', function () { addLink(editor); }));
   }
 
   function cleanBody(editor) {
@@ -856,6 +853,9 @@
     return editor.innerHTML.trim();
   }
 
+  // Blog-style editor: title and story up front, Publish / Save draft at the
+  // top, and everything else in a collapsed "Post settings" section that
+  // fills itself in automatically.
   function renderChronicleEditor(id) {
     var existing = id === 'new' ? null : state.chronicles.find(function (c) { return c.id === id; });
     if (id !== 'new' && !existing) {
@@ -863,55 +863,69 @@
       viewEl.append(h('p', {class: 'empty-line', text: 'That Chronicle no longer exists.'}), h('a', {class: 'btn', href: '#/chronicles', text: 'Back to Chronicles'}));
       return;
     }
-    var c = existing || {title: '', slug: '', summary: '', body: '<p><br></p>', status: 'draft', published_at: '', category: '', kicker: 'By Jerry Marotta', deck: '', read_minutes: ''};
-    setTitle(existing ? 'Edit Chronicle' : 'New Chronicle', existing && existing.status === 'published' ? storyUrl(existing.slug) : null);
+    var c = existing || {title: '', slug: '', summary: '', body: '<p><br></p>', status: 'draft', published_at: '', category: '', kicker: '', deck: '', read_minutes: ''};
+    var isPublished = c.status === 'published';
+    setTitle(existing ? 'Edit post' : 'New post', isPublished ? storyUrl(c.slug) : null);
 
-    var title = h('input', {type: 'text', class: 'title-input', placeholder: 'Story title', 'aria-label': 'Story title', value: c.title, maxlength: '200'});
-    var deck = h('input', {type: 'text', class: 'deck-input', placeholder: 'Opening line shown under the title (optional)', 'aria-label': 'Opening line', value: c.deck || '', maxlength: '400'});
-    var body = h('div', {class: 'rich article-body', contenteditable: 'true', role: 'textbox', 'aria-multiline': 'true', 'aria-label': 'Story', spellcheck: 'true'});
+    var title = h('textarea', {class: 'post-title', rows: '1', placeholder: 'Add a title', 'aria-label': 'Title', maxlength: '200'});
+    title.value = c.title;
+    var body = h('div', {class: 'rich post-body', contenteditable: 'true', role: 'textbox', 'aria-multiline': 'true', 'aria-label': 'Story', spellcheck: 'true', 'data-placeholder': 'Start writing your story…'});
     body.innerHTML = c.body || '<p><br></p>';
     plainPaste(body, false);
+    var words = h('p', {class: 'post-count'});
+    var error = h('p', {class: 'field-error', hidden: true});
 
-    var status = h('select', {id: 'c-status'}, h('option', {value: 'draft', text: 'Draft (private)'}), h('option', {value: 'published', text: 'Published (on the website)'}));
-    status.value = c.status === 'published' ? 'published' : 'draft';
-    var date = h('input', {type: 'date', id: 'c-date', value: c.published_at || ''});
+    var summary = h('textarea', {id: 'c-summary', rows: '3', maxlength: '1000', placeholder: 'Leave blank to use the first sentences of the story.'});
+    summary.value = c.summary || '';
     var slug = h('input', {type: 'text', id: 'c-slug', value: c.slug, maxlength: '100', spellcheck: 'false'});
     var slugPreview = h('p', {class: 'hint slug'});
     var category = h('input', {type: 'text', id: 'c-category', value: c.category || '', maxlength: '80', placeholder: 'For example: Flight Safety'});
-    var kicker = h('input', {type: 'text', id: 'c-kicker', value: c.kicker || '', maxlength: '200', placeholder: 'By Jerry Marotta • Flight Safety'});
-    var summary = h('textarea', {id: 'c-summary', rows: '4', maxlength: '1000', placeholder: 'One or two sentences for the Chronicles list and search engines.'});
-    summary.value = c.summary || '';
-    var minutes = h('input', {type: 'number', id: 'c-minutes', min: '1', max: '240', value: c.read_minutes || '', placeholder: 'Auto'});
-    var words = h('p', {class: 'hint'});
-    var error = h('p', {class: 'field-error', hidden: true});
+    var date = h('input', {type: 'date', id: 'c-date', value: c.published_at || ''});
+    var deck = h('input', {type: 'text', id: 'c-deck', value: c.deck || '', maxlength: '400', placeholder: 'Optional line shown under the title'});
     var slugTouched = !!existing;
 
+    function wordCount() { var text = norm(body.textContent); return text ? text.split(' ').length : 0; }
+    function autoSummary() {
+      var text = norm(body.textContent);
+      if (text.length <= 220) return text;
+      var cut = text.slice(0, 220);
+      return cut.slice(0, cut.lastIndexOf(' ')) + '…';
+    }
     function update() {
-      var count = norm(body.textContent) ? norm(body.textContent).split(' ').length : 0;
+      var count = wordCount();
       words.textContent = count.toLocaleString() + ' words · about ' + Math.max(1, Math.round(count / 200)) + ' minute read';
       slugPreview.textContent = storyUrl(slug.value || '…').replace('https://', '');
+      title.style.height = 'auto';
+      title.style.height = title.scrollHeight + 'px';
     }
     function dirty() { state.editorDirty = true; update(); }
-    title.addEventListener('input', function () { if (!slugTouched) slug.value = slugify(title.value); dirty(); });
+    title.addEventListener('input', function () {
+      title.value = title.value.replace(/\n/g, ' ');
+      if (!slugTouched) slug.value = slugify(title.value);
+      dirty();
+    });
+    title.addEventListener('keydown', function (event) { if (event.key === 'Enter') { event.preventDefault(); body.focus(); } });
     slug.addEventListener('input', function () { slugTouched = true; slug.value = slug.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'); dirty(); });
-    [deck, status, date, category, kicker, summary, minutes].forEach(function (el) { el.addEventListener('input', dirty); el.addEventListener('change', dirty); });
+    [summary, category, date, deck].forEach(function (input) { input.addEventListener('input', dirty); });
     body.addEventListener('input', dirty);
-    update();
 
     function payload(statusValue) {
-      var count = norm(body.textContent) ? norm(body.textContent).split(' ').length : 0;
       return {
         title: norm(title.value), slug: slug.value.replace(/^-+|-+$/g, ''), deck: norm(deck.value), body: cleanBody(body),
-        status: statusValue, published_at: date.value, category: norm(category.value), kicker: norm(kicker.value),
-        summary: summary.value.trim(), read_minutes: minutes.value ? Number(minutes.value) : Math.max(1, Math.round(count / 200))
+        status: statusValue, published_at: date.value, category: norm(category.value),
+        kicker: existing ? (c.kicker || '') : '',
+        summary: summary.value.trim() || autoSummary(),
+        read_minutes: Math.max(1, Math.round(wordCount() / 200))
       };
     }
 
-    function save(statusValue) {
+    function save(statusValue, button) {
       error.hidden = true;
       var data = payload(statusValue);
-      if (!data.title) { error.textContent = 'Please give the story a title.'; error.hidden = false; title.focus(); return; }
-      if (!data.slug) { error.textContent = 'Please add a web address.'; error.hidden = false; slug.focus(); return; }
+      if (!data.title) { error.textContent = 'Please add a title.'; error.hidden = false; title.focus(); return; }
+      if (!wordCount()) { error.textContent = 'The story is empty.'; error.hidden = false; body.focus(); return; }
+      if (!data.slug) data.slug = slugify(data.title);
+      if (button) { button.disabled = true; button.dataset.label = button.textContent; button.textContent = 'Saving…'; }
       var request = existing ? api('PUT', 'chronicles/' + encodeURIComponent(existing.id), data) : api('POST', 'chronicles', data);
       request
         .then(function (result) {
@@ -923,56 +937,63 @@
           var target = '#/chronicles/edit/' + saved.id;
           if (location.hash !== target) location.hash = target; else route();
         })
-        .catch(function (err) { error.textContent = err.message; error.hidden = false; });
+        .catch(function (err) {
+          error.textContent = err.message;
+          error.hidden = false;
+          if (button) { button.disabled = false; button.textContent = button.dataset.label; }
+        });
     }
 
     function preview() {
-      var data = payload(status.value);
+      var data = payload(c.status);
       var frame = h('iframe', {class: 'preview-frame', title: 'Story preview'});
       frame.srcdoc = '<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/css/styles.css"></head><body>' +
         '<main><section class="view active" id="view-article"><header class="page-hero"><div class="section-label">Flight Instructor’s Chronicles</div><h1></h1><p></p></header>' +
         '<div class="page-content"><article class="article"></article></div></section></main></body></html>';
       frame.addEventListener('load', function () {
         var doc = frame.contentDocument;
-        doc.querySelector('.page-hero h1').textContent = data.title || 'Untitled story';
-        doc.querySelector('.page-hero p').textContent = data.summary || data.deck || '';
+        doc.querySelector('.page-hero h1').textContent = data.title || 'Untitled post';
+        doc.querySelector('.page-hero p').textContent = data.summary || '';
         var article = doc.querySelector('.article');
         article.append(
-          Object.assign(doc.createElement('div'), {className: 'article-kicker', textContent: data.kicker}),
+          Object.assign(doc.createElement('div'), {className: 'article-kicker', textContent: data.kicker || ['By Jerry Marotta', data.category].filter(Boolean).join(' • ')}),
           Object.assign(doc.createElement('h1'), {textContent: data.title}));
         if (data.deck) article.append(Object.assign(doc.createElement('div'), {className: 'article-deck', textContent: data.deck}));
-        var bodyWrap = doc.createElement('div');
-        bodyWrap.innerHTML = data.body;
-        bodyWrap.querySelectorAll('script, iframe, object, embed').forEach(function (el) { el.remove(); });
-        article.append.apply(article, Array.from(bodyWrap.childNodes));
+        var wrap = doc.createElement('div');
+        wrap.innerHTML = data.body;
+        wrap.querySelectorAll('script, iframe, object, embed').forEach(function (node) { node.remove(); });
+        article.append.apply(article, Array.from(wrap.childNodes));
       });
       openModal('Preview', frame, [h('button', {type: 'button', class: 'btn primary', text: 'Close preview', onclick: function () { modal.close(); }})], true);
     }
 
-    var isPublished = existing && existing.status === 'published';
-    var actions = h('div', {class: 'side-actions'},
-      isPublished
-        ? [h('button', {type: 'button', class: 'btn primary', text: 'Save changes', onclick: function () { save(status.value); }}),
-          h('button', {type: 'button', class: 'btn', text: 'Unpublish (make draft)', onclick: function () { save('draft'); }})]
-        : [h('button', {type: 'button', class: 'btn primary', text: 'Publish to website', onclick: function () { save('published'); }}),
-          h('button', {type: 'button', class: 'btn', text: 'Save draft', onclick: function () { save('draft'); }})],
-      h('button', {type: 'button', class: 'btn', text: 'Preview', onclick: preview}),
-      existing ? h('button', {type: 'button', class: 'btn danger-ghost', text: 'Delete', onclick: function () { deleteChronicle(existing); }}) : null);
+    var primary = h('button', {type: 'button', class: 'btn primary', text: isPublished ? 'Update' : 'Publish'});
+    primary.addEventListener('click', function () { save('published', primary); });
+    var secondary = h('button', {type: 'button', class: 'btn', text: isPublished ? 'Unpublish' : 'Save draft'});
+    secondary.addEventListener('click', function () { save('draft', secondary); });
 
     viewEl.append(
-      h('a', {class: 'back-link', href: '#/chronicles', text: '← All Chronicles'}),
-      h('div', {class: 'chronicle-editor'},
-        h('div', {class: 'writer'}, title, deck, blockTools(body), body, words),
-        h('aside', {class: 'side-panel'},
-          actions,
-          error,
-          field('Status', status, null),
-          field('Publish date', date, 'Leave blank to use the day you publish.'),
+      h('div', {class: 'post-bar'},
+        h('a', {class: 'back-link', href: '#/chronicles', text: '← All posts'}),
+        h('span', {class: 'pill ' + (isPublished ? 'pill-live' : 'pill-draft'), text: isPublished ? 'Published' : (existing ? 'Draft' : 'New draft')}),
+        h('div', {class: 'post-actions'},
+          h('button', {type: 'button', class: 'btn ghost', text: 'Preview', onclick: preview}),
+          secondary,
+          primary)),
+      error,
+      h('div', {class: 'post-canvas'}, title, blockTools(body), body, words),
+      h('details', {class: 'post-settings'},
+        h('summary', null, h('strong', {text: 'Post settings'}), h('span', {class: 'muted small', text: ' Optional. These fill in automatically.'})),
+        h('div', {class: 'settings-grid'},
+          field('Summary', summary, 'Shown on the Chronicles page and the home page.'),
           h('div', {class: 'field'}, h('label', {for: 'c-slug', text: 'Web address'}), slug, slugPreview),
-          field('Category', category, 'Shown on the story card.'),
-          field('Byline', kicker, 'Shown above the title.'),
-          field('Summary', summary, 'Shown on the Chronicles page, the home page feature, and in search results.'),
-          field('Reading time (minutes)', minutes, 'Leave blank to calculate it automatically.'))));
+          field('Category', category, 'Shown on the post’s card.'),
+          field('Publish date', date, 'Leave blank to use the day you publish.'),
+          field('Subtitle', deck, null)),
+        existing ? h('div', {class: 'danger-zone'},
+          h('button', {type: 'button', class: 'btn danger-ghost', text: 'Delete this post', onclick: function () { deleteChronicle(existing); }})) : null));
+
+    update();
     if (!existing) title.focus();
   }
 
