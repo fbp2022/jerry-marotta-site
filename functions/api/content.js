@@ -1,8 +1,14 @@
 // Public, read-only content feed. Returns only published content.
-import {json} from '../_lib/util.js';
+// Read by js/cms.js on jerrymarottaaviation.com (GitHub Pages) and on pages.dev.
+import {json, publicCors} from '../_lib/util.js';
 
-export async function onRequestGet({env}) {
-  if (!env.DB) return json({error: 'Content database unavailable'}, 503);
+export function onRequestOptions({request}) {
+  return new Response(null, {status: 204, headers: publicCors(request)});
+}
+
+export async function onRequestGet({request, env}) {
+  const cors = publicCors(request);
+  if (!env.DB) return json({error: 'Content database unavailable'}, 503, cors);
 
   const [settings, testimonials, chronicles] = await env.DB.batch([
     env.DB.prepare('SELECT key, value FROM site_settings'),
@@ -32,5 +38,5 @@ export async function onRequestGet({env}) {
       rating: row.rating
     })),
     chronicles: chronicles.results
-  }, 200, {'cache-control': 'public, max-age=30'});
+  }, 200, {...cors, 'cache-control': 'public, max-age=30'});
 }
