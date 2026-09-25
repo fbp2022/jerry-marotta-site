@@ -162,6 +162,7 @@ async function route(method, [resource, id], request, env, email) {
 
 function assertSettingKey(key) {
   if (/^text:[a-z0-9]{4,16}$/.test(key)) return 'text';
+  if (/^layout:[a-z0-9]{4,16}$/.test(key)) return 'layout';
   if (key.startsWith('fact:') && FACT_KEYS.has(key.slice(5))) return 'fact';
   throw new HttpError(400, 'Unknown setting: ' + key.slice(0, 40));
 }
@@ -172,6 +173,12 @@ async function settingValue(key, raw) {
     const value = cleanText(raw, 120);
     if (!value) throw new HttpError(400, 'Facts cannot be blank');
     return value;
+  }
+  if (kind === 'layout') {
+    const keys = list => (Array.isArray(list) ? list : []).map(String).filter(k => /^[a-z0-9]{4,16}$/.test(k)).slice(0, 200);
+    const order = keys(raw && raw.order);
+    if (!order.length) throw new HttpError(400, 'Section order is empty');
+    return JSON.stringify({order, hidden: keys(raw && raw.hidden)});
   }
   const html = await sanitizeHtml(raw && raw.html, 20000);
   if (!html.trim()) throw new HttpError(400, 'Page text cannot be blank');
