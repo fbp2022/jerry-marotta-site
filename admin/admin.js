@@ -4,6 +4,22 @@
 (function () {
   'use strict';
 
+  // The admin only works behind Cloudflare Access on Cloudflare Pages. The
+  // public site (and this file) is also served by GitHub Pages, so send
+  // anyone who lands on the GitHub copy to the protected one.
+  var ADMIN_HOME = 'https://jerry-marotta-aviation.pages.dev/admin/';
+  if (!/(^|\.)jerry-marotta-aviation\.pages\.dev$/.test(location.hostname)) {
+    location.replace(ADMIN_HOME + location.hash);
+    return;
+  }
+
+  // Where visitors see the site.
+  var SITE = 'https://jerrymarottaaviation.com';
+
+  function storyUrl(slug) {
+    return SITE + '/chronicles/?story=' + slug;
+  }
+
   var PAGES = [
     {id: 'home', label: 'Home', path: '/'},
     {id: 'about', label: 'About', path: '/about/'},
@@ -146,7 +162,7 @@
     document.title = title + ' · Website Admin';
     var live = document.getElementById('view-live');
     live.hidden = !livePath;
-    if (livePath) live.href = livePath;
+    if (livePath) live.href = livePath.charAt(0) === '/' ? SITE + livePath : livePath;
   }
 
   function setActiveNav(routeKey) {
@@ -759,10 +775,10 @@
             h('span', {class: 'muted small', text: published ? formatDate(c.published_at) : 'Last edited ' + formatDate(c.updated_at, true)})),
           h('h3', null, h('a', {href: '#/chronicles/edit/' + c.id, text: c.title})),
           c.summary ? h('p', {class: 'muted', text: c.summary}) : null,
-          h('p', {class: 'slug', text: 'jerrymarottaaviation.com/chronicles/' + c.slug + '/'})),
+          h('p', {class: 'slug', text: storyUrl(c.slug).replace('https://', '')})),
         h('div', {class: 't-actions'},
           h('a', {class: 'btn', href: '#/chronicles/edit/' + c.id, text: 'Edit'}),
-          published ? h('a', {class: 'btn', href: '/chronicles/' + c.slug + '/', target: '_blank', rel: 'noopener', text: 'View ↗'}) : null,
+          published ? h('a', {class: 'btn', href: storyUrl(c.slug), target: '_blank', rel: 'noopener', text: 'View ↗'}) : null,
           h('button', {type: 'button', class: 'btn danger-ghost', text: 'Delete', onclick: function () { deleteChronicle(c); }})));
     })));
   }
@@ -848,7 +864,7 @@
       return;
     }
     var c = existing || {title: '', slug: '', summary: '', body: '<p><br></p>', status: 'draft', published_at: '', category: '', kicker: 'By Jerry Marotta', deck: '', read_minutes: ''};
-    setTitle(existing ? 'Edit Chronicle' : 'New Chronicle', existing && existing.status === 'published' ? '/chronicles/' + existing.slug + '/' : null);
+    setTitle(existing ? 'Edit Chronicle' : 'New Chronicle', existing && existing.status === 'published' ? storyUrl(existing.slug) : null);
 
     var title = h('input', {type: 'text', class: 'title-input', placeholder: 'Story title', 'aria-label': 'Story title', value: c.title, maxlength: '200'});
     var deck = h('input', {type: 'text', class: 'deck-input', placeholder: 'Opening line shown under the title (optional)', 'aria-label': 'Opening line', value: c.deck || '', maxlength: '400'});
@@ -873,7 +889,7 @@
     function update() {
       var count = norm(body.textContent) ? norm(body.textContent).split(' ').length : 0;
       words.textContent = count.toLocaleString() + ' words · about ' + Math.max(1, Math.round(count / 200)) + ' minute read';
-      slugPreview.textContent = 'jerrymarottaaviation.com/chronicles/' + (slug.value || '…') + '/';
+      slugPreview.textContent = storyUrl(slug.value || '…').replace('https://', '');
     }
     function dirty() { state.editorDirty = true; update(); }
     title.addEventListener('input', function () { if (!slugTouched) slug.value = slugify(title.value); dirty(); });
@@ -903,7 +919,7 @@
           return refresh().then(function () { return result.chronicle; });
         })
         .then(function (saved) {
-          toast(saved.status === 'published' ? 'Published. It’s live at /chronicles/' + saved.slug + '/' : 'Draft saved. It isn’t on the website yet.');
+          toast(saved.status === 'published' ? 'Published. It’s live on the website now.' : 'Draft saved. It isn’t on the website yet.');
           var target = '#/chronicles/edit/' + saved.id;
           if (location.hash !== target) location.hash = target; else route();
         })
