@@ -42,5 +42,5 @@ export async function onRequestGet({request, env}) {
       rating: row.rating
     })),
     chronicles: chronicles.results
-  }, 200, {...cors, 'cache-control': 'public, max-age=30'});
+  }, 200, {...cors, 'cache-control': 'no-cache'});
 }
