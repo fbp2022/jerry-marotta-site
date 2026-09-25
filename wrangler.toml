@@ -2,9 +2,9 @@ name = "jerry-marotta-aviation"
 compatibility_date = "2026-09-25"
 pages_build_output_dir = "."
 
-# Bind the production D1 database after it is created in Cloudflare.
+# Production D1 database (created 2026-09-25).
 [[d1_databases]]
 binding = "DB"
 database_name = "jerry-marotta-content"
-database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+database_id = "414e47b3-7d85-4c56-88bb-30cf40c3dcb7"
 migrations_dir = "migrations"
