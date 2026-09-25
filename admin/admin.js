@@ -87,6 +87,13 @@
     el.append(child.nodeType ? child : document.createTextNode(String(child)));
   }
 
+  // Replace an element's contents; accepts nested arrays and skips null.
+  function fill(el) {
+    el.replaceChildren();
+    for (var i = 1; i < arguments.length; i += 1) add(el, arguments[i]);
+    return el;
+  }
+
   function norm(text) { return String(text || '').replace(/\s+/g, ' ').trim(); }
 
   function toast(message, kind) {
@@ -888,14 +895,14 @@
     var rating = data.rating || 0;
     var ratingRow = h('div', {class: 'rating-picker', role: 'radiogroup', 'aria-label': 'Star rating'});
     var status = h('select', {id: 't-status'},
-      h('option', {value: 'draft', text: 'Draft: not shown on the website'}),
-      h('option', {value: 'published', text: 'Published: shown on the website'}));
-    status.value = data.status === 'published' ? 'published' : 'draft';
+      h('option', {value: 'published', text: 'Yes, show it on the website'}),
+      h('option', {value: 'draft', text: 'No, keep it hidden for now'}));
+    status.value = isNew || data.status === 'published' ? 'published' : 'draft';
     var error = h('p', {class: 'field-error', hidden: true});
 
     var preview = h('div', {class: 'preview-card'});
     function drawRating() {
-      ratingRow.replaceChildren(
+      fill(ratingRow,
         h('button', {type: 'button', role: 'radio', 'aria-checked': String(!rating), class: 'rating-none' + (!rating ? ' active' : ''), text: 'No rating', onclick: function () { rating = 0; drawRating(); drawPreview(); }}),
         [1, 2, 3, 4, 5].map(function (n) {
           return h('button', {type: 'button', role: 'radio', 'aria-checked': String(rating === n), 'aria-label': n + ' star' + (n > 1 ? 's' : ''),
@@ -906,7 +913,7 @@
       var who = norm(name.value) || 'Flight training client';
       var rel = norm(relationship.value) || 'Student testimonial';
       charCount.textContent = text.value.length.toLocaleString() + ' characters';
-      preview.replaceChildren(
+      fill(preview,
         h('p', {class: 'preview-label', text: 'Preview on the website'}),
         rating ? h('div', {class: 'preview-stars', text: stars(rating)}) : null,
         h('p', {class: 'preview-text', text: text.value.trim() || 'The testimonial text will appear here.'}),
@@ -918,12 +925,12 @@
 
     var body = h('div', {class: 'editor-split'},
       h('div', {class: 'form-grid'},
-        field('Reviewer name', name, 'Optional. If blank, the website shows “Flight training client”.'),
-        field('Who they are', relationship, 'Shown under the name.'),
-        field('Extra detail', detail, 'Optional, for example how long they’ve trained with Jerry.'),
-        h('div', {class: 'field'}, h('span', {class: 'label', text: 'Star rating'}), ratingRow, h('p', {class: 'hint', text: 'Only add stars if the reviewer gave a rating. Leave “No rating” otherwise.'})),
-        h('div', {class: 'field full'}, h('label', {for: 't-text', text: 'Testimonial'}), text, charCount),
-        field('Visibility', status, null),
+        field('Student’s name', name, null),
+        field('Who they are', relationship, 'For example: Private Pilot Student'),
+        h('div', {class: 'field'}, h('span', {class: 'label', text: 'Stars'}), ratingRow),
+        h('div', {class: 'field full'}, h('label', {for: 't-text', text: 'What they wrote'}), text),
+        field('Extra line (optional)', detail, 'For example: Student since 2018'),
+        field('Show on website?', status, null),
         error),
       preview);
 
