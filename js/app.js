@@ -316,7 +316,8 @@ async function copyRequest() {
 }
 
 function normalizeTestimonial(review) {
-  const rating = Math.max(1, Math.min(5, Math.round(Number(review.rating) || 5)));
+  const suppliedRating = Number(review.rating);
+  const rating = Number.isFinite(suppliedRating) && suppliedRating > 0 ? Math.max(1, Math.min(5, Math.round(suppliedRating))) : null;
   return {id:String(review.id || '').trim(),rating,name:String(review.name || 'Anonymous student').trim(),relationship:String(review.relationship || 'Aviation student').trim(),detail:String(review.detail || '').trim(),text:String(review.text || '').trim()};
 }
 function testimonialFingerprint(review) {
@@ -329,14 +330,15 @@ function deduplicateTestimonials(reviews) {
 }
 
 function calculateTestimonialAverage(reviews) {
-  if (!reviews.length) return 0;
-  return reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+  const ratedReviews = reviews.filter(review => review.rating !== null);
+  if (!ratedReviews.length) return 0;
+  return ratedReviews.reduce((sum, review) => sum + review.rating, 0) / ratedReviews.length;
 }
 
 let approvedTestimonials = [];
 function createTestimonialCard(review) {
   const button=document.createElement('button');button.type='button';button.className='testimonial-card';button.dataset.testimonialId=review.id;button.setAttribute('aria-label','Read the full review from '+review.name);
-  const stars=document.createElement('div');stars.className='testimonial-stars';stars.textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);stars.setAttribute('aria-label',review.rating+' out of 5 stars');
+  const stars=document.createElement('div');stars.className='testimonial-stars';if(review.rating !== null){stars.textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);stars.setAttribute('aria-label',review.rating+' out of 5 stars');}
   const text=document.createElement('p');text.className='testimonial-text';text.textContent=review.text;
   const footer=document.createElement('div');footer.className='testimonial-footer';const name=document.createElement('strong');name.textContent=review.name;const relationship=document.createElement('span');relationship.textContent=review.detail?review.relationship+'\n'+review.detail:review.relationship;relationship.style.whiteSpace='pre-line';footer.append(name,relationship);button.append(stars,text,footer);button.addEventListener('click',()=>openReviewDialog(review));return button;
 }
@@ -372,7 +374,7 @@ function renderTestimonials(reviews) {
 
 const reviewDialog=document.getElementById('review-dialog');
 const reviewDialogClose=document.getElementById('review-dialog-close');
-function openReviewDialog(review){if(!reviewDialog)return;document.getElementById('review-dialog-stars').textContent='★'.repeat(review.rating)+'☆'.repeat(5-review.rating);document.getElementById('review-dialog-name').textContent=review.name;document.getElementById('review-dialog-relationship').textContent=review.detail?review.relationship+' · '+review.detail:review.relationship;document.getElementById('review-dialog-text').textContent=review.text;const dialogLink=document.getElementById('review-dialog-link');if(dialogLink){if(review.url){dialogLink.href=review.url;dialogLink.style.display='inline-flex';}else{dialogLink.removeAttribute('href');dialogLink.style.display='none';}}if(typeof reviewDialog.showModal==='function')reviewDialog.showModal();else reviewDialog.setAttribute('open','');}
+function openReviewDialog(review){if(!reviewDialog)return;const stars=document.getElementById('review-dialog-stars');stars.textContent=review.rating !== null?'★'.repeat(review.rating)+'☆'.repeat(5-review.rating):'';document.getElementById('review-dialog-name').textContent=review.name;document.getElementById('review-dialog-relationship').textContent=review.detail?review.relationship+' · '+review.detail:review.relationship;document.getElementById('review-dialog-text').textContent=review.text;const dialogLink=document.getElementById('review-dialog-link');if(dialogLink){if(review.url){dialogLink.href=review.url;dialogLink.style.display='inline-flex';}else{dialogLink.removeAttribute('href');dialogLink.style.display='none';}}if(typeof reviewDialog.showModal==='function')reviewDialog.showModal();else reviewDialog.setAttribute('open','');}
 function closeReviewDialog(){if(!reviewDialog)return;if(typeof reviewDialog.close==='function')reviewDialog.close();else reviewDialog.removeAttribute('open');}
 if(reviewDialogClose)reviewDialogClose.addEventListener('click',closeReviewDialog);
 if(reviewDialog)reviewDialog.addEventListener('click',event=>{if(event.target===reviewDialog)closeReviewDialog();});
