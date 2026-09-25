@@ -22,6 +22,18 @@
     email: 'jerry.marotta@hotmail.com'
   };
 
+  // The site itself is served from GitHub Pages; saved content, the admin
+  // and its login live on Cloudflare Pages.
+  var CLOUDFLARE_ORIGIN = 'https://jerry-marotta-aviation.pages.dev';
+  var ON_CLOUDFLARE = /(^|\.)jerry-marotta-aviation\.pages\.dev$/.test(location.hostname);
+  var API_ORIGIN = ON_CLOUDFLARE ? '' : CLOUDFLARE_ORIGIN;
+  var ADMIN_URL = CLOUDFLARE_ORIGIN + '/admin/';
+  var SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+  function chronicleUrl(slug) {
+    return ON_CLOUDFLARE ? '/chronicles/' + slug + '/' : '/chronicles/?story=' + slug;
+  }
+
   var ALLOWED = {
     p: [], br: [], strong: [], b: [], em: [], i: [], u: [],
     span: ['class'], a: ['href', 'title', 'class', 'target', 'rel'], div: ['class'],
@@ -188,7 +200,7 @@
     actions.style.marginTop = '22px';
     var link = document.createElement('a');
     link.className = 'btn btn-primary';
-    link.href = '/chronicles/' + item.slug + '/';
+    link.href = chronicleUrl(item.slug);
     link.textContent = 'Read the Story';
     actions.append(link);
     body.append(p, actions);
@@ -211,8 +223,9 @@
     var links = home.querySelectorAll('a[href^="/chronicles/"]:not([href="/chronicles/"])');
     if (!links.length) return;
     var oldHref = links[0].getAttribute('href');
-    var newHref = '/chronicles/' + latest.slug + '/';
-    if (oldHref === newHref) return;
+    var oldSlug = (oldHref.match(/\/chronicles\/([a-z0-9-]+)\/?$/) || [])[1];
+    if (oldSlug === latest.slug) return;
+    var newHref = chronicleUrl(latest.slug);
     var oldTitle = null;
     home.querySelectorAll('h2, h3').forEach(function (heading) {
       var container = heading.closest('div, article, section');
@@ -225,6 +238,69 @@
       container.querySelectorAll('.quote').forEach(function (quote) { quote.hidden = true; });
     });
     links.forEach(function (a) { if (a.getAttribute('href') === oldHref) a.setAttribute('href', newHref); });
+  }
+
+  function storySlug() {
+    var fromQuery = new URLSearchParams(location.search).get('story');
+    if (fromQuery) return fromQuery.toLowerCase();
+    var match = location.pathname.match(/^\/chronicles\/([a-z0-9-]+)\/?$/);
+    return match ? match[1] : null;
+  }
+
+  function element(tag, className, text) {
+    var node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+  }
+
+  // Shows a Chronicle saved in the admin, on either host. On GitHub Pages new
+  // Chronicles open at /chronicles/?story=<slug>; an edited version of an
+  // existing static story replaces the static text.
+  function showStory() {
+    var slug = storySlug();
+    var view = document.getElementById('view-article');
+    if (!slug || !SLUG.test(slug) || !view) return;
+    fetch(API_ORIGIN + '/api/chronicle?slug=' + encodeURIComponent(slug), {headers: {accept: 'application/json'}})
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .catch(function () { return null; })
+      .then(function (data) {
+        if (!data || !data.chronicle) return;
+        var c = data.chronicle;
+        document.querySelectorAll('main section.view').forEach(function (section) {
+          section.classList.toggle('active', section === view);
+        });
+        document.title = c.title + ' | Jerry Marotta Aviation';
+        var heroTitle = view.querySelector('.page-hero h1');
+        if (heroTitle) heroTitle.textContent = c.title;
+        var heroText = view.querySelector('.page-hero p');
+        if (heroText) heroText.textContent = c.summary || c.deck || '';
+        var readTime = view.querySelector('.article-mobile-bar span');
+        if (readTime) readTime.textContent = c.read_minutes ? c.read_minutes + ' minute read' : '';
+        var article = view.querySelector('article.article');
+        if (!article) return;
+        var body = document.createElement('div');
+        setSafeHtml(body, c.body);
+        var actions = element('div', 'article-end-actions');
+        var train = element('a', 'btn btn-primary', 'Train With Jerry');
+        train.href = '/book/';
+        var back = element('a', 'btn btn-copy', 'Back to Chronicles');
+        back.href = '/chronicles/';
+        actions.append(train, back);
+        article.replaceChildren(
+          element('div', 'article-kicker', c.kicker || ['By Jerry Marotta', c.category].filter(Boolean).join(' • ')),
+          element('h1', null, c.title));
+        if (c.deck) article.append(element('div', 'article-deck', c.deck));
+        article.append.apply(article, Array.prototype.slice.call(body.childNodes));
+        article.append(actions);
+        if (new URLSearchParams(location.search).get('story')) window.scrollTo(0, 0);
+      });
+  }
+
+  function pointAdminLinks() {
+    document.querySelectorAll('a.footer-admin, a[href="/admin/"]').forEach(function (a) {
+      a.setAttribute('href', ADMIN_URL);
+    });
   }
 
   function markActiveNav() {
@@ -240,7 +316,7 @@
   var loading = null;
   function load() {
     if (!loading) {
-      loading = fetch('/api/content', {headers: {accept: 'application/json'}})
+      loading = fetch(API_ORIGIN + '/api/content', {headers: {accept: 'application/json'}})
         .then(function (response) {
           if (!response.ok || !(response.headers.get('content-type') || '').includes('json')) return null;
           return response.json();
@@ -262,10 +338,12 @@
     applyChronicles(data.chronicles);
   }
 
-  window.JMCMS = {collect: collect, hash: hash, normalize: normalize, load: load, originalFacts: ORIGINAL_FACTS};
+  window.JMCMS = {collect: collect, hash: hash, normalize: normalize, load: load, originalFacts: ORIGINAL_FACTS, chronicleUrl: chronicleUrl};
 
   if (!document.documentElement.hasAttribute('data-cms-admin')) {
     markActiveNav();
+    pointAdminLinks();
+    showStory();
     load().then(apply);
   }
 })();
